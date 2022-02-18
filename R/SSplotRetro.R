@@ -215,7 +215,7 @@ SSplotRetro<- function(summaryoutput,
     }
     
     # subfunction to add legend
-    legendfun <- function(legendlabels,cumulative=FALSE) {
+    add_legend <- function(legendlabels,cumulative=FALSE) {
       if(cumulative){
         legendloc="topleft"
       }
@@ -429,7 +429,7 @@ SSplotRetro<- function(summaryoutput,
       if(legend){
         # add legend if requested
         
-        legendfun(legendlabels)
+        add_legend(legendlabels)
       }
       if(showrho) legend("top", paste0("Mohn's rho = ",round(rho,2),ifelse(forecast & forecastrho,paste0("(",round(fcrho,2),")"),"")),bty="n",y.intersp=-0.2,cex=legendcex+0.1)
       

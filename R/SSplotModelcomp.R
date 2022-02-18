@@ -241,7 +241,7 @@ SSplotModelcomp<- function(summaryoutput=ss3diags::aspm.sma,
   plot_index <- function(indexfleets=1){  
   
     # subfunction to add legend
-    legendfun <- function(legendlabels,cumulative=FALSE) {
+    add_legend <- function(legendlabels,cumulative=FALSE) {
       if(cumulative){
         legendloc="topleft"
       }
@@ -460,7 +460,7 @@ SSplotModelcomp<- function(summaryoutput=ss3diags::aspm.sma,
     }
     if(legend){
       # add legend if requested
-      legendfun(legendlabels)
+      add_legend(legendlabels)
     }
     legend("top",
            paste0(unique(indices2[["Fleet_name"]])[1]),
@@ -501,7 +501,7 @@ SSplotModelcomp<- function(summaryoutput=ss3diags::aspm.sma,
     }
     
     # subfunction to add legend
-    legendfun <- function(legendlabels,cumulative=FALSE) {
+    add_legend <- function(legendlabels,cumulative=FALSE) {
       if(cumulative){
         legendloc="topleft"
       }
@@ -710,7 +710,7 @@ SSplotModelcomp<- function(summaryoutput=ss3diags::aspm.sma,
     if(legend){
       # add legend if requested
       
-      legendfun(legendlabels)
+      add_legend(legendlabels)
     }
     
     #axis(1, at=c(min(xmin,min(yr)):max(endyrvec)))

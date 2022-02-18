@@ -257,7 +257,7 @@ SSplotJABBAres<- function(ss3rep=ss3diags::ss3sma,
   jabbaresiduals <- function(){
     
     # subfunction to add legend
-    legendfun <- function(legendlabels,cumulative=FALSE) {
+    add_legend <- function(legendlabels,cumulative=FALSE) {
       if(cumulative){
         legendloc="topleft"
       }
