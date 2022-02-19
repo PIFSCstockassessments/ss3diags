@@ -74,7 +74,7 @@ final year of values to show for each model. By default it is set to the}
 
 \item{endyrvec}{ending year specified in each model.}
 
-\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device 
+\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
 by default (TRUE), and the option to disable this, via FALSE, is unused.}
 
 \item{print}{Deprecated. Please use 'print_plot'.}
@@ -159,7 +159,7 @@ It will be separated from default name by an underscore.}
 
 \item{shadealpha}{Transparency adjustment used to make default shadecol}
 
-\item{new}{Deprecated. New plot windows are created by default (TRUE), and the 
+\item{new}{Deprecated. New plot windows are created by default (TRUE), and the
 option to disable this, via FALSE, is unused.}
 
 \item{add}{surpresses par() to create multiplot figs}
@@ -176,12 +176,11 @@ option to disable this, via FALSE, is unused.}
 Plots one-step ahead hindcasting cross-validations and computes MASE from prediction redisuals
 }
 \examples{
- \dontrun{
+\dontrun{
 
-mvln = SSdeltaMVLN(ss3sma, run = "SMA")
+mvln <- SSdeltaMVLN(ss3sma, run = "SMA")
 sspar(mfrow = c(3, 2), plot.cex = 0.7)
 SSplotEnsemble(mvln$kb, ylabs = mvln$labels, add = T, verbose = F)
-
 }
 }
 \author{

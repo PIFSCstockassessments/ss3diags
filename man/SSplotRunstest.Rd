@@ -53,7 +53,7 @@ SSplotRunstest(
 generalized size composition data, 'age' for age composition data,
 or 'con' for conditional age at length data}
 
-\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device 
+\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
 by default (TRUE), the option to disable this via FALSE, is unused here.}
 
 \item{print}{Deprecated. Please use 'print_plot'.}

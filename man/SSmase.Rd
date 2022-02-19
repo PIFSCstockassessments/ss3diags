@@ -46,7 +46,7 @@ ending year specified in each model.}
 MASE and hcxval statistic
 }
 \description{
-MASE for one-step ahead hindcasting cross-validations and computes MASE from prediction residuals of indices. 
+MASE for one-step ahead hindcasting cross-validations and computes MASE from prediction residuals of indices.
 MASE is calculated the average ratio of mean absolute error (MAE) of prediction residuals (MAE.PR) and Naive Predictions (MAE.base)
 MASE.adj sets the MAE.base to a minimum MAE.base.adj (default=0.1)
 MASE.adj allow passing (MASE<1) if MAE.PE < 0.1 and thus accurate, when obs show extremely little variation
@@ -56,6 +56,7 @@ MASE.adj allow passing (MASE<1) if MAE.PE < 0.1 and thus accurate, when obs show
 # calculate MASE for CPUE indices only for fleets 1 and 2
 SSmase(retro.sma, quant = "cpue", indexselect = c(1:2))
 }
+
 }
 \seealso{
 [SSretroComps()] [r4ss::SSsummarize()]

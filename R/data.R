@@ -1,9 +1,9 @@
 #' A simulated Simple Stock Synthesis model for a "cod-like" stock.
 #'
 #' Stock Synthesis output read by \code{\link[r4ss]{SS_output}()}
-#' 
+#'
 #' @docType data
-#' 
+#'
 #' @format Large list of 184 objects generated using \pkg{r4ss}
 #' \describe{
 #'  \item{Data_File}{Data_File}
@@ -191,20 +191,20 @@
 #'  \item{logfile}{logfile}
 #'  \item{inputs}{inputs}
 #' }
-#' 
+#'
 #' @source simulated with \pkg{ss3sim}
 #'
 #' @author R. Methot,
-#' 
+#'
 "simple"
 
 
 #' Retrospective runs for simulated Simple Stock Synthesis model.
 #'
 #' Stock Synthesis output read by \code{\link[r4ss]{SS_output}()}
-#' 
+#'
 #' @docType data
-#' 
+#'
 #' @format Large list of 184 objects generated using \pkg{r4ss}
 #' \describe{
 #'  \item{Data_File}{Data_File}
@@ -392,9 +392,9 @@
 #'  \item{logfile}{logfile}
 #'  \item{inputs}{inputs}
 #' }
-#' 
+#'
 #' @source simulated with \pkg{ss3sim}
 #'
 #' @author R. Methot
-#' 
+#'
 "retroSimple"

@@ -171,7 +171,7 @@ It will be separated from default name by an underscore.}
 
 \item{shadecol}{uncertainty shading of hcxval horizon}
 
-\item{new}{Deprecated. New plot windows are created by default (TRUE), and the 
+\item{new}{Deprecated. New plot windows are created by default (TRUE), and the
 option to disable this, via FALSE, is unused.}
 
 \item{add}{surpresses par() to create multiplot figs}
