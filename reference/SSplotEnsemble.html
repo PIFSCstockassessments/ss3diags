@@ -126,7 +126,7 @@ final year of values to show for each model. By default it is set to the</p></dd
 <dt>endyrvec</dt>
 <dd><p>ending year specified in each model.</p></dd>
 <dt>plot</dt>
-<dd><p>Deprecated. Plots (and subplots) are drawn to the active plot device 
+<dd><p>Deprecated. Plots (and subplots) are drawn to the active plot device
 by default (TRUE), and the option to disable this, via FALSE, is unused.</p></dd>
 <dt>print</dt>
 <dd><p>Deprecated. Please use 'print_plot'.</p></dd>
@@ -211,7 +211,7 @@ It will be separated from default name by an underscore.</p></dd>
 <dt>shadealpha</dt>
 <dd><p>Transparency adjustment used to make default shadecol</p></dd>
 <dt>new</dt>
-<dd><p>Deprecated. New plot windows are created by default (TRUE), and the 
+<dd><p>Deprecated. New plot windows are created by default (TRUE), and the
 option to disable this, via FALSE, is unused.</p></dd>
 <dt>add</dt>
 <dd><p>surpresses par() to create multiplot figs</p></dd>
@@ -231,12 +231,11 @@ option to disable this, via FALSE, is unused.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"> <span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">mvln</span> <span class="op">=</span> <span class="fu"><a href="ssdeltaMVLN.html">SSdeltaMVLN</a></span><span class="op">(</span><span class="va">ss3sma</span>, run <span class="op">=</span> <span class="st">"SMA"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">mvln</span> <span class="op">&lt;-</span> <span class="fu"><a href="SSdeltaMVLN.html">SSdeltaMVLN</a></span><span class="op">(</span><span class="va">ss3sma</span>, run <span class="op">=</span> <span class="st">"SMA"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="sspar.html">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>, plot.cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">SSplotEnsemble</span><span class="op">(</span><span class="va">mvln</span><span class="op">$</span><span class="va">kb</span>, ylabs <span class="op">=</span> <span class="va">mvln</span><span class="op">$</span><span class="va">labels</span>, add <span class="op">=</span> <span class="cn">T</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>
