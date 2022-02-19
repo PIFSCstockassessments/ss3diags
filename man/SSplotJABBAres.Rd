@@ -61,7 +61,7 @@ SSplotJABBAres(
 'sep' - treat season separately, plotting against Yr.S.
 If is.null(seas), it is assumed that there is only one season and option 'comb' is used.}
 
-\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device 
+\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
 by default (TRUE), and the option to disable this, via FALSE, is unused.}
 
 \item{print}{Deprecated. Please use 'print_plot'.}
@@ -91,7 +91,7 @@ by default (TRUE), and the option to disable this, via FALSE, is unused.}
 \item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis mark at final
 year in time series plots.}
 
-\item{xlim}{Optional, values for x-axis range of years to display on plot. 
+\item{xlim}{Optional, values for x-axis range of years to display on plot.
 Default = "default" displays all years of available data. (currently not used)}
 
 \item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space}
@@ -149,7 +149,7 @@ It will be separated from default name by an underscore.}
 
 \item{boxcol}{color boxes}
 
-\item{new}{Deprecated. New plot windows are created by default (TRUE), and the 
+\item{new}{Deprecated. New plot windows are created by default (TRUE), and the
 option to disable this, via FALSE, is unused.}
 
 \item{add}{supresses par() to create multiplot figs}
