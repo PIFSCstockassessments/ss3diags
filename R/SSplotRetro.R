@@ -220,9 +220,9 @@ SSplotRetro <- function(summaryoutput,
     }
 
     # subfunction to add legend
-    legendfun <- function(legendlabels, cumulative = FALSE) {
-      if (cumulative) {
-        legendloc <- "topleft"
+    add_legend <- function(legendlabels,cumulative=FALSE) {
+      if(cumulative){
+        legendloc="topleft"
       }
       if (is.numeric(legendloc)) {
         Usr <- par()$usr
@@ -384,55 +384,66 @@ SSplotRetro <- function(summaryoutput,
     # hindcast section
     yr.eval <- c(endyrvec)
     yr.eval <- (sort(yr.eval))
-    nhc <- length(endyrvec) - 1
-
-
-    plot(0,
-      type = "n", xlim = xlim, yaxs = yaxs,
-      ylim = ylim, xlab = ifelse(xylabs, "Year", ""), ylab = ifelse(xylabs, ylab, ""), axes = FALSE
-    )
-
-    imodel <- models[which(endyrvec == max(endyrvec))[1]]
-
-    if (uncertainty) {
-      polygon(c(seq(xlim[1], xlim[2]), rev(seq(xlim[1], xlim[2]))),
-        c(
-          lower[which(lower$Yr == xlim[1]):which(lower$Yr == xlim[2]), imodel],
-          rev(upper[which(upper$Yr == xlim[1]):which(upper$Yr == xlim[2]), imodel])
-        ),
-        col = shadecol,
-        border = shadecol
-      )
-    }
-
-
-    # Plot Reference
-    x.ref <- exp$Yr[which(exp$Yr == xlim[1]):which(exp$Yr == xlim[2])]
-    y.ref <- exp[which(exp$Yr == xlim[1]):which(exp$Yr == xlim[2]), imodel]
-    lines(x.ref, y.ref, col = col[1], lwd = 2, lty = 1, pch = 16)
-    rho.i <- fcrho.i <- NULL
-    for (iline in (2:nlines)[!mcmcVec]) {
-      imodel <- models[iline]
-      subset <- yr <= endyrvec[iline] & yr >= xlim[1]
-      subsetfc <- yr <= endyrvec[iline] + 1 & yr >= xlim[1]
-      x <- yr[subset]
-      y <- exp[subset, imodel]
-      xfc <- yr[subsetfc]
-      yfc <- exp[subsetfc, imodel]
-      lines(x, y, lwd = lwd[iline], col = col[iline], type = "l", cex = 0.9)
-      if (forecast) {
-        lines(xfc[(length(xfc) - 1):length(xfc)],
-          yfc[(length(xfc) - 1):length(xfc)],
-          lwd = 1,
-          col = col[iline],
-          type = "l",
-          cex = 0.9,
-          lty = 2
-        )
-        points(xfc[length(xfc)], yfc[length(yfc)],
-          pch = 21,
-          bg = col[iline], col = 1, type = "p", cex = 0.9
-        )
+    nhc = length(endyrvec)-1
+    
+    
+      plot(0, type = "n", xlim = xlim, yaxs = yaxs, 
+           ylim = ylim, xlab = ifelse(xylabs,"Year",""), ylab = ifelse(xylabs,ylab,""), axes = FALSE)
+      
+      imodel <- models[which(endyrvec==max(endyrvec))[1]]
+      
+      if(uncertainty){
+      
+        polygon(c(seq(xlim[1], xlim[2]), rev(seq(xlim[1], xlim[2]))), 
+                c(lower[which(lower$Yr == xlim[1]):which(lower$Yr == xlim[2]),imodel],
+                  rev(upper[which(upper$Yr == xlim[1]):which(upper$Yr == xlim[2]),imodel])),
+                col=shadecol,
+                border=shadecol)
+      }  
+      
+      
+      # Plot Reference
+      x.ref = exp$Yr[which(exp$Yr == xlim[1]):which(exp$Yr == xlim[2])]
+      y.ref = exp[which(exp$Yr == xlim[1]):which(exp$Yr == xlim[2]),imodel]
+      lines(x.ref,y.ref,col=col[1],lwd=2,lty=1,pch=16)
+      rho.i = fcrho.i = NULL
+      for(iline in (2:nlines)[!mcmcVec]){
+        imodel <- models[iline]
+        subset <- yr <= endyrvec[iline] & yr >= xlim[1]
+        subsetfc <- yr <= endyrvec[iline]+1 & yr >= xlim[1]
+        x <- yr[subset]
+        y <- exp[subset,imodel]
+        xfc <- yr[subsetfc]
+        yfc <- exp[subsetfc,imodel]
+        lines(x, y, lwd=lwd[iline], col=col[iline], type="l",cex=0.9)
+        if(forecast){
+        lines(xfc[(length(xfc)-1):length(xfc)], 
+              yfc[(length(xfc)-1):length(xfc)], 
+              lwd=1, 
+              col=col[iline], 
+              type="l",
+              cex=0.9,
+              lty=2)
+        points(xfc[length(xfc)], yfc[length(yfc)],pch=21,
+                 bg=col[iline],col=1, type="p",cex=0.9)
+        }
+        rho.i[iline-1] = (y[length(y)]-y.ref[length(y)])/
+          y.ref[length(y)]
+        fcrho.i[iline-1] = (yfc[length(yfc)]-y.ref[length(yfc)])/
+          y.ref[length(yfc)]
+        
+        }
+        
+      
+      rho =  mean(rho.i)
+      fcrho= mean(fcrho.i)
+      rho.table = data.frame(type=quant,peel=c(endyrvec[-1],"Combined"),Rho=c(rho.i,rho),ForecastRho=c(fcrho.i,fcrho))
+      
+      
+      if(legend){
+        # add legend if requested
+        
+        add_legend(legendlabels)
       }
       rho.i[iline - 1] <- (y[length(y)] - y.ref[length(y)]) /
         y.ref[length(y)]
