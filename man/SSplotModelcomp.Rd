@@ -66,7 +66,7 @@ SSplotModelcomp(
 \arguments{
 \item{summaryoutput}{List created by r4ss::SSsummarize()}
 
-\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device 
+\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
 by default (TRUE), the option to disable this via FALSE, is unused here.}
 
 \item{print}{Deprecated. Please use 'print_plot'.}
@@ -174,7 +174,7 @@ It will be separated from default name by an underscore.}
 
 \item{shadealpha}{Transparency adjustment used to make default shadecol}
 
-\item{new}{Deprecated. New plot windows are created by default (TRUE), and the 
+\item{new}{Deprecated. New plot windows are created by default (TRUE), and the
 option to disable this, via FALSE, is unused.}
 
 \item{add}{surpresses par() to create multiplot figs}

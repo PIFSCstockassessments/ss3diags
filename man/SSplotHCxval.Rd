@@ -190,13 +190,13 @@ It will be separated from default name by an underscore.}
 
 \item{indexfleets}{CHECK IF NEEDED or how to adjust indexfleets}
 
-\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device 
+\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
 by default (TRUE), and the option to disable this, via FALSE, is unused.}
 
 \item{shadecol1}{uncertainty shading of early years not affected by hindcast (currently not used)}
 }
 \description{
-Plots one-step ahead hindcasting cross-validations and computes MASE from prediction residuals. 
+Plots one-step ahead hindcasting cross-validations and computes MASE from prediction residuals.
 MASE is calculated as the average ratio of mean absolute error (MAE) of prediction residuals (MAE.PR) and naive predictions (MAE.base)
 MASE.adj sets the MAE.base to a minimum MAE.base.adj (default=0.1)
 MASE.adj allow passing (MASE<1) if MAE.PE < 0.1 and thus accurate if obs show very little annual variation
