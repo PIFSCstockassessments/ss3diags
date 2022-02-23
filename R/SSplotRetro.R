@@ -220,9 +220,9 @@ SSplotRetro <- function(summaryoutput,
     }
 
     # subfunction to add legend
-    add_legend <- function(legendlabels,cumulative=FALSE) {
-      if(cumulative){
-        legendloc="topleft"
+    add_legend <- function(legendlabels, cumulative = FALSE) {
+      if (cumulative) {
+        legendloc <- "topleft"
       }
       if (is.numeric(legendloc)) {
         Usr <- par()$usr
@@ -432,8 +432,6 @@ SSplotRetro <- function(summaryoutput,
         fcrho.i[iline - 1] <- (yfc[length(yfc)] - y.ref[length(yfc)]) /
           y.ref[length(yfc)]
       }
-
-    
 
 
     rho <- mean(rho.i)

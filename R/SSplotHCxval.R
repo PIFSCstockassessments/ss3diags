@@ -260,9 +260,9 @@ SSplotHCxval <- function(retroSummary,
     }
 
     # subfunction to add legend
-    add_legend <- function(legendlabels,cumulative=FALSE) {
-      if(cumulative){
-        legendloc="topleft"
+    add_legend <- function(legendlabels, cumulative = FALSE) {
+      if (cumulative) {
+        legendloc <- "topleft"
       }
       if (is.numeric(legendloc)) {
         Usr <- par()$usr
@@ -574,7 +574,7 @@ SSplotHCxval <- function(retroSummary,
       }
       if (legend) {
         # add legend if requested
-      
+
         add_legend(legendlabels)
       }
       if (mase == mase.adj | show.mase.adj == FALSE) legend("top", paste0(unique(indices2$Fleet_name)[1], ifelse(length(unique(hcruns$indices$Seas)) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2)), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
