@@ -262,9 +262,9 @@ SSplotEnsemble <- function(kb, summaryoutput,
     }
 
     # subfunction to add legend
-    add_legend <- function(legendlabels,cumulative=FALSE) {
-      if(cumulative){
-        legendloc="topleft"
+    add_legend <- function(legendlabels, cumulative = FALSE) {
+      if (cumulative) {
+        legendloc <- "topleft"
       }
       if (is.numeric(legendloc)) {
         Usr <- par()$usr
@@ -486,9 +486,9 @@ SSplotEnsemble <- function(kb, summaryoutput,
 ensemble_plot_index <- function(summaryoutput, varlist, indexfleets = 1, verbose = TRUE) {
 
   # subfunction to add legend
-  add_legend <- function(legendlabels,cumulative=FALSE) {
-    if(cumulative){
-      legendloc="topleft"
+  add_legend <- function(legendlabels, cumulative = FALSE) {
+    if (cumulative) {
+      legendloc <- "topleft"
     }
     if (is.numeric(legendloc)) {
       Usr_indices <- par("usr")
@@ -701,7 +701,7 @@ ensemble_plot_index <- function(summaryoutput, varlist, indexfleets = 1, verbose
   }
   if (legend) {
     # add legend if requested
-    
+
     add_legend(legendlabels)
   }
   legend("top", paste0(unique(indices2$Fleet_name)[1]), bty = "n", y.intersp = -0.2, cex = varlist[["legendcex"]] + 0.1)
