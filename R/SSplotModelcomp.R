@@ -247,9 +247,9 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
   plot_index <- function(indexfleets = 1) {
 
     # subfunction to add legend
-    add_legend <- function(legendlabels,cumulative=FALSE) {
-      if(cumulative){
-        legendloc="topleft"
+    add_legend <- function(legendlabels, cumulative = FALSE) {
+      if (cumulative) {
+        legendloc <- "topleft"
       }
       if (is.numeric(legendloc)) {
         Usr <- par("usr")
@@ -525,9 +525,9 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     }
 
     # subfunction to add legend
-    add_legend <- function(legendlabels,cumulative=FALSE) {
-      if(cumulative){
-        legendloc="topleft"
+    add_legend <- function(legendlabels, cumulative = FALSE) {
+      if (cumulative) {
+        legendloc <- "topleft"
       }
       if (is.numeric(legendloc)) {
         Usr <- par()$usr
@@ -738,7 +738,7 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
 
     if (legend) {
       # add legend if requested
-      
+
       add_legend(legendlabels)
     }
 
