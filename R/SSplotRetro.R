@@ -427,29 +427,13 @@ SSplotRetro <- function(summaryoutput,
         points(xfc[length(xfc)], yfc[length(yfc)],pch=21,
                  bg=col[iline],col=1, type="p",cex=0.9)
         }
-        rho.i[iline-1] = (y[length(y)]-y.ref[length(y)])/
-          y.ref[length(y)]
-        fcrho.i[iline-1] = (yfc[length(yfc)]-y.ref[length(yfc)])/
-          y.ref[length(yfc)]
-        
-        }
-        
-      
-      rho =  mean(rho.i)
-      fcrho= mean(fcrho.i)
-      rho.table = data.frame(type=quant,peel=c(endyrvec[-1],"Combined"),Rho=c(rho.i,rho),ForecastRho=c(fcrho.i,fcrho))
-      
-      
-      if(legend){
-        # add legend if requested
-        
-        add_legend(legendlabels)
+
       }
       rho.i[iline - 1] <- (y[length(y)] - y.ref[length(y)]) /
         y.ref[length(y)]
       fcrho.i[iline - 1] <- (yfc[length(yfc)] - y.ref[length(yfc)]) /
         y.ref[length(yfc)]
-    }
+    
 
 
     rho <- mean(rho.i)
@@ -460,7 +444,7 @@ SSplotRetro <- function(summaryoutput,
     if (legend) {
       # add legend if requested
 
-      legendfun(legendlabels)
+      add_legend(legendlabels)
     }
     if (showrho) legend("top", paste0("Mohn's rho = ", round(rho, 2), ifelse(forecast & forecastrho, paste0("(", round(fcrho, 2), ")"), "")), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
 
