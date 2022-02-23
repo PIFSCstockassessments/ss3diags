@@ -427,12 +427,12 @@ SSplotRetro <- function(summaryoutput,
         points(xfc[length(xfc)], yfc[length(yfc)],pch=21,
                  bg=col[iline],col=1, type="p",cex=0.9)
         }
-
+        rho.i[iline - 1] <- (y[length(y)] - y.ref[length(y)]) /
+          y.ref[length(y)]
+        fcrho.i[iline - 1] <- (yfc[length(yfc)] - y.ref[length(yfc)]) /
+          y.ref[length(yfc)]
       }
-      rho.i[iline - 1] <- (y[length(y)] - y.ref[length(y)]) /
-        y.ref[length(y)]
-      fcrho.i[iline - 1] <- (yfc[length(yfc)] - y.ref[length(yfc)]) /
-        y.ref[length(yfc)]
+
     
 
 
