@@ -174,7 +174,7 @@ SSplotRetro <- function(summaryoutput,
   if (!add) graphics.off()
 
 
-  pngfun <- function(file) {
+  save_png <- function(file) {
     # if extra text requested, add it before extention in file name
     file <- paste0(filenameprefix, file)
     # open png file
@@ -460,7 +460,7 @@ SSplotRetro <- function(summaryoutput,
   if (verbose) message("Plotting Retrospective pattern")
   if (plot) {
     if (print_plot) {
-      pngfun(paste0("retro_", quant, ".png", sep = ""))
+      save_png(paste0("retro_", quant, ".png", sep = ""))
       par(par)
       get_rho <- plot_retro(quant)
       dev.off()

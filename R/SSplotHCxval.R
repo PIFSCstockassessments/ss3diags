@@ -186,7 +186,7 @@ SSplotHCxval <- function(retroSummary,
   if (!add) graphics.off()
   plot <- TRUE
   hcruns <- retroSummary # added for now
-  pngfun <- function(file) {
+  save_png <- function(file) {
     # if extra text requested, add it before extention in file name
     file <- paste0(filenameprefix, file)
     # open png file
@@ -606,7 +606,7 @@ SSplotHCxval <- function(retroSummary,
         legend <- F
         if (fi %in% legendindex) legend <- TRUE
         indexfleets <- unique(hcruns$indices$Fleet)[fi]
-        pngfun(paste0("hcxval_", unique(hcruns$indices$Fleet)[fi], ".png", sep = ""))
+        save_png(paste0("hcxval_", unique(hcruns$indices$Fleet)[fi], ".png", sep = ""))
         par(par)
         get_mase <- plot_hcxval(indexfleets)$MASE
         dev.off()

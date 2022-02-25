@@ -200,7 +200,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::ss3sma,
     }
   }
 
-  pngfun <- function(file) {
+  save_png <- function(file) {
     # if extra text requested, add it before extension in file name
     file <- paste0(filenameprefix, file)
     # open png file
@@ -395,7 +395,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::ss3sma,
   if (verbose) message("Plotting JABBA residual plot")
   if (plot) {
     if (print_plot) {
-      pngfun(paste0("jabbaresidual.png", sep = ""))
+      save_png(paste0("jabbaresidual.png", sep = ""))
       par(par)
       rmse <- jabbaresiduals()
       dev.off()
