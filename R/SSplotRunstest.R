@@ -219,7 +219,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::ss3sma,
     Res <- cond
   }
 
-  pngfun <- function(file) {
+  save_png <- function(file) {
     # if extra text requested, add it before extention in file name
     file <- paste0(filenameprefix, file)
     # open png file
@@ -344,7 +344,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::ss3sma,
       runs <- NULL
       for (fi in 1:nfleets) {
         resid <- Res[Res$Fleet_name == indices[fi], ]
-        pngfun(paste0("residruns_", indices[fi], ".png", sep = ""))
+        save_png(paste0("residruns_", indices[fi], ".png", sep = ""))
         par(par)
         if (nrow(resid) > 3 & (max(resid$Time) - min(resid$Time)) > 3) {
           get_runs <- plot_runs(resid)

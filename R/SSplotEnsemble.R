@@ -192,7 +192,7 @@ SSplotEnsemble <- function(kb, summaryoutput,
 
   quants <- subplots
 
-  pngfun <- function(file) {
+  save_png <- function(file) {
     # if extra text requested, add it before extention in file name
     file <- paste0(filenameprefix, file)
     # open png file
@@ -422,7 +422,7 @@ SSplotEnsemble <- function(kb, summaryoutput,
       if (print_plot) {
         quant <- subplots[s]
         par(par)
-        pngfun(paste0("ModelComp_", quant, ".png", sep = ""))
+        save_png(paste0("ModelComp_", quant, ".png", sep = ""))
         plot_quants(quant)
         dev.off()
       }
