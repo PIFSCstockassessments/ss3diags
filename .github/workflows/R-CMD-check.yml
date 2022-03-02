@@ -6,7 +6,7 @@
 # See https://github.com/r-lib/actions/tree/master/examples#readme for
 # additional example workflows available for the R community.
 
-name: R-CMD-check-unittests
+name: R-CMD-check
 
 on:
   push:
@@ -63,15 +63,18 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck", "testthat"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
-      - name: Check
+        
+      - name: Check R Package
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error", check_dir = "check")
         shell: Rscript {0}
-      - name: Show testthat output
+        
+      - name: Test package (testthat) 
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
