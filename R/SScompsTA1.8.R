@@ -182,9 +182,9 @@ SScompsTA1.8 <- function(ss3rep, type = c("len", "age", "size", "con"), fleet = 
       pldat[i, "Std.res"] <- (pldat[i, "Obsmn"] - pldat[i, "Expmn"]) / pldat[i, "semn"]
       pldat[i, "Fleet"] <- mean(subdbase[["Fleet"]])
       pldat[i, "Total"] <- Total
-      pldat[i, "Yr"] <- mean(if (seas == "comb") subdbase[["Yr"]] else subdbase[["Yr.S"]])
+      pldat[i, "Yr"] <- mean(subdbase$Yr)
       pldat[i, "EffN"] <- 1 / var(Intermediate[, "Resid"])
-      pldat[i, "Time"] <- mean(if (seas == "comb") subdbase[["Yr"]] else subdbase[["Yr.S"]])
+      pldat[i, "Time"] <- mean(subdbase$Time)
       pldat[i, "Seas"] <- mean(subdbase$Seas)
       pldat[i, "Like"] <- mean(subdbase$Like)
       AllRes <- c(AllRes, Intermediate[, "Resid"])
@@ -211,8 +211,8 @@ SScompsTA1.8 <- function(ss3rep, type = c("len", "age", "size", "con"), fleet = 
       pldat[i, "Obshi"] <- pldat[i, "Obsmn"] + 2 * pldat[i, "semn"]
       pldat[i, "Std.res"] <- (pldat[i, "Obsmn"] - pldat[i, "Expmn"]) / pldat[i, "semn"]
       pldat[i, "Fleet"] <- mean(subdbase$Fleet)
-      pldat[i, "Yr"] <- mean(if (seas == "comb") subdbase[["Yr"]] else subdbase[["Yr.S"]])
-      pldat[i, "Time"] <- mean(if (seas == "comb") subdbase[["Yr"]] else subdbase[["Yr.S"]])
+      pldat[i, "Yr"] <- mean(subdbase$Yr)
+      pldat[i, "Time"] <- mean(subdbase$Time)
       pldat[i, "Seas"] <- mean(subdbase$Seas)
       pldat[i, "Like"] <- mean(subdbase$Like)
 

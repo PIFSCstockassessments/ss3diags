@@ -212,9 +212,6 @@ SSplotJABBAres <- function(ss3rep = ss3diags::ss3sma,
     par(par)
   }
 
-  if (seas == "comb") {
-    Res$Time <- Res$Yr
-  }
 
   # subset if indexselect is specified
   if (is.null(indexselect) == F & is.numeric(indexselect)) {
