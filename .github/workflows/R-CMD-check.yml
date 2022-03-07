@@ -10,7 +10,6 @@ name: R-CMD-check-unittests
 
 on:
   push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
