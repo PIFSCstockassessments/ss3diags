@@ -262,17 +262,17 @@ SSplotEnsemble <- function(kb, summaryoutput,
     }
 
     # subfunction to add legend
-    add_legend <- function(legendlabels, cumulative = FALSE) {
-      if (cumulative) {
-        legendloc <- "topleft"
-      }
-      if (is.numeric(legendloc)) {
-        Usr <- par()$usr
-        legendloc <- list(
-          x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
-          y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
-        )
-      }
+    #add_legend <- function(legendlabels, cumulative = FALSE) {
+      #if (cumulative) {
+       # legendloc <- "topleft"
+      #}
+      #if (is.numeric(legendloc)) {
+       # Usr <- par()$usr
+       # legendloc <- list(
+       #   x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
+       #   y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
+       # )
+      #}
 
       # if type input is "l" then turn off points on top of lines in legend
       legend.pch <- pch
@@ -401,7 +401,7 @@ SSplotEnsemble <- function(kb, summaryoutput,
 
     if (legend) {
       # add legend if requested
-      add_legend(legendlabels)
+      r4ss::add_legend(legendlabels)
     }
 
     # axis(1, at=c(min(xmin,min(yr)):max(endyrvec)))
@@ -486,17 +486,17 @@ SSplotEnsemble <- function(kb, summaryoutput,
 ensemble_plot_index <- function(summaryoutput, varlist, indexfleets = 1, verbose = TRUE) {
 
   # subfunction to add legend
-  add_legend <- function(legendlabels, cumulative = FALSE) {
-    if (cumulative) {
-      legendloc <- "topleft"
-    }
-    if (is.numeric(legendloc)) {
-      Usr_indices <- par("usr")
-      legendloc <- list(
-        x = Usr_indices[1] + legendloc[1] * (Usr_indices[2] - Usr_indices[1]),
-        y = Usr_indices[3] + legendloc[2] * (Usr_indices[4] - Usr_indices[3])
-      )
-    }
+  #add_legend <- function(legendlabels, cumulative = FALSE) {
+   # if (cumulative) {
+   #   legendloc <- "topleft"
+   # }
+   # if (is.numeric(legendloc)) {
+   #   Usr_indices <- par("usr")
+   #   legendloc <- list(
+    #    x = Usr_indices[1] + legendloc[1] * (Usr_indices[2] - Usr_indices[1]),
+    #    y = Usr_indices[3] + legendloc[2] * (Usr_indices[4] - Usr_indices[3])
+    #  )
+    #}
 
     # if type input is "l" then turn off points on top of lines in legend
     legend.pch <- -1
@@ -702,7 +702,7 @@ ensemble_plot_index <- function(summaryoutput, varlist, indexfleets = 1, verbose
   if (legend) {
     # add legend if requested
 
-    add_legend(legendlabels)
+    r4ss::add_legend(legendlabels)
   }
   legend("top", paste0(unique(indices2$Fleet_name)[1]), bty = "n", y.intersp = -0.2, cex = varlist[["legendcex"]] + 0.1)
 

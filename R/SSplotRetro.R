@@ -220,17 +220,17 @@ SSplotRetro <- function(summaryoutput,
     }
 
     # subfunction to add legend
-    add_legend <- function(legendlabels, cumulative = FALSE) {
-      if (cumulative) {
-        legendloc <- "topleft"
-      }
-      if (is.numeric(legendloc)) {
-        Usr <- par()$usr
-        legendloc <- list(
-          x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
-          y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
-        )
-      }
+    #add_legend <- function(legendlabels, cumulative = FALSE) {
+    #  if (cumulative) {
+    #    legendloc <- "topleft"
+    #  }
+     # if (is.numeric(legendloc)) {
+     #   Usr <- par()$usr
+     #   legendloc <- list(
+     #     x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
+     #     y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
+     #   )
+     # }
 
       # if type input is "l" then turn off points on top of lines in legend
       legend.pch <- pch
@@ -442,7 +442,7 @@ SSplotRetro <- function(summaryoutput,
     if (legend) {
       # add legend if requested
 
-      add_legend(legendlabels)
+      r4ss::add_legend(legendlabels)
     }
     if (showrho) legend("top", paste0("Mohn's rho = ", round(rho, 2), ifelse(forecast & forecastrho, paste0("(", round(fcrho, 2), ")"), "")), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
 

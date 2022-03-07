@@ -247,17 +247,17 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
   plot_index <- function(indexfleets = 1) {
 
     # subfunction to add legend
-    add_legend <- function(legendlabels, cumulative = FALSE) {
-      if (cumulative) {
-        legendloc <- "topleft"
-      }
-      if (is.numeric(legendloc)) {
-        Usr <- par("usr")
-        legendloc <- list(
-          x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
-          y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
-        )
-      }
+    #add_legend <- function(legendlabels, cumulative = FALSE) {
+     # if (cumulative) {
+     #   legendloc <- "topleft"
+     # }
+     # if (is.numeric(legendloc)) {
+     #   Usr <- par("usr")
+     #   legendloc <- list(
+     #     x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
+     #     y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
+     #   )
+     # }
 
       # if type input is "l" then turn off points on top of lines in legend
       legend.pch <- -1
@@ -480,7 +480,7 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     }
     if (legend) {
       # add legend if requested
-      add_legend(legendlabels)
+      r4ss::add_legend(legendlabels)
     }
     legend("top",
       paste0(unique(indices2[["Fleet_name"]])[1]),
@@ -525,17 +525,17 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     }
 
     # subfunction to add legend
-    add_legend <- function(legendlabels, cumulative = FALSE) {
-      if (cumulative) {
-        legendloc <- "topleft"
-      }
-      if (is.numeric(legendloc)) {
-        Usr <- par()$usr
-        legendloc <- list(
-          x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
-          y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
-        )
-      }
+    #add_legend <- function(legendlabels, cumulative = FALSE) {
+    #  if (cumulative) {
+    #    legendloc <- "topleft"
+    #  }
+     # if (is.numeric(legendloc)) {
+     #   Usr <- par()$usr
+     #   legendloc <- list(
+     #     x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
+     #     y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
+     #   )
+     # }
 
       # if type input is "l" then turn off points on top of lines in legend
       legend.pch <- pch
@@ -739,7 +739,7 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     if (legend) {
       # add legend if requested
 
-      add_legend(legendlabels)
+      r4ss::add_legend(legendlabels)
     }
 
     # axis(1, at=c(min(xmin,min(yr)):max(endyrvec)))
