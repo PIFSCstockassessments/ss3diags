@@ -131,7 +131,7 @@ SSplotEnsemble <- function(kb, summaryoutput,
                            mcmcVec = FALSE,
                            indexQlabel = TRUE,
                            indexQdigits = 4,
-                           legendindex = NULL) { # plot different fits to a single index of abundance
+                           legendindex = NULL) { # plot different fits to a single index of abundance 
 
   # Parameter DEPRECATION checks
   if (lifecycle::is_present(print)) {
@@ -275,16 +275,16 @@ SSplotEnsemble <- function(kb, summaryoutput,
       #}
 
       # if type input is "l" then turn off points on top of lines in legend
-      legend.pch <- pch
-      if (type == "l") {
-        legend.pch <- rep(NA, length(pch))
-      }
-      legend(legendloc,
-        legend = legendlabels[legendorder],
-        col = col[legendorder], lty = lty[legendorder], seg.len = 2,
-        lwd = lwd[legendorder], pch = legend.pch[legendorder], bty = "n", ncol = legendncol, pt.cex = 0.7, cex = legendcex, y.intersp = legendsp
-      )
-    }
+      #legend.pch <- pch
+      #if (type == "l") {
+      #  legend.pch <- rep(NA, length(pch))
+      #}
+      #legend(legendloc,
+      #  legend = legendlabels[legendorder],
+      #  col = col[legendorder], lty = lty[legendorder], seg.len = 2,
+      #  lwd = lwd[legendorder], pch = legend.pch[legendorder], bty = "n", ncol = legendncol, pt.cex = 0.7, cex = legendcex, y.intersp = legendsp
+     # )
+    #}
 
     # r4ss Colors
     #rc <- function(n, alpha = 1) {
@@ -486,31 +486,29 @@ SSplotEnsemble <- function(kb, summaryoutput,
 ensemble_plot_index <- function(summaryoutput, varlist, indexfleets = 1, verbose = TRUE) {
 
   # subfunction to add legend
-  #add_legend <- function(legendlabels, cumulative = FALSE) {
-   # if (cumulative) {
-   #   legendloc <- "topleft"
-   # }
-   # if (is.numeric(legendloc)) {
-   #   Usr_indices <- par("usr")
-   #   legendloc <- list(
-    #    x = Usr_indices[1] + legendloc[1] * (Usr_indices[2] - Usr_indices[1]),
-    #    y = Usr_indices[3] + legendloc[2] * (Usr_indices[4] - Usr_indices[3])
-    #  )
-    #}
+    #add_legend <- function(legendlabels, cumulative = FALSE) {
+      #if (cumulative) {
+       # legendloc <- "topleft"
+      #}
+      #if (is.numeric(legendloc)) {
+       # Usr <- par()$usr
+       # legendloc <- list(
+       #   x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
+       #   y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
+       # )
+      #}
 
-    # if type input is "l" then turn off points on top of lines in legend
-    legend.pch <- -1
-    if (varlist[["type"]] == "l") {
-      legend.pch <- rep(NA, length(pch))
-    }
-    legend(legendloc,
-      legend = legendlabels[legendorder],
-      col = col[legendorder], lty = lty[legendorder], seg.len = 2,
-      lwd = lwd[legendorder], pch = legend.pch[legendorder], bty = "n",
-      ncol = varlist[["legendncol"]], pt.cex = 0.7,
-      cex = varlist[["legendcex"]], y.intersp = varlist[["legendsp"]]
-    )
-  }
+      # if type input is "l" then turn off points on top of lines in legend
+      #legend.pch <- pch
+      #if (type == "l") {
+      #  legend.pch <- rep(NA, length(pch))
+      #}
+      #legend(legendloc,
+      #  legend = legendlabels[legendorder],
+      #  col = col[legendorder], lty = lty[legendorder], seg.len = 2,
+      #  lwd = lwd[legendorder], pch = legend.pch[legendorder], bty = "n", ncol = legendncol, pt.cex = 0.7, cex = legendcex, y.intersp = legendsp
+     # )
+    #}
 
   # r4ss Colors
   #rc <- function(n, alpha = 1) {

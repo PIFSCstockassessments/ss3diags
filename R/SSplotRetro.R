@@ -220,30 +220,30 @@ SSplotRetro <- function(summaryoutput,
     }
 
     # subfunction to add legend
-    #add_legend <- function(legendlabels, cumulative = FALSE) {
-    #  if (cumulative) {
-    #    legendloc <- "topleft"
-    #  }
-     # if (is.numeric(legendloc)) {
-     #   Usr <- par()$usr
-     #   legendloc <- list(
-     #     x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
-     #     y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
-     #   )
-     # }
+        #add_legend <- function(legendlabels, cumulative = FALSE) {
+      #if (cumulative) {
+       # legendloc <- "topleft"
+      #}
+      #if (is.numeric(legendloc)) {
+       # Usr <- par()$usr
+       # legendloc <- list(
+       #   x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
+       #   y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
+       # )
+      #}
 
       # if type input is "l" then turn off points on top of lines in legend
-      legend.pch <- pch
-      if (type == "l") {
-        legend.pch <- rep(NA, length(pch))
-      }
-      legend(legendloc,
-        legend = legendlabels[legendorder],
-        col = col[legendorder], lty = lty[legendorder], seg.len = 2,
-        lwd = lwd[legendorder], pch = legend.pch[legendorder], bty = "n", ncol = legendncol, pt.cex = 0.7, cex = legendcex, y.intersp = legendsp
-      )
-    }
-
+      #legend.pch <- pch
+      #if (type == "l") {
+      #  legend.pch <- rep(NA, length(pch))
+      #}
+      #legend(legendloc,
+      #  legend = legendlabels[legendorder],
+      #  col = col[legendorder], lty = lty[legendorder], seg.len = 2,
+      #  lwd = lwd[legendorder], pch = legend.pch[legendorder], bty = "n", ncol = legendncol, pt.cex = 0.7, cex = legendcex, y.intersp = legendsp
+     # )
+    #}
+    
     # r4ss Colors
     #rc <- function(n, alpha = 1) {
       # a subset of rich.colors by Arni Magnusson from the gregmisc package
