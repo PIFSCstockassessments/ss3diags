@@ -76,7 +76,7 @@
 #' @export
 #'
 #' @importFrom grDevices pdf
-#' @importFrom lifecycle deprecated
+#' @importFrom lifecycle deprecated 
 #'
 #' @keywords ssplot hindcasting
 #'
@@ -280,17 +280,17 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     }
 
     # r4ss Colors
-    rc <- function(n, alpha = 1) {
+    #rc <- function(n, alpha = 1) {
       # a subset of rich.colors by Arni Magnusson from the gregmisc package
       # a.k.a. rich.colors.short, but put directly in this function
       # to try to diagnose problem with transparency on one computer
-      x <- seq(0, 1, length = n)
-      r <- 1 / (1 + exp(20 - 35 * x))
-      g <- pmin(pmax(0, -0.8 + 6 * x - 5 * x^2), 1)
-      b <- dnorm(x, 0.25, 0.15) / max(dnorm(x, 0.25, 0.15))
-      rgb.m <- matrix(c(r, g, b), ncol = 3)
-      rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1], v[2], v[3], alpha = alpha))
-    }
+      #x <- seq(0, 1, length = n)
+      #r <- 1 / (1 + exp(20 - 35 * x))
+      #g <- pmin(pmax(0, -0.8 + 6 * x - 5 * x^2), 1)
+      #b <- dnorm(x, 0.25, 0.15) / max(dnorm(x, 0.25, 0.15))
+      #rgb.m <- matrix(c(r, g, b), ncol = 3)
+      #rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1], v[2], v[3], alpha = alpha))
+    #}
 
     labels <- c(
       "Year", # 1
@@ -328,7 +328,7 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
       }
     }
     # setup colors, points, and line types
-    if (is.null(col) & nlines > 3) col <- rc(nlines + 1)[-1]
+    if (is.null(col) & nlines > 3) col <- r4ss::rich.colors.short(nlines + 1)[-1]
     if (is.null(col) & nlines < 3) col <- c("blue", "green4")
     if (is.null(col) & nlines == 3) col <- c("blue", "red", "green4")
     if (is.null(shadecol)) {
@@ -558,17 +558,17 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     }
 
     # r4ss Colors
-    rc <- function(n, alpha = 1) {
+    #rc <- function(n, alpha = 1) {
       # a subset of rich.colors by Arni Magnusson from the gregmisc package
       # a.k.a. rich.colors.short, but put directly in this function
       # to try to diagnose problem with transparency on one computer
-      x <- seq(0, 1, length = n)
-      r <- 1 / (1 + exp(20 - 35 * x))
-      g <- pmin(pmax(0, -0.8 + 6 * x - 5 * x^2), 1)
-      b <- dnorm(x, 0.25, 0.15) / max(dnorm(x, 0.25, 0.15))
-      rgb.m <- matrix(c(r, g, b), ncol = 3)
-      rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1], v[2], v[3], alpha = alpha))
-    }
+      #x <- seq(0, 1, length = n)
+      #r <- 1 / (1 + exp(20 - 35 * x))
+      #g <- pmin(pmax(0, -0.8 + 6 * x - 5 * x^2), 1)
+      #b <- dnorm(x, 0.25, 0.15) / max(dnorm(x, 0.25, 0.15))
+      #rgb.m <- matrix(c(r, g, b), ncol = 3)
+      #rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1], v[2], v[3], alpha = alpha))
+    #}
 
 
 
@@ -637,7 +637,7 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
 
 
     # setup colors, points, and line types
-    if (is.null(col) & nlines > 3) col <- rc(nlines + 1)[-1]
+    if (is.null(col) & nlines > 3) col <- r4ss::rich.colors.short(nlines + 1)[-1]
     if (is.null(col) & nlines < 3) col <- c("blue", "green4")
     if (is.null(col) & nlines == 3) col <- c("blue", "red", "green4")
     if (is.null(shadecol)) {

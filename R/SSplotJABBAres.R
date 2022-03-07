@@ -289,17 +289,17 @@ SSplotJABBAres <- function(ss3rep = ss3diags::ss3sma,
     }
 
     # r4ss Colors
-    rc <- function(n, alpha = 1) {
+    #rc <- function(n, alpha = 1) {
       # a subset of rich.colors by Arni Magnusson from the gregmisc package
       # a.k.a. rich.colors.short, but put directly in this function
       # to try to diagnose problem with transparency on one computer
-      x <- seq(0, 1, length = n)
-      r <- 1 / (1 + exp(20 - 35 * x))
-      g <- pmin(pmax(0, -0.8 + 6 * x - 5 * x^2), 1)
-      b <- dnorm(x, 0.25, 0.15) / max(dnorm(x, 0.25, 0.15))
-      rgb.m <- matrix(c(r, g, b), ncol = 3)
-      rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1], v[2], v[3], alpha = alpha))
-    }
+      #x <- seq(0, 1, length = n)
+      #r <- 1 / (1 + exp(20 - 35 * x))
+      #g <- pmin(pmax(0, -0.8 + 6 * x - 5 * x^2), 1)
+      #b <- dnorm(x, 0.25, 0.15) / max(dnorm(x, 0.25, 0.15))
+      #rgb.m <- matrix(c(r, g, b), ncol = 3)
+      #rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1], v[2], v[3], alpha = alpha))
+    #}
 
     labels <- c(
       "Year", # 1
@@ -321,8 +321,8 @@ SSplotJABBAres <- function(ss3rep = ss3diags::ss3sma,
     n.years <- length(yr)
 
     # setup colors, points, and line types
-    if (is.null(col) & n.indices > 3) col <- rc(n.indices + 1)[-1]
-    if (is.null(col) & n.indices < 3) col <- rc(n.indices)
+    if (is.null(col) & n.indices > 3) col <- r4ss::rich.colors.short(n.indices + 1)[-1] 
+    if (is.null(col) & n.indices < 3) col <- r4ss::rich.colors.short(n.indices)
     if (is.null(col) & n.indices == 3) col <- c("blue", "red", "green3")
     # set pch values if no input
 
