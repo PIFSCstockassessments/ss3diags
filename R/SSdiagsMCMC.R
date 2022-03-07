@@ -264,7 +264,7 @@ SSdiagsMCMC <- function(mcmc, ss3rep, Fref = NULL, years = NULL, run = "MCMC", t
 
   labs <- ifelse(quants == "Recr", "Recruits", quants)
   if (plot == TRUE) {
-    sspar(mfrow = c(3, 2), plot.cex = 0.7)
+    r4ss::sspar(mfrow = c(3, 2), plot.cex = 0.7)
     SSplotEnsemble(kb, add = T, legend = F, ylabs = c(xlab, ylab, labs[1], "F", labs[2], "Catch"))
   }
 
