@@ -472,7 +472,13 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     }
     if (legend) {
       # add legend if requested
-      r4ss::add_legend(legendlabels)
+      r4ss::add_legend(legendlabels, 
+                         legendloc = legendloc, 
+                         legendcex = legendcex,
+                         legendsp = legendsp,
+                         legendncol = legendncol,
+                         legendorder = legendorder,
+                         pch = pch, col = col, lty = lty, lwd = lwd)
     }
     legend("top",
       paste0(unique(indices2[["Fleet_name"]])[1]),
@@ -723,7 +729,13 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     if (legend) {
       # add legend if requested
 
-      r4ss::add_legend(legendlabels)
+      r4ss::add_legend(legendlabels, 
+                         legendloc = legendloc, 
+                         legendcex = legendcex,
+                         legendsp = legendsp,
+                         legendncol = legendncol,
+                         legendorder = legendorder,
+                         pch = pch, col = col, lty = lty, lwd = lwd)
     }
 
     # axis(1, at=c(min(xmin,min(yr)):max(endyrvec)))

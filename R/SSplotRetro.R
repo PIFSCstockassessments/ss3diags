@@ -243,7 +243,7 @@ SSplotRetro <- function(summaryoutput,
       #  lwd = lwd[legendorder], pch = legend.pch[legendorder], bty = "n", ncol = legendncol, pt.cex = 0.7, cex = legendcex, y.intersp = legendsp
      # )
     #}
-    
+
     # r4ss Colors
     #rc <- function(n, alpha = 1) {
       # a subset of rich.colors by Arni Magnusson from the gregmisc package
@@ -442,7 +442,13 @@ SSplotRetro <- function(summaryoutput,
     if (legend) {
       # add legend if requested
 
-      r4ss::add_legend(legendlabels)
+      r4ss::add_legend(legendlabels, 
+                         legendloc = legendloc, 
+                         legendcex = legendcex,
+                         legendsp = legendsp,
+                         legendncol = legendncol,
+                         legendorder = legendorder,
+                         pch = pch, col = col, lty = lty, lwd = lwd)
     }
     if (showrho) legend("top", paste0("Mohn's rho = ", round(rho, 2), ifelse(forecast & forecastrho, paste0("(", round(fcrho, 2), ")"), "")), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
 

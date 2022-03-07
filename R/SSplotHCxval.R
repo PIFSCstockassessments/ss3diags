@@ -575,7 +575,13 @@ SSplotHCxval <- function(retroSummary,
       if (legend) {
         # add legend if requested
 
-        r4ss::add_legend(legendlabels)
+        r4ss::add_legend(legendlabels, 
+                         legendloc = legendloc, 
+                         legendcex = legendcex,
+                         legendsp = legendsp,
+                         legendncol = legendncol,
+                         legendorder = legendorder,
+                         pch = pch, col = col, lty = lty, lwd = lwd)
       }
       if (mase == mase.adj | show.mase.adj == FALSE) legend("top", paste0(unique(indices2$Fleet_name)[1], ifelse(length(unique(hcruns$indices$Seas)) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2)), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
       if (mase.adj < mase & show.mase.adj == TRUE) legend("top", paste0(unique(indices2$Fleet_name)[1], ifelse(length(unique(hcruns$indices$Seas)) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2), " (", round(mase.adj, 2), ")"), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
