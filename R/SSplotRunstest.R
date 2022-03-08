@@ -106,7 +106,7 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 #' @importFrom lifecycle deprecated
 #' @export
 
-SSplotRunstest_pngtest <- function(ss3rep = ss3diags::simple,
+SSplotRunstest <- function(ss3rep = ss3diags::simple,
                            mixing = "less",
                            subplots = c("cpue", "len", "age", "con")[1],
                            plot = TRUE,
