@@ -184,21 +184,21 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
   # if(fmsy) refline2  = 1
   if (fmsy) ylabs[3] <- expression(F / F[MSY])
 
-  save_png <- function(file) {
+  #save_png <- function(file) {
     # if extra text requested, add it before extention in file name
-    file <- paste0(filenameprefix, file)
+   # file <- paste0(filenameprefix, file)
     # open png file
-    png(
-      filename = file.path(plotdir, file),
-      width = pwidth,
-      height = pheight,
-      units = punits,
-      res = res,
-      pointsize = ptsize
-    )
+    #png(
+     # filename = file.path(plotdir, file),
+     # width = pwidth,
+     # height = pheight,
+     # units = punits,
+     # res = res,
+     # pointsize = ptsize
+    #)
     # change graphics parameters to input value
-    par(par)
-  }
+    #par(par)
+  #}
 
   # subset if indexselect is specified
   if (is.null(indexselect) == F & is.numeric(indexselect)) {
@@ -755,7 +755,17 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
         if (subplots[s] != "index") {
           quant <- subplots[s]
           par(par)
-          save_png(paste0("ModelComp_", quant, ".png", sep = ""))
+          #save_png(paste0("ModelComp_", quant, ".png", sep = ""))
+
+        plotinfo <- NULL
+        r4ss::save_png(plotinfo = plotinfo,
+                       file = paste0("ModelComp_", quant, ".png", sep = ""),
+                       plotdir = plotdir,
+                       pwidth = pwidth,
+                       pheight = pheight,
+                       punits = punits,
+                       res = res, 
+                       ptsize = ptsize)
           plot_quants(quant)
           dev.off()
         } else {
@@ -766,7 +776,17 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
             legend <- F
             if (fi %in% legendindex) legend <- TRUE
             indexfleets <- unique(summaryoutput$indices$Fleet)[fi]
-            save_png(paste0("FitsIndex_", unique(summaryoutput$indices$Fleet)[fi], ".png", sep = ""))
+            #save_png(paste0("FitsIndex_", unique(summaryoutput$indices$Fleet)[fi], ".png", sep = ""))
+
+            plotinfo <- NULL
+            r4ss::save_png(plotinfo = plotinfo,
+                       file = paste0("FitsIndex_", unique(summaryoutput$indices$Fleet)[fi], ".png", sep = ""),
+                       plotdir = plotdir,
+                       pwidth = pwidth,
+                       pheight = pheight,
+                       punits = punits,
+                       res = res, 
+                       ptsize = ptsize)
             par(par)
             plot_index(indexfleets)
             dev.off()

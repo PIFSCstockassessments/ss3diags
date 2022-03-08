@@ -174,17 +174,17 @@ SSplotRetro <- function(summaryoutput,
   if (!add) graphics.off()
 
 
-  save_png <- function(file) {
+  #save_png <- function(file) {
     # if extra text requested, add it before extention in file name
-    file <- paste0(filenameprefix, file)
+   # file <- paste0(filenameprefix, file)
     # open png file
-    png(
-      filename = file.path(plotdir, file),
-      width = pwidth, height = pheight, units = punits, res = res, pointsize = ptsize
-    )
+    #png(
+     # filename = file.path(plotdir, file),
+      #width = pwidth, height = pheight, units = punits, res = res, pointsize = ptsize
+    #)
     # change graphics parameters to input value
-    par(par)
-  }
+    #par(par)
+  #}
 
 
   if (is.null(legendindex)) legendindex <- 1:summaryoutput$n
@@ -466,7 +466,16 @@ SSplotRetro <- function(summaryoutput,
   if (verbose) message("Plotting Retrospective pattern")
   if (plot) {
     if (print_plot) {
-      save_png(paste0("retro_", quant, ".png", sep = ""))
+      #save_png(paste0("retro_", quant, ".png", sep = ""))
+      plotinfo <- NULL
+      r4ss::save_png(plotinfo = plotinfo,
+                       file = paste0("retro_", quant, ".png", sep = ""),
+                       plotdir = plotdir,
+                       pwidth = pwidth,
+                       pheight = pheight,
+                       punits = punits,
+                       res = res, 
+                       ptsize = ptsize)
       par(par)
       get_rho <- plot_retro(quant)
       dev.off()

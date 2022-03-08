@@ -200,17 +200,17 @@ SSplotJABBAres <- function(ss3rep = ss3diags::ss3sma,
     }
   }
 
-  save_png <- function(file) {
+  #save_png <- function(file) {
     # if extra text requested, add it before extension in file name
-    file <- paste0(filenameprefix, file)
+   # file <- paste0(filenameprefix, file)
     # open png file
-    png(
-      filename = file.path(plotdir, file),
-      width = pwidth, height = pheight, units = punits, res = res, pointsize = ptsize
-    )
+   # png(
+  #    filename = file.path(plotdir, file),
+   #   width = pwidth, height = pheight, units = punits, res = res, pointsize = ptsize
+   # )
     # change graphics parameters to input value
-    par(par)
-  }
+   # par(par)
+  #}
 
 
   # subset if indexselect is specified
@@ -392,7 +392,16 @@ SSplotJABBAres <- function(ss3rep = ss3diags::ss3sma,
   if (verbose) message("Plotting JABBA residual plot")
   if (plot) {
     if (print_plot) {
-      save_png(paste0("jabbaresidual.png", sep = ""))
+      #save_png(paste0("jabbaresidual.png", sep = ""))
+       plotinfo <- NULL
+        r4ss::save_png(plotinfo = plotinfo,
+                       file = paste0("jabbaresidual.png", sep = ""),
+                       plotdir = plotdir,
+                       pwidth = pwidth,
+                       pheight = pheight,
+                       punits = punits,
+                       res = res, 
+                       ptsize = ptsize)
       par(par)
       rmse <- jabbaresiduals()
       dev.off()

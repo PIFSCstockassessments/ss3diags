@@ -192,17 +192,17 @@ SSplotEnsemble <- function(kb, summaryoutput,
 
   quants <- subplots
 
-  save_png <- function(file) {
+  #save_png <- function(file) {
     # if extra text requested, add it before extention in file name
-    file <- paste0(filenameprefix, file)
+   # file <- paste0(filenameprefix, file)
     # open png file
-    png(
-      filename = file.path(plotdir, file),
-      width = pwidth, height = pheight, units = punits, res = res, pointsize = ptsize
-    )
+   # png(
+   #   filename = file.path(plotdir, file),
+    #  width = pwidth, height = pheight, units = punits, res = res, pointsize = ptsize
+    #)
     # change graphics parameters to input value
-    par(par)
-  }
+   # par(par)
+  #}
 
 
   if (use_png) print_plot <- TRUE
@@ -428,7 +428,17 @@ SSplotEnsemble <- function(kb, summaryoutput,
       if (print_plot) {
         quant <- subplots[s]
         par(par)
-        save_png(paste0("ModelComp_", quant, ".png", sep = ""))
+        #save_png(paste0("ModelComp_", quant, ".png", sep = ""))
+
+        plotinfo <- NULL
+        r4ss::save_png(plotinfo = plotinfo,
+                       file = paste0("ModelComp_", quant, ".png", sep = ""),
+                       plotdir = plotdir,
+                       pwidth = pwidth,
+                       pheight = pheight,
+                       punits = punits,
+                       res = res, 
+                       ptsize = ptsize)
         plot_quants(quant)
         dev.off()
       }
