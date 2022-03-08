@@ -5,11 +5,10 @@ simple <- ss3diags::simple
 path <- file.path(tempdir(), "test_runs")
 dir.create(path, showWarnings = FALSE)
 
-# ss3diags::diags_simple
 
 ## Simple
 test_that("file of simple_cpue_jabbaresiduals plot exists", {
-  SSplotJABBAres(simple,
+  SSplotJABBAres_test(simple,
     png = TRUE,
     print = T,
     subplots = "cpue",

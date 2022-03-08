@@ -347,14 +347,14 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
         #save_png(paste0("residruns_", indices[fi], ".png", sep = ""))
         plotinfo <- NULL
         r4ss::save_png(plotinfo = plotinfo,
-                       file = paste0("residruns_", indices[fi], ".png", sep = ""),
+                       file = paste0("jabbaresidual.png", sep = ""),
                        plotdir = plotdir,
                        pwidth = pwidth,
                        pheight = pheight,
                        punits = punits,
                        res = res, 
-                       ptsize = ptsize)
-        
+                       ptsize = ptsize,
+                       filenameprefix = filenameprefix)
         par(par)
         if (nrow(resid) > 3 & (max(resid$Time) - min(resid$Time)) > 3) {
           get_runs <- plot_runs(resid)

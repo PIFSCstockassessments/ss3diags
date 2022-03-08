@@ -472,13 +472,15 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     }
     if (legend) {
       # add legend if requested
-      r4ss::add_legend(legendlabels, 
+     r4ss::add_legend(legendlabels, 
                          legendloc = legendloc, 
                          legendcex = legendcex,
                          legendsp = legendsp,
                          legendncol = legendncol,
                          legendorder = legendorder,
-                         pch = pch, col = col, lty = lty, lwd = lwd)
+                         pch = pch, col = col, lty = lty, 
+                         lwd = lwd,
+                         type = type)
     }
     legend("top",
       paste0(unique(indices2[["Fleet_name"]])[1]),
@@ -729,13 +731,15 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     if (legend) {
       # add legend if requested
 
-      r4ss::add_legend(legendlabels, 
+     r4ss::add_legend(legendlabels, 
                          legendloc = legendloc, 
                          legendcex = legendcex,
                          legendsp = legendsp,
                          legendncol = legendncol,
                          legendorder = legendorder,
-                         pch = pch, col = col, lty = lty, lwd = lwd)
+                         pch = pch, col = col, lty = lty, 
+                         lwd = lwd,
+                         type = type)
     }
 
     # axis(1, at=c(min(xmin,min(yr)):max(endyrvec)))
@@ -759,13 +763,14 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
 
         plotinfo <- NULL
         r4ss::save_png(plotinfo = plotinfo,
-                       file = paste0("ModelComp_", quant, ".png", sep = ""),
+                       file = paste0("jabbaresidual.png", sep = ""),
                        plotdir = plotdir,
                        pwidth = pwidth,
                        pheight = pheight,
                        punits = punits,
                        res = res, 
-                       ptsize = ptsize)
+                       ptsize = ptsize,
+                       filenameprefix = filenameprefix)
           plot_quants(quant)
           dev.off()
         } else {
@@ -779,14 +784,15 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
             #save_png(paste0("FitsIndex_", unique(summaryoutput$indices$Fleet)[fi], ".png", sep = ""))
 
             plotinfo <- NULL
-            r4ss::save_png(plotinfo = plotinfo,
-                       file = paste0("FitsIndex_", unique(summaryoutput$indices$Fleet)[fi], ".png", sep = ""),
+        r4ss::save_png(plotinfo = plotinfo,
+                       file = paste0("jabbaresidual.png", sep = ""),
                        plotdir = plotdir,
                        pwidth = pwidth,
                        pheight = pheight,
                        punits = punits,
                        res = res, 
-                       ptsize = ptsize)
+                       ptsize = ptsize,
+                       filenameprefix = filenameprefix)
             par(par)
             plot_index(indexfleets)
             dev.off()

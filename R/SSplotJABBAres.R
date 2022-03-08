@@ -71,7 +71,7 @@
 #' @importFrom lifecycle deprecated
 #'
 #' @export
-SSplotJABBAres <- function(ss3rep = ss3diags::ss3sma,
+SSplotJABBAres <- function(ss3rep = ss3diags::simple,
                            subplots = c("cpue", "len", "age", "con")[1],
                            seas = NULL,
                            plot = TRUE,
@@ -401,7 +401,8 @@ SSplotJABBAres <- function(ss3rep = ss3diags::ss3sma,
                        pheight = pheight,
                        punits = punits,
                        res = res, 
-                       ptsize = ptsize)
+                       ptsize = ptsize,
+                       filenameprefix = filenameprefix)
       par(par)
       rmse <- jabbaresiduals()
       dev.off()

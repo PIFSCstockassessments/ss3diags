@@ -575,13 +575,15 @@ SSplotHCxval <- function(retroSummary,
       if (legend) {
         # add legend if requested
 
-        r4ss::add_legend(legendlabels, 
+     r4ss::add_legend(legendlabels, 
                          legendloc = legendloc, 
                          legendcex = legendcex,
                          legendsp = legendsp,
                          legendncol = legendncol,
                          legendorder = legendorder,
-                         pch = pch, col = col, lty = lty, lwd = lwd)
+                         pch = pch, col = col, lty = lty, 
+                         lwd = lwd,
+                         type = type)
       }
       if (mase == mase.adj | show.mase.adj == FALSE) legend("top", paste0(unique(indices2$Fleet_name)[1], ifelse(length(unique(hcruns$indices$Seas)) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2)), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
       if (mase.adj < mase & show.mase.adj == TRUE) legend("top", paste0(unique(indices2$Fleet_name)[1], ifelse(length(unique(hcruns$indices$Seas)) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2), " (", round(mase.adj, 2), ")"), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
@@ -616,13 +618,14 @@ SSplotHCxval <- function(retroSummary,
 
         plotinfo <- NULL
         r4ss::save_png(plotinfo = plotinfo,
-                       file = paste0("hcxval_", unique(hcruns$indices$Fleet)[fi], ".png", sep = ""),
+                       file = paste0("jabbaresidual.png", sep = ""),
                        plotdir = plotdir,
                        pwidth = pwidth,
                        pheight = pheight,
                        punits = punits,
                        res = res, 
-                       ptsize = ptsize)
+                       ptsize = ptsize,
+                       filenameprefix = filenameprefix)
         par(par)
         get_mase <- plot_hcxval(indexfleets)$MASE
         dev.off()

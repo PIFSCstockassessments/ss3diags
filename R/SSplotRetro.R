@@ -442,13 +442,15 @@ SSplotRetro <- function(summaryoutput,
     if (legend) {
       # add legend if requested
 
-      r4ss::add_legend(legendlabels, 
+     r4ss::add_legend(legendlabels, 
                          legendloc = legendloc, 
                          legendcex = legendcex,
                          legendsp = legendsp,
                          legendncol = legendncol,
                          legendorder = legendorder,
-                         pch = pch, col = col, lty = lty, lwd = lwd)
+                         pch = pch, col = col, lty = lty, 
+                         lwd = lwd,
+                         type = type)
     }
     if (showrho) legend("top", paste0("Mohn's rho = ", round(rho, 2), ifelse(forecast & forecastrho, paste0("(", round(fcrho, 2), ")"), "")), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
 
@@ -468,14 +470,15 @@ SSplotRetro <- function(summaryoutput,
     if (print_plot) {
       #save_png(paste0("retro_", quant, ".png", sep = ""))
       plotinfo <- NULL
-      r4ss::save_png(plotinfo = plotinfo,
-                       file = paste0("retro_", quant, ".png", sep = ""),
+        r4ss::save_png(plotinfo = plotinfo,
+                       file = paste0("jabbaresidual.png", sep = ""),
                        plotdir = plotdir,
                        pwidth = pwidth,
                        pheight = pheight,
                        punits = punits,
                        res = res, 
-                       ptsize = ptsize)
+                       ptsize = ptsize,
+                       filenameprefix = filenameprefix)
       par(par)
       get_rho <- plot_retro(quant)
       dev.off()
