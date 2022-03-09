@@ -347,7 +347,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
         #save_png(paste0("residruns_", indices[fi], ".png", sep = ""))
         plotinfo <- NULL
         r4ss::save_png(plotinfo = plotinfo,
-                       file = paste0("jabbaresidual.png", sep = ""),
+                       file = paste0("residruns_", indices[fi], ".png", sep = ""),
                        plotdir = plotdir,
                        pwidth = pwidth,
                        pheight = pheight,

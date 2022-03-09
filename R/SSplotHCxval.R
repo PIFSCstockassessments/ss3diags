@@ -618,7 +618,7 @@ SSplotHCxval <- function(retroSummary,
 
         plotinfo <- NULL
         r4ss::save_png(plotinfo = plotinfo,
-                       file = paste0("jabbaresidual.png", sep = ""),
+                       file = paste0("hcxval_", unique(hcruns$indices$Fleet)[fi], ".png", sep = ""),
                        plotdir = plotdir,
                        pwidth = pwidth,
                        pheight = pheight,

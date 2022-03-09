@@ -471,7 +471,7 @@ SSplotRetro <- function(summaryoutput,
       #save_png(paste0("retro_", quant, ".png", sep = ""))
       plotinfo <- NULL
         r4ss::save_png(plotinfo = plotinfo,
-                       file = paste0("jabbaresidual.png", sep = ""),
+                       file = paste0("retro_", quant, ".png", sep = ""),
                        plotdir = plotdir,
                        pwidth = pwidth,
                        pheight = pheight,

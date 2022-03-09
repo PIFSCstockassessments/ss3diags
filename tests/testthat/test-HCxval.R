@@ -8,7 +8,7 @@ dir.create(path, showWarnings = FALSE)
 
 ## Hindcast plotting of indices
 
-test_that("Hindcast plot is created for sma indices", {
+test_that("Hindcast plot is created for simple model indices", {
   SSplotHCxval(retrosum.simple,
     add = T,
     verbose = F,
@@ -36,13 +36,14 @@ test_that("Hindcast plot is created for sma indices", {
 ## Test that MASE table is correct
 #### note: function was too complicated to replicate in the test script so used values directly from running the function. If code for calculations changes, the values will change and it will error or if the SS3 input files change, the values will be different and it will error.
 
-test_that("MASE table gives expected values for sma", {
+test_that("MASE table gives expected values for simple model", {
   mase <- SSplotHCxval(retrosum.simple, add = T, verbose = F)
 
   expect_match(mase$Index[1], "Survey")
   expect_equal(round(mase$MASE[1], 7), 0.5836339)
   expect_equal(round(mase$MAE.PR[1], 7), 0.1856207)
-})
+
+  })
 
 
 test_that("SSretroComps returns the correct comp data for simple model", {
