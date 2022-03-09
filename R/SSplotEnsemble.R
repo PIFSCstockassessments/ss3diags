@@ -497,12 +497,28 @@ SSplotEnsemble <- function(kb, summaryoutput,
 #' @param varlist variable list
 #' @param indexfleets Fleet vector index
 #' @param verbose Option to output messages to Rconsole
+#' @param legendloc Location of legend. Either a string like "topleft" or a vector
+#' of two numeric values representing the fraction of the maximum in the x and y
+#' dimensions, respectively. See ?legend for more info on the string options.
+#' @param legendcex Allows to adjust legend cex
+#' @param legendsp Space between legend labels
+#' @param legendncol Number of columns for the legend.
+#' @param type Type parameter passed to points (default 'o' overplots points on
+#' top of lines)
 #'
 #' @keywords internal ssplot
 #'
 #' @importFrom grDevices png
 #'
-ensemble_plot_index <- function(summaryoutput, varlist, indexfleets = 1, verbose = TRUE) {
+ensemble_plot_index <- function(summaryoutput,
+                                varlist,
+                                indexfleets = 1,
+                                verbose = TRUE,
+                                legendloc = "topright",
+                                legendcex = 1,
+                                legendsp = 0.9,
+                                legendncol = 1,
+                                type="l") {
 
   # subfunction to add legend
     #add_legend <- function(legendlabels, cumulative = FALSE) {
