@@ -352,7 +352,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
                        pwidth = pwidth,
                        pheight = pheight,
                        punits = punits,
-                       res = res, 
+                       res = res,
                        ptsize = ptsize,
                        filenameprefix = filenameprefix)
         par(par)
