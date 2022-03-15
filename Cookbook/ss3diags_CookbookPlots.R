@@ -76,7 +76,7 @@ res=300
 plname = "Fig4_runsfig_sma"
 
 jpeg(file = paste0(getwd(),"/output/",plname,".jpg"), width = pwidth, height = pheight, res = res, units = "in")
-sspar(mfrow=c(3,2),labs=T,plot.cex=0.9)
+r4ss::sspar(mfrow=c(3,2),labs=T,plot.cex=0.9)
 for(i in 1:3){
 SSplotRunstest(ss3sma,add=T,legendcex=0.8,tickEndYr=F,xylabs=T,indexselect = c(1,3,4)[i])
 legend("topleft",paste0(letters[c(1,3,5)[i]],")"),y.intersp = -0.2,x.intersp = -0.7,bty="n",cex=l)
@@ -91,7 +91,7 @@ pheight = 9
 res=300
 plname = "Fig5_runsfig_hke"
 jpeg(file = paste0(getwd(),"/output/",plname,".jpg"), width = pwidth, height = pheight, res = res, units = "in")
-sspar(mfrow=c(3,1),labs=T,plot.cex=0.9)
+r4ss:sspar(mfrow=c(3,1),labs=T,plot.cex=0.9)
 for(i in 1:1){
   SSplotRunstest(ss3phk,add=T,legendcex=0.8,tickEndYr=F,xylabs=T,indexselect = i)
   legend("topleft",paste0(letters[c(1)[i]],")"),y.intersp = -0.2,x.intersp = -0.7,bty="n",cex=l)
@@ -111,7 +111,7 @@ dev.off()
 plname = "Fig3_jointresiduals"
 pwidth=8; pheight=7
 jpeg(file = paste0(getwd(),"/output/",plname,".jpg"), width = pwidth, height = pheight, res = res, units = "in")
-sspar(mfrow=c(2,2),labs=T,plot.cex=0.9)
+r4ss::sspar(mfrow=c(2,2),labs=T,plot.cex=0.9)
 SSplotJABBAres(ss3sma,add=T,legendcex=0.8,tickEndYr=T,xylabs=T,indexselect = c(1,3,4,5,6),legendsp = 1)
 legend("topleft",paste0(letters[1],")"),y.intersp = -0.2,x.intersp = -0.7,bty="n",cex=l)
 SSplotJABBAres(ss3phk,add=T,legendcex=0.8,tickEndYr=T,xylabs=T,legendsp = 1)
@@ -133,7 +133,7 @@ pwidth = 8
 pheight = 9
 res=300
 jpeg(file = paste0(getwd(),"/output/",plname,".jpg"), width = pwidth, height = pheight, res = res, units = "in")
-sspar(mfrow=c(3,2),labs=F,plot.cex=1)
+r4ss::sspar(mfrow=c(3,2),labs=F,plot.cex=1)
 SSplotModelcomp(aspm.sma,subplots = "Index",ylimAdj=1.1,add=T,legendcex=0.8,tickEndYr=F,xylabs=F,indexselect = c(1),legendlabels = c("Full Model","ASPM","ASPMdev"))
 legend("topleft",paste0(letters[1],")"),y.intersp = -0.2,x.intersp = -0.7,bty="n",cex=l)
 mtext("Index",side=2,outer=F,line=1.5,cex=1)
@@ -162,7 +162,7 @@ pwidth=8; pheight=8
 plname = "Fig8_retrowithforecast"
 
 jpeg(file = paste0(getwd(),"/output/",plname,".jpg"), width = pwidth, height = pheight, res = res, units = "in")
-sspar(mfrow=c(2,2),labs=F,plot.cex=1.)
+r4ss::sspar(mfrow=c(2,2),labs=F,plot.cex=1.)
 SSplotRetro(retroI.sma,add=T,legendcex=0.8,tickEndYr=F,xylabs=F,legendloc = "bottomleft",uncertainty = T,showrho = F,forecast = T,labels="SSB (t)",legendsp=0.9,ylim=c(0,1500))
 legend("topleft",paste0(letters[1],")"),y.intersp = -0.2,x.intersp = -0.7,bty="n",cex=l)
 SSplotRetro(retroI.phk,add=T,legendcex=0.8,tickEndYr=F,xylabs=F,legendloc = "topright",uncertainty = T,showrho = F,forecast = T,labels="SSB (t)",legendsp=0.9,ylim=c(0,6.5E6))
@@ -190,7 +190,7 @@ retroI.sma = SSsummarize(retro.sma) # summarize index fits
 hccomps.sma = ss3diags::SSretroComps(retro.sma) # summarize composition fits
 
 jpeg(file = paste0(getwd(),"/output/",plname,".jpg"), width = pwidth, height = pheight, res = res, units = "in")
-sspar(mfrow=c(3,2),labs=T,plot.cex=0.9)
+r4ss::sspar(mfrow=c(3,2),labs=T,plot.cex=0.9)
 for(i in 1:3){
   SSplotHCxval(retroI.sma,add=T,legendcex=0.8,legend=ifelse(i==0,T,F),legendsp = 0.8,legendindex = 1,tickEndYr=F,xylabs=T,legendloc="bottomleft",indexselect = c(1,3,4)[i],MAE.base.adj=0)
   legend("topleft",paste0(letters[c(1,3,5)[i]],")"),y.intersp = -0.2,x.intersp = -0.7,bty="n",cex=l)
@@ -209,7 +209,7 @@ retroI.phk = SSsummarize(retro.phk) # summarize index fits
 hccomps.phk = ss3diags::SSretroComps(retro.phk) # summarize composition fits
 
 jpeg(file = paste0(getwd(),"/output/",plname,".jpg"), width = pwidth, height = pheight, res = res, units = "in")
-sspar(mfrow=c(3,1),labs=T,plot.cex=0.9)
+r4ss::sspar(mfrow=c(3,1),labs=T,plot.cex=0.9)
 
 for(i in 1:1){
   SSplotHCxval(retroI.phk,add=T,legendcex=0.8,legend=F,legendsp = 0.8,legendindex = 1,tickEndYr=F,xylabs=T,legendloc="topright",indexselect = c(1)[i])

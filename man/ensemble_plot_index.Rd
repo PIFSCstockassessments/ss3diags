@@ -4,7 +4,17 @@
 \alias{ensemble_plot_index}
 \title{Plot Indices}
 \usage{
-ensemble_plot_index(summaryoutput, varlist, indexfleets = 1, verbose = TRUE)
+ensemble_plot_index(
+  summaryoutput,
+  varlist,
+  indexfleets = 1,
+  verbose = TRUE,
+  legendloc = "topright",
+  legendcex = 1,
+  legendsp = 0.9,
+  legendncol = 1,
+  type = "l"
+)
 }
 \arguments{
 \item{summaryoutput}{summaryoutput}
@@ -14,6 +24,19 @@ ensemble_plot_index(summaryoutput, varlist, indexfleets = 1, verbose = TRUE)
 \item{indexfleets}{Fleet vector index}
 
 \item{verbose}{Option to output messages to Rconsole}
+
+\item{legendloc}{Location of legend. Either a string like "topleft" or a vector
+of two numeric values representing the fraction of the maximum in the x and y
+dimensions, respectively. See ?legend for more info on the string options.}
+
+\item{legendcex}{Allows to adjust legend cex}
+
+\item{legendsp}{Space between legend labels}
+
+\item{legendncol}{Number of columns for the legend.}
+
+\item{type}{Type parameter passed to points (default 'o' overplots points on
+top of lines)}
 }
 \description{
 function to plot different fits to a single index of abundance

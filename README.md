@@ -82,7 +82,7 @@ of performing a runs test on the index, length composition, and
 conditional age-at-length fits.
 
 ``` r
-sspar(mfrow = c(2,2))
+r4ss::sspar(mfrow = c(2,2))
 SSplotRunstest(simple, subplots = "cpue", add = TRUE)
 #> Residual Runs Test (/w plot) stats by Index:
 #>    Index runs.p   test  sigma3.lo sigma3.hi type
@@ -105,12 +105,11 @@ values. In the plots above, the shaded area represents the ‘three-sigma
 limit’, or three residual standard deviations from zero. If any of the
 individual residual points fall outside of the three-sigma limit, they
 are colored red as in the fishery length-composition. Green shaded area
-indicates the residuals are randomly distributed (p-value &gt;= 0.05)
-and red shaded area indicates the residuals are not randomly distributed
-and there is some misspecification with the indices or composition data
-(p-value &lt; 0.05). In addition to the residual plots,
-`SSplotRunstest()` produces a summary table of the runs test output
-values, including:
+indicates the residuals are randomly distributed (p-value \>= 0.05) and
+red shaded area indicates the residuals are not randomly distributed and
+there is some misspecification with the indices or composition data
+(p-value \< 0.05). In addition to the residual plots, `SSplotRunstest()`
+produces a summary table of the runs test output values, including:
 
 -   p-value for the runs test  
 -   if the test passed or failed (indicated by green or red shading in
@@ -129,7 +128,7 @@ the example below, we plot the residuals for the mean age
 (age-composition) and mean length (length-composition) for both fleets.
 
 ``` r
-sspar(mfrow=c(1,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
 SSplotJABBAres(simple, subplots = "age", add = TRUE, seas="comb")
 #> RMSE stats by Index:
 #>    indices RMSE.perc nobs
@@ -177,7 +176,7 @@ abundance indices but not composition data. To plot the output from the
 retrospective analysis you can use the function
 
 ``` r
-sspar(mfrow=c(1,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
 SSplotRetro(sumSimple, subplots = "SSB", add = TRUE)
 #> Mohn's Rho stats, including one step ahead forecasts:
 #>   type     peel         Rho  ForecastRho
@@ -210,7 +209,7 @@ projecting quantities, such as SSB, over the truncated years. This can
 be visualized by adding `forecast = TRUE` in the function above.
 
 ``` r
-sspar(mfrow=c(1,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
 SSplotRetro(sumSimple, subplots = "SSB", forecast = TRUE, add = TRUE, xlim = c(94,100), uncertainty = FALSE)
 #> Mohn's Rho stats, including one step ahead forecasts:
 #>   type     peel         Rho  ForecastRho

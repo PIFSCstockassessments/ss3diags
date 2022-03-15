@@ -1,20 +1,21 @@
 ---
 title: "User guidelines for Advanced Model Diagnostics with ss3diags"
-author: 
- - Hennig Winker (JRC-EC)
- - Felipe Carvalho (NOAA)
- - Massimiliano Cardinale (SLU) 
- - Laurence Kell (Sea++)
+author:
+- Hennig Winker (JRC-EC)
+- Felipe Carvalho (NOAA)
+- Massimiliano Cardinale (SLU)
+- Laurence Kell (Sea++)
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
+  html_document:
+    toc: yes
+    df_print: paged
   pdf_document:
     number_sections: yes
     toc: yes
-    keep_tex: false
-vignette: >
-  %\VignetteIndexEntry{ss3daigs Vignetted}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+    keep_tex: no
+vignette: |
+  %\VignetteIndexEntry{ss3daigs Vignetted} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 
 ```{r wrap-hook, echo = FALSE}
@@ -154,13 +155,13 @@ SSplotRunstest(ss3sma)
 <br>
 
 
-To visiualize the runs test for multiple indices, it is recommended to use of the function `sspar()`. The option plot `add=TRUE` in `sspar()` facilitates setting the graphic parameters so that they are suitable for `ss3diags` plots. The option `add=TRUE` prevents the plotting functions from over-writing `sspar()`.
+To visiualize the runs test for multiple indices, it is recommended to use of the function `r4ss::sspar()`. The option plot `add=TRUE` in `sspar()` facilitates setting the graphic parameters so that they are suitable for `ss3diags` plots. The option `add=TRUE` prevents the plotting functions from over-writing `sspar()`.
 
 <br>
 
 ```{r fig1, fig.height=6, fig.cap = "Runs test plots for CPUE index fits. Green shading indicates no evidence (p ≥ 0.05) and red shading evidence (p < 0.05) to reject the hypothesis of a randomly distributed time-series of residuals, respectively. The shaded (green/red) area spans three residual standard deviations to either side from zero, and the red points outside of the shading violate the ‘three-sigma limit’ for that series."}
 
-sspar(mfrow=c(3,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(3,2),plot.cex=0.8)
 rt = SSplotRunstest(ss3sma,add=T,verbose=F)
 ```
 <br><br>
@@ -171,7 +172,7 @@ It is also possible to select the indices that should be plotted. For example, w
 
 ```{r fig2,fig.height=6, fig.cap="Runs test plot and Joint residual plot for fits to CPUE indices, where the vertical lines with points show the residuals, and solid black lines show loess smoother through all residuals. Boxplots indicate the median and quantiles in cases where residuals from the multiple indices are available for any given year. Root-mean squared errors (RMSE) are included in the upper right-hand corner of each plot."}
 
-sspar(mfrow=c(3,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(3,2),plot.cex=0.8)
 rt= SSplotRunstest(ss3sma,add=T,indexselect = c(1,3:6),legendcex = 0.8,verbose=F)
 jr = SSplotJABBAres(ss3sma,add=T,indexselect = c(1,3:6),legendcex = 0.55,verbose=F)
 ```
@@ -183,7 +184,7 @@ The default for `SSplotRunstest()` and `SSplotJABBAres()` is plot the residual r
 <br><br>
 
 ```{r fig3, fig.height=6,fig.cap= "Runs test plot and Joint residual plot for mean lengths from fits length composition data"}
-sspar(mfrow=c(3,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(3,2),plot.cex=0.8)
 rt= SSplotRunstest(ss3sma,add=T,legendcex = 0.8,subplot="len",verbose=F)
 jr = SSplotJABBAres(ss3sma,add=T,
                   legendcex = 0.55,legendloc="bottomright",subplot="len",verbose=F)
@@ -209,7 +210,7 @@ The Pacific hake assessment provides an example of fits to age composition inste
 
 ```{r,fig.height=4, fig.cap="Runs test plot and Joint residual plot for a survey abudance index and mean ages from fits to survey and fisheries dependent age-composition data"}
 
-sspar(mfrow=c(2,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(2,2),plot.cex=0.8)
 rti = SSplotRunstest(ss3phk,add=T,legendcex = 0.8,subplot="cpue",verbose=F)
 rta = SSplotRunstest(ss3phk,add=T,legendcex = 0.8,subplot="age",verbose=F)
 jra = SSplotJABBAres(ss3phk,add=T,legendcex = 0.7,subplot="age",verbose=F)
@@ -233,7 +234,7 @@ We use notation "retroI" because `r4ss::SSsummarize()` summarizes the modeled qu
 
 ```{r fig5, fig.height=3,fig.cap= "Retrospective analysis of spawning stock biomass (SSB) and fishing mortality estimates for Pacific hake conducted by re-fitting the reference model (Ref) after seven years, one year at a time sequentially. Mohn’s rho statistic are denoted on top of the panels. Grey shaded areas are the 95 \\% confidence intervals from the reference model in cases where the analysis was run with Hessian"}
 
-sspar(mfrow=c(1,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
 rb = SSplotRetro(retroI.phk,add=T,forecast = F,legend = F,verbose=F)
 rf = SSplotRetro(retroI.phk,add=T,subplots="F", ylim=c(0,0.4),
                  forecast = F,legendloc="topleft",legendcex = 0.8,verbose=F)
@@ -247,7 +248,7 @@ An intuitive extension of the retrospective analysis is to assess potential fore
 
 ```{r fig6, fig.height=3.,fig.cap= "Retrospective results shown for the most recent years only. Mohn’s rho statistic and the corresponding ‘hindcast rho’ values (in brackets) are now printed at the top of the panels. One-year-ahead projections denoted by color-coded dashed lines with terminal points are shown for each model."}
 
-sspar(mfrow=c(1,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
 rb = SSplotRetro(retroI.phk,add=T,forecast = T,legend = F,verbose=F,xmin=2000)
 rf = SSplotRetro(retroI.phk,add=T,subplots="F", ylim=c(0,0.4),
                 forecast = T,legendloc="topleft",legendcex = 0.8,verbose=F,xmin=2000)
@@ -293,7 +294,7 @@ retroI.sma <- r4ss::SSsummarize(retro.sma,verbose=F)
 
 ```{r fig7, fig.height=5.5,fig.cap= "Hindcasting cross-validation (HCxval) results from CPUE fits, showing observed (large points connected with dashed line), fitted (solid lines) and one-yearahead forecast values (small terminal points).HCxval was performed using one reference model (Ref) and five hindcast model runs (solid lines) relative to the expected CPUE. The observations used for crossvalidation are highlighted as color-coded solid circles with associated 95 \\% confidence intervals. The model reference year refers to the endpoints of each one-year-ahead forecast and the corresponding observation (i.e., year of peel + 1). The mean absolute scaled error (MASE) score associated with each CPUE"}
 
-sspar(mfrow=c(3,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(3,2),plot.cex=0.8)
 hci = SSplotHCxval(retroI.sma,add=T,verbose=F,ylimAdj = 1.3,legendcex = 0.7)
 ```
 
@@ -307,7 +308,7 @@ retroC.sma = SSretroComps(retro.sma)
 
 ```{r fig8, fig.height=3,fig.cap= "Hindcasting cross-validation (HCxval) results for mean lengths. Note that MASE values in breakets are adjusted MASE values for cases where naive predictions have a Mean-Absolute-Error below 0.1"}
 
-sspar(mfrow=c(1,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
 hcl = SSplotHCxval(retroC.sma,subplots="len",add=T,verbose=F,
 ylimAdj = 1.3,legendcex = 0.7,indexselect = c(1,2))
 ```
@@ -348,7 +349,7 @@ Applying HCxval for composition data requires correctly specifying the compositi
 
 retroC.phk = SSretroComps(retro.phk) # summarize comps
 
-sspar(mfrow=c(1,2),plot.cex=0.8)
+r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
 hcl = SSplotHCxval(retroC.phk,subplots="age",add=T,
 verbose=F,ylimAdj = 1.3,legendcex = 0.7,indexselect = c(1,2))
 
@@ -434,7 +435,7 @@ SSsettingsBratioF(ss3sma)
 This function is also inbuilt in the `SSdeltaMVLN()` to prevent misleading results. The `SSdeltaMVLN()` output include the maximum likelihood estimates (mles) and the MVLN monte-Carlo distributions `$kb` of $SSB/SSB_{MSY}$, $F/F_{MSY}$ and $F$. Note the additional quantities $SSB$ and $Rec$ are generated independently from lognormal distributions for practical reasons. These can be plotted by
 
 ```{r fig11, fig.height=6.5,fig.cap="Distributions of $SSB/SSB_{MSY}$, $F/F_{MSY}$, $SSB$, $F$ ,Recruitment and Catch trajectories for the North Atlantic shortfin mako SS3 model"}
-sspar(mfrow=c(3,2),plot.cex = 0.7)
+r4ss::sspar(mfrow=c(3,2),plot.cex = 0.7)
 SSplotEnsemble(mvln$kb,ylabs=mvln$labels,add=T,verbose=F) 
 ```
 
@@ -460,7 +461,7 @@ mvln = SSdeltaMVLN(ss3phk,run="Pac.Hake", Fref="SPR",plot=TRUE)
 
 
 ```{r fig14, fig.height=6.5,fig.cap="Distributions for $SSB/SSB_{40}$, $F/F_{SPR40}$, $SSB$, $F$, Recruitment and Catch trajectories for the Pacific Hake SS3 model"} 
-sspar(mfrow=c(3,2),plot.cex = 0.7)
+r4ss::sspar(mfrow=c(3,2),plot.cex = 0.7)
 SSplotEnsemble(mvln$kb,ylabs=mvln$labels,add=T,verbose=F) 
 ```
 
@@ -493,7 +494,7 @@ Comparing delta-MVLN with MCMC simply requires combining the `$kb` outputs by, e
 
 
 ```{r fig15, fig.height=3.3,fig.width=4,fig.cap="Kobe phase plot comparing MVLN and MCMC posterior distributions of $SSB/SSB_{50}$ and $F/F_{50}$  for the ICES Gulf of Bothia Herring SS3 model"} 
-sspar(mfrow=c(1,1),plot.cex = 0.8)
+r4ss::sspar(mfrow=c(1,1),plot.cex = 0.8)
 SSplotKobe(rbind(mvln$kb,mcmc$kb),joint=F,
    xlab=mvln$labels[1],ylab=mvln$labels[2],fill=F)
 
@@ -504,7 +505,7 @@ SSplotKobe(rbind(mvln$kb,mcmc$kb),joint=F,
 
 ```{r fig16, fig.height=4.5,fig.cap="Comparison of MVLN and MCMC posterior distributions for $SSB/SSB_{40}$, $F/F_{SB40}$, $SSB$ and $F$ for the ICES Gulf of Bothia Herring SS3 model"} 
 
-sspar(mfrow=c(2,2),plot.cex = 0.7)
+r4ss::sspar(mfrow=c(2,2),plot.cex = 0.7)
 SSplotEnsemble(rbind(mvln$kb,mcmc$kb),ylabs=mvln$labels,add=T,subplots = c("stock", "harvest", "SSB", "F"),verbose=F)
 
 ```
@@ -671,7 +672,7 @@ save(retro.phk, file=file.path(dir.retro,"retro.phk.rdata"))
 library(ss3diags)
 
 check.retro =r4ss::SSsummarize(retro.phk)
-sspar(mfrow=c(1,1))
+r4ss::sspar(mfrow=c(1,1))
 SSplotRetro(check.retro,forecast = T,add=T,legendcex = 0.7,legendloc = "topleft")
 
 ```

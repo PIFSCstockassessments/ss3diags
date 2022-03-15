@@ -18,7 +18,7 @@ SSmase(retroI.phk)
 SSmase(retroA.phk,quants = "age")
 
 # New retro-forecast options (ylim added too)
-sspar(mfrow=c(2,2),plot.cex=0.7)
+r4ss::sspar(mfrow=c(2,2),plot.cex=0.7)
 SSplotRetro(retroI.sma,subplots = "SSB",ylim=c(0,1500),add=T,legend=F)
 SSplotRetro(retroI.phk,subplots = "SSB",add=T,legend=F,ylim=c(0,7*10^6))
 SSplotRetro(retroI.sma,subplots = "F",add=T,legendloc = "left",legendcex = 0.8)

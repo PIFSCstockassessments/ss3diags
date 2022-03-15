@@ -71,8 +71,8 @@ SSplotKobe <- function(kb, joint = TRUE, year = NULL,
 
   # MVN posterior
   if (n > 1 & joint == FALSE) {
-    if (posterior[1] == "points") for (i in 1:n) points(kb$stock[kb$run == r[i]], kb$harvest[kb$run == r[i]], col = sscol(n, 0.3)[i], pch = 16, cex = 0.8)
-    for (i in 1:n) points(median(kb$stock[kb$run == r[i]]), median(kb$harvest[kb$run == r[i]]), bg = sscol(n, 1)[i], pch = 21, cex = 1.5, col = 1)
+    if (posterior[1] == "points") for (i in 1:n) points(kb$stock[kb$run == r[i]], kb$harvest[kb$run == r[i]], col = r4ss::rich.colors.short(n, 0.3)[i], pch = 16, cex = 0.8)
+    for (i in 1:n) points(median(kb$stock[kb$run == r[i]]), median(kb$harvest[kb$run == r[i]]), bg = r4ss::rich.colors.short(n, 1)[i], pch = 21, cex = 1.5, col = 1)
   } else {
     if (posterior[1] == "points") points(kb$stock, kb$harvest, bg = grey(0.6, 0.8), pch = 21)
   }
@@ -90,7 +90,7 @@ SSplotKobe <- function(kb, joint = TRUE, year = NULL,
   points(median(kb$stock), median(kb$harvest), bg = 0, pch = 21, cex = 2, lwd = 2)
   points(trj$stock[1], trj$harvest[1], bg = 0, pch = 21, cex = 1.7, lwd = 2)
   if (legendruns & joint == F) {
-    legend("topright", paste(r), bty = "n", cex = 0.8, pch = 21, pt.bg = sscol(n, 1), col = 1, pt.cex = 1.5)
+    legend("topright", paste(r), bty = "n", cex = 0.8, pch = 21, pt.bg = r4ss::rich.colors.short(n, 1), col = 1, pt.cex = 1.5)
   }
   # Get Propability
   b <- kb$stock

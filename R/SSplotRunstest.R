@@ -106,7 +106,7 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 #' @importFrom lifecycle deprecated
 #' @export
 
-SSplotRunstest <- function(ss3rep = ss3diags::ss3sma,
+SSplotRunstest <- function(ss3rep = ss3diags::simple,
                            mixing = "less",
                            subplots = c("cpue", "len", "age", "con")[1],
                            plot = TRUE,
@@ -219,17 +219,17 @@ SSplotRunstest <- function(ss3rep = ss3diags::ss3sma,
     Res <- cond
   }
 
-  save_png <- function(file) {
-    # if extra text requested, add it before extention in file name
-    file <- paste0(filenameprefix, file)
-    # open png file
-    png(
-      filename = file.path(plotdir, file),
-      width = pwidth, height = pheight, units = punits, res = res, pointsize = ptsize
-    )
-    # change graphics parameters to input value
-    par(par)
-  }
+  # save_png <- function(file) {
+  #   # if extra text requested, add it before extention in file name
+  #   file <- paste0(filenameprefix, file)
+  #   # open png file
+  #   png(
+  #     filename = file.path(plotdir, file),
+  #     width = pwidth, height = pheight, units = punits, res = res, pointsize = ptsize
+  #   )
+  #   # change graphics parameters to input value
+  #   par(par)
+  # }
 
   # subset if indexselect is specified
   if (is.null(indexselect) == F & is.numeric(indexselect)) {
@@ -344,7 +344,17 @@ SSplotRunstest <- function(ss3rep = ss3diags::ss3sma,
       runs <- NULL
       for (fi in 1:nfleets) {
         resid <- Res[Res$Fleet_name == indices[fi], ]
-        save_png(paste0("residruns_", indices[fi], ".png", sep = ""))
+        #save_png(paste0("residruns_", indices[fi], ".png", sep = ""))
+        plotinfo <- NULL
+        r4ss::save_png(plotinfo = plotinfo,
+                       file = paste0("residruns_", indices[fi], ".png", sep = ""),
+                       plotdir = plotdir,
+                       pwidth = pwidth,
+                       pheight = pheight,
+                       punits = punits,
+                       res = res,
+                       ptsize = ptsize,
+                       filenameprefix = filenameprefix)
         par(par)
         if (nrow(resid) > 3 & (max(resid$Time) - min(resid$Time)) > 3) {
           get_runs <- plot_runs(resid)
