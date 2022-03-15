@@ -42,8 +42,7 @@ test_that("MASE table gives expected values for simple model", {
   expect_match(mase$Index[1], "Survey")
   expect_equal(round(mase$MASE[1], 7), 0.5836339)
   expect_equal(round(mase$MAE.PR[1], 7), 0.1856207)
-
-  })
+})
 
 
 test_that("SSretroComps returns the correct comp data for simple model", {

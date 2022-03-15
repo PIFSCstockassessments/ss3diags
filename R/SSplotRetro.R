@@ -174,17 +174,17 @@ SSplotRetro <- function(summaryoutput,
   if (!add) graphics.off()
 
 
-  #save_png <- function(file) {
-    # if extra text requested, add it before extention in file name
-   # file <- paste0(filenameprefix, file)
-    # open png file
-    #png(
-     # filename = file.path(plotdir, file),
-      #width = pwidth, height = pheight, units = punits, res = res, pointsize = ptsize
-    #)
-    # change graphics parameters to input value
-    #par(par)
-  #}
+  # save_png <- function(file) {
+  # if extra text requested, add it before extention in file name
+  # file <- paste0(filenameprefix, file)
+  # open png file
+  # png(
+  # filename = file.path(plotdir, file),
+  # width = pwidth, height = pheight, units = punits, res = res, pointsize = ptsize
+  # )
+  # change graphics parameters to input value
+  # par(par)
+  # }
 
 
   if (is.null(legendindex)) legendindex <- 1:summaryoutput$n
@@ -220,42 +220,42 @@ SSplotRetro <- function(summaryoutput,
     }
 
     # subfunction to add legend
-        #add_legend <- function(legendlabels, cumulative = FALSE) {
-      #if (cumulative) {
-       # legendloc <- "topleft"
-      #}
-      #if (is.numeric(legendloc)) {
-       # Usr <- par()$usr
-       # legendloc <- list(
-       #   x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
-       #   y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
-       # )
-      #}
+    # add_legend <- function(legendlabels, cumulative = FALSE) {
+    # if (cumulative) {
+    # legendloc <- "topleft"
+    # }
+    # if (is.numeric(legendloc)) {
+    # Usr <- par()$usr
+    # legendloc <- list(
+    #   x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
+    #   y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
+    # )
+    # }
 
-      # if type input is "l" then turn off points on top of lines in legend
-      #legend.pch <- pch
-      #if (type == "l") {
-      #  legend.pch <- rep(NA, length(pch))
-      #}
-      #legend(legendloc,
-      #  legend = legendlabels[legendorder],
-      #  col = col[legendorder], lty = lty[legendorder], seg.len = 2,
-      #  lwd = lwd[legendorder], pch = legend.pch[legendorder], bty = "n", ncol = legendncol, pt.cex = 0.7, cex = legendcex, y.intersp = legendsp
-     # )
-    #}
+    # if type input is "l" then turn off points on top of lines in legend
+    # legend.pch <- pch
+    # if (type == "l") {
+    #  legend.pch <- rep(NA, length(pch))
+    # }
+    # legend(legendloc,
+    #  legend = legendlabels[legendorder],
+    #  col = col[legendorder], lty = lty[legendorder], seg.len = 2,
+    #  lwd = lwd[legendorder], pch = legend.pch[legendorder], bty = "n", ncol = legendncol, pt.cex = 0.7, cex = legendcex, y.intersp = legendsp
+    # )
+    # }
 
     # r4ss Colors
-    #rc <- function(n, alpha = 1) {
-      # a subset of rich.colors by Arni Magnusson from the gregmisc package
-      # a.k.a. rich.colors.short, but put directly in this function
-      # to try to diagnose problem with transparency on one computer
-      #x <- seq(0, 1, length = n)
-      #r <- 1 / (1 + exp(20 - 35 * x))
-      #g <- pmin(pmax(0, -0.8 + 6 * x - 5 * x^2), 1)
-      #b <- dnorm(x, 0.25, 0.15) / max(dnorm(x, 0.25, 0.15))
-      #rgb.m <- matrix(c(r, g, b), ncol = 3)
-      #rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1], v[2], v[3], alpha = alpha))
-    #}
+    # rc <- function(n, alpha = 1) {
+    # a subset of rich.colors by Arni Magnusson from the gregmisc package
+    # a.k.a. rich.colors.short, but put directly in this function
+    # to try to diagnose problem with transparency on one computer
+    # x <- seq(0, 1, length = n)
+    # r <- 1 / (1 + exp(20 - 35 * x))
+    # g <- pmin(pmax(0, -0.8 + 6 * x - 5 * x^2), 1)
+    # b <- dnorm(x, 0.25, 0.15) / max(dnorm(x, 0.25, 0.15))
+    # rgb.m <- matrix(c(r, g, b), ncol = 3)
+    # rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1], v[2], v[3], alpha = alpha))
+    # }
 
 
 
@@ -449,15 +449,16 @@ SSplotRetro <- function(summaryoutput,
     if (legend) {
       # add legend if requested
 
-     r4ss::add_legend(legendlabels, 
-                         legendloc = legendloc, 
-                         legendcex = legendcex,
-                         legendsp = legendsp,
-                         legendncol = legendncol,
-                         legendorder = legendorder,
-                         pch = pch, col = col, lty = lty, 
-                         lwd = lwd,
-                         type = type)
+      r4ss::add_legend(legendlabels,
+        legendloc = legendloc,
+        legendcex = legendcex,
+        legendsp = legendsp,
+        legendncol = legendncol,
+        legendorder = legendorder,
+        pch = pch, col = col, lty = lty,
+        lwd = lwd,
+        type = type
+      )
     }
     if (showrho) legend("top", paste0("Mohn's rho = ", round(rho, 2), ifelse(forecast & forecastrho, paste0("(", round(fcrho, 2), ")"), "")), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
 
@@ -475,17 +476,19 @@ SSplotRetro <- function(summaryoutput,
   if (verbose) message("Plotting Retrospective pattern")
   if (plot) {
     if (print_plot) {
-      #save_png(paste0("retro_", quant, ".png", sep = ""))
+      # save_png(paste0("retro_", quant, ".png", sep = ""))
       plotinfo <- NULL
-        r4ss::save_png(plotinfo = plotinfo,
-                       file = paste0("retro_", quant, ".png", sep = ""),
-                       plotdir = plotdir,
-                       pwidth = pwidth,
-                       pheight = pheight,
-                       punits = punits,
-                       res = res, 
-                       ptsize = ptsize,
-                       filenameprefix = filenameprefix)
+      r4ss::save_png(
+        plotinfo = plotinfo,
+        file = paste0("retro_", quant, ".png", sep = ""),
+        plotdir = plotdir,
+        pwidth = pwidth,
+        pheight = pheight,
+        punits = punits,
+        res = res,
+        ptsize = ptsize,
+        filenameprefix = filenameprefix
+      )
       par(par)
       get_rho <- plot_retro(quant)
       dev.off()
