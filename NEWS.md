@@ -1,3 +1,13 @@
+# ss3diags 2.0.2
+
+* Changed r4ss CRAN version (1.36.1) dependency to development version
+* Refactored common ssplot subfunctions, renamed, and used equilvants in r4ss util 
+  * `legendfun` -> `r4ss::add_legend`
+  * `pngfun` -> `r4ss::save_png`
+  * `rc` -> `r4ss::rich_colors_short`
+  * `sspar` -> `r4ss::sspar`
+* Fix SSplotRetro.R indention causing issues with code styler
+
 # ss3diags 2.0.1
 
 * Minor README Updates and corrections
