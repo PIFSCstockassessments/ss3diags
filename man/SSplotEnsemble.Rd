@@ -2,11 +2,10 @@
 % Please edit documentation in R/SSplotEnsemble.R
 \name{SSplotEnsemble}
 \alias{SSplotEnsemble}
-\title{Hindcasting Cross-Validations}
+\title{Model ensemble plots}
 \usage{
 SSplotEnsemble(
   kb,
-  summaryoutput,
   subplots = c("stock", "harvest", "SSB", "F", "Recr", "Catch"),
   models = "all",
   quantiles = c(0.025, 0.975),
@@ -61,8 +60,6 @@ SSplotEnsemble(
 \arguments{
 \item{kb}{SSdeltaMVLN $kb type output}
 
-\item{summaryoutput}{List created by r4ss::SSummarize(). TODO: Verify}
-
 \item{subplots}{option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"}
 
 \item{models}{option to manually subset the models in kb$run}
@@ -113,7 +110,7 @@ year in timeseries plots.}
 \item{type}{Type parameter passed to points (default 'o' overplots points on
 top of lines)}
 
-\item{uncertainty}{TRUE/FALSE include uncertainty intervals around SSB or F estimated timeseries. Defaults to TRUE.}
+\item{uncertainty}{TRUE/FALSE include uncertainty intervals around SSB or F estimated time series. Defaults to TRUE.}
 
 \item{legend}{Add a legend to plot. TRUE by default.}
 
@@ -162,7 +159,7 @@ It will be separated from default name by an underscore.}
 \item{new}{Deprecated. New plot windows are created by default (TRUE), and the
 option to disable this, via FALSE, is unused.}
 
-\item{add}{surpresses par() to create multiplot figs}
+\item{add}{suppresses par() to create multiplot figs}
 
 \item{mcmcVec}{mcmc vector TODO TODO. Default is FALSE}
 
@@ -173,12 +170,12 @@ option to disable this, via FALSE, is unused.}
 \item{legendindex}{Allows to add lengend for selected indices (plots)}
 }
 \description{
-Plots one-step ahead hindcasting cross-validations and computes MASE from prediction redisuals
+Plots model ensembles and forecasts with uncertaity represented by MVLN or MCMC posteriors
 }
 \examples{
 \dontrun{
 
-mvln <- SSdeltaMVLN(ss3sma, run = "SMA")
+mvln <- SSdeltaMVLN(simple, run = "Simple")
 sspar(mfrow = c(3, 2), plot.cex = 0.7)
 SSplotEnsemble(mvln$kb, ylabs = mvln$labels, add = T, verbose = F)
 }
@@ -186,5 +183,5 @@ SSplotEnsemble(mvln$kb, ylabs = mvln$labels, add = T, verbose = F)
 \author{
 Mostly adopted from r4ss::SSplotComparisons by Taylor et al
 }
-\keyword{hindcasting}
+\keyword{ensemble}
 \keyword{ssplot}
