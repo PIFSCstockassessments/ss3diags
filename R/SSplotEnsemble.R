@@ -5,7 +5,7 @@
 #' @param kb SSdeltaMVLN $kb type output
 #' @param subplots option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"
 #' @param models option to manually subset the models in kb$run
-#' #' @param quantiles quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))
+#' @param quantiles quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))
 #' @param ylabs yaxis labels for quants
 #' final year of values to show for each model. By default it is set to the
 #' @param endyrvec ending year specified in each model.
@@ -349,8 +349,8 @@ SSplotEnsemble <- function(kb,
         } else {
           adj <- 0.2 * iline / nlines - 0.1
           arrows(
-            x0 = yr + adj, y0 = lower[lower$run == runs[iline], "y"],
-            x1 = yr + adj, y1 = upper[upper$run == runs[iline], "y"],
+            x0 = exp[[q]]$year + adj, y0 = exp[[q]]$lower[exp[[q]]$run == runs[iline]],
+            x1 = exp[[q]]$year + adj, y1 = exp[[q]]$upper[exp[[q]]$run == runs[iline]],
             length = 0.02, angle = 90, code = 3, col = col[iline]
           )
         }
@@ -360,9 +360,9 @@ SSplotEnsemble <- function(kb,
 
     for (iline in 1:nlines) {
       if (quant %in% c("SSB", "stock", "harvest", "F", "Catch")) {
-        lines(yr, exp[[iline]]$y[exp[[iline]]$run == runs[iline]], col = col[iline], pch = pch[iline], lty = lty[iline], lwd = lwd[iline], type = "l")
+        lines(years, exp[[iline]]$y[exp[[iline]]$run == runs[iline]], col = col[iline], pch = pch[iline], lty = lty[iline], lwd = lwd[iline], type = "l")
       } else {
-        points(yr, exp[[iline]]$y[exp[[iline]]$run == runs[iline]], col = col[iline], pch = 16, cex = 0.8)
+        points(years, exp[[iline]]$y[exp[[iline]]$run == runs[iline]], col = col[iline], pch = 16, cex = 0.8)
       }
     }
     if (quant == "stock") abline(h = 1, lty = 2)
