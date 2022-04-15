@@ -383,7 +383,7 @@ To facilitate a comparison between the `SSdeltaMLVN()` and MCMC outputs, we prov
 
 ```{r }
 # MCMC example included in ss3diags
-load("../data/mcmcSimple.rda")
+data("mcmcSimple")
 ```
 
 The options and output of `SSdiagsMCMC()` are largely identical to `SSdeltaMVLN`. 
