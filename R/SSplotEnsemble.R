@@ -359,10 +359,12 @@ SSplotEnsemble <- function(kb,
     }
 
     for (iline in 1:nlines) {
+      for(q in 1:n.quantiles){
       if (quant %in% c("SSB", "stock", "harvest", "F", "Catch")) {
-        lines(years, exp[[iline]]$y[exp[[iline]]$run == runs[iline]], col = col[iline], pch = pch[iline], lty = lty[iline], lwd = lwd[iline], type = "l")
+        lines(years, exp[[q]]$y[exp[[q]]$run == runs[iline]], col = col[iline], pch = pch[iline], lty = lty[iline], lwd = lwd[iline], type = "l")
       } else {
-        points(years, exp[[iline]]$y[exp[[iline]]$run == runs[iline]], col = col[iline], pch = 16, cex = 0.8)
+        points(years, exp[[q]]$y[exp[[q]]$run == runs[iline]], col = col[iline], pch = 16, cex = 0.8)
+      }
       }
     }
     if (quant == "stock") abline(h = 1, lty = 2)
