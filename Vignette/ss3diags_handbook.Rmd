@@ -391,6 +391,7 @@ The options and output of `SSdiagsMCMC()` are largely identical to `SSdeltaMVLN`
 ```{r, linewidth=60}
 mvln <- SSdeltaMVLN(simple, plot=F, run="mvln")
 mcmc <- SSdiagsMCMC(mcmcSimple, simple, plot=F, run="mcmc")
+mcmc$kb <- dplyr::filter(mcmc$kb, year > 27)
 ```
 <br>
 Comparing delta-MVLN with MCMC simply requires combining the `$kb` outputs by, e.g.,
