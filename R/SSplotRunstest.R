@@ -108,7 +108,7 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 
 SSplotRunstest <- function(ss3rep = ss3diags::simple,
                            mixing = "less",
-                           subplots = c("cpue", "len", "age", "con")[1],
+                           subplots = c("cpue", "len", "age", "size", "con")[1],
                            plot = TRUE,
                            print = deprecated(),
                            print_plot = FALSE,
@@ -201,7 +201,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
     Res <- cpue
   }
 
-  if (subplots == "len" | subplots == "age") {
+  if (subplots == "len" | subplots == "age" | subplots == "size") {
     comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
     comps$residuals <- ifelse(is.na(comps$Obs), NA, log(comps$Obs) - log(comps$Exp))
     if (is.null(comps$Fleet_name)) { # Deal with Version control
