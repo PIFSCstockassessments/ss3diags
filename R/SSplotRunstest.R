@@ -344,17 +344,19 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
       runs <- NULL
       for (fi in 1:nfleets) {
         resid <- Res[Res$Fleet_name == indices[fi], ]
-        #save_png(paste0("residruns_", indices[fi], ".png", sep = ""))
+        # save_png(paste0("residruns_", indices[fi], ".png", sep = ""))
         plotinfo <- NULL
-        r4ss::save_png(plotinfo = plotinfo,
-                       file = paste0("residruns_", indices[fi], ".png", sep = ""),
-                       plotdir = plotdir,
-                       pwidth = pwidth,
-                       pheight = pheight,
-                       punits = punits,
-                       res = res,
-                       ptsize = ptsize,
-                       filenameprefix = filenameprefix)
+        r4ss::save_png(
+          plotinfo = plotinfo,
+          file = paste0("residruns_", indices[fi], ".png", sep = ""),
+          plotdir = plotdir,
+          pwidth = pwidth,
+          pheight = pheight,
+          punits = punits,
+          res = res,
+          ptsize = ptsize,
+          filenameprefix = filenameprefix
+        )
         par(par)
         if (nrow(resid) > 3 & (max(resid$Time) - min(resid$Time)) > 3) {
           get_runs <- plot_runs(resid)

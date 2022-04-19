@@ -190,6 +190,7 @@ SSplotEnsemble <- function(kb,
   quants <- subplots
 
 
+
   if (use_png) print_plot <- TRUE
   if (use_png & is.null(plotdir)) {
     stop("to print PNG files, you must supply a directory as 'plotdir'")
@@ -245,6 +246,7 @@ SSplotEnsemble <- function(kb,
       }
       par(par)
     }
+
 
 
     #-------------------------------------------------------------
@@ -402,7 +404,9 @@ SSplotEnsemble <- function(kb,
       if (print_plot) {
         quant <- subplots[s]
         par(par)
+
         
+
 
         plotinfo <- NULL
         r4ss::save_png(

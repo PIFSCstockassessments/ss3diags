@@ -24,7 +24,7 @@ test_that("file of simple_len_jabbaresiduals plot exists", {
     png = TRUE,
     print = T,
     subplots = "cpue",
-    #indexselect = 2,
+    # indexselect = 2,
     plotdir = path,
     filenameprefix = "simple_len2_"
   )
@@ -35,12 +35,13 @@ test_that("file of simple_len_jabbaresiduals plot exists", {
 ## CAAL uncomment when con option is finished in function
 # test_that("file of simple_con_jabbaresiduals plot exists", {
 #
-   SSplotJABBAres(simple,
-                  png = TRUE,
-                  print = T,
-                  subplots = "con",
-                  plotdir = path,
-                  filenameprefix = "simple_con_")
+SSplotJABBAres(simple,
+  png = TRUE,
+  print = T,
+  subplots = "con",
+  plotdir = path,
+  filenameprefix = "simple_con_"
+)
 
 #   expect_true(file.exists(file.path(path, "simple_con_jabbaresidual.png")))
 #
