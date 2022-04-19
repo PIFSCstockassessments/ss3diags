@@ -1,19 +1,20 @@
 ---
 title: "User Guidelines for Advanced Model Diagnostics with ss3diags"
 author:
-- Hennig Winker (JRC-EC)
+- Henning Winker (JRC-EC)
 - Felipe Carvalho (NOAA)
 - Massimiliano Cardinale (SLU)
 - Laurence Kell (Sea++)
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  html_document:
-    toc: yes
-    number_sections: true
   pdf_document:
     number_sections: yes
     toc: yes
     keep_tex: no
+  html_document:
+    toc: yes
+    toc_depth: 2
+    number_sections: true
 vignette: |
   %\VignetteIndexEntry{ss3daigs Vignetted} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
@@ -80,12 +81,16 @@ data("simple")
 
 #retrospective analysis output
 data("retroSimple")
+
+#mcmc estimation
+data("mcmcSimple")
 ```
 
 
 - `simple`: list of stock synthesis objects created with `r4ss::SS_output()`
 - `retroSimple`: list of retrospective runs created with `r4ss:SS_doRetro()` and read by `r4ss::SSgetoutput()`.
   - The first object in the list is the reference run and the other 5 objects are the 5 1-year peels. 
+- `mcmcSimple`: dataframe of MCMC posterior distributions
 <br>
 
 # Model Diagnostics with ss3diags {#s2} 
@@ -93,20 +98,20 @@ data("retroSimple")
 <br>
 
 The plotting options are kept mainly to those provided by [r4ss](https://github.com/r4ss/r4ss).
-Like with [r4ss](https://github.com/r4ss/r4ss), if, for example, `SSplotRunstest() called with no further specifications several windows will open, the number of windows depends on the number abundance indices.
+Like with [r4ss](https://github.com/r4ss/r4ss), if, for example, `SSplotRunstest()` is called with no further specifications several windows will open, the number of windows depends on the number abundance indices.
 
 ## Residual diagnostics
 
-The runs test is a nonparametric hypothesis test for randomness in a data sequence that calculates the 2-sided p-value to estimate the number of runs (i.e., sequences of values of the same sign) above and below a reference value. The runs test can diagnose model misspecification using residuals from fits to abundance indices [Carvalho et al. 2017](https://www.sciencedirect.com/science/article/pii/S0165783616303113) by testing if there are non-random patterns in the residuals. It can also be applied to other data components in assessment models such as the mean-length residuals and mean-age residuals. In addition, the three-sigma limits can be considered to identify potential outliers as any data point would be unlikely given a random process error in the observed residual distribution if it is further than three standard deviations away from the expected residual process average of zero.
+The runs test is a nonparametric hypothesis test for randomness in a data sequence that calculates the 2-sided p-value to estimate the number of runs (i.e., sequences of values of the same sign) above and below a reference value. The runs test can diagnose model misspecification using residuals from fits to abundance indices ([Carvalho et al. 2017](https://www.sciencedirect.com/science/article/pii/S0165783616303113)) by testing if there are non-random patterns in the residuals. It can also be applied to other data components in assessment models such as the mean-length residuals and mean-age residuals. In addition, the three-sigma limits can be considered to identify potential outliers as any data point would be unlikely given a random process error in the observed residual distribution if it is further than three standard deviations away from the expected residual process average of zero.
 <br>
 
-The output for `SSplotRunstest()` includes a plot of the residuals by fleet and a table with the results from the runs test and 'three-sigma limit' values. In the plots below, the shaded area  represents the 'three-sigma limit', or three residual standard deviations from zero. If any of the individual residual points fall outside of the three-sigma limit, they are colored red as in the fishery length-composition. Green shaded area indicates the residuals are randomly distributed (p-value >= 0.05) and red shaded area indicates the residuals are not randomly distributed and there is some misspecification with the indices or composition data (p-value < 0.05).
+The output for `SSplotRunstest()` includes a plot of the residuals by fleet and a table with the results from the runs test and 'three-sigma limit' values. In the plots below, the shaded area  represents the 'three-sigma limit', or three residual standard deviations from zero. If any of the individual residual points fall outside of the three-sigma limit, they are colored red as in the fishery length-composition in the example below. Green shaded area indicates the residuals are randomly distributed (p-value >= 0.05) and red shaded area indicates the residuals are not randomly distributed and there is some misspecification with the indices or composition data (p-value < 0.05).
 <br>
 To visualize the runs test for multiple indices, it is recommended to use the function `r4ss::sspar()` to specify row and column layout and any other plotting parameters. The option `add=TRUE` included in any of the ss3diags plotting functions prevents the functions from over-writing `sspar()`.
 
 <br>
 
-```{r fig1, fig.cap = "Runs test plots for CPUE index fits. Green shading indicates no evidence (p ≥ 0.05) and red shading evidence (p < 0.05) to reject the hypothesis of a randomly distributed time-series of residuals. The shaded (green/red) area spans three residual standard deviations to either side from zero, and the red points outside of the shading violate the ‘three-sigma limit’ for that series."}
+```{r fig1, fig.cap = "Runs test plots for CPUE index, length-composition, and conditional-age-at-length data fits. Green shading indicates no evidence (p ≥ 0.05) and red shading indicates evidence (p < 0.05) to reject the hypothesis of a randomly distributed time-series of residuals. The shaded (green/red) area spans three residual standard deviations to either side from zero, and the red points outside of the shading violate the ‘three-sigma limit’ for that series."}
 r4ss::sspar(mfrow = c(2,2))
 SSplotRunstest(simple, subplots = "cpue", add = TRUE)
 SSplotRunstest(simple, subplots = "len", add = TRUE)
@@ -165,9 +170,9 @@ In Stock Synthesis, retrospective analysis can be routinely implemented using `r
 retroI.simple <- r4ss::SSsummarize(retroSimple,verbose=F)
 ```
 
-We use notation "retroI" because `r4ss::SSsummarize()` summarizes the modeled quantities and abundance indices, but not length or age composition data. Using `retroI.simple` it is possible to produce some basic retrospective plots.
+We use the notation "retroI" because `r4ss::SSsummarize()` summarizes the modeled quantities and abundance indices, but not length or age composition data. Using `retroI.simple` it is possible to produce some basic retrospective plots.
 
-```{r fig4, fig.height=3,fig.cap= "Retrospective analysis of spawning stock biomass (SSB) and fishing mortality estimates for cod-like stock conducted by re-fitting the reference model (Ref) after five years, one year at a time sequentially. Mohn’s rho statistic are denoted on top of the panels. Grey shaded areas are the 95 \\% confidence intervals from the reference model in cases where the analysis was run with Hessian"}
+```{r fig4, fig.height=3,fig.cap= "Retrospective analysis of spawning stock biomass (SSB) and fishing mortality estimates for cod-like stock conducted by re-fitting the reference model (Ref) after five years of data were removed, one year at a time sequentially. Mohn’s rho statistic are denoted on top of the panels. Grey shaded areas are the 95 \\% confidence intervals from the reference model in cases where the analysis was run with Hessian."}
 
 r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
 rssb <- SSplotRetro(retroI.simple, add=TRUE, subplots = "SSB", forecast = F, legend = F, verbose=F)
@@ -209,7 +214,7 @@ SShcbias(retroI.simple,quant="F",verbose=F)
 
 ## Hindcast Cross-Validation and prediction skill 
 
-Implementing the Hindcast Cross-Validation (HCxval) diagnostic in Stock Synthesis  requires the same model outputs generated by `r4ss:SS_doRetro()` as described in Section [3.1](#r1). Therefore, no additional step is needed for HCxval if conducted in conjunction with retrospective analysis. 
+Implementing the Hindcast Cross-Validation (HCxval) diagnostic in Stock Synthesis requires the same model outputs generated by `r4ss:SS_doRetro()` as described in Section [3.1](#r1). Therefore, no additional step is needed for HCxval if conducted in conjunction with retrospective analysis. 
 <br> 
 As a robust measure of prediction skill, we implemented the mean absolute
 scaled error (MASE). In brief, the MASE score scales
@@ -235,7 +240,7 @@ The forecast length- and age-composition are located in the Stock Synthesis repo
 retroC.simple <- SSretroComps(retroSimple)
 ```
 
-```{r fig7, fig.cap= "Hindcasting cross-validation (HCxval) results for mean lengths. Note that MASE values in breakets are adjusted MASE values for cases where naive predictions have a Mean-Absolute-Error below 0.1"}
+```{r fig7, fig.cap= "Hindcasting cross-validation (HCxval) results for mean lengths. Note that MASE values in brackets are adjusted MASE values for cases where naive predictions have a Mean-Absolute-Error below 0.1"}
 
 r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
 hcl <- SSplotHCxval(retroC.simple, subplots="len", add=T, verbose=F, legendcex = 0.7, ylim = c(50, 100))
@@ -337,12 +342,12 @@ $$
 
 The reference points depend on the settings in the `starter.ss` file that determine the derived quantities `Bratio` and `Fvalue`. 
 
-We provide the function `SSsettingsBratioF(ss3sma)` to the `starter.ss` settings:
+We provide the function `SSsettingsBratioF(simple)` to view the `starter.ss` settings:
 
 ```{r}
 SSsettingsBratioF(simple)
 ```
-This function is also inbuilt in `SSdeltaMVLN()` to prevent misleading results. The `SSdeltaMVLN()` output includes the maximum likelihood estimates (MLEs) and the MVLN Monte-Carlo distributions `$kb` of $SSB/SSB_{MSY}$, $F/F_{MSY}$ and $F$. Note the additional quantities $SSB$ and $Rec$ are generated independently from lognormal distributions for practical reasons. These can be plotted by
+This function is also inbuilt in `SSdeltaMVLN()` to prevent misleading results. The `SSdeltaMVLN()` output includes the maximum likelihood estimates (MLEs) and the MVLN Monte-Carlo distributions `$kb` of $SSB/SSB_{MSY}$, $F/F_{MSY}$ and $F$. Note the additional quantities $SSB$ and $Rec$ are generated independently from lognormal distributions for practical reasons. These can be plotted by `SSplotEnsemble()`.
 
 The `SSdeltaMVLN()` provides the option to set alternative `Fref` values, but this is only possible for the recommended `starter.ss` option 0 for `F_report_basis`. For option 2, `SSdeltaMVLN()` prompts an error if `Fref` is changed.
 
@@ -372,16 +377,18 @@ SSplotEnsemble(mvln$kb, ylabs=mvln$labels, add=T, verbose=F)
 
 <br> 
 
-It is important to note that MVLN approximation differs notably from MCMC posterior for this model as documented in [Stewart et al. (2013)](https://www.sciencedirect.com/science/article/abs/pii/S0165783612002081) and [Taylor et al. (2021)](https://www.sciencedirect.com/science/article/abs/pii/S0165783621000527). Such differences may be more likely to occur in cases where key parameters such as steepness $h$ or natural $M$ are estimated using informative priors, which can result in left skewed (non-lognormal) distributions of the benchmarks $F_{ref}$ and $B_{ref}$. 
+In some instances, mismatches between the`SSdeltaMVLN` and MCMC may be caused by the latter's poor performance due to poor regularization [(Monnahan et al., 2019)](https://academic.oup.com/icesjms/article/76/6/1477/5475859?login=true) or in cases where key parameters such as steepness $h$ or natural $M$ are estimated using informative priors, which can result in left skewed (non-lognormal) distributions of the benchmarks $F_{ref}$ and $B_{ref}$ ([Stewart et al. (2013)](https://www.sciencedirect.com/science/article/abs/pii/S0165783612002081) and [Taylor et al. (2021)](https://www.sciencedirect.com/science/article/abs/pii/S0165783621000527)).
 
-In other instances, mismatches between the`SSdeltaMVLN` and MCMC may also be caused by the latter's poor performance  due to poor regularization [(Monnahan et al., 2019)](https://academic.oup.com/icesjms/article/76/6/1477/5475859?login=true).
-
-To facilitate a comparison between the `SSdeltaMLVN()` and MCMC outputs, we provide the function `SSdiagsMCMC()`, which is illustrated on the example of the Stock Synthesis model for the ICES Gulf of Bothian Herring stock [(ICES, 2021)](https://www.ices.dk/sites/pub/Publication%20Reports/Stock%20Annexes/2021/her.27.3031_SA.pdf). 
+To facilitate a comparison between the `SSdeltaMLVN()` and MCMC outputs, we provide the function `SSdiagsMCMC()`, which is illustrated on the example of the Simple cod-like Stock Synthesis model. 
 
 
-`SSdiagsMCMC()` requires loading both the `report.sso` and MCMC output in the `posterior.sso` file, where the MCMC was in this case run in the subfolder of the assessment file `/mcmc`. 
+`SSdiagsMCMC()` requires loading both the `report.sso` and MCMC output in the `posterior.sso` file, where the MCMC was in this case run in the subfolder of the assessment file `/mcmc`. For an example, we have provided MCMC output for the simple model which can be loaded in by `data("mcmcSimple")`.
 
-```{r }
+```{r eval=FALSE}
+#report file
+report <- SS_output("./reference_run")
+mcmc <- SSgetMCMC("./reference_run/mcmc")
+
 # MCMC example included in ss3diags
 data("mcmcSimple")
 ```
@@ -416,6 +423,577 @@ SSplotEnsemble(rbind(mvln$kb,mcmc$kb),ylabs=mvln$labels,add=T,subplots = c("stoc
 
 
 <br>
-This works equally for joining a model ensemble. 
+This function works equally for joining a model ensemble. 
 
 \newpage
+
+# Cookbook Recipies {#s4}
+
+## Retrospectives with hindcasts {#r1}
+
+Retrospective analysis can be run for Stock Synthesis using the function `r4ss::SS_doRetro()` available in [r4ss](https://github.com/r4ss/r4ss). This setup of the retrospective analysis has the advantage that forecasts are conducted automatically given the catch. This makes it possible to apply retrospective forecasting and hindcast cross-validations of observations based on the same output.
+
+Below is a step-by-step cookbook recipe for retrospective analysis in Stock Synthesis which can also be found in the [model recipes](https://github.com/PIFSCstockassessments/ss3diags/blob/main/model_recipes/R0_likelihood_profiling.r).  
+
+
+### Step 1: Identify restrospective period  
+
+
+Specify the range pf peels that will then determine the  `end.yr.vec` of runs in `r4ss::SS_doRetro()`
+
+```{r eval=TRUE}
+start.retro <- 0    # end year of reference year
+end.retro   <- 5    # number of years for retrospective e.g., 
+```
+
+### Step 2: Identify the base directory  
+
+Specify the path directory that holds the folder with the base case run. In this case the 'Simple' folder with a model folder `Reference_Run" 
+
+```{r eval=F}
+dirname.base = "./Simple"
+run = "Reference_Run" 
+model.run <- file.path(dirname.base, run)
+
+```
+
+### Step 3: `DAT` and `CONTROL` files  
+
+Specify the names of the data and control files.
+Note these files are named differently from the `DATA.ss` and `CONTROL.ss`. In this case  
+
+```{r eval=F}
+DAT = "simple.dat"
+CTL =  "simple.ctl"
+```
+
+The names of the DAT and CONTROL are declared on the top of the 'starter.ss`, e.g.
+`#C Simple starter file`
+`simple.dat`
+`simple.ctl`
+
+### Step 4: Create a subdirectory for the Retrospectives
+
+There are several ways to organize the retrospective output structure.
+First create a new subfolder for the retrospective runs output
+<br>
+```{r eval=FALSE}
+dir.retro <- paste0(dirname.base,'/Retro_',run)
+dir.create(path=dir.retro, showWarnings = F)
+```
+
+Also create a subdirectory for the retrospective model folders 
+
+```{r eval=FALSE}
+dir.create(path=file.path(dir.retro,"retros"), showWarnings = F)
+```
+
+then copy model run files to the new retrospective folder
+
+```{r eval=FALSE}
+file.copy(file.path(model.run,"starter.ss_new"),  file.path(dir.retro,"starter.ss"))
+file.copy(file.path(model.run,"control.ss_new"),
+file.path(dir.retro, CTL))
+file.copy(file.path(model.run,"data.ss_new"),
+file.path(dir.retro, DAT))	
+file.copy(file.path(model.run,"forecast.ss"),
+file.path(dir.retro, "forecast.ss"))
+file.copy(file.path(model.run,"SS.exe"),
+file.path(dir.retro, "SS.exe"))
+# Automatically ignored for models without wtatage.ss 
+file.copy(file.path(model.run,"wtatage.ss"),
+file.path(dir.retro, "wtatage.ss"))
+```
+
+
+### Step 5: Modify Starter.ss file 
+
+Modifying the Starter File helps to speed up model runs
+<br>
+```{r eval=FALSE}
+starter <- r4ss::SS_readstarter(file = file.path(dir.retro,"starter.ss"))
+
+starter$run_display_detail <- 1
+# write modified starter.ss
+r4ss::SS_writestarter(starter, file.path(dir.retro, "starter.ss"))
+```
+
+### Step 6: Execute retrospective runs    
+
+Run the retrospective analyses using r4SS function `r4ss::SS_doRetro`.Ideally, the runs should be done with Hessian to evaluate the retrospective trajectories with respect to the confidence interval coverage of the reference model.
+
+```{r eval=FALSE}
+r4ss::SS_doRetro(masterdir=dir.retro, oldsubdir="",
+newsubdir="", years=start.retro:-end.retro)
+```
+
+However, for larger models it might be desirable to shorten run times, by not inverting the hessian, using the option `extras = "-nohess"`. This runs the model much faster.  
+
+```{r eval=FALSE}
+r4ss::SS_doRetro(masterdir=dir.retro,oldsubdir="",
+newsubdir="", years=start.retro:-end.retro,extras = "-nohess")
+```
+
+### Step 7: Read `SS_doRetro()` output
+
+```{r eval=FALSE}
+retroSimple <- r4ss::SSgetoutput(dirvec=file.path(dir.retro,
+              paste0("retro",start.retro:-end.retro)))
+```
+It is often useful to save the retro model runs as `.rdata` file for further processing with `ss3diags`, considering that reading the models with `r4ss::SSgetoutput()` can be quite time-consuming for more complex models. 
+
+```{r eval=FALSE}
+save(retroSimple, file = file.path(dir.retro,"retroSimple.rdata"))
+```
+
+### Step 8: Check
+
+```{r eval=T}
+library(ss3diags)
+data("retroSimple")
+check.retro = r4ss::SSsummarize(retroSimple)
+r4ss::sspar(mfrow = c(1,1))
+SSplotRetro(check.retro, forecast = T, add=T, legendcex = 0.7, legendloc = "topleft")
+```
+
+## R0 Profiling {#r2} 
+
+### Step 1: Base model directory  
+
+Identify the directory where completed base model was run.
+
+```{r eval=FALSE}
+completed.model.run <- "./reference_run_orig"
+```
+
+
+### Step 2: Create R0_profile subdirectory  
+```{r eval = FALSE}
+dirname.R0.profile <- paste0(completed.model.run,'/Likelihood profiles/R0')
+dir.create(path=dirname.R0.profile, showWarnings = TRUE, recursive = TRUE)
+```
+
+
+### Step 3: Create a "Figures_Tables" subdirectory  
+```{r eval = FALSE}
+plotdir=paste0(dirname.R0.profile, "/Figures & Tables")
+dir.create(path=plotdir, showWarnings = TRUE, recursive = TRUE)
+```
+
+### Step 4: Copy completed base model output to "R0_profile" directory
+
+```{r eval = FALSE}
+list_of_files <- list.files(completed.model.run) 
+file.copy(file.path(completed.model.run, list_of_files), dirname.R0.profile)
+
+```
+
+### Step 5: Edit "control.ss" in the "R0_profile" working directory to estimate at least one parameter in each phase  
+
+```{r eval = FALSE}
+control.file <- SS_readctl(file = file.path(dirname.R0.profile, "control.ss_new"), 
+                      datlist = file.path(dirname.R0.profile, "data.ss_new"))
+control.file$recdev_phase <- 1
+SS_writectl(control.file, 
+            outfile = file.path(dirname.R0.profile, "control.ss_new"))
+
+```
+
+### Step 6: Edit "starter.ss" file
+Edit the starter file in the "R0_profile" working directory to read from init values from control_modified.ss.
+```{r eval = FALSE}
+starter.file <- SS_readstarter(file.path(dirname.R0.profile, "/starter.ss", sep=""))
+#make sure names for control and data file are correct
+starter.file$ctlfile <- "control_modified.ss"
+starter.file$datfile <- "data.ss_new"
+#for non-estimated quantities
+starter.file$init_values_src <- 0
+# Make sure the prior likelihood is calculated for non-estimated quantities
+starter.file$prior_like <- 1    
+SS_writestarter(starter.file, dir = dirname.R0.profile, overwrite = TRUE)
+
+```
+
+### Step 7: Begin likelihood profiling  
+Create a vector of values to profile over. Make sure the values span both sides of the estimated parameter value (found in the control.ss_new file). Then use the `r4ss::SS_profile()` function to run the models. 
+
+```{r eval = FALSE}
+# vector of values to profile over
+R0.vec <- seq(16.0,20.0,0.1)     
+Nprof.R0 <- length(R0.vec)
+
+profile <- SS_profile(dir=dirname.R0.profile, 
+                      model="ss",
+                      masterctlfile="control.ss_new",
+                      newctlfile="control_modified.ss",
+                      string="SR_LN(R0)",
+                      profilevec=R0.vec)
+
+```
+
+### Step 8: Summarize and analyze output  
+
+```{r eval = FALSE}
+# read the output files (with names like Report1.sso, Report2.sso, etc.)
+prof.R0.models <- SSgetoutput(dirvec=dirname.R0.profile, keyvec=1:Nprof.R0, getcovar = FALSE) # 
+
+# summarize output
+prof.R0.summary <- SSsummarize(prof.R0.models)
+
+#add base model into summary
+MLEmodel <- SS_output(dirname.completed.model.run)
+prof.R0.models$MLE <- MLEmodel
+prof.R0.summary <- SSsummarize(prof.R0.models)
+
+# Likelihood components 
+mainlike_components <- c('TOTAL',"Survey", "Discard", 'Length_comp',"Age_comp",'Recruitment') 
+
+mainlike_components_labels <- c('Total likelihood','Index likelihood',"Discard",'Length likelihood',"Age likelihood",'Recruitment likelihood') 
+
+# plot profile using summary created above
+SSplotProfile(prof.R0.summary,           # summary object
+              profile.string = "R0",     # substring of profile parameter
+              profile.label=expression(log(italic(R)[0])),
+              print = TRUE,
+              plotdir=plotdir 
+              )
+Baseval <- prof.R0.models$MLE$parameters %>% 
+  filter(str_detect(Label, "SR_LN")) %>% 
+  pull(Value)
+abline(v = Baseval, lty=2)
+
+```
+
+
+## ASPM diagnostic {#r3}
+
+
+### Step 1: Create a "ASPM" subdirectory
+Create a new directory for the ASPM run and a subdirectory for figures and tables
+```{r eval=FALSE}
+dirname.aspm <- "./ASPM"
+dir.create(path = dirname.aspm, showWarnings = TRUE, recursive = TRUE)
+
+plotdir <- file.path(dirname.aspm, "Figures_Tables")
+dir.create(path = plotdir, showWarnings = TRUE, recursive = TRUE)
+
+```
+
+### Step 2: Copy and paste files from reference run to ASPM directory
+
+```{r eval=FALSE}
+completed.model.run <- "./reference_run_orig"
+
+list_of_files <- list.files(completed.model.run) 
+file.copy(file.path(completed.model.run, list_of_files), dirname.aspm)
+
+```
+
+
+### Step 3: Change rec devs in ss3.pars to 0 
+
+```{r eval=FALSE}
+pars <- SS_readpar_3.30(file.path(dirname.aspm, "ss3.par"), 
+                        datsource = file.path(dirname.aspm, "data.ss_new"),
+                        ctlsource = file.path(dirname.aspm, "control.ss_new"))
+
+pars$recdev_early[,2] <- 0
+pars$recdev1[,2] <- 0
+pars$recdev_forecast[,2] <- 0
+SS_writepar_3.30(pars, outfile = file.path(dirname.aspm, "ss3.par"))
+
+```
+
+
+### Step 4: Change starter 
+Change the settings in the `starter.ss` file to read from par file and update the dat and ctl file names to .ss_new versions. Also, change the phase that steepness and sigmaR are estimated in.  
+
+```{r eval=FALSE}
+starter <- SS_readstarter(file = file.path(dirname.aspm, "starter.ss"))
+starter$init_values_src <- 1
+starter$datfile <- "data.ss_new"
+starter$ctlfile <- "control.ss_new"
+SS_writestarter(starter, dir = dirname.aspm, overwrite = TRUE)
+
+SS_changepars(dir = dirname.aspm, 
+              strings = c("steep", "sigmaR"),
+              newphs = c(-4, -5))
+
+```
+
+
+### Step 5: Change control file 
+Adjust the control file to fix rec devs at the value read from par file. Also be sure to change the phase to negative (recdev phase =-3, recdev_early_phase = -4). If there are any length or age composition data data, change the likelihood lambda to 0 (to turn off) and penalty for rec dev estimation in likelihood (lambda = 0 for recruitment). 
+
+```{r eval=FALSE}
+control <- SS_readctl(file = file.path(dirname.aspm, "control.ss_new"), 
+                      datlist = file.path(dirname.aspm, "data.ss_new"))
+
+
+control$recdev_early_phase <- -4
+control$recdev_phase <- -3
+
+# Manually turn off all length comp data (likelihood lambda to 0) and penalty for rec dev estimation in likelihood (lambda = 0 for recruitment)
+
+# 4     1     1   0   1   
+
+# 4     2     1   0   1 
+
+# 10    1     1   0   1  
+
+# If there are already lambda adjustments you can do this through R by:
+
+control$lambdas$value[which(control$lambdas$like_comp == 4)] <- 0
+control$lambdas$value[which(control$lambdas$like_comp == 10)] <- 0
+
+SS_writectl_3.30(control, outfile = file.path(dirname.aspm, "control.ss_new"), overwrite = TRUE)
+
+```
+
+
+### Step 6: Run original and ASPM models 
+
+### Step 7: Summarize results and plot comparisons   
+```{r eval = FALSE}
+aspm.mods <- SSgetoutput(dirvec = c(completed.model.run, dirname.aspm))
+aspm.summary <- SSsummarize(aspm.mods)
+
+SSplotComparisons(aspm.summary, 
+                  legendlabels = c("Reference", "ASPM"), 
+                  print = TRUE, 
+                  plotdir = plotdir)
+
+SSplotModelcomp(aspm.summary, subplots = "Index", add = TRUE, legendlabels = c("Full Model","ASPM"))
+SSplotModelcomp(aspm.summary, subplots = "SSB", add = TRUE)
+SSplotModelcomp(aspm.summary, subplots = "RecDevs", add = TRUE)
+
+```
+
+
+## Jittering {#r4}
+
+### Step 1: Define the directory where a completed "base" model run is located
+
+```{r eval = FALSE}
+dirname.base <- './reference_run'
+
+```
+
+
+### Step 2: Create a "Jitter" subdirectory 
+Also create a subdirectory for the output plots. 
+```{r eval = FALSE}
+dirname.jitter <- './jitter'
+dir.create(path = dirname.jitter, showWarnings = TRUE, recursive = TRUE)
+
+dirname.plots <- paste0(dirname.jitter,"/plots")
+dir.create(dirname.plots)
+```
+
+### Step 3: Copy base model files to jitter directory 
+
+```{r eval = FALSE}
+file.copy(paste(dirname.base, "starter.ss", sep="/"),
+          paste(dirname.jitter, "starter.ss", sep="/"))
+file.copy(paste(dirname.base, "em.CTL", sep="/"),
+          paste(dirname.jitter, "em.CTL", sep="/"))
+file.copy(paste(dirname.base, "ss3.DAT", sep="/"),
+          paste(dirname.jitter, "ss3.DAT", sep="/"))	
+file.copy(paste(dirname.base, "forecast.ss", sep="/"),
+          paste(dirname.jitter, "forecast.ss", sep="/"))
+file.copy(paste(dirname.base, "ss.exe", sep="/"),
+          paste(dirname.jitter, "ss.exe", sep="/"))
+file.copy(paste(dirname.base, "ss.par", sep="/"),
+          paste(dirname.jitter, "ss.par", sep="/"))
+```
+
+### Step 4: Run Jitter
+
+```{r eval = FALSE}
+#set number of iterations
+Njitter=200
+
+jit.likes <- r4ss::SS_RunJitter(mydir=dirname.base, 
+                          Njitter=Njitter, 
+                          jitter_fraction = 0.1, 
+                          init_values_src = 1)
+
+```
+
+
+### Step 5: Summarize jitter results 
+
+Save total likelihoods necessary to assess global convergence
+
+```{r eval=FALSE}
+x <- as.numeric(jit.likes)
+global.convergence.check <- table(x,exclude = NULL)
+write.table(jit.likes, paste0(dirname.plots, "/jit_like.csv"))
+write.table(global.convergence.check, paste0(dirname.plots, "/global_convergence_check.csv"))
+
+```
+<br>
+Summarize output from all runs using `r4ss::SSsummarize()`
+```{r eval=FALSE}
+jit_mods <- SSgetoutput(keyvec = 0:Njitter, #starting from 0 includes reference run
+                       getcomp = FALSE, 
+                       dirvec = dirname.base, 
+                       getcovar = FALSE) 
+
+jit_summary <- SSsummarize(jit_mods)
+
+```
+<br>
+
+Key outputs from summarized object 
+```{r eval=FALSE}
+#Likelihood across runs
+likes <- jit_summary$likelihoods
+
+#Derived quants across runs
+quants <- jit_summary$quants
+
+#Estimated parameters across runs
+pars <- jit_summary$pars
+
+#Write output tables to jitter directory
+write.table(quants, paste0(dirname.plots, "/Quants.csv"))
+write.table(pars, paste0(dirname.plots,"/Pars.csv"))
+write.table(likes, paste0(dirname.plots,"/Likelihoods.csv"))
+
+```
+<br>
+Re-tabulate total likelihoods necessary to assess global convergence and compare to jit.likes from above 
+
+```{r eval=FALSE}
+library(magrittr)
+library(dplyr)
+
+x <- likes %>% 
+  filter(str_detect(Label, "TOTAL")) %>% 
+  select(-Label) %>% 
+  mutate_all(~as.numeric(.)) %>% 
+  unlist(use.names = FALSE)
+
+global.convergence <- table(x,exclude = NULL)
+write.table(global.convergence, paste0(dirname.plots, "/global_convergence.csv"))
+
+```
+
+<br>
+Check convergence by seeing if the estimated spawning biomass is really big (+2x base spawning biomass) or really small (<0.5x base spawning biomass). *Note: this code is based on `check_convergence()` from SSMSE.*
+
+```{r eval=FALSE}
+converged_ssb <- jit_summary$SpawnBio %>%  
+  mutate(across(c(1:201),
+                 .fns = ~./replist0)) %>% 
+  select(-Label) %>% 
+  pivot_longer(col = c(1:201), names_to = "jitter", values_to = "SSB") %>% 
+  pivot_wider(names_from = Yr, values_from = SSB) %>% 
+  mutate(rownumber = seq(1, nrow(.))) %>% 
+  column_to_rownames("jitter") %>% 
+  filter_at(vars(1:78), all_vars((.) < 2 & (.) > 0.5)) %>% 
+  select(rownumber) %>% 
+  pull(rownumber)
+
+```
+<br>
+
+Check to make sure max gradient is small
+```{r eval=FALSE}
+converged_grad <- which(jit_summary$maxgrad < 0.001)
+converged_jitters <- jit_mods[converged_grad]
+converged_sum <- SSsummarize(converged_jitters)
+```
+<br>
+
+### Step 6: Make plots with r4ss for runs ending at a converged solution 
+
+Plot of likelihood for all jitter runs, regardless of convergence
+```{r eval=FALSE}
+library(ggplot2)
+
+jit_summary$likelihoods %>% 
+  filter(str_detect(Label, "TOTAL")) %>% 
+  select(-Label) %>% 
+  pivot_longer(cols = everything(), names_to = "jitter", values_to = "likelihood") %>% 
+  separate(jitter, into = c("replist", "jitter"), sep = "(?<=[A-Za-z])(?=[0-9])") %>% 
+  mutate(jitter = as.numeric(jitter)) %>% 
+  ggplot(aes(x = jitter, y = likelihood)) +
+  geom_point(size = 2) +
+  geom_hline(aes(yintercept = likelihood[1]), color = "red") +
+  theme_classic() +
+  labs(y = "Total Likelihood", 
+       x = "Jitter runs")
+ggsave(paste0(dirname.plots, "/all_likelihoods.png")) #make sure to run plot above right before this line, it defaults to saving the last plot run
+
+
+SSplotComparisons(jit_summary, 
+                  subplots = 2, 
+                  pch = "", 
+                  legend=FALSE, 
+                  lwd = 1, 
+                  new = F, 
+                  print = TRUE, 
+                  plotdir = dirname.plots, 
+                  filenameprefix = "all_jitters_",
+                  ylimAdj=1)
+
+
+```
+
+<br>
+
+Repeat for all converged runs 
+```{r eval=FALSE}
+converged_sum$likelihoods %>% 
+  filter(str_detect(Label, "TOTAL")) %>% 
+  select(-Label) %>% 
+  pivot_longer(cols = everything(), names_to = "jitter", values_to = "likelihood") %>% 
+  separate(jitter, into = c("replist", "jitter"), sep = "(?<=[A-Za-z])(?=[0-9])") %>% 
+  mutate(jitter = as.numeric(jitter)) %>% 
+  ggplot(aes(x = jitter, y = likelihood)) +
+  geom_point(size = 3) +
+  geom_hline(aes(yintercept = likelihood[1]), color = "red") +
+  theme_classic() +
+  labs(y = "Total Likelihood", 
+       x = "Jitter runs at a converged solution")
+ggsave(paste0(dirname.plots, "/converged_likelihoods.png"))
+
+
+SSplotComparisons(converged_sum,     
+                  subplots = 2, 
+                  pch = "",
+                  legend=FALSE,
+                  lwd = 1,
+                  new = F, 
+                  print = TRUE,
+                  plotdir = dirname.plots, 
+                  filenameprefix = "converged_",
+                  ylimAdj=1)
+
+```
+
+<br>
+
+Repeat for converged runs at the minimum solution 
+```{r eval=FALSE}
+
+y <- which(jit_summary$likelihoods[jit_summary$likelihoods$Label=="TOTAL",1:Njitter]==min(na.omit(jit.likes)))
+
+jit_min <- jit_mods[y]
+min_sum <- SSsummarize(jit_min)
+
+SSplotComparisons(min_sum,     
+                  subplots =  2, 
+                  pch = "",
+                  legend=FALSE,
+                  lwd = 1,
+                  new = F, 
+                  print = TRUE,
+                  plotdir = dirname.plots, 
+                  filenameprefix = "converged_min_",
+                  ylimAdj=1)
+
+```
+
