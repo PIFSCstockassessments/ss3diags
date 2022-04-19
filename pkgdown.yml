@@ -2,7 +2,7 @@ pandoc: 2.7.3
 pkgdown: 2.0.2
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-04-05T21:01Z
+last_built: 2022-04-19T19:35Z
 urls:
   reference: https://pifscstockassessments.github.io/ss3diags/reference
   article: https://pifscstockassessments.github.io/ss3diags/articles
