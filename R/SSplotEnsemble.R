@@ -261,15 +261,15 @@ SSplotEnsemble <- function(kb,
     run <- kb$run
     year <- kb$year
 
-    
+
     exp <- list()
     n.quantiles <- length(quantiles)
-    for(i in 1:n.quantiles){
+    for (i in 1:n.quantiles) {
       exp[[i]] <- aggregate(y ~ year + run, kb, mean)
       exp[[i]]$lower <- aggregate(y ~ year + run, kb, quantile, quantiles[[i]][1])$y
       exp[[i]]$upper <- aggregate(y ~ year + run, kb, quantile, quantiles[[i]][2])$y
     }
-    
+
 
     # exp$Yr <- exp$year
     # lower$Yr <- lower$year
@@ -281,17 +281,17 @@ SSplotEnsemble <- function(kb,
 
 
     # setup colors, transparency, points, and line types
-    if(n.quantiles == 1) shadealpha <- 0.3
-    if(n.quantiles > 1) shadealpha <- seq(0.3, 0.05, by = -0.05) #maxes out at 6 quantiles
-    
-    if (is.null(col)) col <- r4ss::rich.colors.short(nlines, alpha = shadealpha)#[,-1] 
+    if (n.quantiles == 1) shadealpha <- 0.3
+    if (n.quantiles > 1) shadealpha <- seq(0.3, 0.05, by = -0.05) # maxes out at 6 quantiles
+
+    if (is.null(col)) col <- r4ss::rich.colors.short(nlines, alpha = shadealpha) # [,-1]
     #-1 removes first column bc that color is black
-    
-    
-    #if (is.null(col) & nlines < 3) col <- c("blue", "green4")
-    #if (is.null(col) & nlines == 3) col <- c("blue", "red", "green4")
- 
-    
+
+
+    # if (is.null(col) & nlines < 3) col <- c("blue", "green4")
+    # if (is.null(col) & nlines == 3) col <- c("blue", "red", "green4")
+
+
     ## This section removed bc transparency is done with rich colors short function now
     # if (is.null(shadecol)) {
     #   # new approach thanks to Trevor Branch
@@ -317,15 +317,16 @@ SSplotEnsemble <- function(kb,
       if (!add) par(par)
     }
 
-   # yr <- years
+    # yr <- years
     full.exp <- do.call(rbind, exp)
     if (is.null(xlim)) xlim <- c(max(min(full.exp$year)), max(years))
     xmin <- min(xlim)
-   
-    ylim <- c(0, max(ifelse(uncertainty, 
-                            max(full.exp$upper[full.exp$year >= xmin]) * ylimAdj, 
-                            ylimAdj * max(full.exp$upper[full.exp$year >= xmin]) * 1.05)))
-    
+
+    ylim <- c(0, max(ifelse(uncertainty,
+      max(full.exp$upper[full.exp$year >= xmin]) * ylimAdj,
+      ylimAdj * max(full.exp$upper[full.exp$year >= xmin]) * 1.05
+    )))
+
 
     if (ylab.default) {
       ylab <- ylabs[which(refquants %in% quant)]
@@ -341,32 +342,32 @@ SSplotEnsemble <- function(kb,
 
     if (uncertainty & quant != "Catch") {
       for (iline in nlines:1) {
-        for(q in 1:n.quantiles){
-        if (quant %in% c("SSB", "stock", "harvest", "F")) {
-         
-          polygon(x = c(years, rev(years)),
-            y = c(exp[[q]]$lower[exp[[q]]$run == runs[iline]], rev(exp[[q]]$upper[exp[[q]]$run == runs[iline]])),
-            col = col[iline], border = col[iline]
-          )
-        } else {
-          adj <- 0.2 * iline / nlines - 0.1
-          arrows(
-            x0 = exp[[q]]$year + adj, y0 = exp[[q]]$lower[exp[[q]]$run == runs[iline]],
-            x1 = exp[[q]]$year + adj, y1 = exp[[q]]$upper[exp[[q]]$run == runs[iline]],
-            length = 0.02, angle = 90, code = 3, col = col[iline]
-          )
-        }
+        for (q in 1:n.quantiles) {
+          if (quant %in% c("SSB", "stock", "harvest", "F")) {
+            polygon(
+              x = c(years, rev(years)),
+              y = c(exp[[q]]$lower[exp[[q]]$run == runs[iline]], rev(exp[[q]]$upper[exp[[q]]$run == runs[iline]])),
+              col = col[iline], border = col[iline]
+            )
+          } else {
+            adj <- 0.2 * iline / nlines - 0.1
+            arrows(
+              x0 = exp[[q]]$year + adj, y0 = exp[[q]]$lower[exp[[q]]$run == runs[iline]],
+              x1 = exp[[q]]$year + adj, y1 = exp[[q]]$upper[exp[[q]]$run == runs[iline]],
+              length = 0.02, angle = 90, code = 3, col = col[iline]
+            )
+          }
         }
       }
     }
 
     for (iline in 1:nlines) {
-      for(q in 1:n.quantiles){
-      if (quant %in% c("SSB", "stock", "harvest", "F", "Catch")) {
-        lines(years, exp[[q]]$y[exp[[q]]$run == runs[iline]], col = col[iline], pch = pch[iline], lty = lty[iline], lwd = lwd[iline], type = "l")
-      } else {
-        points(years, exp[[q]]$y[exp[[q]]$run == runs[iline]], col = col[iline], pch = 16, cex = 0.8)
-      }
+      for (q in 1:n.quantiles) {
+        if (quant %in% c("SSB", "stock", "harvest", "F", "Catch")) {
+          lines(years, exp[[q]]$y[exp[[q]]$run == runs[iline]], col = col[iline], pch = pch[iline], lty = lty[iline], lwd = lwd[iline], type = "l")
+        } else {
+          points(years, exp[[q]]$y[exp[[q]]$run == runs[iline]], col = col[iline], pch = 16, cex = 0.8)
+        }
       }
     }
     if (quant == "stock") abline(h = 1, lty = 2)
@@ -405,7 +406,7 @@ SSplotEnsemble <- function(kb,
         quant <- subplots[s]
         par(par)
 
-        
+
 
 
         plotinfo <- NULL

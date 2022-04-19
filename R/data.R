@@ -410,7 +410,7 @@
 #' \describe{
 #'  \item{mcmcSimple}{mcmcSimple}
 #' }
-#' 
+#'
 #' @source MCMC evaluated with Stock Synthesis
 #'
 #' @author R. Methot,

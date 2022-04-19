@@ -7,7 +7,7 @@
 SSplotRunstest(
   ss3rep = ss3diags::simple,
   mixing = "less",
-  subplots = c("cpue", "len", "age", "con")[1],
+  subplots = c("cpue", "len", "age", "size", "con")[1],
   plot = TRUE,
   print = deprecated(),
   print_plot = FALSE,
