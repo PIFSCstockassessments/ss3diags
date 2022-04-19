@@ -84,11 +84,11 @@ SSdiagsMCMC <- function(mcmc, ss3rep, Fref = NULL, years = NULL, run = "MCMC", t
   yrs <- as.numeric(substr(yrs, 8, nchar(yrs)))
   pts <- nms[substr(nms, 1, 3) == "For"]
   pts <- min(as.numeric(substr(pts, 11, nchar(pts)))) - 1
-  
+
   Fs <- paste("F", yrs, sep = "_")
   Bs <- paste("Bratio", yrs, sep = "_")
   Rs <- paste("Recr", yrs, sep = "_")
-  FCs <- paste("ForeCatch", tail(yrs, n = length(which(yrs> pts))), sep = "_")
+  FCs <- paste("ForeCatch", tail(yrs, n = length(which(yrs > pts))), sep = "_")
   SSBs <- paste("SSB", yrs, sep = "_")
 
 
