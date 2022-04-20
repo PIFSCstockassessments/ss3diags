@@ -55,6 +55,7 @@ control <- SS_readctl(file = file.path(dirname.aspm, "control.ss_new"),
 control$recdev_early_phase <- -4
 control$recdev_phase <- -3
 SS_writectl_3.30(control, outfile = file.path(dirname.aspm, "control.ss_new"), overwrite = TRUE)
+# Manually fix the selectivity parameters by changing the phase to a negative value
 # Manually turn off all length comp data (likelihood lambda to 0) and penalty for rec dev estimation in liklihood (lambda = 0 for recruitment)
 # If there are already lambda adjustments you can do this through R by:
 # control$lambdas$value <- 0
