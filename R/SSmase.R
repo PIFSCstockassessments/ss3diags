@@ -10,7 +10,7 @@
 #' @param models Optional subset of the models described in
 #' r4ss function summaryoutput().  Either "all" or a vector of numbers indicating
 #' columns in summary tables.
-#' @param Season option to specify Season - Default uses first available, i.e. usual Seas = 1
+#' @param Season option to specify Season as an integer of value 1-4 - Default uses first available, i.e. usual Seas = 1
 #' @param endyrvec Optional single year or vector of years representing the
 #' final year of values to show for each model. By default it is set to the
 #' ending year specified in each model.
@@ -145,8 +145,9 @@ SSmase <- function(retroSummary, quants = c("cpue", "len", "age", "con"), Season
         cat("Taking Season", Season, "by default for Index", unique(indices2$Fleet_name))
       }
     } else {
+      if(as.integer(Season) < 1 | as.integer(Season) > 4) stop("Season must be an integer between 1 and 4")
+      if (is.na(Season)) stop("Season must be 'default' or an integer value of a season included in the index data (ie 1,2,3,4).")
       Season <- as.numeric(Season)[1]
-      if (is.na(Season)) stop("Season must a default or and or the integer of indices$Seas 1,2,3,4")
     }
 
     indices <- indices[indices$Seas == Season, ]
