@@ -70,7 +70,7 @@ SSplotHCxval(
 
 \item{subplots}{optional use of c("cpue","len","age"), yet to be tested for age.}
 
-\item{Season}{option to specify Season - Default uses first available, i.e. usual Seas = 1}
+\item{Season}{option to specify Season as an integer of value 1-4 - Default uses first available, i.e. usual Seas = 1}
 
 \item{print}{Deprecated. Please use 'print_plot'.}
 

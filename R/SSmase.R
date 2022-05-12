@@ -145,7 +145,7 @@ SSmase <- function(retroSummary, quants = c("cpue", "len", "age", "con"), Season
         cat("Taking Season", Season, "by default for Index", unique(indices2$Fleet_name))
       }
     } else {
-      if(as.integer(Season) < 1 | as.integer(Season) > 4) stop("Season must be an integer between 1 and 4")
+      if (as.integer(Season) < 1 | as.integer(Season) > 4) stop("Season must be an integer between 1 and 4")
       if (is.na(Season)) stop("Season must be 'default' or an integer value of a season included in the index data (ie 1,2,3,4).")
       Season <- as.numeric(Season)[1]
     }
