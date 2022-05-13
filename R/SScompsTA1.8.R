@@ -56,22 +56,22 @@ SScompsTA1.8 <- function(ss3rep, type = c("len", "age", "size", "con"), fleet = 
 
   # Select the type of database
   dbase <- ss3rep[[paste0(type[1], "dbase")]]
-  if (is.null(fleet)) fleet <- unique(dbase$Fleet)
+  if (is.null(fleet)) fleet <- unique(dbase[["Fleet"]])
 
   # sel is vector of row indices selected for the plot/calculations
   # select row indices matching fleet and partition
   if (type[1] == "con") {
-    sel <- is.in(dbase$Fleet, fleet) & is.in(dbase$Part, part)
+    sel <- is.in(dbase[["Fleet"]], fleet) & is.in(dbase[["Part"]], part)
   }
   if (type[1] != "con") {
     # change column nanme on earlier SS versions to match change from
     # Pick_sex to Sexes in 3.30.12 (July 2018)
     names(dbase)[names(dbase) == "Pick_sex"] <- "Sexes"
     sel <- is.in(dbase[["Fleet"]], fleet) & is.in(dbase[["Part"]], part)
-    sel <- sel & is.in(dbase$Sexes, pick.gender)
+    sel <- sel & is.in(dbase[["Sexes"]], pick.gender)
   }
   if (type[1] == "size" & !is.null(method)) {
-    sel <- sel & is.in(dbase$method, method)
+    sel <- sel & is.in(dbase[["method"]], method)
   }
   if (sum(sel) == 0) {
     return()
@@ -80,25 +80,25 @@ SScompsTA1.8 <- function(ss3rep, type = c("len", "age", "size", "con"), fleet = 
   dbase <- dbase[sel, ]
   if (is.null(seas)) {
     seas <- "comb"
-    if (length(unique(dbase$Seas)) > 1) {
+    if (length(unique(dbase[["Seas"]])) > 1) {
       cat("Warning: combining data from multiple seasons\n")
     }
   }
   # create label for partitions
-  partitions <- sort(unique(dbase$Part)) # values are 0, 1, or 2
+  partitions <- sort(unique(dbase[["Part"]])) # values are 0, 1, or 2
   partition.labels <- c("whole", "discarded", "retained")[partitions + 1]
   partition.labels <- paste("(", paste(partition.labels, collapse = "&"), " catch)", sep = "")
 
-  gender.flag <- type[1] != "con" & max(tapply(dbase$Sexes, dbase$Fleet, function(x) length(unique(x)))) > 1
+  gender.flag <- type[1] != "con" & max(tapply(dbase[["Sexes"]], dbase[["Fleet"]], function(x) length(unique(x)))) > 1
 
 
-  #><> added db$Time and dealing with Version issues
-  if (is.null(dbase$Time)) dbase$Time <- dbase$Yr.S
-  indx <- paste(dbase$Fleet, dbase$Yr, dbase$Seas, if (seas == "sep") dbase$Seas else "")
-  if (gender.flag) indx <- paste(indx, dbase$Sexes)
-  method.flag <- if (type[1] == "size") length(unique(dbase$method)) > 1 else FALSE
+  #><> added db[["Time"]] and dealing with Version issues
+  if (is.null(dbase[["Time"]])) dbase[["Time"]] <- dbase[["Yr.S"]]
+  indx <- paste(dbase[["Fleet"]], dbase[["Yr"]], dbase[["Seas"]], if (seas == "sep") dbase[["Seas"]] else "")
+  if (gender.flag) indx <- paste(indx, dbase[["Sexes"]])
+  method.flag <- if (type[1] == "size") length(unique(dbase[["method"]])) > 1 else FALSE
   if (method.flag) {
-    indx <- paste(indx, dbase$method)
+    indx <- paste(indx, dbase[["method"]])
   }
   uindx <- unique(indx)
   if (length(uindx) == 1) {
@@ -182,11 +182,11 @@ SScompsTA1.8 <- function(ss3rep, type = c("len", "age", "size", "con"), fleet = 
       pldat[i, "Std.res"] <- (pldat[i, "Obsmn"] - pldat[i, "Expmn"]) / pldat[i, "semn"]
       pldat[i, "Fleet"] <- mean(subdbase[["Fleet"]])
       pldat[i, "Total"] <- Total
-      pldat[i, "Yr"] <- mean(subdbase$Yr)
+      pldat[i, "Yr"] <- mean(subdbase[["Yr"]])
       pldat[i, "EffN"] <- 1 / var(Intermediate[, "Resid"])
-      pldat[i, "Time"] <- mean(subdbase$Time)
-      pldat[i, "Seas"] <- mean(subdbase$Seas)
-      pldat[i, "Like"] <- mean(subdbase$Like)
+      pldat[i, "Time"] <- mean(subdbase[["Time"]])
+      pldat[i, "Seas"] <- mean(subdbase[["Seas"]])
+      pldat[i, "Like"] <- mean(subdbase[["Like"]])
       AllRes <- c(AllRes, Intermediate[, "Resid"])
     }
     Nmult <- 1 / var(pldat[, "Std.res"], na.rm = TRUE)
@@ -201,27 +201,27 @@ SScompsTA1.8 <- function(ss3rep, type = c("len", "age", "size", "con"), fleet = 
   } else {
     for (i in 1:length(uindx)) { # each row of pldat is an individual comp
       subdbase <- dbase[indx == uindx[i], ]
-      if (is.null(subdbase$Nsamp_adj)) subdbase$Nsamp_adj <- subdbase$N
-      xvar <- subdbase$Bin
-      pldat[i, "Obsmn"] <- sum(subdbase$Obs * xvar) / sum(subdbase$Obs)
-      pldat[i, "Expmn"] <- sum(subdbase$Exp * xvar) / sum(subdbase$Exp)
-      pldat[i, "semn"] <- sqrt((sum(subdbase$Exp * xvar^2) / sum(subdbase$Exp) -
-        pldat[i, "Expmn"]^2) / mean(subdbase$Nsamp_adj))
+      if (is.null(subdbase[["Nsamp_adj"]])) subdbase[["Nsamp_adj"]] <- subdbase[["N"]]
+      xvar <- subdbase[["Bin"]]
+      pldat[i, "Obsmn"] <- sum(subdbase[["Obs"]] * xvar) / sum(subdbase[["Obs"]])
+      pldat[i, "Expmn"] <- sum(subdbase[["Exp"]] * xvar) / sum(subdbase[["Exp"]])
+      pldat[i, "semn"] <- sqrt((sum(subdbase[["Exp"]] * xvar^2) / sum(subdbase[["Exp"]]) -
+        pldat[i, "Expmn"]^2) / mean(subdbase[["Nsamp_adj"]]))
       pldat[i, "Obslo"] <- pldat[i, "Obsmn"] - 2 * pldat[i, "semn"]
       pldat[i, "Obshi"] <- pldat[i, "Obsmn"] + 2 * pldat[i, "semn"]
       pldat[i, "Std.res"] <- (pldat[i, "Obsmn"] - pldat[i, "Expmn"]) / pldat[i, "semn"]
-      pldat[i, "Fleet"] <- mean(subdbase$Fleet)
-      pldat[i, "Yr"] <- mean(subdbase$Yr)
-      pldat[i, "Time"] <- mean(subdbase$Time)
-      pldat[i, "Seas"] <- mean(subdbase$Seas)
-      pldat[i, "Like"] <- mean(subdbase$Like)
+      pldat[i, "Fleet"] <- mean(subdbase[["Fleet"]])
+      pldat[i, "Yr"] <- mean(subdbase[["Yr"]])
+      pldat[i, "Time"] <- mean(subdbase[["Time"]])
+      pldat[i, "Seas"] <- mean(subdbase[["Seas"]])
+      pldat[i, "Like"] <- mean(subdbase[["Like"]])
 
 
       if (gender.flag) {
         pldat[i, "pick.gender"] <- mean(subdbase$"Pick_gender")
       }
       if (method.flag) {
-        pldat[i, "method"] <- mean(subdbase$method)
+        pldat[i, "method"] <- mean(subdbase[["method"]])
       }
       if (type == "size") {
         pldat[i, "method"] <- mean(subdbase[["method"]])
@@ -286,7 +286,7 @@ SScompsTA1.8 <- function(ss3rep, type = c("len", "age", "size", "con"), fleet = 
         lines(c(x - 0.5, x + 0.5), rep(subpldat[, "Expmn"], 2), col = 4)
       }
       # Lines
-      fl <- ss3rep$FleetNames[subpldat[1, "Fleet"]]
+      fl <- ss3rep[["FleetNames"]][subpldat[1, "Fleet"]]
       yr <- paste(subpldat[1, "Yr"])
       lab <- if (type[1] == "con") ifelse(Nfleet > 1, paste(yr, fl), yr) else fl
       if (gender.flag) {
@@ -303,8 +303,8 @@ SScompsTA1.8 <- function(ss3rep, type = c("len", "age", "size", "con"), fleet = 
     mtext("Year", side = 1, outer = TRUE)
     # restore previous graphics parameters
     par(
-      mfrow = par_current$mfrow, mar = par_current$mar, mgp = par_current$mgp,
-      oma = par_current$oma, las = par_current$las
+      mfrow = par_current[["mfrow"]], mar = par_current[["mar"]], mgp = par_current[["mgp"]],
+      oma = par_current[["oma"]], las = par_current[["las"]]
     )
   }
   tmp <- matrix(sample(pldat[, "Std.res"], 1000 * nrow(pldat), replace = TRUE), nrow(pldat))
@@ -313,32 +313,32 @@ SScompsTA1.8 <- function(ss3rep, type = c("len", "age", "size", "con"), fleet = 
     na.rm = TRUE
   ))
   Output <- c(w = Nmult, lo = confint[1], hi = confint[2])
-  Outs <- paste("Francis Weights - ", type[1], ": ", ss3rep$FleetNames[fleet], ": ",
+  Outs <- paste("Francis Weights - ", type[1], ": ", ss3rep[["FleetNames"]][fleet], ": ",
     round(Nmult, 4), " (", round(confint[1], 4), "-", round(confint[2], 4), ")",
     sep = ""
   )
   # print(Outs)
   pldat <- data.frame(pldat)
-  yrs <- pldat$Yr
+  yrs <- pldat[["Yr"]]
   fleetnames <- c()
 
-  for (i in 1:length(pldat$Fleet)) {
-    fleetnames[i] <- ss3rep$FleetNames[pldat$Fleet[i]]
+  for (i in 1:length(pldat[["Fleet"]])) {
+    fleetnames[i] <- ss3rep[["FleetNames"]][pldat[["Fleet"]][i]]
   }
 
 
   comps_out <- list(
     ss_out = pldat,
     runs_dat = data.frame(
-      Fleet = pldat$Fleet,
+      Fleet = pldat[["Fleet"]],
       Fleet_name = fleetnames,
-      Yr = pldat$Yr,
-      Time = pldat$Time,
-      Seas = pldat$Seas,
-      Obs = pldat$Obsmn,
-      Exp = pldat$Expmn,
-      SE = ((pldat$Obsmn - pldat$ObsloAdj) / 1.96) / pldat$ObsloAdj,
-      Like = pldat$Like
+      Yr = pldat[["Yr"]],
+      Time = pldat[["Time"]],
+      Seas = pldat[["Seas"]],
+      Obs = pldat[["Obsmn"]],
+      Exp = pldat[["Expmn"]],
+      SE = ((pldat[["Obsmn"]] - pldat[["ObsloAdj"]]) / 1.96) / pldat[["ObsloAdj"]],
+      Like = pldat[["Like"]]
     )
   )
 

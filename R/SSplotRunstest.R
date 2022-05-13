@@ -41,8 +41,8 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
   if (nlevels(factor(sign(x))) > 1) {
     # Make the runs test non-parametric
     runstest <- randtests::runs.test(x, threshold = 0, alternative = alternative)
-    if (is.na(runstest$p.value)) p.value <- 0.001
-    pvalue <- round(runstest$p.value, 3)
+    if (is.na(runstest[["p.value"]])) p.value <- 0.001
+    pvalue <- round(runstest[["p.value"]], 3)
   } else {
     pvalue <- 0.001
   }
@@ -192,29 +192,29 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
   ylabel <- datatypes[which(c("cpue", "len", "age", "con") %in% subplots)]
   if (verbose) message("Running Runs Test Diagnostics w/ plots for", datatypes[which(c("cpue", "len", "age", "con") %in% subplots)])
   if (subplots == "cpue") {
-    cpue <- ss3rep$cpue
-    cpue$residuals <- ifelse(is.na(cpue$Obs) | is.na(cpue$Like), NA, log(cpue$Obs) - log(cpue$Exp))
+    cpue <- ss3rep[["cpue"]]
+    cpue[["residuals"]] <- ifelse(is.na(cpue[["Obs"]]) | is.na(cpue[["Like"]]), NA, log(cpue[["Obs"]]) - log(cpue[["Exp"]]))
 
-    if (is.null(cpue$Fleet_name)) { # Deal with Version control
-      cpue$Fleet_name <- cpue$Name
+    if (is.null(cpue[["Fleet_name"]])) { # Deal with Version control
+      cpue[["Fleet_name"]] <- cpue[["Name"]]
     }
     Res <- cpue
   }
 
   if (subplots == "len" | subplots == "age" | subplots == "size") {
     comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
-    comps$residuals <- ifelse(is.na(comps$Obs), NA, log(comps$Obs) - log(comps$Exp))
-    if (is.null(comps$Fleet_name)) { # Deal with Version control
-      comps$Fleet_name <- comps$Name
+    comps[["residuals"]] <- ifelse(is.na(comps[["Obs"]]), NA, log(comps[["Obs"]]) - log(comps[["Exp"]]))
+    if (is.null(comps[["Fleet_name"]])) { # Deal with Version control
+      comps[["Fleet_name"]] <- comps[["Name"]]
     }
     Res <- comps
   }
 
   if (subplots == "con") {
     cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
-    cond$residuals <- ifelse(is.na(cond$Obs), NA, log(cond$Obs) - log(cond$Exp))
-    if (is.null(cond$Fleet_name)) { # Deal with Version control
-      cond$Fleet_name <- cond$Name
+    cond[["residuals"]] <- ifelse(is.na(cond[["Obs"]]), NA, log(cond[["Obs"]]) - log(cond[["Exp"]]))
+    if (is.null(cond[["Fleet_name"]])) { # Deal with Version control
+      cond[["Fleet_name"]] <- cond[["Name"]]
     }
     Res <- cond
   }
@@ -233,13 +233,13 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
 
   # subset if indexselect is specified
   if (is.null(indexselect) == F & is.numeric(indexselect)) {
-    iname <- unique(Res$Fleet_name)[indexselect]
+    iname <- unique(Res[["Fleet_name"]])[indexselect]
     if (TRUE %in% is.na(iname)) stop("One or more index numbers exceed number of available indices")
-    Res <- Res[Res$Fleet_name %in% iname, ]
+    Res <- Res[Res[["Fleet_name"]] %in% iname, ]
   }
 
   # Define indices
-  indices <- unique(Res$Fleet_name)
+  indices <- unique(Res[["Fleet_name"]])
   n.indices <- length(indices)
   series <- 1:n.indices
 
@@ -289,17 +289,17 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
 
 
     # get quantities for plot
-    yr <- resid$Yr
-    ti <- resid$Time
+    yr <- resid[["Yr"]]
+    ti <- resid[["Time"]]
     ylab <- paste(ylabel, "residuals")
 
     ### make plot of index fits
 
     # Do runs test
-    runstest <- ssruns_sig3(x = as.numeric(resid$residuals), type = "resid", mixing = mixing)
+    runstest <- ssruns_sig3(x = as.numeric(resid[["residuals"]]), type = "resid", mixing = mixing)
 
     # if no values included in subset, then set ylim based on all values
-    ylim <- c(min(-miny, runstest$sig3lim[1] * ylimAdj), max(miny, runstest$sig3lim[2] * ylimAdj))
+    ylim <- c(min(-miny, runstest[["sig3lim"]][1] * ylimAdj), max(miny, runstest[["sig3lim"]][2] * ylimAdj))
 
     if (xlim[1] == "default") xlim <- c(floor(min(ti, yr) - .1), ceiling(max(ti, yr) + 0.1))
 
@@ -309,23 +309,23 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
     )
 
 
-    lims <- runstest$sig3lim
-    cols <- c(rgb(1, 0, 0, 0.5), rgb(0, 1, 0, 0.5))[ifelse(runstest$p.runs < 0.05, 1, 2)]
-    rect(min(resid$Yr - 1), lims[1], max(resid$Yr + 1), lims[2], col = cols, border = cols) # only show runs if RMSE >= 0.1
+    lims <- runstest[["sig3lim"]]
+    cols <- c(rgb(1, 0, 0, 0.5), rgb(0, 1, 0, 0.5))[ifelse(runstest[["p.runs"]] < 0.05, 1, 2)]
+    rect(min(resid[["Yr"]] - 1), lims[1], max(resid[["Yr"]] + 1), lims[2], col = cols, border = cols) # only show runs if RMSE >= 0.1
 
     abline(h = 0, lty = 2)
-    for (j in 1:length(resid$Yr)) {
-      lines(c(resid$Time[j], resid$Time[j]), c(0, resid$residuals[j]))
+    for (j in 1:length(resid[["Yr"]])) {
+      lines(c(resid[["Time"]][j], resid[["Time"]][j]), c(0, resid[["residuals"]][j]))
     }
-    points(resid$Time, resid$residuals, pch = pch, bg = ifelse(resid$residuals < lims[1] | resid$residuals > lims[2], 2, "white"), cex = 1)
+    points(resid[["Time"]], resid[["residuals"]], pch = pch, bg = ifelse(resid[["residuals"]] < lims[1] | resid[["residuals"]] > lims[2], 2, "white"), cex = 1)
     if (legend) {
-      legend(legendloc, paste(resid$Fleet_name[1]), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
+      legend(legendloc, paste(resid[["Fleet_name"]][1]), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
     }
     # legend("topright", bty='n',
     #       c("Passed","Failed"),pch=15,col=c(rgb(0,1,0,0.5),rgb(1,0,0,0.5)),pt.cex=2,cex=legendcex,y.intersp=0.9 )
 
-    axis(1, at = resid$Yr)
-    if (tickEndYr) axis(1, at = max(resid$Yr))
+    axis(1, at = resid[["Yr"]])
+    if (tickEndYr) axis(1, at = max(resid[["Yr"]]))
 
     axis(2)
     box()
@@ -343,7 +343,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
     if (print_plot) {
       runs <- NULL
       for (fi in 1:nfleets) {
-        resid <- Res[Res$Fleet_name == indices[fi], ]
+        resid <- Res[Res[["Fleet_name"]] == indices[fi], ]
         # save_png(paste0("residruns_", indices[fi], ".png", sep = ""))
         plotinfo <- NULL
         r4ss::save_png(
@@ -358,10 +358,10 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
           filenameprefix = filenameprefix
         )
         par(par)
-        if (nrow(resid) > 3 & (max(resid$Time) - min(resid$Time)) > 3) {
+        if (nrow(resid) > 3 & (max(resid[["Time"]]) - min(resid[["Time"]])) > 3) {
           get_runs <- plot_runs(resid)
           dev.off()
-          runs <- rbind(runs, c(get_runs$p.runs, get_runs$sig3lim))
+          runs <- rbind(runs, c(get_runs[["p.runs"]], get_runs[["sig3lim"]]))
         } else {
           runs <- rbind(runs, c(NA, NA, NA))
         }
@@ -371,11 +371,11 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
 
     runs <- NULL
     for (fi in 1:nfleets) {
-      resid <- Res[Res$Fleet_name == indices[fi], ]
-      if (nrow(resid) > 3 & (max(resid$Time) - min(resid$Time)) > 3) {
+      resid <- Res[Res[["Fleet_name"]] == indices[fi], ]
+      if (nrow(resid) > 3 & (max(resid[["Time"]]) - min(resid[["Time"]])) > 3) {
         if (!add) (par)
         get_runs <- plot_runs(resid)
-        runs <- rbind(runs, c(get_runs$p.runs, get_runs$sig3lim))
+        runs <- rbind(runs, c(get_runs[["p.runs"]], get_runs[["sig3lim"]]))
         # End of Fleet Loop
       } else {
         runs <- rbind(runs, c(NA, NA, NA))
@@ -416,41 +416,41 @@ SSrunstest <- function(ss3rep = ss3diags::ss3sma,
   ylabel <- datatypes[which(c("cpue", "len", "age", "con") %in% subplots)]
   if (verbose) cat("Running Runs Test Diagnosics for", datatypes[which(c("cpue", "len", "age", "con") %in% subplots)], "\n")
   if (subplots == "cpue") {
-    cpue <- ss3rep$cpue
-    cpue$residuals <- ifelse(is.na(cpue$Obs) | is.na(cpue$Like), NA, log(cpue$Obs) - log(cpue$Exp))
+    cpue <- ss3rep[["cpue"]]
+    cpue[["residuals"]] <- ifelse(is.na(cpue[["Obs"]]) | is.na(cpue[["Like"]]), NA, log(cpue[["Obs"]]) - log(cpue[["Exp"]]))
 
-    if (is.null(cpue$Fleet_name)) { # Deal with Version control
-      cpue$Fleet_name <- cpue$Name
+    if (is.null(cpue[["Fleet_name"]])) { # Deal with Version control
+      cpue[["Fleet_name"]] <- cpue[["Name"]]
     }
     Res <- cpue
   }
 
   if (subplots == "len" | subplots == "age") {
     comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
-    comps$residuals <- ifelse(is.na(comps$Obs), NA, log(comps$Obs) - log(comps$Exp))
-    if (is.null(comps$Fleet_name)) { # Deal with Version control
-      comps$Fleet_name <- comps$Name
+    comps[["residuals"]] <- ifelse(is.na(comps[["Obs"]]), NA, log(comps[["Obs"]]) - log(comps[["Exp"]]))
+    if (is.null(comps[["Fleet_name"]])) { # Deal with Version control
+      comps[["Fleet_name"]] <- comps[["Name"]]
     }
     Res <- comps
   }
 
   if (subplots == "con") {
     cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
-    cond$residuals <- ifelse(is.na(cond$Obs), NA, log(cond$Obs) - log(cond$Exp))
-    if (is.null(cond$Fleet_name)) { # Deal with Version control
-      cond$Fleet_name <- cond$Name
+    cond[["residuals"]] <- ifelse(is.na(cond[["Obs"]]), NA, log(cond[["Obs"]]) - log(cond[["Exp"]]))
+    if (is.null(cond[["Fleet_name"]])) { # Deal with Version control
+      cond[["Fleet_name"]] <- cond[["Name"]]
     }
     Res <- cond
   }
   # subset if indexselect is specified
   if (is.null(indexselect) == F & is.numeric(indexselect)) {
-    iname <- unique(Res$Fleet_name)[indexselect]
+    iname <- unique(Res[["Fleet_name"]])[indexselect]
     if (TRUE %in% is.na(iname)) stop("One or more index numbers exceed number of available indices")
-    Res <- Res[Res$Fleet_name %in% iname, ]
+    Res <- Res[Res[["Fleet_name"]] %in% iname, ]
   }
 
   # Define indices
-  indices <- unique(Res$Fleet_name)
+  indices <- unique(Res[["Fleet_name"]])
   n.indices <- length(indices)
   series <- 1:n.indices
 
@@ -462,17 +462,17 @@ SSrunstest <- function(ss3rep = ss3diags::ss3sma,
 
 
     # get quantities for plot
-    yr <- resid$Yr
-    ti <- resid$Time
+    yr <- resid[["Yr"]]
+    ti <- resid[["Time"]]
     ylab <- paste(ylabel, "residuals")
 
     ### make plot of index fits
 
     # Do runs test
-    runstest <- ssruns_sig3(x = as.numeric(resid$residuals), type = "resid", mixing = mixing)
+    runstest <- ssruns_sig3(x = as.numeric(resid[["residuals"]]), type = "resid", mixing = mixing)
 
     # if no values included in subset, then set ylim based on all values
-    lims <- runstest$sig3lim
+    lims <- runstest[["sig3lim"]]
 
     return(runstest)
   } # End of runs function
@@ -484,10 +484,10 @@ SSrunstest <- function(ss3rep = ss3diags::ss3sma,
   nfleets <- n.indices
   runs <- NULL
   for (fi in 1:nfleets) {
-    resid <- Res[Res$Fleet_name == indices[fi], ]
-    if (nrow(resid) > 3 & (max(resid$Time) - min(resid$Time)) > 3) {
+    resid <- Res[Res[["Fleet_name"]] == indices[fi], ]
+    if (nrow(resid) > 3 & (max(resid[["Time"]]) - min(resid[["Time"]])) > 3) {
       get_runs <- doruns(resid)
-      runs <- rbind(runs, c(get_runs$p.runs, get_runs$sig3lim))
+      runs <- rbind(runs, c(get_runs[["p.runs"]], get_runs[["sig3lim"]]))
       # End of Fleet Loop
     } else {
       runs <- rbind(runs, c(NA, NA, NA))

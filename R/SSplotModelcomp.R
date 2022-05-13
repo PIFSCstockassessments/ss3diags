@@ -180,7 +180,7 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
   refplots <- c("SSB", "Bratio", "Fvalue", "Recruits", "Index", "RecDevs")
   refline <- refline2 <- 1
   if (brp[1] != "msy") ylabs[2] <- expression(SSB / SSB[0])
-  if (brp[1] != "msy") refline <- summaryoutput$btargs[1]
+  if (brp[1] != "msy") refline <- summaryoutput[["btargs"]][1]
   # if(fmsy) refline2  = 1
   if (fmsy) ylabs[3] <- expression(F / F[MSY])
 
@@ -202,16 +202,16 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
 
   # subset if indexselect is specified
   if (is.null(indexselect) == F & is.numeric(indexselect)) {
-    iname <- unique(summaryoutput$indices$Fleet_name)[indexselect]
+    iname <- unique(summaryoutput[["indices"]][["Fleet_name"]])[indexselect]
     if (TRUE %in% is.na(iname)) {
       stop("One or more index numbers exceed number of available indices")
     }
-    summaryoutput$indices <- summaryoutput$indices[summaryoutput$indices$Fleet_name %in% iname, ]
+    summaryoutput[["indices"]] <- summaryoutput[["indices"]][summaryoutput[["indices"]][["Fleet_name"]] %in% iname, ]
   }
 
 
   # NOTE: 'log scale' option is not used -ef
-  if (is.null(legendindex)) legendindex <- 1:summaryoutput$n
+  if (is.null(legendindex)) legendindex <- 1:summaryoutput[["n"]]
   if (!legend) legendindex <- 10000
 
 
@@ -361,10 +361,10 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
       imodel <- models[iline]
       subset1 <- indices[["imodel"]] == imodel & !is.na(indices[["Like"]])
       subset2 <- indices[["imodel"]] == imodel
-      if (length(unique(indices$Fleet[subset1])) > 1) {
+      if (length(unique(indices[["Fleet"]][subset1])) > 1) {
         if (!is.null(indexfleets[imodel])) {
           ifleet <- indexfleets[imodel]
-          indices2 <- rbind(indices2, indices[subset2 & indices$Fleet == ifleet, ])
+          indices2 <- rbind(indices2, indices[subset2 & indices[["Fleet"]] == ifleet, ])
         } else {
           if (verbose) {
             cat(
@@ -604,16 +604,16 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
       }
 
       base <- summaryoutput[["recruits"]]
-      if (min(base$Yr) < min(exp$Yr)) {
-        base <- base[base$Yr %in% exp$Yr == FALSE, ]
+      if (min(base[["Yr"]]) < min(exp[["Yr"]])) {
+        base <- base[base[["Yr"]] %in% exp[["Yr"]] == FALSE, ]
         base[, 1:(ncol(base) - 2)] <- 0
         exp <- rbind(base, exp)
         lower <- rbind(base, lower)
         upper <- rbind(base, upper)
       } else {
-        exp <- exp[exp$Yr >= min(base$Yr), ]
-        lower <- lower[exp$Yr >= min(base$Yr), ]
-        upper <- upper[exp$Yr >= min(base$Yr), ]
+        exp <- exp[exp[["Yr"]] >= min(base[["Yr"]]), ]
+        lower <- lower[exp[["Yr"]] >= min(base[["Yr"]]), ]
+        upper <- upper[exp[["Yr"]] >= min(base[["Yr"]]), ]
       }
     }
     if (models[1] == "all") models <- 1:n
@@ -624,9 +624,9 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
       endyrvec <- endyrs
     }
 
-    exp <- exp[exp$Yr <= max(endyrvec) & exp$Yr >= max(startyrs), ]
-    lower <- lower[lower$Yr <= max(endyrvec) & lower$Yr >= max(startyrs), ]
-    upper <- upper[upper$Yr <= max(endyrvec) & upper$Yr >= max(startyrs), ]
+    exp <- exp[exp[["Yr"]] <= max(endyrvec) & exp[["Yr"]] >= max(startyrs), ]
+    lower <- lower[lower[["Yr"]] <= max(endyrvec) & lower[["Yr"]] >= max(startyrs), ]
+    upper <- upper[upper[["Yr"]] <= max(endyrvec) & upper[["Yr"]] >= max(startyrs), ]
 
 
     # setup colors, points, and line types
@@ -670,7 +670,7 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     # ylim <- c(0,max(ifelse(uncertainty,unlist(upper[,1:nlines])*ylimAdj, ylimAdj*unlist(exp[,1:nlines])*1.05)))
     # if no values included in subset, then set ylim based on all values
 
-    yr <- exp$Yr
+    yr <- exp[["Yr"]]
 
 
     if (is.null(xmin)) {
@@ -680,9 +680,9 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
     }
 
     if (quant != "RecDevs") {
-      ylim <- c(0, max(ifelse(uncertainty, max(unlist(upper[upper$Yr >= xmin, 1:nlines])) * ylimAdj, ylimAdj * max(unlist(exp[exp$Yr >= xmin, 1:nlines])) * 1.05)))
+      ylim <- c(0, max(ifelse(uncertainty, max(unlist(upper[upper[["Yr"]] >= xmin, 1:nlines])) * ylimAdj, ylimAdj * max(unlist(exp[exp[["Yr"]] >= xmin, 1:nlines])) * 1.05)))
     } else {
-      ylims <- max(ifelse(uncertainty, max(abs(unlist(upper[upper$Yr >= xmin, 1:nlines]))) * ylimAdj, ylimAdj * max(abs(unlist(exp[exp$Yr >= xmin, 1:nlines]))) * 1.05))
+      ylims <- max(ifelse(uncertainty, max(abs(unlist(upper[upper[["Yr"]] >= xmin, 1:nlines]))) * ylimAdj, ylimAdj * max(abs(unlist(exp[exp[["Yr"]] >= xmin, 1:nlines]))) * 1.05))
       ylim <- c(-ylims, ylims)
     }
 
@@ -779,13 +779,13 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
           dev.off()
         } else {
           if (subplots[s] == "index") {
-            nfleets <- length(unique(summaryoutput$indices$Fleet))
+            nfleets <- length(unique(summaryoutput[["indices"]][["Fleet"]]))
           }
           for (fi in 1:nfleets) {
             legend <- F
             if (fi %in% legendindex) legend <- TRUE
-            indexfleets <- unique(summaryoutput$indices$Fleet)[fi]
-            # save_png(paste0("FitsIndex_", unique(summaryoutput$indices$Fleet)[fi], ".png", sep = ""))
+            indexfleets <- unique(summaryoutput[["indices"]][["Fleet"]])[fi]
+            # save_png(paste0("FitsIndex_", unique(summaryoutput[["indices"]][["Fleet"]])[fi], ".png", sep = ""))
 
             plotinfo <- NULL
             r4ss::save_png(
@@ -816,12 +816,12 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
         quant <- subplots[s]
         plot_quants(quant)
       } else {
-        nfleets <- length(unique(summaryoutput$indices$Fleet))
+        nfleets <- length(unique(summaryoutput[["indices"]][["Fleet"]]))
 
         for (fi in 1:nfleets) {
           legend <- F
           if (fi %in% legendindex) legend <- TRUE
-          indexfleets <- unique(summaryoutput$indices$Fleet)[fi]
+          indexfleets <- unique(summaryoutput[["indices"]][["Fleet"]])[fi]
           if (!add) par(par)
           plot_index(indexfleets)
           legend <- legend.temp

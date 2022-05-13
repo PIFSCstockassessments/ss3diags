@@ -187,7 +187,7 @@ SSplotRetro <- function(summaryoutput,
   # }
 
 
-  if (is.null(legendindex)) legendindex <- 1:summaryoutput$n
+  if (is.null(legendindex)) legendindex <- 1:summaryoutput[["n"]]
   if (!legend) legendindex <- 10000
 
   quant <- subplots[1]
@@ -263,9 +263,9 @@ SSplotRetro <- function(summaryoutput,
     # plot function
 
     # get stuff from summary output (minimized)
-    n <- summaryoutput$n
-    startyrs <- summaryoutput$startyrs
-    endyrs <- summaryoutput$endyrs
+    n <- summaryoutput[["n"]]
+    startyrs <- summaryoutput[["startyrs"]]
+    endyrs <- summaryoutput[["endyrs"]]
 
     if (endyrvec[1] == "default") {
       endyrvec <- endyrs - seq(0, n - 1, 1)
@@ -274,11 +274,11 @@ SSplotRetro <- function(summaryoutput,
     years <- min(startyrs):max(endyrvec)
 
     if (quant == "SSB") {
-      mu <- summaryoutput$SpawnBio
-      Lower <- summaryoutput$SpawnBioLower
-      Upper <- summaryoutput$SpawnBioUpper
+      mu <- summaryoutput[["SpawnBio"]]
+      Lower <- summaryoutput[["SpawnBioLower"]]
+      Upper <- summaryoutput[["SpawnBioUpper"]]
       if (is.null(labels)) {
-        if (summaryoutput$SpawnOutputUnits[1] == "numbers") {
+        if (summaryoutput[["SpawnOutputUnits"]][1] == "numbers") {
           labels <- "Stock fecundity"
         } else {
           labels <- "Spawning biomass (t)"
@@ -287,13 +287,13 @@ SSplotRetro <- function(summaryoutput,
     }
 
     if (quant == "F") {
-      mu <- summaryoutput$Fvalue
-      Lower <- summaryoutput$FvalueLower
-      Upper <- summaryoutput$FvalueUpper
+      mu <- summaryoutput[["Fvalue"]]
+      Lower <- summaryoutput[["FvalueLower"]]
+      Upper <- summaryoutput[["FvalueUpper"]]
       if (is.null(labels)) {
-        if (strsplit(summaryoutput$FvalueLabels[1], ";")[[1]][1] == "_abs_F") {
+        if (strsplit(summaryoutput[["FvalueLabels"]][1], ";")[[1]][1] == "_abs_F") {
           labels <- "Fishing mortality F"
-        } else if (strsplit(summaryoutput$FvalueLabels[1], ";")[[1]][1] == "(F)/(Fmsy)") {
+        } else if (strsplit(summaryoutput[["FvalueLabels"]][1], ";")[[1]][1] == "(F)/(Fmsy)") {
           labels <- expression(F / F[MSY])
         } else {
           labels <- "F ratio"
@@ -350,11 +350,11 @@ SSplotRetro <- function(summaryoutput,
 
 
     # get exp
-    exp <- mu[mu$Yr %in% years, ]
+    exp <- mu[mu[["Yr"]] %in% years, ]
 
     # get uncertainty intervals if requested
-    lower <- Lower[Lower$Yr %in% years, ]
-    upper <- Upper[Upper$Yr %in% years, ]
+    lower <- Lower[Lower[["Yr"]] %in% years, ]
+    upper <- Upper[Upper[["Yr"]] %in% years, ]
 
 
     # Check if uncertainty is measured
@@ -369,7 +369,7 @@ SSplotRetro <- function(summaryoutput,
     # ylim <- c(0,max(ifelse(uncertainty,unlist(upper[,1:nlines])*ylimAdj, ylimAdj*unlist(exp[,1:nlines])*1.05)))
     # if no values included in subset, then set ylim based on all values
 
-    yr <- exp$Yr
+    yr <- exp[["Yr"]]
 
     if (is.null(xmin)) {
       xmin <- min(yr)
@@ -378,7 +378,7 @@ SSplotRetro <- function(summaryoutput,
     }
 
 
-    if (is.null(ylim)) ylim <- c(0, max(ifelse(uncertainty, max(c(unlist(exp[exp$Yr >= xmin, 1:nlines]), unlist(upper[upper$Yr >= xmin, 1]))) * ylimAdj, ylimAdj * max(unlist(exp[exp$Yr >= xmin, 1:nlines])) * 1.05)))
+    if (is.null(ylim)) ylim <- c(0, max(ifelse(uncertainty, max(c(unlist(exp[exp[["Yr"]] >= xmin, 1:nlines]), unlist(upper[upper[["Yr"]] >= xmin, 1]))) * ylimAdj, ylimAdj * max(unlist(exp[exp[["Yr"]] >= xmin, 1:nlines])) * 1.05)))
     if (is.null(xlim)) xlim <- c(max(min(yr), xmin), min(c(max(yr), max(endyrvec + 0.5))))
 
     # hindcast section
@@ -397,8 +397,8 @@ SSplotRetro <- function(summaryoutput,
     if (uncertainty) {
       polygon(c(seq(xlim[1], xlim[2]), rev(seq(xlim[1], xlim[2]))),
         c(
-          lower[which(lower$Yr == xlim[1]):which(lower$Yr == xlim[2]), imodel],
-          rev(upper[which(upper$Yr == xlim[1]):which(upper$Yr == xlim[2]), imodel])
+          lower[which(lower[["Yr"]] == xlim[1]):which(lower[["Yr"]] == xlim[2]), imodel],
+          rev(upper[which(upper[["Yr"]] == xlim[1]):which(upper[["Yr"]] == xlim[2]), imodel])
         ),
         col = shadecol,
         border = shadecol
@@ -407,8 +407,8 @@ SSplotRetro <- function(summaryoutput,
 
 
     # Plot Reference
-    x.ref <- exp$Yr[which(exp$Yr == xlim[1]):which(exp$Yr == xlim[2])]
-    y.ref <- exp[which(exp$Yr == xlim[1]):which(exp$Yr == xlim[2]), imodel]
+    x.ref <- exp[["Yr"]][which(exp[["Yr"]] == xlim[1]):which(exp[["Yr"]] == xlim[2])]
+    y.ref <- exp[which(exp[["Yr"]] == xlim[1]):which(exp[["Yr"]] == xlim[2]), imodel]
     lines(x.ref, y.ref, col = col[1], lwd = 2, lty = 1, pch = 16)
     rho.i <- fcrho.i <- NULL
     for (iline in (2:nlines)[!mcmcVec]) {
