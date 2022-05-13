@@ -3,7 +3,7 @@
 #' plots residuals for all indices as boxplot (color coded by fleet) with a loess showing systematic trends over time. This function is from the package JABBA.
 #'
 #' @param ss3rep Stock Synthesis output as read by r4SS function SS_output
-#' @param subplots string of type of data to plot, 'cpue' for index of abundance data, 'len' or 'age' for length- or age-composition, or 'con' for conditional age-at-length data.
+#' @param subplots string of type of data to plot, 'cpue' for index of abundance data, 'len' or 'age' for length- or age-composition, 'size' for generalized size composition, or 'con' for conditional age-at-length data.
 #' @param seas string indicating how to treat data from multiple seasons
 #' 'comb' - combine seasonal data for each year and plot against Yr
 #' 'sep' - treat season separately, plotting against Yr.S.
@@ -72,7 +72,7 @@
 #'
 #' @export
 SSplotJABBAres <- function(ss3rep = ss3diags::simple,
-                           subplots = c("cpue", "len", "age", "con")[1],
+                           subplots = c("cpue", "len", "age", "size", "con")[1],
                            seas = NULL,
                            plot = TRUE,
                            print = deprecated(),
@@ -175,7 +175,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
     Res <- cpue
   }
 
-  if (subplots == "len" | subplots == "age") {
+  if (subplots == "len" | subplots == "age" | subplots == "size") {
     comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
     comps$residuals <- ifelse(is.na(comps$Obs), NA, log(comps$Obs) - log(comps$Exp))
     if (is.null(comps$Fleet_name)) { # Deal with Version control

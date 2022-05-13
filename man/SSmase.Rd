@@ -22,7 +22,7 @@ SSmase(
 
 \item{quants}{data type, either "cpue" for index data, "len" for length composition data, or "age" for age composition data. Note, if using "age" or "len", SSretroComps() will be used to extract and summarize the composition data first.}
 
-\item{Season}{option to specify Season - Default uses first available, i.e. usual Seas = 1}
+\item{Season}{option to specify Season as an integer of value 1-4 - Default uses first available, i.e. usual Seas = 1}
 
 \item{models}{Optional subset of the models described in
 r4ss function summaryoutput().  Either "all" or a vector of numbers indicating
