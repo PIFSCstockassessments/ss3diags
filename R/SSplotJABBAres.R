@@ -167,35 +167,35 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
 
 
   if (subplots == "cpue") {
-    cpue <- ss3rep$cpue
-    cpue$residuals <- ifelse(is.na(cpue$Obs), NA, log(cpue$Obs) - log(cpue$Exp))
-    if (is.null(cpue$Fleet_name)) { # Deal with Version control
-      cpue$Fleet_name <- cpue$Name
+    cpue <- ss3rep[["cpue"]]
+    cpue[["residuals"]] <- ifelse(is.na(cpue[["Obs"]]), NA, log(cpue[["Obs"]]) - log(cpue[["Exp"]]))
+    if (is.null(cpue[["Fleet_name"]])) { # Deal with Version control
+      cpue[["Fleet_name"]] <- cpue[["Name"]]
     }
     Res <- cpue
   }
 
   if (subplots == "len" | subplots == "age" | subplots == "size") {
     comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
-    comps$residuals <- ifelse(is.na(comps$Obs), NA, log(comps$Obs) - log(comps$Exp))
-    if (is.null(comps$Fleet_name)) { # Deal with Version control
-      comps$Fleet_name <- comps$Name
+    comps[["residuals"]] <- ifelse(is.na(comps[["Obs"]]), NA, log(comps[["Obs"]]) - log(comps[["Exp"]]))
+    if (is.null(comps[["Fleet_name"]])) { # Deal with Version control
+      comps[["Fleet_name"]] <- comps[["Name"]]
     }
     Res <- comps
   }
 
   if (subplots == "con") {
     cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
-    cond$residuals <- ifelse(is.na(cond$Obs), NA, log(cond$Obs) - log(cond$Exp))
-    if (is.null(cond$Fleet_name)) { # Deal with Version control
-      cond$Fleet_name <- cond$Name
+    cond[["residuals"]] <- ifelse(is.na(cond[["Obs"]]), NA, log(cond[["Obs"]]) - log(cond[["Exp"]]))
+    if (is.null(cond[["Fleet_name"]])) { # Deal with Version control
+      cond[["Fleet_name"]] <- cond[["Name"]]
     }
     Res <- cond
   }
 
   if (is.null(seas)) {
     seas <- "comb"
-    if (length(unique(Res$Seas)) > 1) {
+    if (length(unique(Res[["Seas"]])) > 1) {
       cat("Warning: combining data from multiple seasons\n")
     }
   }
@@ -215,17 +215,17 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
 
   # subset if indexselect is specified
   if (is.null(indexselect) == F & is.numeric(indexselect)) {
-    iname <- unique(Res$Fleet_name)[indexselect]
+    iname <- unique(Res[["Fleet_name"]])[indexselect]
     if (TRUE %in% is.na(iname)) stop("One or more index numbers exceed number of available indices")
-    Res <- Res[Res$Fleet_name %in% iname, ]
+    Res <- Res[Res[["Fleet_name"]] %in% iname, ]
   }
 
   # Define indices
   resids <- reshape2::dcast(Res, Time ~ Fleet, value.var = "residuals")
-  indices <- unique(Res$Fleet_name)
+  indices <- unique(Res[["Fleet_name"]])
   n.indices <- length(indices)
   series <- 1:n.indices
-  yr <- unique(round(resids$Time))
+  yr <- unique(round(resids[["Time"]]))
 
 
   log <- FALSE # (no option to plot on log scale)

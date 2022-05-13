@@ -34,15 +34,15 @@ SSplotKobe <- function(kb, joint = TRUE, year = NULL,
                        xlab = expression(SSB / SSB[MSY]), ylab = expression(F / F[MSY]), ylim = NULL,
                        xlim = NULL, fill = TRUE, legend = TRUE, legendpos = "right", legendcex = 0.7,
                        legendruns = TRUE, yr.label = TRUE, yr.int = 5, verbose = TRUE) {
-  if (is.null(year)) year <- max(kb$year)
+  if (is.null(year)) year <- max(kb[["year"]])
   trj <- aggregate(cbind(stock, harvest) ~ year, kb, median)
-  trj <- trj[trj$year <= year, ]
-  kb <- kb[kb$year == year, ]
-  r <- (unique(kb$run)) # runs
+  trj <- trj[trj[["year"]] <= year, ]
+  kb <- kb[kb[["year"]] == year, ]
+  r <- (unique(kb[["run"]])) # runs
   n <- length(r)
 
-  if (is.null(xlim)) xlim <- c(0, max(trj$stock, 2.5, quantile(kb$stock, 0.99)))
-  if (is.null(ylim)) ylim <- c(0, max(trj$harvest, 2.1, quantile(kb$harvest, 0.99)))
+  if (is.null(xlim)) xlim <- c(0, max(trj[["stock"]], 2.5, quantile(kb[["stock"]], 0.99)))
+  if (is.null(ylim)) ylim <- c(0, max(trj[["harvest"]], 2.1, quantile(kb[["harvest"]], 0.99)))
 
   plot(1000, 1000, type = "b", xlim = xlim, ylim = ylim, lty = 3, ylab = ylab, xlab = xlab, xaxs = "i", yaxs = "i")
   c1 <- c(-1, 100)
@@ -63,38 +63,38 @@ SSplotKobe <- function(kb, joint = TRUE, year = NULL,
   lines(c2, c1, lty = 3, lwd = 0.7)
 
   if (posterior[1] == "kernel") {
-    kernelF <- gplots::ci2d(kb$stock, kb$harvest, nbins = 151, factor = 1.5, ci.levels = c(0.50, 0.80, 0.75, 0.90, 0.95), show = "none")
-    polygon(kernelF$contours$"0.95", lty = 2, border = NA, col = "cornsilk4")
-    polygon(kernelF$contours$"0.8", border = NA, lty = 2, col = "grey")
-    polygon(kernelF$contours$"0.5", border = NA, lty = 2, col = "cornsilk2")
+    kernelF <- gplots::ci2d(kb[["stock"]], kb[["harvest"]], nbins = 151, factor = 1.5, ci.levels = c(0.50, 0.80, 0.75, 0.90, 0.95), show = "none")
+    polygon(kernelF[["contours"]]$"0.95", lty = 2, border = NA, col = "cornsilk4")
+    polygon(kernelF[["contours"]]$"0.8", border = NA, lty = 2, col = "grey")
+    polygon(kernelF[["contours"]]$"0.5", border = NA, lty = 2, col = "cornsilk2")
   }
 
   # MVN posterior
   if (n > 1 & joint == FALSE) {
-    if (posterior[1] == "points") for (i in 1:n) points(kb$stock[kb$run == r[i]], kb$harvest[kb$run == r[i]], col = r4ss::rich.colors.short(n, 0.3)[i], pch = 16, cex = 0.8)
-    for (i in 1:n) points(median(kb$stock[kb$run == r[i]]), median(kb$harvest[kb$run == r[i]]), bg = r4ss::rich.colors.short(n, 1)[i], pch = 21, cex = 1.5, col = 1)
+    if (posterior[1] == "points") for (i in 1:n) points(kb[["stock"]][kb[["run"]] == r[i]], kb[["harvest"]][kb[["run"]] == r[i]], col = r4ss::rich.colors.short(n, 0.3)[i], pch = 16, cex = 0.8)
+    for (i in 1:n) points(median(kb[["stock"]][kb[["run"]] == r[i]]), median(kb[["harvest"]][kb[["run"]] == r[i]]), bg = r4ss::rich.colors.short(n, 1)[i], pch = 21, cex = 1.5, col = 1)
   } else {
-    if (posterior[1] == "points") points(kb$stock, kb$harvest, bg = grey(0.6, 0.8), pch = 21)
+    if (posterior[1] == "points") points(kb[["stock"]], kb[["harvest"]], bg = grey(0.6, 0.8), pch = 21)
   }
-  lines(trj$stock, trj$harvest, lwd = 2)
+  lines(trj[["stock"]], trj[["harvest"]], lwd = 2)
 
   if (yr.label) {
-    showyr <- unique(yr.int * floor(trj$year / yr.int))
-    for (i in 1:length(trj$year)) {
-      if (trj$year[i] %in% showyr) {
-        points(trj$stock[i], trj$harvest[i], pch = 21, bg = "white", cex = 1)
-        text(trj$stock[i] - 0.05, trj$harvest[i] - 0.07, as.character(trj$year[i]), cex = 0.8, col = "blue")
+    showyr <- unique(yr.int * floor(trj[["year"]] / yr.int))
+    for (i in 1:length(trj[["year"]])) {
+      if (trj[["year"]][i] %in% showyr) {
+        points(trj[["stock"]][i], trj[["harvest"]][i], pch = 21, bg = "white", cex = 1)
+        text(trj[["stock"]][i] - 0.05, trj[["harvest"]][i] - 0.07, as.character(trj[["year"]][i]), cex = 0.8, col = "blue")
       }
     }
   }
-  points(median(kb$stock), median(kb$harvest), bg = 0, pch = 21, cex = 2, lwd = 2)
-  points(trj$stock[1], trj$harvest[1], bg = 0, pch = 21, cex = 1.7, lwd = 2)
+  points(median(kb[["stock"]]), median(kb[["harvest"]]), bg = 0, pch = 21, cex = 2, lwd = 2)
+  points(trj[["stock"]][1], trj[["harvest"]][1], bg = 0, pch = 21, cex = 1.7, lwd = 2)
   if (legendruns & joint == F) {
     legend("topright", paste(r), bty = "n", cex = 0.8, pch = 21, pt.bg = r4ss::rich.colors.short(n, 1), col = 1, pt.cex = 1.5)
   }
   # Get Propability
-  b <- kb$stock
-  f <- kb$harvest
+  b <- kb[["stock"]]
+  f <- kb[["harvest"]]
   Pr.green <- sum(ifelse(b > 1 & f < 1, 1, 0)) / length(b) * 100
   Pr.red <- sum(ifelse(b < 1 & f > 1, 1, 0)) / length(b) * 100
   Pr.yellow <- sum(ifelse(b < 1 & f < 1, 1, 0)) / length(b) * 100

@@ -61,7 +61,7 @@ SSplotEnsemble(
 
 \item{subplots}{option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"}
 
-\item{models}{option to manually subset the models in kb$run}
+\item{models}{option to manually subset the models in kb[["run"]]}
 
 \item{quantiles}{quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))}
 
@@ -174,7 +174,7 @@ Plots model ensembles and forecasts with uncertaity represented by MVLN or MCMC 
 
 mvln <- SSdeltaMVLN(simple, run = "Simple")
 sspar(mfrow = c(3, 2), plot.cex = 0.7)
-SSplotEnsemble(mvln$kb, ylabs = mvln$labels, add = T, verbose = F)
+SSplotEnsemble(mvln[["kb"]], ylabs = mvln[["labels"]], add = T, verbose = F)
 }
 }
 \author{

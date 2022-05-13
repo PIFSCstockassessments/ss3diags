@@ -4,7 +4,7 @@
 #'
 #' @param kb SSdeltaMVLN $kb type output
 #' @param subplots option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"
-#' @param models option to manually subset the models in kb$run
+#' @param models option to manually subset the models in kb[["run"]]
 #' @param quantiles quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))
 #' @param ylabs yaxis labels for quants
 #' final year of values to show for each model. By default it is set to the
@@ -75,7 +75,7 @@
 #'
 #' mvln <- SSdeltaMVLN(simple, run = "Simple")
 #' sspar(mfrow = c(3, 2), plot.cex = 0.7)
-#' SSplotEnsemble(mvln$kb, ylabs = mvln$labels, add = T, verbose = F)
+#' SSplotEnsemble(mvln[["kb"]], ylabs = mvln[["labels"]], add = T, verbose = F)
 #' }
 #' @keywords ssplot ensemble
 #'
@@ -185,7 +185,7 @@ SSplotEnsemble <- function(kb,
   # Check time line
   minyr <- max(aggregate(year ~ run, kb, min)[, 2])
   maxyr <- min(aggregate(year ~ run, kb, max)[, 2])
-  kb <- kb[kb$year >= minyr & kb$year <= maxyr, ]
+  kb <- kb[kb[["year"]] >= minyr & kb[["year"]] <= maxyr, ]
 
   quants <- subplots
 
@@ -253,31 +253,31 @@ SSplotEnsemble <- function(kb,
     # plot function
 
     # get stuff from summary output (minimized)
-    n <- length(unique(kb$run))
-    startyrs <- min(kb$year)
-    endyrs <- max(kb$year)
-    years <- unique(kb$year)
+    n <- length(unique(kb[["run"]]))
+    startyrs <- min(kb[["year"]])
+    endyrs <- max(kb[["year"]])
+    years <- unique(kb[["year"]])
     y <- kb[, quant]
-    run <- kb$run
-    year <- kb$year
+    run <- kb[["run"]]
+    year <- kb[["year"]]
 
 
     exp <- list()
     n.quantiles <- length(quantiles)
     for (i in 1:n.quantiles) {
       exp[[i]] <- aggregate(y ~ year + run, kb, mean)
-      exp[[i]]$lower <- aggregate(y ~ year + run, kb, quantile, quantiles[[i]][1])$y
-      exp[[i]]$upper <- aggregate(y ~ year + run, kb, quantile, quantiles[[i]][2])$y
+      exp[[i]][["lower"]] <- aggregate(y ~ year + run, kb, quantile, quantiles[[i]][1])$y
+      exp[[i]][["upper"]] <- aggregate(y ~ year + run, kb, quantile, quantiles[[i]][2])$y
     }
 
 
-    # exp$Yr <- exp$year
-    # lower$Yr <- lower$year
-    # upper$Yr <- upper$year
+    # exp[["Yr"]] <- exp[["year"]]
+    # lower[["Yr"]] <- lower[["year"]]
+    # upper[["Yr"]] <- upper[["year"]]
 
     if (models[1] == "all") models <- 1:n
     nlines <- length(models)
-    runs <- unique(kb$run)[models]
+    runs <- unique(kb[["run"]])[models]
 
 
     # setup colors, transparency, points, and line types
@@ -319,12 +319,12 @@ SSplotEnsemble <- function(kb,
 
     # yr <- years
     full.exp <- do.call(rbind, exp)
-    if (is.null(xlim)) xlim <- c(max(min(full.exp$year)), max(years))
+    if (is.null(xlim)) xlim <- c(max(min(full.exp[["year"]])), max(years))
     xmin <- min(xlim)
 
     ylim <- c(0, max(ifelse(uncertainty,
-      max(full.exp$upper[full.exp$year >= xmin]) * ylimAdj,
-      ylimAdj * max(full.exp$upper[full.exp$year >= xmin]) * 1.05
+      max(full.exp[["upper"]][full.exp[["year"]] >= xmin]) * ylimAdj,
+      ylimAdj * max(full.exp[["upper"]][full.exp[["year"]] >= xmin]) * 1.05
     )))
 
 
@@ -346,14 +346,14 @@ SSplotEnsemble <- function(kb,
           if (quant %in% c("SSB", "stock", "harvest", "F")) {
             polygon(
               x = c(years, rev(years)),
-              y = c(exp[[q]]$lower[exp[[q]]$run == runs[iline]], rev(exp[[q]]$upper[exp[[q]]$run == runs[iline]])),
+              y = c(exp[[q]][["lower"]][exp[[q]][["run"]] == runs[iline]], rev(exp[[q]][["upper"]][exp[[q]][["run"]] == runs[iline]])),
               col = col[iline], border = col[iline]
             )
           } else {
             adj <- 0.2 * iline / nlines - 0.1
             arrows(
-              x0 = exp[[q]]$year + adj, y0 = exp[[q]]$lower[exp[[q]]$run == runs[iline]],
-              x1 = exp[[q]]$year + adj, y1 = exp[[q]]$upper[exp[[q]]$run == runs[iline]],
+              x0 = exp[[q]][["year"]] + adj, y0 = exp[[q]][["lower"]][exp[[q]][["run"]] == runs[iline]],
+              x1 = exp[[q]][["year"]] + adj, y1 = exp[[q]][["upper"]][exp[[q]][["run"]] == runs[iline]],
               length = 0.02, angle = 90, code = 3, col = col[iline]
             )
           }
@@ -364,9 +364,9 @@ SSplotEnsemble <- function(kb,
     for (iline in 1:nlines) {
       for (q in 1:n.quantiles) {
         if (quant %in% c("SSB", "stock", "harvest", "F", "Catch")) {
-          lines(years, exp[[q]]$y[exp[[q]]$run == runs[iline]], col = col[iline], pch = pch[iline], lty = lty[iline], lwd = lwd[iline], type = "l")
+          lines(years, exp[[q]][["y"]][exp[[q]][["run"]] == runs[iline]], col = col[iline], pch = pch[iline], lty = lty[iline], lwd = lwd[iline], type = "l")
         } else {
-          points(years, exp[[q]]$y[exp[[q]]$run == runs[iline]], col = col[iline], pch = 16, cex = 0.8)
+          points(years, exp[[q]][["y"]][exp[[q]][["run"]] == runs[iline]], col = col[iline], pch = 16, cex = 0.8)
         }
       }
     }
@@ -586,12 +586,12 @@ ensemble_plot_index <- function(summaryoutput,
   indices2 <- NULL
   for (iline in 1:nlines) {
     imodel <- models[iline]
-    subset1 <- indices$imodel == imodel & !is.na(indices$Like)
-    subset2 <- indices$imodel == imodel
-    if (length(unique(indices$Fleet[subset1])) > 1) {
+    subset1 <- indices[["imodel"]] == imodel & !is.na(indices[["Like"]])
+    subset2 <- indices[["imodel"]] == imodel
+    if (length(unique(indices[["Fleet"]][subset1])) > 1) {
       if (!is.null(indexfleets[imodel])) {
         ifleet <- indexfleets[imodel]
-        indices2 <- rbind(indices2, indices[subset2 & indices$Fleet == ifleet, ])
+        indices2 <- rbind(indices2, indices[subset2 & indices[["Fleet"]] == ifleet, ])
       } else {
         if (verbose) {
           # TODO: Catch as exception
@@ -625,7 +625,7 @@ ensemble_plot_index <- function(summaryoutput,
 
   ### make plot of index fits
   # calculate ylim (excluding dummy observations from observed but not expected)
-  sub <- !is.na(indices2$Like)
+  sub <- !is.na(indices2[["Like"]])
   ylim <- varlist[["ylimAdj"]] * range(exp, obs[sub], lower[sub], upper[sub], na.rm = TRUE)
   # if no values included in subset, then set ylim based on all values
 
@@ -663,8 +663,8 @@ ensemble_plot_index <- function(summaryoutput,
   for (iline in 1:nlines) {
     adj <- 0.2 * iline / nlines - 0.1
     imodel <- models[iline]
-    subset <- indices2$imodel == imodel & !is.na(indices2$Like) & yr >= xmin
-    subexp <- indices2$imodel == imodel & yr >= xmin
+    subset <- indices2[["imodel"]] == imodel & !is.na(indices2[["Like"]]) & yr >= xmin
+    subexp <- indices2[["imodel"]] == imodel & yr >= xmin
     if (iline == 1) {
       points(yr[subset], obs[subset], pch = 21, cex = 1, bg = "white")
     }
@@ -695,7 +695,7 @@ ensemble_plot_index <- function(summaryoutput,
       type = type
     )
   }
-  legend("top", paste0(unique(indices2$Fleet_name)[1]), bty = "n", y.intersp = -0.2, cex = varlist[["legendcex"]] + 0.1)
+  legend("top", paste0(unique(indices2[["Fleet_name"]])[1]), bty = "n", y.intersp = -0.2, cex = varlist[["legendcex"]] + 0.1)
 
 
 

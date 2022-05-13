@@ -36,7 +36,7 @@ SShcbias <- function(summaryoutput, quants = c("SSB", "F"),
       Upper <- summaryoutput[["SpawnBioUpper"]]
 
       if (is.null(labels)) {
-        if (summaryoutput$SpawnOutputUnits[1] == "numbers") {
+        if (summaryoutput[["SpawnOutputUnits"]][1] == "numbers") {
           labels <- "Stock fecundity"
         } else {
           labels <- "Spawning biomass (t)"
@@ -50,9 +50,9 @@ SShcbias <- function(summaryoutput, quants = c("SSB", "F"),
       Upper <- summaryoutput[["FvalueUpper"]]
 
       if (is.null(labels)) {
-        if (strsplit(summaryoutput$FvalueLabels[1], ";")[[1]][1] == "_abs_F") {
+        if (strsplit(summaryoutput[["FvalueLabels"]][1], ";")[[1]][1] == "_abs_F") {
           labels <- "Fishing mortality F"
-        } else if (strsplit(summaryoutput$FvalueLabels[1], ";")[[1]][1] == "(F)/(Fmsy)") {
+        } else if (strsplit(summaryoutput[["FvalueLabels"]][1], ";")[[1]][1] == "(F)/(Fmsy)") {
           labels <- expression(F / F[MSY])
         } else {
           labels <- "F ratio"
@@ -74,7 +74,7 @@ SShcbias <- function(summaryoutput, quants = c("SSB", "F"),
     }
 
     # get exp
-    exp <- mu[mu$Yr %in% years, ]
+    exp <- mu[mu[["Yr"]] %in% years, ]
     uncertainty <- FALSE
 
     yr <- exp[["Yr"]]

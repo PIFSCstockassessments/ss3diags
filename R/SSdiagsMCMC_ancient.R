@@ -27,7 +27,7 @@ SSdiagsMCMC_ancient <- function(mcmc, ss3rep, Fref = NULL, years = NULL, run = "
                                 addprj = FALSE, ymax = NULL, xmax = NULL, legendcex = 1, verbose = TRUE) {
   dat <- mcmc
 
-  if (is.null(dat$SSB_Unfished) == F) {
+  if (is.null(dat[["SSB_Unfished"]]) == F) {
     cat("This is indeed an accient run, perhaps 2014 or earlier?")
   } else {
     stop("This seems to be a more recent SS3 version, try SSdiagsMCMC()")
@@ -60,58 +60,58 @@ SSdiagsMCMC_ancient <- function(mcmc, ss3rep, Fref = NULL, years = NULL, run = "
   res <- res[, c("Iter", SSBs, Bs, Fs, Rs)] # remove FCs
   res <- res[seq(1, dim(res)[1], thin), ]
   res <- reshape2::melt(res[, c("Iter", SSBs, Bs, Fs, Rs)], id.vars = "Iter")
-  res$year <- as.numeric(gsub("SPB_", "", as.character((res$variable))))
-  res$year[is.na(res$year)] <- as.numeric(gsub(
+  res[["year"]] <- as.numeric(gsub("SPB_", "", as.character((res[["variable"]]))))
+  res[["year"]][is.na(res[["year"]])] <- as.numeric(gsub(
     "SPB_", "",
-    as.character(res[is.na(res$year), "variable"])
+    as.character(res[is.na(res[["year"]]), "variable"])
   ))
-  res$var <- substr(res$variable, 1, 2)
+  res[["var"]] <- substr(res[["variable"]], 1, 2)
   options(ops)
-  res <- data.frame(res[res$var == "SP", c(
+  res <- data.frame(res[res[["var"]] == "SP", c(
     "Iter", "year",
     "value"
-  )], stock = res[res$var == "Br", "value"], harvest = res[res$var == "F_", "value"], recr = res[res$var == "Re", "value"])
+  )], stock = res[res[["var"]] == "Br", "value"], harvest = res[res[["var"]] == "F_", "value"], recr = res[res[["var"]] == "Re", "value"])
 
 
   names(res)[c(1, 3)] <- c("iter", "SSB")
-  resFc <- res$fcat
+  resFc <- res[["fcat"]]
   res[is.na(res)] <- 0
-  res$fcat <- resFc
+  res[["fcat"]] <- resFc
   sims <- merge(res, rfs, by = "iter")
 
   status <- c("Bratio", "F")
   quants <- c("SSB", "Recr")
 
-  hat <- ss3rep$derived_quants # from rep file
+  hat <- ss3rep[["derived_quants"]] # from rep file
   allyrs <- yrs
   addprj <- F
   if (is.null(years) & addprj == TRUE) yrs <- allyrs
-  if (is.null(years) & addprj == FALSE) yrs <- allyrs[allyrs <= ss3rep$endyr]
+  if (is.null(years) & addprj == FALSE) yrs <- allyrs[allyrs <= ss3rep[["endyr"]]]
   if (is.null(years) == FALSE) yrs <- years[years %in% allyrs == TRUE]
 
 
   # brp checks for starter file setting
   refyr <- max(yrs)
-  bt <- hat[hat$Label == paste0("SSB_", refyr), 2]
-  b0 <- hat[hat$Label %in% c("SSB_unfished", "SSB_Unfished"), 2]
-  btrg <- hat[hat$Label == paste0("SSB_Btgt"), 2]
-  bmsy <- hat[hat$Label == paste0("SSB_MSY"), 2]
+  bt <- hat[hat[["Label"]] == paste0("SSB_", refyr), 2]
+  b0 <- hat[hat[["Label"]] %in% c("SSB_unfished", "SSB_Unfished"), 2]
+  btrg <- hat[hat[["Label"]] == paste0("SSB_Btgt"), 2]
+  bmsy <- hat[hat[["Label"]] == paste0("SSB_MSY"), 2]
   bb.check <- c(bt / b0, bt / bmsy, bt / btrg)
 
   # bratio definition
-  bratio <- hat[hat$Label == paste0("Bratio_", refyr), 2]
+  bratio <- hat[hat[["Label"]] == paste0("Bratio_", refyr), 2]
   bb <- which(abs(bratio - bb.check) == min(abs(bratio - bb.check)))
   if (bb %in% c(1:2) == F) stop("This Bratio is not [yet] defined, please rerun Stock Synthesis with starter.ss option for Depletion basis: 1 or 2")
 
   bbasis <- c("SSB/SSB0", "SSB/SSBMSY", "SSB/SSBtrg")[bb]
-  fbasis <- strsplit(ss3rep$F_report_basis, ";")[[1]][1]
+  fbasis <- strsplit(ss3rep[["F_report_basis"]], ";")[[1]][1]
   gettrg <- strsplit(fbasis, "%")[[1]][1]
   gettrg <- as.numeric(strsplit(gettrg, "B")[[1]][2])
 
-  if (fbasis %in% c("_abs_F", "(F)/(Fmsy)", paste0("(F)/(F_at_B", ss3rep$btarg * 100, "%)"), paste0("(F)/(F", ss3rep$btarg * 100, "%SPR)"))) {
+  if (fbasis %in% c("_abs_F", "(F)/(Fmsy)", paste0("(F)/(F_at_B", ss3rep[["btarg"]] * 100, "%)"), paste0("(F)/(F", ss3rep[["btarg"]] * 100, "%SPR)"))) {
     fb <- which(c(
-      "_abs_F", "(F)/(Fmsy)", paste0("(F)/(F_at_B", ss3rep$btarg * 100, "%)"),
-      paste0("(F)/(F", ss3rep$btarg * 100, "%SPR)")
+      "_abs_F", "(F)/(Fmsy)", paste0("(F)/(F_at_B", ss3rep[["btarg"]] * 100, "%)"),
+      paste0("(F)/(F", ss3rep[["btarg"]] * 100, "%SPR)")
     ) %in% fbasis)
   } else {
     stop("F_report_basis is not defined, please rerun Stock Synthesis with recommended starter.ss option for F_report_basis: 1")
@@ -121,7 +121,7 @@ SSdiagsMCMC_ancient <- function(mcmc, ss3rep, Fref = NULL, years = NULL, run = "
   if (is.null(Fref) & fb %in% c(4)) Fref <- "SPR"
 
   if (verbose) cat("\n", "starter.sso with Bratio:", bbasis, "and F:", fbasis, "\n", "\n")
-  bref <- ifelse(ss3rep$btarg < 0, gettrg / 100, ss3rep$btarg)
+  bref <- ifelse(ss3rep[["btarg"]] < 0, gettrg / 100, ss3rep[["btarg"]])
   if (is.na(bref)) bref <- 0.4
 
   if (fb == 4 & Fref[1] %in% c("Btgt", "MSY")) stop("Fref = ", Fref[1], " option conflicts with ", fbasis, " in starter.sso, please choose Fref = SPR")
@@ -131,83 +131,83 @@ SSdiagsMCMC_ancient <- function(mcmc, ss3rep, Fref = NULL, years = NULL, run = "
   if (fb %in% c(1, 3) & Fref[1] == "Btgt") Fquant <- "Btgt"
   if (fb %in% c(1, 4) & Fref[1] == "SPR") Fquant <- "SPR"
 
-  SSB <- sims$SSB
-  if (bb == 2) stock <- sims$stock
-  if (bb == 1) stock <- sims$stock / bref
-  # if(Bref[1]=="B0") stock = SSB/sims$SSB_unfished
-  Fout <- sims$harvest
-  # if(Fstarter[1]=="_abs_F"){ Fabs = Fout} else if(Fstarter[1] == "(F)/(Fmsy)"){Fabs = Fout} else {Fabs = Fout*sims$Fstd_Btgt}
+  SSB <- sims[["SSB"]]
+  if (bb == 2) stock <- sims[["stock"]]
+  if (bb == 1) stock <- sims[["stock"]] / bref
+  # if(Bref[1]=="B0") stock = SSB/sims[["SSB_unfished"]]
+  Fout <- sims[["harvest"]]
+  # if(Fstarter[1]=="_abs_F"){ Fabs = Fout} else if(Fstarter[1] == "(F)/(Fmsy)"){Fabs = Fout} else {Fabs = Fout*sims[["Fstd_Btgt"]]}
   if (ssver == "new") { # new version
     if (fb == 1) {
       Fabs <- Fout
     }
     if (fb == 2) {
-      Fabs <- Fout * sims$annF_MSY
+      Fabs <- Fout * sims[["annF_MSY"]]
     }
     if (fb == 3) {
-      Fabs <- Fout * sims$annF_Btgt
+      Fabs <- Fout * sims[["annF_Btgt"]]
     }
     if (fb == 4) {
-      Fabs <- Fout * sims$annF_SPR
+      Fabs <- Fout * sims[["annF_SPR"]]
     }
     if (Fref[1] == "MSY") {
-      harvest <- Fabs / sims$annF_MSY
+      harvest <- Fabs / sims[["annF_MSY"]]
     }
     if (Fref[1] == "Btgt") {
-      harvest <- Fabs / sims$annF_Btgt
+      harvest <- Fabs / sims[["annF_Btgt"]]
     }
     if (Fref[1] == "SPR") {
-      harvest <- Fabs / sims$annF_SPR
+      harvest <- Fabs / sims[["annF_SPR"]]
     }
   } else { # Old version
     if (fb == 1) {
       Fabs <- Fout
     }
     if (fb == 2) {
-      Fabs <- Fout * sims$Fstd_MSY
+      Fabs <- Fout * sims[["Fstd_MSY"]]
     }
     if (fb == 3) {
-      Fabs <- Fout * sims$Fstd_Btgt
+      Fabs <- Fout * sims[["Fstd_Btgt"]]
     }
     if (fb == 4) {
-      Fabs <- Fout * sims$Fstd_SPR
+      Fabs <- Fout * sims[["Fstd_SPR"]]
     }
     if (Fref[1] == "MSY") {
-      harvest <- Fabs / sims$Fstd_MSY
+      harvest <- Fabs / sims[["Fstd_MSY"]]
     }
     if (Fref[1] == "Btgt") {
-      harvest <- Fabs / sims$Fstd_Btgt
+      harvest <- Fabs / sims[["Fstd_Btgt"]]
     }
     if (Fref[1] == "SPR") {
-      harvest <- Fabs / sims$Fstd_SPR
+      harvest <- Fabs / sims[["Fstd_SPR"]]
     }
   }
 
-  simout <- data.frame(sims[, 1:2], run = run, SSB, Fabs, BB0 = SSB / sims$SSB_Unfished, stock = stock, harvest = harvest, Recr = sims$recr, sims[, 6:ncol(sims)])
+  simout <- data.frame(sims[, 1:2], run = run, SSB, Fabs, BB0 = SSB / sims[["SSB_Unfished"]], stock = stock, harvest = harvest, Recr = sims[["recr"]], sims[, 6:ncol(sims)])
 
   kb <- data.frame(
-    year = simout$year, run = run, type = ifelse(simout$year <= ss3rep$endyr, "fit", "forecast"),
-    iter = simout$iter, stock = simout$stock, harvest = simout$harvest, SSB = simout$SSB,
-    F = simout$Fabs, Recr = simout$Recr
+    year = simout[["year"]], run = run, type = ifelse(simout[["year"]] <= ss3rep[["endyr"]], "fit", "forecast"),
+    iter = simout[["iter"]], stock = simout[["stock"]], harvest = simout[["harvest"]], SSB = simout[["SSB"]],
+    F = simout[["Fabs"]], Recr = simout[["Recr"]]
   )
 
 
-  kb <- kb[kb$year %in% yrs, ]
+  kb <- kb[kb[["year"]] %in% yrs, ]
   # Sort
-  kb <- kb[order(kb$year, kb$iter), ]
-  iter <- nrow(kb[kb$year == yrs[1], ])
-  kb$iter <- rep(1:iter, length(yrs))
+  kb <- kb[order(kb[["year"]], kb[["iter"]]), ]
+  iter <- nrow(kb[kb[["year"]] == yrs[1], ])
+  kb[["iter"]] <- rep(1:iter, length(yrs))
 
 
 
   # Add catch
-  C_obs <- aggregate(Obs ~ Yr, ss3rep$catch, sum)
-  Cobs <- C_obs[C_obs$Yr %in% yrs, ]
-  foreyrs <- unique(as.numeric(gsub(paste0("ForeCatch_"), "", hat$Label[grep(paste0("ForeCatch_"), hat$Label)])))
-  Cfore <- data.frame(Yr = foreyrs, Obs = hat$Value[hat$Label %in% paste0("ForeCatch_", foreyrs)])
+  C_obs <- aggregate(Obs ~ Yr, ss3rep[["catch"]], sum)
+  Cobs <- C_obs[C_obs[["Yr"]] %in% yrs, ]
+  foreyrs <- unique(as.numeric(gsub(paste0("ForeCatch_"), "", hat[["Label"]][grep(paste0("ForeCatch_"), hat[["Label"]])])))
+  Cfore <- data.frame(Yr = foreyrs, Obs = hat[["Value"]][hat[["Label"]] %in% paste0("ForeCatch_", foreyrs)])
   Catch <- rbind(Cobs, Cfore)
-  Catch <- Catch[Catch$Yr %in% yrs, ]
-  kb$Catch <- rep(Catch$Obs, each = iter)
+  Catch <- Catch[Catch[["Yr"]] %in% yrs, ]
+  kb[["Catch"]] <- rep(Catch[["Obs"]], each = iter)
   trg <- round(bref * 100, 0)
 
   # House keeping

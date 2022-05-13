@@ -10,7 +10,7 @@ SSretroComps(retroModels)
 \item{retroModels}{object list of replists from r4ss::SSgetoutput()}
 }
 \value{
-list of observed and expected mean Length/age comps (c.f. ss3rep$cpue)
+list of observed and expected mean Length/age comps (c.f. ss3rep[["cpue"]])
 }
 \description{
 Wrapper to get observed and expected mean length/age from multiple Stock Synthesis models.

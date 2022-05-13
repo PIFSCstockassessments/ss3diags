@@ -200,36 +200,36 @@ SSplotHCxval <- function(retroSummary,
 
 
 
-  if (is.null(hcruns$indices) & subplots[1] == "cpue") {
+  if (is.null(hcruns[["indices"]]) & subplots[1] == "cpue") {
     stop("Require input object from r4ss::SSsummarize()")
   }
 
   if (subplots[1] %in% c("len", "age")) {
-    if (is.null(hcruns$age) & is.null(hcruns$len)) {
+    if (is.null(hcruns[["age"]]) & is.null(hcruns[["len"]])) {
       stop("Require input object from ss3diags::SSdiagsComps")
     }
   }
 
   if (subplots[1] == "len") {
-    if (is.null(hcruns$len)) stop("No Length Comps found")
-    hcruns$indices <- hcruns$len
+    if (is.null(hcruns[["len"]])) stop("No Length Comps found")
+    hcruns[["indices"]] <- hcruns[["len"]]
   }
 
   if (subplots[1] == "age") {
-    if (is.null(hcruns$age)) stop("No Age Comps found")
-    hcruns$indices <- hcruns$age
+    if (is.null(hcruns[["age"]])) stop("No Age Comps found")
+    hcruns[["indices"]] <- hcruns[["age"]]
   }
 
   # subset if indexselect is specified
   if (is.null(indexselect) == F & is.numeric(indexselect)) {
-    iname <- unique(hcruns$indices$Fleet_name)[indexselect]
+    iname <- unique(hcruns[["indices"]][["Fleet_name"]])[indexselect]
     if (TRUE %in% is.na(iname)) stop("One or more index numbers exceed number of available indices")
-    hcruns$indices <- hcruns$indices[hcruns$indices$Fleet_name %in% iname, ]
+    hcruns[["indices"]] <- hcruns[["indices"]][hcruns[["indices"]][["Fleet_name"]] %in% iname, ]
   }
 
 
 
-  if (is.null(legendindex)) legendindex <- 1:hcruns$n
+  if (is.null(legendindex)) legendindex <- 1:hcruns[["n"]]
   if (!legend) legendindex <- 10000
 
 
@@ -311,10 +311,10 @@ SSplotHCxval <- function(retroSummary,
     # plot_hcxal function
     #-------------------------------------------------------------
     # get stuff from summary output (minimized)
-    n <- hcruns$n
-    startyrs <- hcruns$startyrs
-    endyrs <- hcruns$endyrs
-    indices <- hcruns$indices
+    n <- hcruns[["n"]]
+    startyrs <- hcruns[["startyrs"]]
+    endyrs <- hcruns[["endyrs"]]
+    indices <- hcruns[["indices"]]
 
     if (models[1] == "all") models <- 1:n
     nlines <- length(models)
@@ -373,21 +373,21 @@ SSplotHCxval <- function(retroSummary,
 
     # Exclude all Time steps not use in reference run replist1
     if (subplots[1] %in% c("len", "age")) {
-      indices$Use <- ifelse(is.na(indices$Like), -1, 1)
+      indices[["Use"]] <- ifelse(is.na(indices[["Like"]]), -1, 1)
     }
-    RefUse <- indices[indices$imodel == 1 & indices$Use == 1, ]
-    RefUse <- paste0(RefUse$Fleet_name, ".", RefUse$Time)
-    indices <- indices[paste0(indices$Fleet_name, ".", indices$Time) %in% RefUse, ]
+    RefUse <- indices[indices[["imodel"]] == 1 & indices[["Use"]] == 1, ]
+    RefUse <- paste0(RefUse[["Fleet_name"]], ".", RefUse[["Time"]])
+    indices <- indices[paste0(indices[["Fleet_name"]], ".", indices[["Time"]]) %in% RefUse, ]
 
     indices2 <- NULL
     for (iline in 1:nlines) {
       imodel <- models[iline]
-      subset1 <- indices$imodel == imodel & !is.na(indices$Like) & indices$Use == 1
-      subset2 <- indices$imodel == imodel # & indices$Use == 1 #><>
-      if (length(unique(indices$Fleet[subset1])) > 1) {
+      subset1 <- indices[["imodel"]] == imodel & !is.na(indices[["Like"]]) & indices[["Use"]] == 1
+      subset2 <- indices[["imodel"]] == imodel # & indices[["Use"]] == 1 #><>
+      if (length(unique(indices[["Fleet"]][subset1])) > 1) {
         if (!is.null(indexfleets[imodel])) {
           ifleet <- indexfleets[imodel]
-          indices2 <- rbind(indices2, indices[subset2 & indices$Fleet == ifleet, ])
+          indices2 <- rbind(indices2, indices[subset2 & indices[["Fleet"]] == ifleet, ])
         } else {
           if (verbose) {
             cat(
@@ -405,9 +405,9 @@ SSplotHCxval <- function(retroSummary,
 
     # Subset by month
     if (Season == "default") {
-      Season <- unique(indices2$Seas)[1]
-      if (verbose & length(unique(indices2$Seas)) > 1) {
-        cat("Taking Season", Season, "by default for Index", unique(indices2$Fleet_name))
+      Season <- unique(indices2[["Seas"]])[1]
+      if (verbose & length(unique(indices2[["Seas"]])) > 1) {
+        cat("Taking Season", Season, "by default for Index", unique(indices2[["Fleet_name"]]))
       }
     } else {
       if (as.integer(Season) < 1 | as.integer(Season) > 4) stop("Season must be an integer between 1 and 4")
@@ -415,23 +415,23 @@ SSplotHCxval <- function(retroSummary,
       Season <- as.numeric(Season)[1]
     }
 
-    indices <- indices[indices$Seas == Season, ]
-    indices2 <- indices2[indices2$Seas == Season, ]
+    indices <- indices[indices[["Seas"]] == Season, ]
+    indices2 <- indices2[indices2[["Seas"]] == Season, ]
 
 
     # get quantities for plot
-    yr <- indices2$Yr
-    obs <- indices2$Obs
-    exp <- indices2$Exp
-    imodel <- indices2$imodel
-    Q <- indices2$Calc_Q
+    yr <- indices2[["Yr"]]
+    obs <- indices2[["Obs"]]
+    exp <- indices2[["Exp"]]
+    imodel <- indices2[["imodel"]]
+    Q <- indices2[["Calc_Q"]]
 
     ylab <- labels[2]
 
     # get uncertainty intervals if requested
     if (indexUncertainty) {
-      subset <- indices2$imodel == models[1] & indices2$Use == 1
-      indexSEvec <- indices2$SE[subset]
+      subset <- indices2[["imodel"]] == models[1] & indices2[["Use"]] == 1
+      indexSEvec <- indices2[["SE"]][subset]
       y <- obs[subset]
       upper <- qlnorm(.975, meanlog = log(y), sdlog = indexSEvec)
       lower <- qlnorm(.025, meanlog = log(y), sdlog = indexSEvec)
@@ -449,12 +449,12 @@ SSplotHCxval <- function(retroSummary,
 
     meanQ <- rep(NA, nlines)
     imodel <- models[which(endyrvec == max(endyrvec))[1]]
-    subset <- indices2$imodel == imodel & !is.na(indices2$Like) & yr >= xmin
+    subset <- indices2[["imodel"]] == imodel & !is.na(indices2[["Like"]]) & yr >= xmin
 
 
     ### make plot of index fits
     # calculate ylim (excluding dummy observations from observed but not expected)
-    sub <- !is.na(indices2$Like) & yr >= xmin
+    sub <- !is.na(indices2[["Like"]]) & yr >= xmin
 
     if (is.null(ylim)) {
       +1
@@ -492,7 +492,7 @@ SSplotHCxval <- function(retroSummary,
       if (verbose) {
         cat(paste(
           "\n", "Computing MASE with", ifelse(npe < (length(endyrvec) - 1), "only", "all"),
-          npe, "of", length(endyrvec) - 1, " prediction residuals for Index", indices2$Fleet_name[1]
+          npe, "of", length(endyrvec) - 1, " prediction residuals for Index", indices2[["Fleet_name"]][1]
         ), "\n")
       }
       if (verbose & npe < (length(endyrvec) - 1)) cat(paste("\n", "Warning:  Unequal spacing of naive predictions residuals may influence the interpretation of MASE", "\n"))
@@ -519,15 +519,15 @@ SSplotHCxval <- function(retroSummary,
       points(yr.eval[pe.eval], obs.eval[pe.eval], pch = 21, cex = 1.5, bg = (rev(col))[pe.eval - 1])
 
       # Plot Reference
-      index.i <- unique(indices2$Fleet_name)
-      x.ref <- indices[indices$imodel == imodel & indices$Yr >= xmin & indices$Fleet_name == index.i, ]$Yr
-      y.ref <- indices[indices$imodel == imodel & indices$Yr >= xmin & indices$Fleet_name == index.i, ]$Exp
+      index.i <- unique(indices2[["Fleet_name"]])
+      x.ref <- indices[indices[["imodel"]] == imodel & indices[["Yr"]] >= xmin & indices[["Fleet_name"]] == index.i, ][["Yr"]]
+      y.ref <- indices[indices[["imodel"]] == imodel & indices[["Yr"]] >= xmin & indices[["Fleet_name"]] == index.i, ][["Exp"]]
       lines(x.ref, y.ref, col = col[1], lwd = 2, lty = 1, type = type, pch = 16)
       pred.resid <- NULL # Note Prediction Residuals
       for (iline in (2:nlines)[!mcmcVec]) {
         imodel <- models[iline]
-        subset <- indices2$imodel == imodel & yr <= endyrvec[iline] + 1 & yr >= xmin
-        subset.ref <- indices2$imodel == imodel
+        subset <- indices2[["imodel"]] == imodel & yr <= endyrvec[iline] + 1 & yr >= xmin
+        subset.ref <- indices2[["imodel"]] == imodel
 
         if (endyrvec[iline - 1] %in% yr) {
           x <- yr[subset]
@@ -564,7 +564,7 @@ SSplotHCxval <- function(retroSummary,
       mase.adj <- maepr / (max(scaler, MAE.base.adj))
 
       MASE.i <- NULL
-      MASE.i <- data.frame(Index = unique(indices2$Fleet_name)[1], Season = Season, MASE = mase, MAE.PR = maepr, MAE.base = scaler, MASE.adj = mase.adj, n.eval = npe)
+      MASE.i <- data.frame(Index = unique(indices2[["Fleet_name"]])[1], Season = Season, MASE = mase, MAE.PR = maepr, MAE.base = scaler, MASE.adj = mase.adj, n.eval = npe)
 
       # legendlabels <- c("Ref",rev(yr.eval))
       if (indexQlabel) {
@@ -587,8 +587,8 @@ SSplotHCxval <- function(retroSummary,
           type = type
         )
       }
-      if (mase == mase.adj | show.mase.adj == FALSE) legend("top", paste0(unique(indices2$Fleet_name)[1], ifelse(length(unique(hcruns$indices$Seas)) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2)), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
-      if (mase.adj < mase & show.mase.adj == TRUE) legend("top", paste0(unique(indices2$Fleet_name)[1], ifelse(length(unique(hcruns$indices$Seas)) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2), " (", round(mase.adj, 2), ")"), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
+      if (mase == mase.adj | show.mase.adj == FALSE) legend("top", paste0(unique(indices2[["Fleet_name"]])[1], ifelse(length(unique(hcruns[["indices"]][["Seas"]])) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2)), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
+      if (mase.adj < mase & show.mase.adj == TRUE) legend("top", paste0(unique(indices2[["Fleet_name"]])[1], ifelse(length(unique(hcruns[["indices"]][["Seas"]])) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2), " (", round(mase.adj, 2), ")"), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
 
 
       axis(1, at = c(max(xmin, min(yr)):max(endyrvec)))
@@ -597,9 +597,9 @@ SSplotHCxval <- function(retroSummary,
       axis(2)
       box()
     } else {
-      if (verbose) cat(paste0("\n", "No observations in evaluation years to compute prediction residuals for Index ", indices2$Fleet_name[1]), "\n")
+      if (verbose) cat(paste0("\n", "No observations in evaluation years to compute prediction residuals for Index ", indices2[["Fleet_name"]][1]), "\n")
       MASE.i <- NULL
-      MASE.i <- data.frame(Index = unique(indices2$Fleet_name)[1], Season = Season, MASE = NA, MAE.PR = NA, MAE.base = NA, MASE.adj = NA, n.eval = 0)
+      MASE.i <- data.frame(Index = unique(indices2[["Fleet_name"]])[1], Season = Season, MASE = NA, MAE.PR = NA, MAE.base = NA, MASE.adj = NA, n.eval = 0)
       if (use_png == FALSE & add == FALSE) dev.off()
     }
     return(list(MASE = MASE.i))
@@ -609,19 +609,19 @@ SSplotHCxval <- function(retroSummary,
   if (verbose) cat("Plotting Hindcast Cross-Validation (one-step-ahead) \n")
   if (plot) {
     # LOOP through fleets
-    nfleets <- length(unique(hcruns$indices$Fleet))
+    nfleets <- length(unique(hcruns[["indices"]][["Fleet"]]))
     if (print_plot) {
       MASE <- NULL
       for (fi in 1:nfleets) {
         legend <- F
         if (fi %in% legendindex) legend <- TRUE
-        indexfleets <- unique(hcruns$indices$Fleet)[fi]
-        # save_png(paste0("hcxval_", unique(hcruns$indices$Fleet)[fi], ".png", sep = ""))
+        indexfleets <- unique(hcruns[["indices"]][["Fleet"]])[fi]
+        # save_png(paste0("hcxval_", unique(hcruns[["indices"]][["Fleet"]])[fi], ".png", sep = ""))
 
         plotinfo <- NULL
         r4ss::save_png(
           plotinfo = plotinfo,
-          file = paste0("hcxval_", unique(hcruns$indices$Fleet)[fi], ".png", sep = ""),
+          file = paste0("hcxval_", unique(hcruns[["indices"]][["Fleet"]])[fi], ".png", sep = ""),
           plotdir = plotdir,
           pwidth = pwidth,
           pheight = pheight,
@@ -642,7 +642,7 @@ SSplotHCxval <- function(retroSummary,
     for (fi in 1:nfleets) {
       legend <- F
       if (fi %in% legendindex) legend <- TRUE
-      indexfleets <- unique(hcruns$indices$Fleet)[fi]
+      indexfleets <- unique(hcruns[["indices"]][["Fleet"]])[fi]
       if (!add) (par)
       get_mase <- plot_hcxval(indexfleets)$MASE
       MASE <- rbind(MASE, get_mase)
