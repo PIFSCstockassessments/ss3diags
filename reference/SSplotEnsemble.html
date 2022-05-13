@@ -113,7 +113,7 @@
 <dt>subplots</dt>
 <dd><p>option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"</p></dd>
 <dt>models</dt>
-<dd><p>option to manually subset the models in kb$run</p></dd>
+<dd><p>option to manually subset the models in kb[["run"]]</p></dd>
 <dt>quantiles</dt>
 <dd><p>quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))</p></dd>
 <dt>ylabs</dt>
@@ -229,7 +229,7 @@ option to disable this, via FALSE, is unused.</p></dd>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">mvln</span> <span class="op">&lt;-</span> <span class="fu"><a href="SSdeltaMVLN.html">SSdeltaMVLN</a></span><span class="op">(</span><span class="va">simple</span>, run <span class="op">=</span> <span class="st">"Simple"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">sspar</span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>, plot.cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">SSplotEnsemble</span><span class="op">(</span><span class="va">mvln</span><span class="op">$</span><span class="va">kb</span>, ylabs <span class="op">=</span> <span class="va">mvln</span><span class="op">$</span><span class="va">labels</span>, add <span class="op">=</span> <span class="cn">T</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">SSplotEnsemble</span><span class="op">(</span><span class="va">mvln</span><span class="op">[[</span><span class="st">"kb"</span><span class="op">]</span><span class="op">]</span>, ylabs <span class="op">=</span> <span class="va">mvln</span><span class="op">[[</span><span class="st">"labels"</span><span class="op">]</span><span class="op">]</span>, add <span class="op">=</span> <span class="cn">T</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>
