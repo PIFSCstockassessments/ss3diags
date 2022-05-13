@@ -402,7 +402,7 @@
 
 #' MCMC output for simulated Simple Stock Synthesis model.
 #'
-#' MCMC output read by \code{\link[r4ss]{SSreadMCMC}()}
+#' MCMC output read by \code{\link[r4ss]{SSgetMCMC}()}
 #'
 #' @docType data
 #'
