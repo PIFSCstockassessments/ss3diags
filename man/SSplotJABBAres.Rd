@@ -6,7 +6,7 @@
 \usage{
 SSplotJABBAres(
   ss3rep = ss3diags::simple,
-  subplots = c("cpue", "len", "age", "con")[1],
+  subplots = c("cpue", "len", "age", "size", "con")[1],
   seas = NULL,
   plot = TRUE,
   print = deprecated(),
@@ -54,7 +54,7 @@ SSplotJABBAres(
 \arguments{
 \item{ss3rep}{Stock Synthesis output as read by r4SS function SS_output}
 
-\item{subplots}{string of type of data to plot, 'cpue' for index of abundance data, 'len' or 'age' for length- or age-composition, or 'con' for conditional age-at-length data.}
+\item{subplots}{string of type of data to plot, 'cpue' for index of abundance data, 'len' or 'age' for length- or age-composition, 'size' for generalized size composition, or 'con' for conditional age-at-length data.}
 
 \item{seas}{string indicating how to treat data from multiple seasons
 'comb' - combine seasonal data for each year and plot against Yr

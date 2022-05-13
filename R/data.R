@@ -398,3 +398,21 @@
 #' @author R. Methot
 #'
 "retroSimple"
+
+
+#' MCMC output for simulated Simple Stock Synthesis model.
+#'
+#' MCMC output read by \code{\link[r4ss]{SSgetMCMC}()}
+#'
+#' @docType data
+#'
+#' @format Large dataframe of MCMC parameter estimates with nrow = number of values and ncol = number of parameters
+#' \describe{
+#'  \item{mcmcSimple}{mcmcSimple}
+#' }
+#'
+#' @source MCMC evaluated with Stock Synthesis
+#'
+#' @author R. Methot,
+#'
+"mcmcSimple"
