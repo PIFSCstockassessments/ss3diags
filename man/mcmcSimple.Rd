@@ -17,7 +17,7 @@ MCMC evaluated with Stock Synthesis
 mcmcSimple
 }
 \description{
-MCMC output read by \code{\link[r4ss]{SSreadMCMC}()}
+MCMC output read by \code{\link[r4ss]{SSgetMCMC}()}
 }
 \author{
 R. Methot,
