@@ -1,6 +1,6 @@
 Package: ss3diags
 Title: Stock Synthesis Model Diagnostics for Intergated Stock Assessments
-Version: 2.0.2
+Version: 2.0.3
 Authors@R: 
   c(person(given = "Henning",
     family = "Winker",
@@ -35,7 +35,7 @@ Imports:
     reshape2,
     mvtnorm,
     randtests,
-    r4ss,
+    r4ss(>= 1.44.0),
     gplots,
     lifecycle
 Remotes: r4ss/r4ss
@@ -43,7 +43,7 @@ License: EUPL
 Encoding: UTF-8
 LazyData: True
 LazyDataCompression: gzip
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Suggests:
   testthat (>= 3.0.0),
   knitr,
