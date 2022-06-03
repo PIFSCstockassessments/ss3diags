@@ -1,3 +1,8 @@
+# ss3diags 2.0.3
+
+* Changed r4ss dependency to 1.44.0 (CRAN version) and above. 
+* Replaced default R package check workflow with NOAA-fish-tools/ghactions4r's version.
+
 # ss3diags 2.0.2
 
 * Changed r4ss CRAN version (1.36.1) dependency to development version
