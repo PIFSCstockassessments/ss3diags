@@ -1,3 +1,5 @@
+# ss3diags (development version)
+
 # ss3diags 2.0.3
 
 * Changed r4ss dependency to 1.44.0 (CRAN version) and above. 
