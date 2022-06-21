@@ -76,7 +76,7 @@ SSplotKobe <- function(kb, joint = TRUE, year = NULL,
   } else {
     if (posterior[1] == "points") points(kb[["stock"]], kb[["harvest"]], bg = grey(0.8, 0.9), pch = 21)
   }
-  if(showMedian == TRUE){
+  if (showMedian == TRUE) {
     lines(trj[["stock"]], trj[["harvest"]], lwd = 2)
     if (yr.label) {
       showyr <- unique(yr.int * floor(trj[["year"]] / yr.int))
@@ -86,12 +86,12 @@ SSplotKobe <- function(kb, joint = TRUE, year = NULL,
           text(trj[["stock"]][i] - 0.05, trj[["harvest"]][i] - 0.07, as.character(trj[["year"]][i]), cex = 1, col = "dodgerblue3", font = 2)
         }
       }
-    } #end of if(yr.label)
+    } # end of if(yr.label)
     points(median(kb[["stock"]]), median(kb[["harvest"]]), bg = 0, pch = 21, cex = 2, lwd = 2)
     points(trj[["stock"]][1], trj[["harvest"]][1], bg = 0, pch = 21, cex = 1.7, lwd = 2)
   }
 
- 
+
   if (legendruns & joint == F) {
     legend("topright", paste(r), bty = "n", cex = 0.8, pch = 21, pt.bg = r4ss::rich.colors.short(n, 1), col = 1, pt.cex = 1.5)
   }
