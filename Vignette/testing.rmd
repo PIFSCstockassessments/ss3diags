@@ -3,11 +3,15 @@ title: "ss3diags Unit Testing"
 author: "Meg Oshima"
 date: "9/20/2021"
 output: 
-  html_document:
-    theme: simplex  
+  rmarkdown::html_vignette: 
     toc: true
     toc_depth: 4
-    toc_float: true 
+    fig_width: 7
+    fig_height: 5
+vignette: >
+  %\VignetteIndexEntry{ss3diags Unit Testing}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r setup, include=FALSE}
