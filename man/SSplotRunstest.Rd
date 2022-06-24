@@ -70,7 +70,7 @@ by default (TRUE), the option to disable this via FALSE, is unused here.}
 
 \item{indexselect}{Vector of fleet numbers for each model for which to compare}
 
-\item{miny}{minimum abs values of ylim}
+\item{miny}{the absolute value of the min and max value for ylim, default is 1}
 
 \item{pch}{Optional vector of plot character values}
 
