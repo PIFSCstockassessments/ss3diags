@@ -59,50 +59,71 @@ MASE.adj allow passing (MASE&lt;1) if MAE.PE &lt; 0.1 and thus accurate, when ob
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">SSmase</span><span class="op">(</span>
-  <span class="va">retroSummary</span>,
-  quants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cpue"</span>, <span class="st">"len"</span>, <span class="st">"age"</span>, <span class="st">"con"</span><span class="op">)</span>,
-  Season <span class="op">=</span> <span class="st">"default"</span>,
-  models <span class="op">=</span> <span class="st">"all"</span>,
-  endyrvec <span class="op">=</span> <span class="st">"default"</span>,
-  indexselect <span class="op">=</span> <span class="cn">NULL</span>,
-  MAE.base.adj <span class="op">=</span> <span class="fl">0.1</span>,
-  residuals <span class="op">=</span> <span class="cn">FALSE</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>,
-  indexfleets <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SSmase</span><span class="op">(</span></span>
+<span>  <span class="va">retroSummary</span>,</span>
+<span>  quants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cpue"</span>, <span class="st">"len"</span>, <span class="st">"age"</span>, <span class="st">"con"</span><span class="op">)</span>,</span>
+<span>  Season <span class="op">=</span> <span class="st">"default"</span>,</span>
+<span>  models <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  endyrvec <span class="op">=</span> <span class="st">"default"</span>,</span>
+<span>  indexselect <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  MAE.base.adj <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  residuals <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  indexfleets <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>retroSummary</dt>
 <dd><p>raw list of retrospective runs created by r4ss::SSgetoutput(). Depending on the type of data, the function will call r4ss::SSsummarize or ss3diags:SSretroComps to summarize the list.</p></dd>
+
+
 <dt>quants</dt>
 <dd><p>data type, either "cpue" for index data, "len" for length composition data, or "age" for age composition data. Note, if using "age" or "len", SSretroComps() will be used to extract and summarize the composition data first.</p></dd>
+
+
 <dt>Season</dt>
 <dd><p>option to specify Season as an integer of value 1-4 - Default uses first available, i.e. usual Seas = 1</p></dd>
+
+
 <dt>models</dt>
 <dd><p>Optional subset of the models described in
 r4ss function summaryoutput().  Either "all" or a vector of numbers indicating
 columns in summary tables.</p></dd>
+
+
 <dt>endyrvec</dt>
 <dd><p>Optional single year or vector of years representing the
 final year of values to show for each model. By default it is set to the
 ending year specified in each model.</p></dd>
+
+
 <dt>indexselect</dt>
 <dd><p>Vector of fleet numbers for each model for which to compare</p></dd>
+
+
 <dt>MAE.base.adj</dt>
 <dd><p>minimum MASE demoninator (naive predictions) for MASE.adj (default = 0.1)</p></dd>
+
+
 <dt>residuals</dt>
 <dd><p>If true, includes a dataframe in the output of the prediction residuals and naive prediction residuals. Default is FALSE.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Report progress to R GUI?</p></dd>
+
+
 <dt>indexfleets</dt>
 <dd><p>Single value or vector of length n = number of models in summary object of the fleet number(s) for the index to compare.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>MASE and hcxval statistic</p>
+    
+
+<p>MASE and hcxval statistic</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -115,11 +136,11 @@ ending year specified in each model.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># calculate MASE for CPUE indices only for fleets 1 and 2</span></span>
-<span class="r-in"><span class="fu">SSmase</span><span class="op">(</span><span class="va">retro.sma</span>, quant <span class="op">=</span> <span class="st">"cpue"</span>, indexselect <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># calculate MASE for CPUE indices only for fleets 1 and 2</span></span></span>
+<span class="r-in"><span><span class="fu">SSmase</span><span class="op">(</span><span class="va">retro.sma</span>, quant <span class="op">=</span> <span class="st">"cpue"</span>, indexselect <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -134,7 +155,7 @@ ending year specified in each model.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

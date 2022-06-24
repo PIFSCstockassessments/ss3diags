@@ -55,41 +55,58 @@ The main purpose is to create a dataframe of the annual observed and expected me
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">SScompsTA1.8</span><span class="op">(</span>
-  <span class="va">ss3rep</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"len"</span>, <span class="st">"age"</span>, <span class="st">"size"</span>, <span class="st">"con"</span><span class="op">)</span>,
-  fleet <span class="op">=</span> <span class="cn">NULL</span>,
-  seas <span class="op">=</span> <span class="cn">NULL</span>,
-  plotit <span class="op">=</span> <span class="cn">FALSE</span>,
-  maxpanel <span class="op">=</span> <span class="fl">1000</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SScompsTA1.8</span><span class="op">(</span></span>
+<span>  <span class="va">ss3rep</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"len"</span>, <span class="st">"age"</span>, <span class="st">"size"</span>, <span class="st">"con"</span><span class="op">)</span>,</span>
+<span>  fleet <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  seas <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  plotit <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  maxpanel <span class="op">=</span> <span class="fl">1000</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ss3rep</dt>
 <dd><p>Stock Synthesis output as read by r4SS function SS_output</p></dd>
+
+
 <dt>type</dt>
 <dd><p>string of either 'len' (for length composition data), 'size' (for
 generalized size composition data), 'age' (for age composition data),
 or 'con' (for conditional age at length data)</p></dd>
+
+
 <dt>fleet</dt>
 <dd><p>vector of one or more fleet numbers whose data are to
 be analysed simultaneously, if NULL, all fleets will be analysed</p></dd>
+
+
 <dt>seas</dt>
 <dd><p>string indicating how to treat data from multiple seasons
 'comb' - combine seasonal data for each year and plot against Yr
 'sep' - treat season separately, plotting against Yr.S.
 If is.null(seas), it is assumed that there is only one season and option 'comb' is used.</p></dd>
+
+
 <dt>plotit</dt>
 <dd><p>if TRUE, make an illustrative plot like one or more
 panels of Fig. 4 in Francis (2011).</p></dd>
+
+
 <dt>maxpanel</dt>
 <dd><p>maximum number of panels within a plot, default 1000</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>ss_out data.frame of observed, predicted mean length/age and 95<!-- % confidence intervals based on stage 1 and stage 2 weighting -->runs_dat data.frame of observed and predicted mean length or age for each year/fleet.</p>
+    
+
+<p>ss_out data.frame of observed, predicted mean length/age and 95<!-- % confidence intervals based on stage 1 and stage 2 weighting --></p>
+
+
+
+<p>runs_dat data.frame of observed and predicted mean length or age for each year/fleet.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -116,7 +133,7 @@ Fish. Res. &lt;http://dx.doi.org/10.1016/j.fishres.2015.12.006</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

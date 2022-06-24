@@ -53,52 +53,77 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">SSdiagsMCMC</span><span class="op">(</span>
-  <span class="va">mcmc</span>,
-  <span class="va">ss3rep</span>,
-  Fref <span class="op">=</span> <span class="cn">NULL</span>,
-  years <span class="op">=</span> <span class="cn">NULL</span>,
-  run <span class="op">=</span> <span class="st">"MCMC"</span>,
-  thin <span class="op">=</span> <span class="fl">1</span>,
-  plot <span class="op">=</span> <span class="cn">TRUE</span>,
-  addprj <span class="op">=</span> <span class="cn">FALSE</span>,
-  ymax <span class="op">=</span> <span class="cn">NULL</span>,
-  xmax <span class="op">=</span> <span class="cn">NULL</span>,
-  legendcex <span class="op">=</span> <span class="fl">1</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SSdiagsMCMC</span><span class="op">(</span></span>
+<span>  <span class="va">mcmc</span>,</span>
+<span>  <span class="va">ss3rep</span>,</span>
+<span>  Fref <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  years <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  run <span class="op">=</span> <span class="st">"MCMC"</span>,</span>
+<span>  thin <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  addprj <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ymax <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xmax <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  legendcex <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>mcmc</dt>
 <dd><p>file path for folder with the derived_posteriors.sso file</p></dd>
+
+
 <dt>ss3rep</dt>
 <dd><p>from r4ss::SS_output</p></dd>
+
+
 <dt>Fref</dt>
 <dd><p>Choice of Fratio c("MSY","Btgt), correponding to F_MSY and F_Btgt</p></dd>
+
+
 <dt>years</dt>
 <dd><p>single year or vector of years for mvln</p></dd>
+
+
 <dt>run</dt>
 <dd><p>qualifier for model run</p></dd>
+
+
 <dt>thin</dt>
 <dd><p>option to use additional thinning</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>option to show plot</p></dd>
+
+
 <dt>addprj</dt>
 <dd><p>include forecast years</p></dd>
+
+
 <dt>ymax</dt>
 <dd><p>ylim maximum</p></dd>
+
+
 <dt>xmax</dt>
 <dd><p>xlim maximum</p></dd>
+
+
 <dt>legendcex</dt>
 <dd><p>Allows to adjust legend cex</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Report progress to R GUI?</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>output list maximum likelihood estimates and the MCMC posterier distributions of the Kobe values and a Kobe plot</p>
+    
+
+<p>output list maximum likelihood estimates and the MCMC posterier distributions of the Kobe values and a Kobe plot</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -121,7 +146,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

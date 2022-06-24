@@ -53,170 +53,267 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">SSplotEnsemble</span><span class="op">(</span>
-  <span class="va">kb</span>,
-  subplots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stock"</span>, <span class="st">"harvest"</span>, <span class="st">"SSB"</span>, <span class="st">"F"</span>, <span class="st">"Recr"</span>, <span class="st">"Catch"</span><span class="op">)</span>,
-  models <span class="op">=</span> <span class="st">"all"</span>,
-  quantiles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span>,
-  ylabs <span class="op">=</span> <span class="cn">NULL</span>,
-  endyrvec <span class="op">=</span> <span class="st">"default"</span>,
-  plot <span class="op">=</span> <span class="cn">TRUE</span>,
-  print <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,
-  print_plot <span class="op">=</span> <span class="cn">FALSE</span>,
-  png <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,
-  use_png <span class="op">=</span> <span class="va">print_plot</span>,
-  pdf <span class="op">=</span> <span class="cn">FALSE</span>,
-  use_pdf <span class="op">=</span> <span class="cn">FALSE</span>,
-  col <span class="op">=</span> <span class="cn">NULL</span>,
-  pch <span class="op">=</span> <span class="cn">NULL</span>,
-  lty <span class="op">=</span> <span class="fl">1</span>,
-  lwd <span class="op">=</span> <span class="fl">2</span>,
-  tickEndYr <span class="op">=</span> <span class="cn">FALSE</span>,
-  xlim <span class="op">=</span> <span class="cn">NULL</span>,
-  ylimAdj <span class="op">=</span> <span class="fl">1.05</span>,
-  xaxs <span class="op">=</span> <span class="st">"i"</span>,
-  yaxs <span class="op">=</span> <span class="st">"i"</span>,
-  xylabs <span class="op">=</span> <span class="cn">TRUE</span>,
-  type <span class="op">=</span> <span class="st">"l"</span>,
-  uncertainty <span class="op">=</span> <span class="cn">TRUE</span>,
-  legend <span class="op">=</span> <span class="cn">TRUE</span>,
-  legendlabels <span class="op">=</span> <span class="st">"default"</span>,
-  legendloc <span class="op">=</span> <span class="st">"topright"</span>,
-  legendorder <span class="op">=</span> <span class="st">"default"</span>,
-  legendncol <span class="op">=</span> <span class="fl">1</span>,
-  legendcex <span class="op">=</span> <span class="fl">1</span>,
-  legendsp <span class="op">=</span> <span class="fl">0.9</span>,
-  pwidth <span class="op">=</span> <span class="fl">6.5</span>,
-  pheight <span class="op">=</span> <span class="fl">5</span>,
-  punits <span class="op">=</span> <span class="st">"in"</span>,
-  res <span class="op">=</span> <span class="fl">300</span>,
-  ptsize <span class="op">=</span> <span class="fl">10</span>,
-  cex.main <span class="op">=</span> <span class="fl">1</span>,
-  plotdir <span class="op">=</span> <span class="cn">NULL</span>,
-  filenameprefix <span class="op">=</span> <span class="st">""</span>,
-  par <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.1</span><span class="op">)</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  shadealpha <span class="op">=</span> <span class="fl">0.3</span>,
-  new <span class="op">=</span> <span class="cn">TRUE</span>,
-  add <span class="op">=</span> <span class="cn">FALSE</span>,
-  mcmcVec <span class="op">=</span> <span class="cn">FALSE</span>,
-  indexQlabel <span class="op">=</span> <span class="cn">TRUE</span>,
-  indexQdigits <span class="op">=</span> <span class="fl">4</span>,
-  legendindex <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SSplotEnsemble</span><span class="op">(</span></span>
+<span>  <span class="va">kb</span>,</span>
+<span>  subplots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stock"</span>, <span class="st">"harvest"</span>, <span class="st">"SSB"</span>, <span class="st">"F"</span>, <span class="st">"Recr"</span>, <span class="st">"Catch"</span><span class="op">)</span>,</span>
+<span>  models <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  quantiles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  ylabs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  endyrvec <span class="op">=</span> <span class="st">"default"</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  print <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  print_plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  png <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  use_png <span class="op">=</span> <span class="va">print_plot</span>,</span>
+<span>  pdf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  use_pdf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pch <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lty <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  lwd <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  tickEndYr <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ylimAdj <span class="op">=</span> <span class="fl">1.05</span>,</span>
+<span>  xaxs <span class="op">=</span> <span class="st">"i"</span>,</span>
+<span>  yaxs <span class="op">=</span> <span class="st">"i"</span>,</span>
+<span>  xylabs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  uncertainty <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  legendlabels <span class="op">=</span> <span class="st">"default"</span>,</span>
+<span>  legendloc <span class="op">=</span> <span class="st">"topright"</span>,</span>
+<span>  legendorder <span class="op">=</span> <span class="st">"default"</span>,</span>
+<span>  legendncol <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  legendcex <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  legendsp <span class="op">=</span> <span class="fl">0.9</span>,</span>
+<span>  pwidth <span class="op">=</span> <span class="fl">6.5</span>,</span>
+<span>  pheight <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  punits <span class="op">=</span> <span class="st">"in"</span>,</span>
+<span>  res <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>  ptsize <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  cex.main <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  plotdir <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filenameprefix <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  par <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.1</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  shadealpha <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>  new <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  mcmcVec <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  indexQlabel <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  indexQdigits <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  legendindex <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>kb</dt>
 <dd><p>SSdeltaMVLN $kb type output</p></dd>
+
+
 <dt>subplots</dt>
 <dd><p>option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"</p></dd>
+
+
 <dt>models</dt>
 <dd><p>option to manually subset the models in kb[["run"]]</p></dd>
+
+
 <dt>quantiles</dt>
 <dd><p>quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))</p></dd>
+
+
 <dt>ylabs</dt>
 <dd><p>yaxis labels for quants
 final year of values to show for each model. By default it is set to the</p></dd>
+
+
 <dt>endyrvec</dt>
 <dd><p>ending year specified in each model.</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>Deprecated. Plots (and subplots) are drawn to the active plot device
 by default (TRUE), and the option to disable this, via FALSE, is unused.</p></dd>
+
+
 <dt>print</dt>
 <dd><p>Deprecated. Please use 'print_plot'.</p></dd>
+
+
 <dt>print_plot</dt>
 <dd><p>print to PNG files?</p></dd>
+
+
 <dt>png</dt>
 <dd><p>Deprecated. Please use 'use_png'.</p></dd>
+
+
 <dt>use_png</dt>
 <dd><p>Draw plots in PNG format</p></dd>
+
+
 <dt>pdf</dt>
 <dd><p>Deprecated. Please use 'use_pdf'.</p></dd>
+
+
 <dt>use_pdf</dt>
 <dd><p>option for pdf plots (not tested for TRUE)</p></dd>
+
+
 <dt>col</dt>
 <dd><p>Optional vector of colors to be used for lines. Input NULL</p></dd>
+
+
 <dt>pch</dt>
 <dd><p>Optional vector of plot character values</p></dd>
+
+
 <dt>lty</dt>
 <dd><p>Optional vector of line types</p></dd>
+
+
 <dt>lwd</dt>
 <dd><p>Optional vector of line widths</p></dd>
+
+
 <dt>tickEndYr</dt>
 <dd><p>TRUE/FALSE switch to turn on/off extra axis mark at final
 year in timeseries plots.</p></dd>
+
+
 <dt>xlim</dt>
 <dd><p>Optional, years to use for x-axis. Default NULL uses all years available.</p></dd>
+
+
 <dt>ylimAdj</dt>
 <dd><p>Multiplier for ylim parameter. Allows additional white space</p></dd>
+
+
 <dt>xaxs</dt>
 <dd><p>Choice of xaxs parameter (see ?par for more info)</p></dd>
+
+
 <dt>yaxs</dt>
 <dd><p>Choice of yaxs parameter (see ?par for more info)</p></dd>
+
+
 <dt>xylabs</dt>
 <dd><p>TRUE or FALSE, include x- and y-axis labels. Defaults to TRUE</p></dd>
+
+
 <dt>type</dt>
 <dd><p>Type parameter passed to points (default 'o' overplots points on
 top of lines)</p></dd>
+
+
 <dt>uncertainty</dt>
 <dd><p>TRUE/FALSE include uncertainty intervals around SSB or F estimated time series. Defaults to TRUE.</p></dd>
+
+
 <dt>legend</dt>
 <dd><p>Add a legend to plot. TRUE by default.</p></dd>
+
+
 <dt>legendlabels</dt>
 <dd><p>Optional vector of labels to include in legend.</p></dd>
+
+
 <dt>legendloc</dt>
 <dd><p>Location of legend. Either a string like "topleft" or a vector
 of two numeric values representing the fraction of the maximum in the x and y
 dimensions, respectively. See ?legend for more info on the string options.</p></dd>
+
+
 <dt>legendorder</dt>
 <dd><p>Optional vector of model numbers that can be used to have
 the legend display the model names in an order that is different than that
 which is represented in the summary input object.</p></dd>
+
+
 <dt>legendncol</dt>
 <dd><p>Number of columns for the legend.</p></dd>
+
+
 <dt>legendcex</dt>
 <dd><p>Allows to adjust legend cex</p></dd>
+
+
 <dt>legendsp</dt>
 <dd><p>Space between legend labels</p></dd>
+
+
 <dt>pwidth</dt>
 <dd><p>Width of plot</p></dd>
+
+
 <dt>pheight</dt>
 <dd><p>Height of plot</p></dd>
+
+
 <dt>punits</dt>
 <dd><p>Units for PNG file</p></dd>
+
+
 <dt>res</dt>
 <dd><p>Resolution for PNG file</p></dd>
+
+
 <dt>ptsize</dt>
 <dd><p>Point size for PNG file</p></dd>
+
+
 <dt>cex.main</dt>
 <dd><p>Character expansion for plot titles</p></dd>
+
+
 <dt>plotdir</dt>
 <dd><p>Directory where PNG or PDF files will be written. By default
 it will be the directory where the model was run.</p></dd>
+
+
 <dt>filenameprefix</dt>
 <dd><p>Additional text to append to PNG or PDF file names.
 It will be separated from default name by an underscore.</p></dd>
+
+
 <dt>par</dt>
 <dd><p>list of graphics parameter values passed to par() function</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Report progress to R GUI?</p></dd>
+
+
 <dt>shadealpha</dt>
 <dd><p>Transparency adjustment used to make uncertainty regions, default is 0.3</p></dd>
+
+
 <dt>new</dt>
 <dd><p>Deprecated. New plot windows are created by default (TRUE), and the
 option to disable this, via FALSE, is unused.</p></dd>
+
+
 <dt>add</dt>
 <dd><p>suppresses par() to create multiplot figs</p></dd>
+
+
 <dt>mcmcVec</dt>
 <dd><p>mcmc vector TODO TODO. Default is FALSE</p></dd>
+
+
 <dt>indexQlabel</dt>
 <dd><p>TRUE/FALSE include labels for indices. Default is TRUE (currently not used)</p></dd>
+
+
 <dt>indexQdigits</dt>
 <dd><p>Number of significant digits for catchability in legend. Default is 4</p></dd>
+
+
 <dt>legendindex</dt>
 <dd><p>Allows to add legend for selected indices (plots)</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -225,12 +322,12 @@ option to disable this, via FALSE, is unused.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">mvln</span> <span class="op">&lt;-</span> <span class="fu"><a href="SSdeltaMVLN.html">SSdeltaMVLN</a></span><span class="op">(</span><span class="va">simple</span>, run <span class="op">=</span> <span class="st">"Simple"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">sspar</span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>, plot.cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">SSplotEnsemble</span><span class="op">(</span><span class="va">mvln</span><span class="op">[[</span><span class="st">"kb"</span><span class="op">]</span><span class="op">]</span>, ylabs <span class="op">=</span> <span class="va">mvln</span><span class="op">[[</span><span class="st">"labels"</span><span class="op">]</span><span class="op">]</span>, add <span class="op">=</span> <span class="cn">T</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">mvln</span> <span class="op">&lt;-</span> <span class="fu"><a href="SSdeltaMVLN.html">SSdeltaMVLN</a></span><span class="op">(</span><span class="va">simple</span>, run <span class="op">=</span> <span class="st">"Simple"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">sspar</span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>, plot.cex <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">SSplotEnsemble</span><span class="op">(</span><span class="va">mvln</span><span class="op">[[</span><span class="st">"kb"</span><span class="op">]</span><span class="op">]</span>, ylabs <span class="op">=</span> <span class="va">mvln</span><span class="op">[[</span><span class="st">"labels"</span><span class="op">]</span><span class="op">]</span>, add <span class="op">=</span> <span class="cn">T</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -245,7 +342,7 @@ option to disable this, via FALSE, is unused.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

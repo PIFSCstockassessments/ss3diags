@@ -53,64 +53,98 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">SSplotKobe</span><span class="op">(</span>
-  <span class="va">kb</span>,
-  joint <span class="op">=</span> <span class="cn">TRUE</span>,
-  year <span class="op">=</span> <span class="cn">NULL</span>,
-  posterior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"points"</span>, <span class="st">"kernel"</span><span class="op">)</span>,
-  xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">SSB</span><span class="op">/</span><span class="va">SSB</span><span class="op">[</span><span class="va">MSY</span><span class="op">]</span><span class="op">)</span>,
-  ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="cn">F</span><span class="op">/</span><span class="cn">F</span><span class="op">[</span><span class="va">MSY</span><span class="op">]</span><span class="op">)</span>,
-  ylim <span class="op">=</span> <span class="cn">NULL</span>,
-  xlim <span class="op">=</span> <span class="cn">NULL</span>,
-  fill <span class="op">=</span> <span class="cn">TRUE</span>,
-  legend <span class="op">=</span> <span class="cn">TRUE</span>,
-  legendpos <span class="op">=</span> <span class="st">"right"</span>,
-  legendcex <span class="op">=</span> <span class="fl">0.7</span>,
-  legendruns <span class="op">=</span> <span class="cn">TRUE</span>,
-  yr.label <span class="op">=</span> <span class="cn">TRUE</span>,
-  yr.int <span class="op">=</span> <span class="fl">5</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SSplotKobe</span><span class="op">(</span></span>
+<span>  <span class="va">kb</span>,</span>
+<span>  joint <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  year <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  posterior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"points"</span>, <span class="st">"kernel"</span><span class="op">)</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">SSB</span><span class="op">/</span><span class="va">SSB</span><span class="op">[</span><span class="va">MSY</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="cn">F</span><span class="op">/</span><span class="cn">F</span><span class="op">[</span><span class="va">MSY</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fill <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  showMedian <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  legendpos <span class="op">=</span> <span class="st">"right"</span>,</span>
+<span>  legendcex <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  legendruns <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  yr.label <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  yr.int <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>kb</dt>
 <dd><p>output from SSdeltaMVLN()$kb</p></dd>
+
+
 <dt>joint</dt>
 <dd><p>option FALSE shows individual runs</p></dd>
+
+
 <dt>year</dt>
 <dd><p>option to choose year for kobe, last year is default</p></dd>
+
+
 <dt>posterior</dt>
 <dd><p>visualization of posterior c("points","kernel")</p></dd>
+
+
 <dt>xlab</dt>
 <dd><p>graphic parameter</p></dd>
+
+
 <dt>ylab</dt>
 <dd><p>graphic parameter</p></dd>
+
+
 <dt>ylim</dt>
 <dd><p>graphic parameter</p></dd>
+
+
 <dt>xlim</dt>
 <dd><p>graphic parameter</p></dd>
+
+
 <dt>fill</dt>
 <dd><p>shows color-coded quadrants</p></dd>
+
+
 <dt>legend</dt>
 <dd><p>option for legend. TRUE by default.</p></dd>
+
+
 <dt>legendpos</dt>
 <dd><p>legend position</p></dd>
+
+
 <dt>legendcex</dt>
 <dd><p>legend size</p></dd>
+
+
 <dt>legendruns</dt>
 <dd><p>show legend for run labels</p></dd>
+
+
 <dt>yr.label</dt>
 <dd><p>show year along trajectory</p></dd>
+
+
 <dt>yr.int</dt>
 <dd><p>year intervals along trajectory</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Output to R console. Default is TRUE</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Kobe Quadrant percentages</p>
+    
+
+<p>Kobe Quadrant percentages</p>
     </div>
 
   </div>
@@ -125,7 +159,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

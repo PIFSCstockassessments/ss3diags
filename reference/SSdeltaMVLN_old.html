@@ -53,58 +53,87 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">SSdeltaMVLN_old</span><span class="op">(</span>
-  <span class="va">ss3rep</span>,
-  status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Bratio"</span>, <span class="st">"F"</span><span class="op">)</span>,
-  quants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SSB"</span>, <span class="st">"Recr"</span><span class="op">)</span>,
-  Fref <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MSY"</span>, <span class="st">"Ftrg"</span><span class="op">)</span>,
-  years <span class="op">=</span> <span class="cn">NULL</span>,
-  mc <span class="op">=</span> <span class="fl">5000</span>,
-  weight <span class="op">=</span> <span class="fl">1</span>,
-  run <span class="op">=</span> <span class="st">"MVLN"</span>,
-  plot <span class="op">=</span> <span class="cn">TRUE</span>,
-  addtrj <span class="op">=</span> <span class="cn">TRUE</span>,
-  ymax <span class="op">=</span> <span class="cn">NULL</span>,
-  xmax <span class="op">=</span> <span class="cn">NULL</span>,
-  legendcex <span class="op">=</span> <span class="fl">1</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SSdeltaMVLN_old</span><span class="op">(</span></span>
+<span>  <span class="va">ss3rep</span>,</span>
+<span>  status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Bratio"</span>, <span class="st">"F"</span><span class="op">)</span>,</span>
+<span>  quants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SSB"</span>, <span class="st">"Recr"</span><span class="op">)</span>,</span>
+<span>  Fref <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MSY"</span>, <span class="st">"Ftrg"</span><span class="op">)</span>,</span>
+<span>  years <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mc <span class="op">=</span> <span class="fl">5000</span>,</span>
+<span>  weight <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  run <span class="op">=</span> <span class="st">"MVLN"</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  addtrj <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ymax <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xmax <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  legendcex <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ss3rep</dt>
 <dd><p>from r4ss::SSgetoutput()$replist1</p></dd>
+
+
 <dt>status</dt>
 <dd><p>covarying stock status quantaties to extract from Hessian</p></dd>
+
+
 <dt>quants</dt>
 <dd><p>additional stock quantaties to extract from Hessian</p></dd>
+
+
 <dt>Fref</dt>
 <dd><p>Choice of reference point for stock SSB/XFref=c("MSY","Ftrg"),only if F_report_basis: 0 or 3</p></dd>
+
+
 <dt>years</dt>
 <dd><p>single year or vector of years for mvln</p></dd>
+
+
 <dt>mc</dt>
 <dd><p>number of monte-carlo simulations</p></dd>
+
+
 <dt>weight</dt>
 <dd><p>weighting option for model ensembles weight*mc</p></dd>
+
+
 <dt>run</dt>
 <dd><p>qualifier for model run</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>option to show plot</p></dd>
+
+
 <dt>addtrj</dt>
 <dd><p>TRUE/FALSE add trajectory of years. Default is TRUE</p></dd>
+
+
 <dt>ymax</dt>
 <dd><p>ylim maximum</p></dd>
+
+
 <dt>xmax</dt>
 <dd><p>xlim maximum</p></dd>
+
+
 <dt>legendcex</dt>
 <dd><p>Allows to adjust legend cex</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Report progress to R GUI?</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>output list of kobe objects and mle's</p>
+    
+
+<p>output list of kobe objects and mle's</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -123,7 +152,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
