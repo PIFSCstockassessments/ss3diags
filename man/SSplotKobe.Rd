@@ -14,6 +14,7 @@ SSplotKobe(
   ylim = NULL,
   xlim = NULL,
   fill = TRUE,
+  showMedian = TRUE,
   legend = TRUE,
   legendpos = "right",
   legendcex = 0.7,
