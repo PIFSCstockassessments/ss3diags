@@ -71,6 +71,7 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 #' @param use_png Draw plots in PNG format
 #' @param pdf PDF plots. Deprecated. Please use use_pdf.
 #' @param use_pdf option for pdf plots
+#' @param miny the absolute value of the min and max value for ylim, default is 1
 #' @param pch Optional vector of plot character values
 #' @param lty Optional vector of line types
 #' @param lwd Optional vector of line widths
