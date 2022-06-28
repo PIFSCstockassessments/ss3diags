@@ -11,6 +11,7 @@
 #' @param ylim graphic parameter
 #' @param xlim graphic parameter
 #' @param fill shows color-coded quadrants
+#' @param showMedian option for median trajectory. TRUE by default
 #' @param legend option for legend. TRUE by default.
 #' @param legendpos legend position
 #' @param legendcex legend size

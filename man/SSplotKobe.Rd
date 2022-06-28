@@ -43,6 +43,8 @@ SSplotKobe(
 
 \item{fill}{shows color-coded quadrants}
 
+\item{showMedian}{option for median trajectory. TRUE by default}
+
 \item{legend}{option for legend. TRUE by default.}
 
 \item{legendpos}{legend position}
