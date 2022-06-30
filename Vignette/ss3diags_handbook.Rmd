@@ -7,16 +7,16 @@ author:
 - Laurence Kell (Sea++)
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  pdf_document:
-    number_sections: yes
-    toc: yes
-    keep_tex: no
-  html_document:
+  rmarkdown::html_vignette:
     toc: yes
     toc_depth: 2
     number_sections: true
-vignette: |
-  %\VignetteIndexEntry{ss3daigs Vignetted} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
+    fig_width: 7
+    fig_height: 5
+vignette: >
+  %\VignetteIndexEntry{User Guidelines for Advanced Model Diagnostics with ss3diags} 
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown} 
 ---
 
 ```{r wrap-hook, echo = FALSE, warning=FALSE}

@@ -1,7 +1,14 @@
+# ss3diags (development version)
+
 # ss3diags 2.0.3
 
 * Changed r4ss dependency to 1.44.0 (CRAN version) and above. 
 * Replaced default R CMD CHECK workflow with NOAA-fish-tools/ghactions4r's version.
+* Fixed Ensemble Quantile Shading Issues (#4)
+* Replaced the example datasets in the ss3diags cookbook, and the handbook with the current "simple" ensemble model.
+* Fixup minor code documentation formatting issues.
+* Implemented NOAA-fish-tools/ghactions4r integrated code styler and documentation for pull requests.
+  * SSmase and SSplotHcxval: Fixed up code styler's dollar subset conversion issues. example:`message('x$name is 1,2,3,4')`
 
 # ss3diags 2.0.2
 
