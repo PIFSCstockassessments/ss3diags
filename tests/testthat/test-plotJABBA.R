@@ -23,7 +23,7 @@ test_that("file of simple_len_jabbaresiduals plot exists", {
   SSplotJABBAres(simple,
     png = TRUE,
     print = T,
-    subplots = "cpue",
+    subplots = "len",
     # indexselect = 2,
     plotdir = path,
     filenameprefix = "simple_len2_"

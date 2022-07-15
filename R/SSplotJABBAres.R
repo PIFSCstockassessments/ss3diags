@@ -168,9 +168,6 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
   ylabel <- datatypes[which(c("cpue", "len", "age", "con") %in% subplots)]
   
   #log <- FALSE # (no option to plot on log scale) #removed this line, not sure why it is necessary - MO 7/14/22
-  if (is.null(legendindex)) legendindex <- series
-  if (!legend) legendindex <- 10000
-
   if (use_png) print_plot <- TRUE
   if (use_png & is.null(plotdir)) {
     stop("to print PNG files, you must supply a directory as 'plotdir'")
@@ -197,7 +194,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
   }
 
  
-  resids_list <- SSrmse(ss3rep, quants = subplots)
+  resids_list <- SSrmse(ss3rep, quants = subplots, seas, indexselect)
   #-----------------
   # start plot
   #----------------
@@ -221,6 +218,9 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
       "Residuals"
     ) # 2
 
+    if (is.null(legendindex)) legendindex <- series
+    if (!legend) legendindex <- 10000
+    
     # open new window if requested
     if (plot & use_png == FALSE) {
       if (!add) dev.new(width = pwidth, height = pheight, pointsize = ptsize, record = TRUE)

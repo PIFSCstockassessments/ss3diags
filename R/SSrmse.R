@@ -3,13 +3,18 @@
 #' 
 #' @param ss3rep output from `SS_output()`
 #' @param quants the dataset to calculate RMSE for. "cpue" for index of abundance, "len" for length comp, "age" for age composition, and "con" for conditional age-at-length. 
+#' @param seas string indicating how to treat data from multiple seasons
+#' 'comb' - combine seasonal data for each year and plot against Yr
+#' 'sep' - treat season separately, plotting against Yr.S.
+#' If is.null(seas), it is assumed that there is only one season and option 'comb' is used.
+#' @param indexselect Vector of fleet numbers for each model for which to compare
 #' @return returns a list that includes the RMSE table output (by fleet and combined) and the dataframe of residuals which can be used for creating the `SSplotJABBAres()` plot
 #' @importFrom magrittr "%>%"
 #' 
 #' @export
 
 
-SSrmse <- function(ss3rep, quants = c("cpue", "len", "age", "con")){
+SSrmse <- function(ss3rep, quants = c("cpue", "len", "age", "con"), seas = seas, indexselect = indexselect){
   
   if(length(quants) > 1) 
     warning("RMSE can only be calculated for one object at a time, calculating RMSE for ", quants[1], " only." )
