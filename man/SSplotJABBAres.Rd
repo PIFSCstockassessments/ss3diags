@@ -9,11 +9,11 @@ SSplotJABBAres(
   subplots = c("cpue", "len", "age", "size", "con")[1],
   seas = NULL,
   plot = TRUE,
-  print = deprecated(),
+  print = lifecycle::deprecated(),
   print_plot = FALSE,
-  png = deprecated(),
+  png = lifecycle::deprecated(),
   use_png = print_plot,
-  pdf = deprecated(),
+  pdf = lifecycle::deprecated(),
   use_pdf = FALSE,
   indexselect = NULL,
   miny = 3,
@@ -23,6 +23,7 @@ SSplotJABBAres(
   lwd = 2,
   tickEndYr = TRUE,
   xlim = "default",
+  ylim = "default",
   ylimAdj = 1.1,
   xaxs = "i",
   yaxs = "i",
@@ -48,7 +49,7 @@ SSplotJABBAres(
   verbose = TRUE,
   boxcol = grey(0.8, 0.5),
   new = TRUE,
-  add = FALSE
+  add = TRUE
 )
 }
 \arguments{
@@ -93,6 +94,8 @@ year in time series plots.}
 
 \item{xlim}{Optional, values for x-axis range of years to display on plot.
 Default = "default" displays all years of available data. (currently not used)}
+
+\item{ylim}{Optional, min and max values for the ylim to override the "default" value (-0.7, 0.5)}
 
 \item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space}
 

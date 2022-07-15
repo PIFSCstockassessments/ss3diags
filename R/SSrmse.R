@@ -16,7 +16,6 @@ SSrmse <- function(ss3rep, quants = c("cpue", "len", "age", "con")){
   
   quants <- quants[1]
   datatypes <- c("Index", "Mean length", "Mean age", "Conditional Age")
-  ylabel <- datatypes[which(c("cpue", "len", "age", "con") %in% quants)]
   
   if (quants == "cpue") {
     cpue <- ss3rep[["cpue"]]
