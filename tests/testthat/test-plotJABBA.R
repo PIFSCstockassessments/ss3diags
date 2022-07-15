@@ -43,6 +43,6 @@ SSplotJABBAres(simple,
   filenameprefix = "simple_con_"
 )
 
-#   expect_true(file.exists(file.path(path, "simple_con_jabbaresidual.png")))
+  expect_true(file.exists(file.path(path, "simple_con_jabbaresidual.png")))
 #
 # })
