@@ -38,6 +38,7 @@ Imports:
     randtests,
     r4ss(>= 1.44.0),
     gplots,
+    magrittr,
     lifecycle
 Remotes: r4ss/r4ss
 License: EUPL
