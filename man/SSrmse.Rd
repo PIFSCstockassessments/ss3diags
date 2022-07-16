@@ -8,8 +8,8 @@ used for `SSplotJABBAres()`}
 SSrmse(
   ss3rep,
   quants = c("cpue", "len", "age", "con"),
-  seas = seas,
-  indexselect = indexselect
+  seas = NULL,
+  indexselect = NULL
 )
 }
 \arguments{
