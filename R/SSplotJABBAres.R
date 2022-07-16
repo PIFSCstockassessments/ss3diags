@@ -194,7 +194,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
   }
 
  
-  resids_list <- SSrmse(ss3rep, quants = subplots, seas, indexselect)
+  resids_list <- SSrmse(ss3rep, quants = subplots, seas = seas, indexselect = indexselect)
   #-----------------
   # start plot
   #----------------

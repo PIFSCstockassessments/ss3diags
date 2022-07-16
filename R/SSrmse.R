@@ -14,7 +14,7 @@
 #' @export
 
 
-SSrmse <- function(ss3rep, quants = c("cpue", "len", "age", "con"), seas = seas, indexselect = indexselect){
+SSrmse <- function(ss3rep, quants = c("cpue", "len", "age", "con"), seas = NULL, indexselect = NULL){
   
   if(length(quants) > 1) 
     warning("RMSE can only be calculated for one object at a time, calculating RMSE for ", quants[1], " only." )
