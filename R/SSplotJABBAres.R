@@ -68,7 +68,7 @@
 #'
 #' @importFrom grDevices grey
 #' @importFrom graphics boxplot
-#' @importFrom stats predict loess runif
+#' @importFrom stats predict loess runif residuals
 #' @importFrom lifecycle deprecated
 #'
 #' @export

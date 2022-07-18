@@ -10,6 +10,7 @@
 #' @param indexselect Vector of fleet numbers for each model for which to compare
 #' @return returns a list that includes the RMSE table output (by fleet and combined) and the dataframe of residuals which can be used for creating the `SSplotJABBAres()` plot
 #' @importFrom magrittr "%>%"
+#' @importFrom stats residuals
 #' 
 #' @export
 
