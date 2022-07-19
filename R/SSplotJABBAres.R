@@ -66,10 +66,13 @@
 #'
 #' @keywords ssplot
 #'
+#'
 #' @importFrom grDevices grey
 #' @importFrom graphics boxplot
 #' @importFrom stats predict loess runif residuals
 #' @importFrom lifecycle deprecated
+#' @importFrom rlang .data
+#' @importFrom dplyr group_by arrange mutate summarise ungroup
 #'
 #' @export
 SSplotJABBAres <- function(ss3rep = ss3diags::simple,
@@ -204,12 +207,12 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
     positions <- runif(nrow(resids_list$residuals), -0.2, 0.2)
     
     Res <- resids_list$residuals %>% 
-      dplyr::group_by(Fleet) %>% 
-      dplyr::arrange(Yr, .by_group = TRUE) %>% 
-      dplyr::ungroup() %>% 
-      dplyr::mutate(xyear = Yr + positions,
-                    xyear = as.factor(xyear),
-                    Yr = as.factor(Yr)) %>% 
+      group_by(.data$Fleet) %>% 
+      arrange(.data$Yr, .by_group = TRUE) %>% 
+      ungroup() %>% 
+      mutate(xyear = .data$Yr + positions,
+                    xyear = as.factor(.data$xyear),
+                    Yr = as.factor(.data$Yr)) %>% 
       as.data.frame()
     series <- 1:length(unique(Res$Fleet))
 
@@ -289,9 +292,9 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
     }
 
     mean.res <-  Res %>% 
-      dplyr::group_by(Yr) %>%
-      dplyr::summarise(mean.res = mean(residuals, na.rm = TRUE)) %>% 
-      dplyr::mutate(Yr = as.numeric(Yr))
+      group_by(.data$Yr) %>%
+      summarise(mean.res = mean(residuals, na.rm = TRUE)) %>% 
+      mutate(Yr = as.numeric(.data$Yr))
     
     mean.res$smooth.res <- predict(loess(mean.res$mean.res ~ mean.res$Yr), data.frame(yr))
     mean.res$Yr <- as.factor(mean.res$Yr)

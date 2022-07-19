@@ -11,6 +11,8 @@
 #' @return returns a list that includes the RMSE table output (by fleet and combined) and the dataframe of residuals which can be used for creating the `SSplotJABBAres()` plot
 #' @importFrom magrittr "%>%"
 #' @importFrom stats residuals
+#' @importFrom dplyr summarise mutate select group_by select rename bind_rows
+#' @importFrom rlang .data
 #' 
 #' @export
 
@@ -65,21 +67,21 @@ SSrmse <- function(ss3rep, quants = c("cpue", "len", "age", "con"), seas = NULL,
     Res <- Res[Res[["Fleet_name"]] %in% iname, ]
   }
   
-  RMSE <- Res %>% dplyr::summarise(RMSE.perc = round(100 * sqrt(mean(residuals^2, na.rm = TRUE)), 1),
+  RMSE <- Res %>% summarise(RMSE.perc = round(100 * sqrt(mean(residuals^2, na.rm = TRUE)), 1),
                                    Nobs = length(!is.na(residuals))) %>% 
-    dplyr::mutate(Fleet = "Combined") %>% 
-    dplyr::select(Fleet, RMSE.perc, Nobs)
+    mutate(Fleet = "Combined") %>% 
+    select(.data$Fleet, .data$RMSE.perc, .data$Nobs)
 
   rmse_table <- Res %>% 
-    dplyr::group_by(Fleet_name) %>% 
-    dplyr::summarise(resi = sum(residuals^2, na.rm = TRUE),
+    group_by(.data$Fleet_name) %>% 
+    summarise(resi = sum(residuals^2, na.rm = TRUE),
                      ni = length(!is.na(residuals))) %>% 
-    dplyr::mutate(rmse = round(100* sqrt(resi/ni), 1)) %>% 
-    dplyr::select(Fleet_name, rmse, ni) %>% 
-    dplyr::rename(Fleet = "Fleet_name",
+    mutate(rmse = round(100* sqrt(.data$resi/.data$ni), 1)) %>% 
+    select(.data$Fleet_name, .data$rmse, .data$ni) %>% 
+    rename(Fleet = "Fleet_name",
            RMSE.perc = "rmse",
            Nobs = "ni") %>% 
-    dplyr::bind_rows(RMSE)
+    bind_rows(RMSE)
   
   output <- list(RMSE = rmse_table, residuals = Res)
     
