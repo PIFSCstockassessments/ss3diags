@@ -119,7 +119,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
                            verbose = TRUE,
                            boxcol = grey(0.8, 0.5),
                            new = TRUE,
-                           add = TRUE) {
+                           add = FALSE) {
 
 
   # Parameter DEPRECATION checks
