@@ -73,6 +73,7 @@
 #' @importFrom lifecycle deprecated
 #' @importFrom rlang .data
 #' @importFrom dplyr group_by arrange mutate summarise ungroup
+#' @importFrom r4ss save_png
 #'
 #' @export
 SSplotJABBAres <- function(ss3rep = ss3diags::simple,
@@ -119,7 +120,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
                            verbose = TRUE,
                            boxcol = grey(0.8, 0.5),
                            new = TRUE,
-                           add = TRUE) {
+                           add = FALSE) {
 
 
   # Parameter DEPRECATION checks
@@ -318,12 +319,14 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
   } # jabba residual plot
   #------------------------------------------------------------
 
-  if (verbose) message("Plotting JABBA residual plot")
+  if (verbose) message("Plotting JABBA residual plot.")
+  if (verbose) message("is plot TRUE? ", plot) 
   if (plot) {
+    if (verbose) message("drawing plot at ", plotdir)
     if (print_plot) {
       # save_png(paste0("jabbaresidual.png", sep = ""))
       plotinfo <- NULL
-      r4ss::save_png(
+      save_png(
         plotinfo = plotinfo,
         file = paste0("jabbaresidual.png", sep = ""),
         plotdir = plotdir,
@@ -338,12 +341,18 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
       rmse <- jabbaresiduals(resids_list)
       dev.off()
     }
-
+    if (verbose) {
+      message("Plot exists: ", 
+              file.exists(file.path(plotdir, paste0(filenameprefix, "jabbaresidual.png")))) 
+    }
+    
     if (!add) (par)
     rmse <- jabbaresiduals(resids_list) # End of Fleet Loop
   }
 
+  
   if (verbose) cat(paste0("RMSE stats by Index:", "\n"))
   return(rmse)
 } # end of SSplotJABBAresids()
 #-----------------------------------------------------------------------------------------
+  

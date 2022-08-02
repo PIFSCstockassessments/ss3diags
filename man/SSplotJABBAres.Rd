@@ -49,7 +49,7 @@ SSplotJABBAres(
   verbose = TRUE,
   boxcol = grey(0.8, 0.5),
   new = TRUE,
-  add = TRUE
+  add = FALSE
 )
 }
 \arguments{
