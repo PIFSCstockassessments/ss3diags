@@ -320,7 +320,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
   #------------------------------------------------------------
 
   if (verbose) message("Plotting JABBA residual plot.")
-  if (verbose) message("is plot TRUE? ", plot) 
+  if (verbose) message("is plot TRUE? ", plot)
   if (plot) {
     if (verbose) message("drawing plot at ", plotdir)
     if (print_plot) {
@@ -342,17 +342,18 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
       dev.off()
     }
     if (verbose) {
-      message("Plot exists: ", 
-              file.exists(file.path(plotdir, paste0(filenameprefix, "jabbaresidual.png")))) 
+      message(
+        "Plot exists: ",
+        file.exists(file.path(plotdir, paste0(filenameprefix, "jabbaresidual.png")))
+      )
     }
-    
+
     if (!add) (par)
     rmse <- jabbaresiduals(resids_list) # End of Fleet Loop
   }
 
-  
+
   if (verbose) cat(paste0("RMSE stats by Index:", "\n"))
   return(rmse)
 } # end of SSplotJABBAresids()
 #-----------------------------------------------------------------------------------------
-  
