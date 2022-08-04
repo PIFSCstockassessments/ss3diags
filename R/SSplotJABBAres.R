@@ -203,12 +203,11 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
   # start plot
   #----------------
   jabbaresiduals <- function(resids_list) {
-    
-    Res <- resids_list[["residuals"]] %>% 
-      dplyr::group_by(.data[["Fleet"]]) %>% 
+    Res <- resids_list[["residuals"]] %>%
+      dplyr::group_by(.data[["Fleet"]]) %>%
       dplyr::arrange(.data[["Yr"]], .by_group = TRUE)
     positions <- runif(nrow(Res), -0.2, 0.2)
-    
+
     series <- 1:length(unique(Res[["Fleet"]]))
 
     labels <- c(
@@ -256,61 +255,71 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
     }
 
     ### make plot of index fits
-    yrange <- ifelse(rep(max(ifelse(abs(Res[["residuals"]]) > miny, 0, Res[["residuals"]]), na.rm = T), 2) > 0.5, 
-                     range(ylimAdj * ifelse(abs(Res[["residuals"]]) > miny, 0, Res[["residuals"]]), na.rm = T), 
-                     range(c(-0.7, 0.5)))
-    
-    if(ylim[1] == "default"){
+    yrange <- ifelse(rep(max(ifelse(abs(Res[["residuals"]]) > miny, 0, Res[["residuals"]]), na.rm = T), 2) > 0.5,
+      range(ylimAdj * ifelse(abs(Res[["residuals"]]) > miny, 0, Res[["residuals"]]), na.rm = T),
+      range(c(-0.7, 0.5))
+    )
+
+    if (ylim[1] == "default") {
       ylim <- c(-max(abs(yrange)), max(abs(yrange)))
     } else {
       ylim <- ylim
     }
 
     if (xlim[1] == "default") xlim <- range(yr)
-   
+
     Res[["residuals"]] <- ifelse(abs(Res[["residuals"]]) > 3, NA, Res[["residuals"]])
-      
+
 
     Resids <- reshape2::dcast(Res, Time ~ Fleet, value.var = "residuals")
-    Resids <- t(Resids[,-1])
-      
-    plot(0, 
-         type = "n", xlim = xlim, ylim = ylim, yaxs = yaxs, 
-         xlab = ifelse(xylabs, "Year", ""), ylab = ifelse(xylabs, ylab, ""), axes = FALSE) 
-    boxplot(as.matrix(Resids), add = TRUE, at = yr, xaxt = "n", 
-            col = grey(0.8,.5), notch = FALSE, outline = F, axes = F)
+    Resids <- t(Resids[, -1])
+
+    plot(0,
+      type = "n", xlim = xlim, ylim = ylim, yaxs = yaxs,
+      xlab = ifelse(xylabs, "Year", ""), ylab = ifelse(xylabs, ylab, ""), axes = FALSE
+    )
+    boxplot(as.matrix(Resids),
+      add = TRUE, at = yr, xaxt = "n",
+      col = grey(0.8, .5), notch = FALSE, outline = F, axes = F
+    )
     abline(h = 0, lty = 2)
-    
-    for(i in 1:n.indices){
-      for(t in 1:n.years){
-        lines(rep((yr + positions[i])[t], 2), c(0, Resids[i,t]), col = col[i])
+
+    for (i in 1:n.indices) {
+      for (t in 1:n.years) {
+        lines(rep((yr + positions[i])[t], 2), c(0, Resids[i, t]), col = col[i])
       }
-      points(yr + positions[i], Resids[i,], col = 1, pch = pch, bg = col[i])
+      points(yr + positions[i], Resids[i, ], col = 1, pch = pch, bg = col[i])
     }
 
-    mean.res <-  Res %>% 
+    mean.res <- Res %>%
       dplyr::group_by(.data[["Yr"]]) %>%
-      dplyr::summarise(mean.res = mean(.data[["residuals"]], na.rm = TRUE)) %>% 
+      dplyr::summarise(mean.res = mean(.data[["residuals"]], na.rm = TRUE)) %>%
       dplyr::mutate(Yr = as.numeric(.data[["Yr"]]))
-    
-    mean.res[["smooth.res"]] <- predict(loess(mean.res[["mean.res"]] ~ mean.res[["Yr"]]), 
-                                        data.frame(unique(Res[["Yr"]])))
-    #mean.res[["Yr"]] <- as.factor(mean.res[["Yr"]])
+
+    mean.res[["smooth.res"]] <- predict(
+      loess(mean.res[["mean.res"]] ~ mean.res[["Yr"]]),
+      data.frame(unique(Res[["Yr"]]))
+    )
+    # mean.res[["Yr"]] <- as.factor(mean.res[["Yr"]])
     lines(mean.res[["Yr"]], mean.res[["smooth.res"]], lwd = 2)
 
-    legend("topright", 
-           c(paste0("RMSE = ", resids_list[["RMSE"]][resids_list[["RMSE"]][["Fleet"]] == "Combined", "RMSE.perc"], "%")), 
-           bty = "n", cex = legendcex + 0.1, y.intersp = 0.2, x.intersp = 0)
-    
-    if (legend) legend(legendloc, legendlabels, bty = "n", col = 1, pt.cex = 1.1, 
-                       cex = legendcex, pch = c(rep(21, n.indices), -1), pt.bg = c(col, 1), 
-                       lwd = c(rep(-1, n.indices), 2))
-    axis(1, at =  mean.res$Yr, labels = unique(Res[["Yr"]])) 
+    legend("topright",
+      c(paste0("RMSE = ", resids_list[["RMSE"]][resids_list[["RMSE"]][["Fleet"]] == "Combined", "RMSE.perc"], "%")),
+      bty = "n", cex = legendcex + 0.1, y.intersp = 0.2, x.intersp = 0
+    )
+
+    if (legend) {
+      legend(legendloc, legendlabels,
+        bty = "n", col = 1, pt.cex = 1.1,
+        cex = legendcex, pch = c(rep(21, n.indices), -1), pt.bg = c(col, 1),
+        lwd = c(rep(-1, n.indices), 2)
+      )
+    }
+    axis(1, at = mean.res[["Yr"]], labels = unique(Res[["Yr"]]))
     if (tickEndYr) axis(1, at = max(floor(yr)))
     axis(2)
     box()
     return(resids_list[["RMSE"]])
-
   } # end jabba residual plot
   #------------------------------------------------------------
 
