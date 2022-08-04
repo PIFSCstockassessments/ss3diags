@@ -9,8 +9,8 @@ dir.create(path, showWarnings = FALSE)
 ## Simple
 test_that("file of simple_cpue_jabbaresiduals plot exists", {
   SSplotJABBAres(simple,
-    png = TRUE,
-    print = T,
+    use_png = TRUE,
+    print_plot = T,
     subplots = "cpue",
     plotdir = path,
     filenameprefix = "simple_cpue"
@@ -21,8 +21,8 @@ test_that("file of simple_cpue_jabbaresiduals plot exists", {
 
 test_that("file of simple_len_jabbaresiduals plot exists", {
   SSplotJABBAres(simple,
-    png = TRUE,
-    print = T,
+    use_png = TRUE,
+    print_plot = T,
     subplots = "len",
     # indexselect = 2,
     plotdir = path,
@@ -36,8 +36,8 @@ test_that("file of simple_len_jabbaresiduals plot exists", {
 test_that("file of simple_con_jabbaresiduals plot exists", {
 #
 SSplotJABBAres(simple,
-  png = TRUE,
-  print = T,
+  use_png = TRUE,
+  print_plot = T,
   subplots = "con",
   plotdir = path,
   filenameprefix = "simple_con_"

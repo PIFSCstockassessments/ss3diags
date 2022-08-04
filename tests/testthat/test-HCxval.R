@@ -13,8 +13,8 @@ test_that("Hindcast plot is created for simple model indices", {
     add = T,
     verbose = F,
     legendcex = 0.7,
-    png = TRUE,
-    print = TRUE,
+    use_png = TRUE,
+    print_plot = TRUE,
     plotdir = path
   )
 
