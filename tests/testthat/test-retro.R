@@ -10,8 +10,8 @@ retrosum.simple <- r4ss::SSsummarize(retroSimple)
 test_that("Retrospective plot is created for SSB (w/ deprecated parameters)", {
   SSplotRetro(retrosum.simple,
     subplots = "SSB",
-    png = TRUE,
-    print = TRUE,
+    use_png = TRUE,
+    print_plot = TRUE,
     plot = TRUE,
     plotdir = path
   )
@@ -23,8 +23,8 @@ test_that("Retrospective plot is created for SSB (w/ deprecated parameters)", {
 test_that("Retrospective plot is created for F (w/ deprecated parameters)", {
   SSplotRetro(retrosum.simple,
     subplots = "F",
-    png = TRUE,
-    print = TRUE,
+    use_png = TRUE,
+    print_plot = TRUE,
     plot = TRUE,
     plotdir = path
   )

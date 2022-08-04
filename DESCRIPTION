@@ -38,13 +38,16 @@ Imports:
     randtests,
     r4ss(>= 1.44.0),
     gplots,
+    magrittr,
+    rlang,
+    dplyr,
     lifecycle
 Remotes: r4ss/r4ss
 License: EUPL
 Encoding: UTF-8
 LazyData: True
 LazyDataCompression: gzip
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Suggests:
   testthat (>= 3.0.0),
   knitr,
