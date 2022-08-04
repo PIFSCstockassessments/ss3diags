@@ -71,13 +71,9 @@
 #' @importFrom graphics boxplot
 #' @importFrom stats predict loess runif residuals
 #' @importFrom lifecycle deprecated
-<<<<<<< HEAD
-#' @importFrom magrittr "%>%"
-=======
 #' @importFrom rlang .data
 #' @importFrom dplyr group_by arrange mutate summarise ungroup
 #' @importFrom r4ss save_png
->>>>>>> aad351b4032455877d3c21955f2fe575738b29e6
 #'
 #' @export
 SSplotJABBAres <- function(ss3rep = ss3diags::simple,
