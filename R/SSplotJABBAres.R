@@ -66,11 +66,18 @@
 #'
 #' @keywords ssplot
 #'
+#'
 #' @importFrom grDevices grey
 #' @importFrom graphics boxplot
-#' @importFrom stats predict loess runif
+#' @importFrom stats predict loess runif residuals
 #' @importFrom lifecycle deprecated
+<<<<<<< HEAD
 #' @importFrom magrittr "%>%"
+=======
+#' @importFrom rlang .data
+#' @importFrom dplyr group_by arrange mutate summarise ungroup
+#' @importFrom r4ss save_png
+>>>>>>> aad351b4032455877d3c21955f2fe575738b29e6
 #'
 #' @export
 SSplotJABBAres <- function(ss3rep = ss3diags::simple,
@@ -167,8 +174,8 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
   subplots <- subplots[1]
   datatypes <- c("Index", "Mean length", "Mean age", "Conditional Age")
   ylabel <- datatypes[which(c("cpue", "len", "age", "con") %in% subplots)]
-  
-  #log <- FALSE # (no option to plot on log scale) #removed this line, not sure why it is necessary - MO 7/14/22
+
+  # log <- FALSE # (no option to plot on log scale) #removed this line, not sure why it is necessary - MO 7/14/22
   if (use_png) print_plot <- TRUE
   if (use_png & is.null(plotdir)) {
     stop("to print PNG files, you must supply a directory as 'plotdir'")
@@ -194,7 +201,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
     par(par)
   }
 
- 
+
   resids_list <- SSrmse(ss3rep, quants = subplots, seas = seas, indexselect = indexselect)
   #-----------------
   # start plot
@@ -215,7 +222,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
 
     if (is.null(legendindex)) legendindex <- series
     if (!legend) legendindex <- 10000
-    
+
     # open new window if requested
     if (plot & use_png == FALSE) {
       if (!add) dev.new(width = pwidth, height = pheight, pointsize = ptsize, record = TRUE)
@@ -232,12 +239,12 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
 
 
     # setup colors, points, and line types
-    n.indices <- length(unique(Res$Fleet))
+    n.indices <- length(unique(Res[["Fleet"]]))
     if (is.null(col) & n.indices > 3) col <- r4ss::rich.colors.short(n.indices + 1)[-1]
     if (is.null(col) & n.indices < 3) col <- r4ss::rich.colors.short(n.indices)
     if (is.null(col) & n.indices == 3) col <- c("blue", "red", "green3")
     # set pch values if no input
-    
+
     # if line stuff is shorter than number of lines, recycle as needed
     if (!is.expression(legendlabels[1]) &&
       legendlabels[1] == "default") {
@@ -259,7 +266,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
     
     if(ylim[1] == "default"){
       ylim <- c(-max(abs(yrange)), max(abs(yrange)))
-    }else{
+    } else {
       ylim <- ylim
     }
 
@@ -311,12 +318,14 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
   } # end jabba residual plot
   #------------------------------------------------------------
 
-  if (verbose) message("Plotting JABBA residual plot")
+  if (verbose) message("Plotting JABBA residual plot.")
+  if (verbose) message("is plot TRUE? ", plot)
   if (plot) {
+    if (verbose) message("drawing plot at ", plotdir)
     if (print_plot) {
       # save_png(paste0("jabbaresidual.png", sep = ""))
       plotinfo <- NULL
-      r4ss::save_png(
+      save_png(
         plotinfo = plotinfo,
         file = paste0("jabbaresidual.png", sep = ""),
         plotdir = plotdir,
@@ -331,15 +340,19 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
       rmse <- jabbaresiduals(resids_list)
       dev.off()
     }
+    if (verbose) {
+      message(
+        "Plot exists: ",
+        file.exists(file.path(plotdir, paste0(filenameprefix, "jabbaresidual.png")))
+      )
+    }
 
     if (!add) (par)
     rmse <- jabbaresiduals(resids_list) # End of Fleet Loop
   }
 
+
   if (verbose) cat(paste0("RMSE stats by Index:", "\n"))
   return(rmse)
 } # end of SSplotJABBAresids()
 #-----------------------------------------------------------------------------------------
-
-
-
