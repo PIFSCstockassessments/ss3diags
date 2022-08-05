@@ -163,4 +163,5 @@ plots residuals for all indices as boxplot (color coded by fleet) with a loess s
 \author{
 Henning Winker (JRC-EC)
 }
+\keyword{rmsetable}
 \keyword{ssplot}

@@ -64,7 +64,7 @@
 #'
 #' @author Henning Winker (JRC-EC)
 #'
-#' @keywords ssplot
+#' @keywords ssplot rmsetable
 #'
 #'
 #' @importFrom grDevices grey

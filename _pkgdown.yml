@@ -6,6 +6,7 @@ reference:
     - has_keyword("diags")
     - has_keyword("ssplot")
     - has_keyword("utils")
+    - has_keyword("rmsetable")
 
 - title: Datasets
   desc: >

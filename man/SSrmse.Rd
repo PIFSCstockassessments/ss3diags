@@ -31,3 +31,4 @@ returns a list that includes the RMSE table output (by fleet and combined) and t
 Function for calculating RMSE
 used for `SSplotJABBAres()`
 }
+\keyword{rmsetable}
