@@ -31,7 +31,7 @@ ending year specified in each model.}
 This function produces the statistics from retrospective analysis (Mohn's rho and forecast bias). To visualize the retrospective forecasts from a Stock Synthesis model, use SSplotRetro().
 }
 \seealso{
-[SSplotRetro()]
+\code{\link[=SSplotRetro]{SSplotRetro()}}
 }
 \author{
 Henning Winker (JRC-EC) and Laurance Kell (Sea++)

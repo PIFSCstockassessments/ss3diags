@@ -51,7 +51,7 @@ output list maximum likelihood estimates and the MCMC posterier distributions of
 A function to generate joint distributions for stock status ratios (SSB/SSBref and F/Fref where ref can be MSY, SSB40, F40, etc.) using MCMC. The function produces a Kobe plot, maximum likelihood estimates and the MVLN Monte-Carlo distributions of the Kobe values which can be input into SSplotEnsemble().
 }
 \seealso{
-[SSdeltaMVLN()], [SSplotEnsemble()], [SSkobe()]
+\code{\link[=SSdeltaMVLN]{SSdeltaMVLN()}}, \code{\link[=SSplotEnsemble]{SSplotEnsemble()}}, \code{\link[=SSplotKobe]{SSplotKobe()}}
 }
 \author{
 Henning Winker (JRC-EC), Massimiliano and Laurence Kell (Sea++)
