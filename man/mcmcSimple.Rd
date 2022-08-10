@@ -7,7 +7,7 @@
 \format{
 Large dataframe of MCMC parameter estimates with nrow = number of values and ncol = number of parameters
 \describe{
- \item{mcmcSimple}{mcmcSimple}
+\item{mcmcSimple}{mcmcSimple}
 }
 }
 \source{
