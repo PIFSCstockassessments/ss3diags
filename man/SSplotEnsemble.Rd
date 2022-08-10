@@ -61,7 +61,7 @@ SSplotEnsemble(
 
 \item{subplots}{option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"}
 
-\item{models}{option to manually subset the models in kb[["run"]]}
+\item{models}{option to manually subset the models in \code{kb[["run"]]}}
 
 \item{quantiles}{quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))}
 

@@ -3,7 +3,7 @@
 \name{SSrmse}
 \alias{SSrmse}
 \title{Function for calculating RMSE
-used for `SSplotJABBAres()`}
+used for \code{SSplotJABBAres()}}
 \usage{
 SSrmse(
   ss3rep,
@@ -13,7 +13,7 @@ SSrmse(
 )
 }
 \arguments{
-\item{ss3rep}{output from `SS_output()`}
+\item{ss3rep}{output from \code{SS_output()}}
 
 \item{quants}{the dataset to calculate RMSE for. "cpue" for index of abundance, "len" for length comp, "age" for age composition, and "con" for conditional age-at-length.}
 
@@ -25,10 +25,10 @@ If is.null(seas), it is assumed that there is only one season and option 'comb' 
 \item{indexselect}{Vector of fleet numbers for each model for which to compare}
 }
 \value{
-returns a list that includes the RMSE table output (by fleet and combined) and the dataframe of residuals which can be used for creating the `SSplotJABBAres()` plot
+returns a list that includes the RMSE table output (by fleet and combined) and the dataframe of residuals which can be used for creating the \code{SSplotJABBAres()} plot
 }
 \description{
 Function for calculating RMSE
-used for `SSplotJABBAres()`
+used for \code{SSplotJABBAres()}
 }
 \keyword{rmsetable}

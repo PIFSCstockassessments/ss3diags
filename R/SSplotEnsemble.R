@@ -4,7 +4,7 @@
 #'
 #' @param kb SSdeltaMVLN $kb type output
 #' @param subplots option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"
-#' @param models option to manually subset the models in kb[["run"]]
+#' @param models option to manually subset the models in `kb[["run"]]`
 #' @param quantiles quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))
 #' @param ylabs yaxis labels for quants
 #' final year of values to show for each model. By default it is set to the
