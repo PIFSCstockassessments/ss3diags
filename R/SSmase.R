@@ -5,7 +5,7 @@
 #' MASE.adj sets the MAE.base to a minimum MAE.base.adj (default=0.1)
 #' MASE.adj allow passing (MASE<1) if MAE.PE < 0.1 and thus accurate, when obs show extremely little variation
 #'
-#' @param retroSummary raw list of retrospective runs created by r4ss::SSgetoutput(). Depending on the type of data, the function will call r4ss::SSsummarize or ss3diags:SSretroComps to summarize the list.
+#' @param retroSummary raw list of retrospective runs created by [r4ss::SSgetoutput()]. Depending on the type of data, the function will call r4ss::SSsummarize or ss3diags:SSretroComps to summarize the list.
 #' @param quants data type, either "cpue" for index data, "len" for length composition data, or "age" for age composition data. Note, if using "age" or "len", SSretroComps() will be used to extract and summarize the composition data first.
 #' @param models Optional subset of the models described in
 #' r4ss function summaryoutput().  Either "all" or a vector of numbers indicating

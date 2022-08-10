@@ -44,7 +44,7 @@ SSreadMCMC <- function(mcmcdir) {
 #' @param verbose Report progress to R GUI?
 #'
 #' @return output list maximum likelihood estimates and the MCMC posterier distributions of the Kobe values and a Kobe plot
-#' @seealso [SSdeltaMVLN()], [SSplotEnsemble()], [SSkobe()]
+#' @seealso [SSdeltaMVLN()], [SSplotEnsemble()], [SSplotKobe()]
 #'
 #' @author Henning Winker (JRC-EC), Massimiliano and Laurence Kell (Sea++)
 #'

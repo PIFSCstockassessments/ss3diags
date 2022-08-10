@@ -18,7 +18,7 @@ SSmase(
 )
 }
 \arguments{
-\item{retroSummary}{raw list of retrospective runs created by r4ss::SSgetoutput(). Depending on the type of data, the function will call r4ss::SSsummarize or ss3diags:SSretroComps to summarize the list.}
+\item{retroSummary}{raw list of retrospective runs created by \code{\link[r4ss:SSgetoutput]{r4ss::SSgetoutput()}}. Depending on the type of data, the function will call r4ss::SSsummarize or ss3diags:SSretroComps to summarize the list.}
 
 \item{quants}{data type, either "cpue" for index data, "len" for length composition data, or "age" for age composition data. Note, if using "age" or "len", SSretroComps() will be used to extract and summarize the composition data first.}
 
@@ -59,7 +59,7 @@ SSmase(retro.sma, quant = "cpue", indexselect = c(1:2))
 
 }
 \seealso{
-[SSretroComps()] [r4ss::SSsummarize()]
+\code{\link[=SSretroComps]{SSretroComps()}} \code{\link[r4ss:SSsummarize]{r4ss::SSsummarize()}}
 }
 \author{
 Henning Winker (JRC-EC) and Laurence Kell (Sea++)

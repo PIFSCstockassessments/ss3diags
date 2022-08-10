@@ -34,7 +34,7 @@ panels of Fig. 4 in Francis (2011).}
 \item{maxpanel}{maximum number of panels within a plot, default 1000}
 }
 \value{
-ss_out data.frame of observed, predicted mean length/age and 95% confidence intervals based on stage 1 and stage 2 weighting
+ss_out data.frame of observed, predicted mean length/age and 95\% confidence intervals based on stage 1 and stage 2 weighting
 
 runs_dat data.frame of observed and predicted mean length or age for each year/fleet.
 }

@@ -13,7 +13,7 @@
 #' @importFrom stats residuals
 #' @importFrom dplyr summarise mutate select group_by select rename bind_rows
 #' @importFrom rlang .data
-#' 
+#'
 #' @keywords rmsetable
 #'
 #' @export
