@@ -1,4 +1,14 @@
-# ss3diags (development version)
+# ss3diags 2.1.0
+
+* RMSE calculations are modularized as a standalone function that can be called independently from `SSplotJABBAres()` as `SSrmse()`. (#50) 
+* Added option to remove median trajectory for `SSplotKobe()` (#3)
+* Added **rlang**, **dplyr**, and **magrittr** dependencies.
+* SSmase and SSplotHcxval: Corrected validation messsage to clarify validation issue and to fix an issue with the code styler. (#33, #35)
+* Added Date field to DESCRIPTION. DESCRIPTION metadata are now used to generate package citations. (#25)
+* Package vingettes formatted to `html_vignette` to reduce file size. Removed redundant PDF and word document versions of *ss3diags_Handbook* vignette.
+* Updated documentation and fixes.
+  * Enabled markdown support for roxygen. 
+  * Enabled Cross-reference links.
 
 # ss3diags 2.0.3
 
