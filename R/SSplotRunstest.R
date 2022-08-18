@@ -100,6 +100,7 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 #' @param new Create new empty plot window (TRUE or FALSE)
 #' @param add suppresses par() to create multiplot figs
 #' @param xlim Optional, values for x-axis range of years to display on plot. Default = "default" displays all years of available data.
+#' @param ylim Optional, values for y-axis range to display on plot. Default = "default" will range from -1 to 1.
 #' @param xylabs TRUE or FALSE, include x- and y-axis labels
 #' @return a dataframe with runs test p-value, if the test has passed or failed, 3x sigma high and low limits, and the type of data used. Rows are for each fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and failed if p-value < 0.5 (residuals are not random)
 #' @author Henning Winker (JRC-EC) and Laurance Kell (Sea++)
@@ -124,6 +125,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
                            lwd = 2,
                            tickEndYr = FALSE,
                            xlim = "default",
+                           ylim = "default",
                            ylimAdj = 1.4,
                            xaxs = "i",
                            yaxs = "i",
@@ -300,7 +302,12 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
     runstest <- ssruns_sig3(x = as.numeric(resid[["residuals"]]), type = "resid", mixing = mixing)
 
     # if no values included in subset, then set ylim based on all values
-    ylim <- c(min(-miny, runstest[["sig3lim"]][1] * ylimAdj), max(miny, runstest[["sig3lim"]][2] * ylimAdj))
+    if (ylim[1] == "default") {
+      ylim <- c(min(-miny, runstest[["sig3lim"]][1] * ylimAdj), max(miny, runstest[["sig3lim"]][2] * ylimAdj))
+    } else {
+      ylim <- ylim * ylimAdj
+    }
+
 
     if (xlim[1] == "default") xlim <- c(floor(min(ti, yr) - .1), ceiling(max(ti, yr) + 0.1))
 
