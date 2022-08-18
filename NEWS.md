@@ -1,6 +1,7 @@
 # ss3diags 2.1.0
 
 * RMSE calculations are modularized as a standalone function that can be called independently from `SSplotJABBAres()` as `SSrmse()`. (#50) 
+* SSplotRunstest and SSplotJABBAres uses ylim to adjust y-axis limits to fix issues with inconsistent parameters and a bug that prevented y-axis limits to be adjusted. (#46)
 * Added option to remove median trajectory for `SSplotKobe()` (#3)
 * Added **rlang**, **dplyr**, and **magrittr** dependencies.
 * SSmase and SSplotHcxval: Corrected validation messsage to clarify validation issue and to fix an issue with the code styler. (#33, #35)
