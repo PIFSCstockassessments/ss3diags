@@ -29,7 +29,7 @@ Authors@R:
     email = "eric.fletcher@noaa")
   ) 
 Description: Compilation of diagnostic functions for Stock Synthesis models, which
-  developed for the MS "Using Model Diagnostics in Integrated Stock Assessments".
+  developed for the manuscript "Using Model Diagnostics in Integrated Stock Assessments".
 Depends:
   R (>= 3.5)
 Imports:
