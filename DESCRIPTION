@@ -1,7 +1,7 @@
 Package: ss3diags
 Title: Stock Synthesis Model Diagnostics for Intergated Stock Assessments
-Version: 2.0.3.9000
-Date: 2022-06-30
+Version: 2.1.0
+Date: 2022-08-24
 Authors@R: 
   c(person(given = "Henning",
     family = "Winker",
@@ -29,7 +29,7 @@ Authors@R:
     email = "eric.fletcher@noaa")
   ) 
 Description: Compilation of diagnostic functions for Stock Synthesis models, which
-  developed for the MS "Using Model Diagnostics in Integrated Stock Assessments".
+  developed for the manuscript "Using Model Diagnostics in Integrated Stock Assessments".
 Depends:
   R (>= 3.5)
 Imports:
