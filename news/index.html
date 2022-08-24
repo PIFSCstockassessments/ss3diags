@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ss3diags</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.0</span>
       </span>
     </div>
 
@@ -47,7 +47,19 @@
       <small>Source: <a href="https://github.com/PIFSCstockassessments/ss3diags/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="section level2"><h2 class="page-header" data-toc-text="development version" id="ss3diags-development-version">ss3diags (development version)<a class="anchor" aria-label="anchor" href="#ss3diags-development-version"></a></h2></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="2.1.0" id="ss3diags-210">ss3diags 2.1.0<a class="anchor" aria-label="anchor" href="#ss3diags-210"></a></h2>
+<ul><li>RMSE calculations are modularized as a standalone function that can be called independently from <code><a href="../reference/SSplotJABBAres.html">SSplotJABBAres()</a></code> as <code><a href="../reference/SSrmse.html">SSrmse()</a></code>. (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/50" class="external-link">#50</a>)</li>
+<li>Bugfixes with adjusting y-axis limits with SSplotRunstest and SSplotJABBAres: Use the <code>ylim</code> parameter to adjust y-axis limits. (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/46" class="external-link">#46</a>)</li>
+<li>Added option to remove median trajectory for <code><a href="../reference/SSplotKobe.html">SSplotKobe()</a></code> (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/3" class="external-link">#3</a>)</li>
+<li>Added <strong>rlang</strong>, <strong>dplyr</strong>, and <strong>magrittr</strong> dependencies.</li>
+<li>SSmase and SSplotHcxval: Corrected validation messsage to clarify validation issue and to fix an issue with the code styler. (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/33" class="external-link">#33</a>, <a href="https://github.com/PIFSCstockassessments/ss3diags/issues/35" class="external-link">#35</a>)</li>
+<li>Added Date field to DESCRIPTION. DESCRIPTION metadata are now used to generate package citations. (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/25" class="external-link">#25</a>)</li>
+<li>Package vingettes formatted to <code>html_vignette</code> to reduce file size. Removed redundant PDF and word document versions of <em>ss3diags_Handbook</em> vignette.</li>
+<li>Updated documentation and fixes.<ul><li>Enabled markdown support for roxygen.</li>
+<li>Enabled Cross-reference links.</li>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.0.3" id="ss3diags-203">ss3diags 2.0.3<a class="anchor" aria-label="anchor" href="#ss3diags-203"></a></h2>
 <ul><li>Changed r4ss dependency to 1.44.0 (CRAN version) and above.</li>
