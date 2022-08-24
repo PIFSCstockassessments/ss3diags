@@ -22,6 +22,7 @@ SSplotRunstest(
   lwd = 2,
   tickEndYr = FALSE,
   xlim = "default",
+  ylim = "default",
   ylimAdj = 1.4,
   xaxs = "i",
   yaxs = "i",
@@ -82,6 +83,8 @@ by default (TRUE), the option to disable this via FALSE, is unused here.}
 year in timeseries plots.}
 
 \item{xlim}{Optional, values for x-axis range of years to display on plot. Default = "default" displays all years of available data.}
+
+\item{ylim}{Optional, values for y-axis range to display on plot. Default = "default" will range from -1 to 1.}
 
 \item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space}
 
