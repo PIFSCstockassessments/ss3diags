@@ -14,10 +14,21 @@
 #' @param addprj include forecast years
 #' @param legendcex Allows to adjust legend cex
 #' @param verbose Report progress to R GUI?
+#' @param variance_method Specify method for approximating the variance and covariance of the multivariate lognormal distribution
+#' \describe{
+#'		\item{\emph{ww2019}}{Use the approximation from Walter and Winker 2019 (Default for backwards compatibility).}
+#'    \item{\emph{2T}}{Use the delta-method and a 2nd order Taylor series approximation.}
+#' }
+#' @param bias_correct_mean Specify if the Stock Synthesis MLE estimates should be bias corrected when used to specify the mean of the multivariate lognormal distribution
+#' \describe{
+#'		\item{\emph{FALSE}}{Do not apply bias correction (Default for backwards compatibility).}
+#'    \item{\emph{TRUE}}{Apply bias correction.}
+#' }
 #'
 #' @return output list of maximum likelihood estimates and the MVLN Monte-Carlo distributions of the Kobe values, and kobe plot
 #'
 #' @author Henning Winker (JRC-EC)
+#' @author Nicholas Ducharme-Barth (PIFSC)
 #'
 #' @keywords diags kobe lognormal
 #'
@@ -26,12 +37,35 @@
 #'
 #' @export
 SSdeltaMVLN <- function(ss3rep, Fref = NULL, years = NULL, mc = 5000, weight = 1, run = "MVLN", plot = TRUE,
-                        addprj = FALSE, ymax = NULL, xmax = NULL, legendcex = 1, verbose = TRUE) {
+                        addprj = FALSE, ymax = NULL, xmax = NULL, legendcex = 1, verbose = TRUE, variance_method = NULL, bias_correct_mean = NULL) {
   status <- c("Bratio", "F")
   quants <- c("SSB", "Recr")
   mc <- round(weight * mc, 0)
   hat <- ss3rep[["derived_quants"]]
   cv <- cv1 <- ss3rep[["CoVar"]]
+
+  # check args
+  valid_variance_method = c("ww2019","2T")
+  if( is.null(variance_method))
+  {
+    variance_method <- valid_variance_method[1]
+  } else {
+    if(!(variance_method %in% valid_variance_method))
+    {
+      stop(paste0("'variance_method' must be one of: '",paste0(valid_variance_method,collapse="', '"),"'"))
+    }
+  }
+
+  valid_bias_correct_mean = c(FALSE,TRUE)
+  if( is.null(variance_method))
+  {
+    bias_correct_mean <- valid_bias_correct_mean[1]
+  } else {
+    if(!(bias_correct_mean %in% valid_bias_correct_mean))
+    {
+      stop(paste0("'bias_correct_mean' must be one of: '",paste0(valid_bias_correct_mean,collapse="', '"),"'"))
+    }
+  }
 
 
   if (is.null(cv)) stop("CoVar from Hessian required")
@@ -111,14 +145,34 @@ SSdeltaMVLN <- function(ss3rep, Fref = NULL, years = NULL, mc = 5000, weight = 1
     x2 <- cv1[cv1[["label.j"]] %in% paste0(status[2], "_", c(yr - 1, yr, yr + 1)), ]
     y <- hat[ylabel %in% paste0(status, "_", yr), ] # old version Label not LABEL
     y[["Value"]][1] <- ifelse(y[["Value"]][1] == 0, 0.001, y[["Value"]][1])
-    varF <- log(1 + (y[["StdDev"]][1] / y[["Value"]][1])^2) # variance log(F/Fmsy)
-    varB <- log(1 + (y[["StdDev"]][2] / y[["Value"]][2])^2) # variance log(SSB/SSBmsy)
-    varFref <- log(1 + (fref[["StdDev"]][1] / fref[["Value"]])^2) # variance log(F/Fmsy)
-    cov <- log(1 + mean(x[["corr"]]) * sqrt(varF * varB)) # covxy
-    cov1 <- log(1 + mean(x1[["corr"]]) * sqrt(varB * varFref)) # covxy
-    cov2 <- log(1 + mean(x2[["corr"]]) * sqrt(varF * varFref)) # covxy
+    if(variance_method == valid_variance_method[1])
+    {
+      varF <- log(1 + (y[["StdDev"]][1] / y[["Value"]][1])^2) # variance log(F/Fmsy)
+      varB <- log(1 + (y[["StdDev"]][2] / y[["Value"]][2])^2) # variance log(SSB/SSBmsy)
+      varFref <- log(1 + (fref[["StdDev"]][1] / fref[["Value"]])^2) # variance log(F/Fmsy)
+      cov <- log(1 + mean(x[["corr"]]) * sqrt(varF * varB)) # covxy
+      cov1 <- log(1 + mean(x1[["corr"]]) * sqrt(varB * varFref)) # covxy
+      cov2 <- log(1 + mean(x2[["corr"]]) * sqrt(varF * varFref)) # covxy
+    } else if(variance_method == valid_variance_method[2]) {
+      varF <- ((y[["StdDev"]][1]^2)/(y[["Value"]][1]^2))+((y[["StdDev"]][1]^4)/(4*y[["Value"]][1]^4))
+      varB <- ((y[["StdDev"]][2]^2)/(y[["Value"]][2]^2))+((y[["StdDev"]][2]^4)/(4*y[["Value"]][2]^4))
+      varFref <- ((fref[["StdDev"]][1]^2)/(fref[["Value"]]^2))+((fref[["StdDev"]][1]^4)/(4*fref[["Value"]]^4))
+      sdF <- sqrt(varF)
+      sdB <- sqrt(varB)
+      sdFref <- sqrt(varFref)
+      cov <- ((mean(x[["corr"]])*sdF*sdB)/(y[["Value"]][1]*y[["Value"]][2]))-((sdF^2*sdB^2)/(4*y[["Value"]][1]^2*y[["Value"]][2]^2)) # F & B
+      cov1 <- ((mean(x1[["corr"]])*sdFref*sdB)/(y[["Value"]][2]*fref[["Value"]]))-((sdFref^2*sdB^2)/(4*y[["Value"]][2]^2*fref[["Value"]]^2)) # Fref & B
+      cov2 <- ((mean(x2[["corr"]])*sdFref*sdF)/(y[["Value"]][1]*fref[["Value"]]))-((sdFref^2*sdF^2)/(4*y[["Value"]][1]^2*fref[["Value"]]^2)) # Fref & F    
+    }
     # MVN means of SSB/SBBmsy, Fvalue and Fref (Ftgt or Fmsy)
-    mvnmu <- log(c(y[["Value"]][2], y[["Value"]][1], fref[["Value"]])) # Assume order F_ then Bratio_
+    if(bias_correct_mean == FALSE)
+    {
+      mvnmu <- log(c(y[["Value"]][2], y[["Value"]][1], fref[["Value"]])) # Assume order F_ then Bratio_
+    } else {
+      mvnmu <- c(log(y[["Value"]][2]) - ((y[["StdDev"]][2]^2)/(2*y[["Value"]][2]^2)),
+                 log(y[["Value"]][1]) - ((y[["StdDev"]][1]^2)/(2*y[["Value"]][1]^2)),
+                 log(fref[["Value"]]) - ((fref[["StdDev"]][1]^2)/(2*fref[["Value"]]^2)))
+    }
     # Create MVN-cov-matrix
     mvncov <- matrix(NA, ncol = 3, nrow = 3)
     diag(mvncov) <- c(varB, varF, varFref)
