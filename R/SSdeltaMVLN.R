@@ -57,7 +57,7 @@ SSdeltaMVLN <- function(ss3rep, Fref = NULL, years = NULL, mc = 5000, weight = 1
   }
 
   valid_bias_correct_mean = c(FALSE,TRUE)
-  if( is.null(variance_method))
+  if( is.null(bias_correct_mean))
   {
     bias_correct_mean <- valid_bias_correct_mean[1]
   } else {
