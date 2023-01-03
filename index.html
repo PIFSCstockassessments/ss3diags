@@ -70,6 +70,7 @@
 <div class="page-header"><h1 id="ss3diags">ss3diags<a class="anchor" aria-label="anchor" href="#ss3diags"></a>
 </h1></div>
 <!-- badges: start -->
+
 <div class="section level3">
 <h3 id="build-status">Build Status<a class="anchor" aria-label="anchor" href="#build-status"></a>
 </h3>
@@ -138,16 +139,20 @@
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/r4ss/man/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,plot.cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/SSplotJABBAres.html">SSplotJABBAres</a></span><span class="op">(</span><span class="va">simple</span>, subplots <span class="op">=</span> <span class="st">"age"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, seas<span class="op">=</span><span class="st">"comb"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; RMSE stats by Index:</span></span>
-<span><span class="co">#&gt;    indices RMSE.perc nobs</span></span>
-<span><span class="co">#&gt; 1  Fishery       9.3   69</span></span>
-<span><span class="co">#&gt; 2   Survey       5.1   20</span></span>
-<span><span class="co">#&gt; 3 Combined       8.5   89</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
+<span><span class="co">#&gt;   Fleet    RMSE.perc  Nobs</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 Fishery        9.3    69</span></span>
+<span><span class="co">#&gt; 2 Survey         5.1    20</span></span>
+<span><span class="co">#&gt; 3 Combined       8.5    89</span></span>
 <span><span class="fu"><a href="reference/SSplotJABBAres.html">SSplotJABBAres</a></span><span class="op">(</span><span class="va">simple</span>, subplots <span class="op">=</span> <span class="st">"len"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, seas<span class="op">=</span><span class="st">"comb"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; RMSE stats by Index:</span></span>
-<span><span class="co">#&gt;    indices RMSE.perc nobs</span></span>
-<span><span class="co">#&gt; 1  Fishery       4.5   75</span></span>
-<span><span class="co">#&gt; 2   Survey       3.4   20</span></span>
-<span><span class="co">#&gt; 3 Combined       4.3   95</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
+<span><span class="co">#&gt;   Fleet    RMSE.perc  Nobs</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 Fishery        4.5    75</span></span>
+<span><span class="co">#&gt; 2 Survey         3.4    20</span></span>
+<span><span class="co">#&gt; 3 Combined       4.3    95</span></span></code></pre></div>
 <p><img src="reference/figures/README-JABBAruns-1.png" width="100%"></p>
 <p>The plots above show the residuals for both fishery and survey length and age-composition data for each year, and the black line is a LOESS smoother fit to all of the residuals. When data from multiple fleets are avaialble in a year, a boxplot is displayed to show the median and quantiles for that year. Additionally, the root-mean squared error is reported in the top right-hand corner to indicate how well the model fits the data (lower RMSE indicates better fit).</p>
 </div>
@@ -224,27 +229,21 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"ss3diags"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; To cite ss3diags in publications use:</span></span>
+<span><span class="co">#&gt; To cite package 'ss3diags' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Carvalho, F., Winker, H., Courtney, D., Kapur, M., Kell, L.,</span></span>
-<span><span class="co">#&gt;   Cardinale, M., Schirripag, M., Kitakado, T., Yemane, D., Piner, K.R.,</span></span>
-<span><span class="co">#&gt;   Maunder, M.N., Taylor, I., Wetzel, C.R., Doering, K., Johnsonm, K.F.,</span></span>
-<span><span class="co">#&gt;   Methot, R.D. 2021. A cookbook for using model diagnostics in</span></span>
-<span><span class="co">#&gt;   integrated stock assessments. Fisheries Research. 240, 1-18.</span></span>
-<span><span class="co">#&gt;   https://doi.org/10.1016/j.fishres.2021.105959.</span></span>
+<span><span class="co">#&gt;   Winker H, Carvalho F, Cardinale M, Kell L, Oshima M, Fletcher E</span></span>
+<span><span class="co">#&gt;   (2022). _ss3diags: Stock Synthesis Model Diagnostics for Intergated</span></span>
+<span><span class="co">#&gt;   Stock Assessments_. R package version 2.1.0,</span></span>
+<span><span class="co">#&gt;   &lt;https://github.com/PIFSCstockassessments/ss3diags&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   @Article{,</span></span>
-<span><span class="co">#&gt;     title = {A cookbook for using model diagnostics in integrated stock assessments},</span></span>
-<span><span class="co">#&gt;     author = {Felipe Carvalho and Henning Winker and Dean Courtney and Maia Kapur and Laurence Kell and Massimiliano Cardinale and Michael Schirripa and Toshihide Kitakado and Dawit Yemane and Kevin R. Piner and Mark N. Maunder and Ian Taylor and Chantel R. Wetzel and Kathryn Doering and Kelli F. Johnson and Richard D. Methot},</span></span>
-<span><span class="co">#&gt;     journal = {Fisheries Research},</span></span>
-<span><span class="co">#&gt;     year = {2021},</span></span>
-<span><span class="co">#&gt;     volume = {240},</span></span>
-<span><span class="co">#&gt;     pages = {105959},</span></span>
-<span><span class="co">#&gt;     url = {https://www.sciencedirect.com/science/article/pii/S0165783621000874},</span></span>
-<span><span class="co">#&gt;     issn = {0165-7836},</span></span>
-<span><span class="co">#&gt;     doi = {https://doi.org/10.1016/j.fishres.2021.105959},</span></span>
+<span><span class="co">#&gt;   @Manual{,</span></span>
+<span><span class="co">#&gt;     title = {ss3diags: Stock Synthesis Model Diagnostics for Intergated Stock Assessments},</span></span>
+<span><span class="co">#&gt;     author = {Henning Winker and Felipe Carvalho and Massimiliano Cardinale and Laurence Kell and Megumi Oshima and Eric Fletcher},</span></span>
+<span><span class="co">#&gt;     year = {2022},</span></span>
+<span><span class="co">#&gt;     note = {R package version 2.1.0},</span></span>
+<span><span class="co">#&gt;     url = {https://github.com/PIFSCstockassessments/ss3diags},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -321,7 +320,7 @@ In that case, don't forget to commit and push the resulting figure files, so the
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

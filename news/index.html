@@ -56,7 +56,8 @@
 <li>SSmase and SSplotHcxval: Corrected validation messsage to clarify validation issue and to fix an issue with the code styler. (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/33" class="external-link">#33</a>, <a href="https://github.com/PIFSCstockassessments/ss3diags/issues/35" class="external-link">#35</a>)</li>
 <li>Added Date field to DESCRIPTION. DESCRIPTION metadata are now used to generate package citations. (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/25" class="external-link">#25</a>)</li>
 <li>Package vingettes formatted to <code>html_vignette</code> to reduce file size. Removed redundant PDF and word document versions of <em>ss3diags_Handbook</em> vignette.</li>
-<li>Updated documentation and fixes.<ul><li>Enabled markdown support for roxygen.</li>
+<li>Updated documentation and fixes.
+<ul><li>Enabled markdown support for roxygen.</li>
 <li>Enabled Cross-reference links.</li>
 </ul></li>
 </ul></div>
@@ -67,12 +68,15 @@
 <li>Fixed Ensemble Quantile Shading Issues (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/4" class="external-link">#4</a>)</li>
 <li>Replaced the example datasets in the ss3diags cookbook, and the handbook with the current “simple” ensemble model.</li>
 <li>Fixup minor code documentation formatting issues.</li>
-<li>Implemented NOAA-fish-tools/ghactions4r integrated code styler and documentation for pull requests.<ul><li>SSmase and SSplotHcxval: Fixed up code styler’s dollar subset conversion issues. <a href="example:%60message" class="uri">example:`message</a>(‘x$name is 1,2,3,4’)`</li></ul></li>
+<li>Implemented NOAA-fish-tools/ghactions4r integrated code styler and documentation for pull requests.
+<ul><li>SSmase and SSplotHcxval: Fixed up code styler’s dollar subset conversion issues. <a href="example:%60message" class="uri">example:`message</a>(‘x$name is 1,2,3,4’)`</li>
+</ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.0.2" id="ss3diags-202">ss3diags 2.0.2<a class="anchor" aria-label="anchor" href="#ss3diags-202"></a></h2>
 <ul><li>Changed r4ss CRAN version (1.36.1) dependency to development version</li>
-<li>Refactored common ssplot subfunctions, renamed, and used equilvants in r4ss util<ul><li>
+<li>Refactored common ssplot subfunctions, renamed, and used equilvants in r4ss util
+<ul><li>
 <code>legendfun</code> -&gt; <code><a href="https://rdrr.io/pkg/r4ss/man/add_legend.html" class="external-link">r4ss::add_legend</a></code>
 </li>
 <li>
@@ -89,14 +93,17 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.0.1" id="ss3diags-201">ss3diags 2.0.1<a class="anchor" aria-label="anchor" href="#ss3diags-201"></a></h2>
-<ul><li>Minor README Updates and corrections<ul><li>Change in SSplotJABBAres to show the combined seasonal data as boxplots</li>
+<ul><li>Minor README Updates and corrections
+<ul><li>Change in SSplotJABBAres to show the combined seasonal data as boxplots</li>
 <li>Fixup links to Cookbook sripts.</li>
 </ul></li>
 <li>Formatted DESCRIPTION URL and BugReports links to the PIFSCstockassessments repo too add to its R package site.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.0.0" id="ss3diags-200">ss3diags 2.0.0<a class="anchor" aria-label="anchor" href="#ss3diags-200"></a></h2>
-<ul><li>ss3iags is now installed as an R-package. Package documentation is upatded to reflect these chenges.<ul><li>A simple, cod-like, Stock Synthesis model, simulated via ss3sim, replaces Pacific North Hake (<code>pac.hke</code>) and North Atlantic Shortfin Mako Shark (<code>natl.sma</code>) example datasets.</li></ul></li>
+<ul><li>ss3iags is now installed as an R-package. Package documentation is upatded to reflect these chenges.
+<ul><li>A simple, cod-like, Stock Synthesis model, simulated via ss3sim, replaces Pacific North Hake (<code>pac.hke</code>) and North Atlantic Shortfin Mako Shark (<code>natl.sma</code>) example datasets.</li>
+</ul></li>
 <li>SSplotRetro: fixed bug so that the shading in uncertainty area shows up when xlims are specified.</li>
 <li>SSplotJABBAres: added ‘con’ option to subplots argument so conditional age-at-length data can be plotted. Also added a seas argument so user can specify if data should be combined across seasons within a year or kept separate.</li>
 <li>SScompsTA1.8: added a seas argument so users can specify if data should be combined across seasons within a year or kept separate.</li>
@@ -105,28 +112,36 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.8" id="ss3diags-108">ss3diags 1.0.8<a class="anchor" aria-label="anchor" href="#ss3diags-108"></a></h2>
-<ul><li>Fixed MASE</li></ul></div>
+<ul><li>Fixed MASE</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.7" id="ss3diags-107">ss3diags 1.0.7<a class="anchor" aria-label="anchor" href="#ss3diags-107"></a></h2>
-<ul><li>Bug fixes</li></ul></div>
+<ul><li>Bug fixes</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.6" id="ss3diags-106">ss3diags 1.0.6<a class="anchor" aria-label="anchor" href="#ss3diags-106"></a></h2>
-<ul><li>Improved SSdiagsMCMC</li></ul></div>
+<ul><li>Improved SSdiagsMCMC</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.5" id="ss3diags-105">ss3diags 1.0.5<a class="anchor" aria-label="anchor" href="#ss3diags-105"></a></h2>
-<ul><li>Updated SSdeltaMVLN</li></ul></div>
+<ul><li>Updated SSdeltaMVLN</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.4" id="ss3diags-104">ss3diags 1.0.4<a class="anchor" aria-label="anchor" href="#ss3diags-104"></a></h2>
-<ul><li>Reference: authors changes</li></ul></div>
+<ul><li>Reference: authors changes</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.3" id="ss3diags-103">ss3diags 1.0.3<a class="anchor" aria-label="anchor" href="#ss3diags-103"></a></h2>
-<ul><li>Added annF_ quantaties</li></ul></div>
+<ul><li>Added annF_ quantaties</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.2" id="ss3diags-102">ss3diags 1.0.2<a class="anchor" aria-label="anchor" href="#ss3diags-102"></a></h2>
-<ul><li>Added aut</li></ul></div>
+<ul><li>Added aut</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.1" id="ss3diags-101">ss3diags 1.0.1<a class="anchor" aria-label="anchor" href="#ss3diags-101"></a></h2>
-<ul><li>Added SSplotH</li></ul></div>
+<ul><li>Added SSplotH</li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -141,7 +156,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
