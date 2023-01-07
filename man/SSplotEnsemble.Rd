@@ -111,21 +111,22 @@ top of lines)}
 
 \item{uncertainty}{TRUE/FALSE include uncertainty intervals around SSB or F estimated time series. Defaults to TRUE.}
 
-\item{legend}{Add a legend to plot. TRUE by default.}
+\item{legend}{Option to add a legend. TRUE by default.}
 
 \item{legendlabels}{Optional vector of labels to include in legend.}
 
-\item{legendloc}{Location of legend. Either a string like "topleft" or a vector
-of two numeric values representing the fraction of the maximum in the x and y
-dimensions, respectively. See ?legend for more info on the string options.}
+\item{legendloc}{Location of legend. Either a string like \code{topleft} or a vector of two
+numeric values representing the fraction of the maximum in the x and y
+dimensions, respectively. See \code{\link[graphics:legend]{?legend}} for more info on the
+string options.}
 
-\item{legendorder}{Optional vector of model numbers that can be used to have
-the legend display the model names in an order that is different than that
+\item{legendorder}{Optional vector of model numbers that can be used to have the legend
+display the model names in an order that is different than that
 which is represented in the summary input object.}
 
-\item{legendncol}{Number of columns for the legend.}
+\item{legendncol}{Number of columns for the legend}
 
-\item{legendcex}{Allows to adjust legend cex}
+\item{legendcex}{Allows to adjust \code{\link[graphics:legend]{legend}} cex}
 
 \item{legendsp}{Space between legend labels}
 

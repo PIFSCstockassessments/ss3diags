@@ -1,6 +1,8 @@
 #' Model ensemble plots
 #'
 #' Plots model ensembles and forecasts with uncertaity represented by MVLN or MCMC posteriors
+#' 
+#' @template legend
 #'
 #' @param kb SSdeltaMVLN $kb type output
 #' @param subplots option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"
@@ -29,18 +31,6 @@
 #' @param yaxs Choice of yaxs parameter (see ?par for more info)
 #' @param type Type parameter passed to points (default 'o' overplots points on
 #' top of lines)
-#' @param legend Add a legend to plot. TRUE by default.
-#' @param legendlabels Optional vector of labels to include in legend.
-#' @param legendloc Location of legend. Either a string like "topleft" or a vector
-#' of two numeric values representing the fraction of the maximum in the x and y
-#' dimensions, respectively. See ?legend for more info on the string options.
-#' @param legendorder Optional vector of model numbers that can be used to have
-#' the legend display the model names in an order that is different than that
-#' which is represented in the summary input object.
-#' @param legendncol Number of columns for the legend.
-#' @param legendcex Allows to adjust legend cex
-#' @param legendsp Space between legend labels
-#' @param legendindex Allows to add legend for selected indices (plots)
 #' @param pwidth Width of plot
 #' @param pheight Height of plot
 #' @param punits Units for PNG file
