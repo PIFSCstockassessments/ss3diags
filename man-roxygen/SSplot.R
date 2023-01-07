@@ -25,8 +25,61 @@
 #' it will be the directory where the model was run.
 #' 
 #' @param par
-#' list of graphics parameter values passed to \code{\link{par()}} function
+#' list of graphics parameter values passed to [`graphics::par`] function
 #' 
 #' @param verbose
 #' Option to report progress to R console. Default is TRUE.
+#' 
+#' @param plot 
+#' Deprecated. Plots (and subplots) are drawn to the active plot device
+#' by default (TRUE), and the option to disable this, via FALSE, is unused.
+#' 
+#' @param print
+#' Deprecated. Please use \code{print_plot}
+#' 
+#' @param print_plot
+#' Option to output plot as output image file. 
+#' 
+#' @param png 
+#' Deprecated. Please use 'use_png'.
+#' 
+#' @param use_png 
+#' Option to use the [`grDevices::png`] graphical device to draw plot
+#' 
+#' @param new 
+#' Deprecated. New plot windows are created by default (TRUE), and the
+#' option to disable this, via FALSE, is unused.
+#' 
+#' @param add 
+#' suppresses [`graphics::par`] to create multiplot figs
+#' 
+#' @param pch
+#' Optional [`graphics::par`] vector of plot character values
+#' 
+#' @param lty
+#' Optional [`graphics::par`] vector of line types
+#' 
+#' @param lwd
+#' Optional [`graphics::par`] vector of line widths
+#' 
+#' @param tickEndYr 
+#' TRUE/FALSE switch to turn on/off extra axis marks at final
+#' 
+#' @param ylimAdj 
+#' Multiplier for ylim parameter. Allows additional white space.
+#' 
+#' @param xaxs
+#' Choice of [`graphics::par`] xaxs parameter (see [`graphics::par`] for more info)
+#' 
+#' @param yaxs 
+#' Choice of [`graphics::par`] yaxs parameter (see [`graphics::par`] for more info)
+#' 
+#' @param xylabs
+#' Option to include x- and y-axis labels. Defaults to TRUE
+#' 
+#' @param type
+#' Type parameter passed to points. If type is \code{o}, it overplots points on
+#' top of lines. if type input is \code{l}, then turn off points on top of 
+#' lines in legend. For more detail see [`graphics::plot.default`]
+#' 
 #' 
