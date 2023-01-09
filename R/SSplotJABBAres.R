@@ -121,8 +121,6 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
                            boxcol = grey(0.8, 0.5),
                            new = TRUE,
                            add = FALSE) {
-
-
   # Parameter DEPRECATION checks
   if (lifecycle::is_present(print)) {
     lifecycle::deprecate_warn("2.0.0", "SSplotJABBAres(print)", "SSplotJABBAres(print_plot)")

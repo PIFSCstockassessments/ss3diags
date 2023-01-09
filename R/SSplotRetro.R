@@ -134,7 +134,6 @@ SSplotRetro <- function(summaryoutput,
                         indexQlabel = TRUE,
                         indexQdigits = 4,
                         shadealpha = 0.3) {
-
   # Parameter Deprecation Checks
   if (lifecycle::is_present(print)) {
     lifecycle::deprecate_warn("2.0.0", "SSplotRetro(print)", "SSplotRetro(print_plot)")

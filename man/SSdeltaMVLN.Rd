@@ -17,8 +17,8 @@ SSdeltaMVLN(
   xmax = NULL,
   legendcex = 1,
   verbose = TRUE,
-  variance_method = NULL,
-  bias_correct_mean = NULL
+  variance_method = "ww2019",
+  bias_correct_mean = FALSE
 )
 }
 \arguments{

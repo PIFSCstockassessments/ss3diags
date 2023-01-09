@@ -46,10 +46,10 @@ SSdeltaMVLN <- function(ss3rep, Fref = NULL, years = NULL, mc = 5000, weight = 1
 
   # check args
   valid_variance_method <- c("ww2019", "2T")
-  variance_method <-  match.arg(arg = variance_method,choices = valid_variance_method)
+  variance_method <- match.arg(arg = variance_method, choices = valid_variance_method)
 
   valid_bias_correct_mean <- c(FALSE, TRUE)
-  bias_correct_mean <-  match.arg(arg = bias_correct_mean,choices = valid_bias_correct_mean)
+  bias_correct_mean <- match.arg(arg = bias_correct_mean, choices = valid_bias_correct_mean)
 
   if (is.null(cv)) stop("CoVar from Hessian required")
   # Get years

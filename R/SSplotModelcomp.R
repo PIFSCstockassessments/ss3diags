@@ -245,7 +245,6 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma,
   # plot Index
   #-------------
   plot_index <- function(indexfleets = 1) {
-
     # subfunction to add legend
     # add_legend <- function(legendlabels, cumulative = FALSE) {
     # if (cumulative) {
