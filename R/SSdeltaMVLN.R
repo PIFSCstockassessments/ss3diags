@@ -37,7 +37,7 @@
 #'
 #' @export
 SSdeltaMVLN <- function(ss3rep, Fref = NULL, years = NULL, mc = 5000, weight = 1, run = "MVLN", plot = TRUE,
-                        addprj = FALSE, ymax = NULL, xmax = NULL, legendcex = 1, verbose = TRUE, variance_method = NULL, bias_correct_mean = NULL) {
+                        addprj = FALSE, ymax = NULL, xmax = NULL, legendcex = 1, verbose = TRUE, variance_method = "ww2019", bias_correct_mean = FALSE) {
   status <- c("Bratio", "F")
   quants <- c("SSB", "Recr")
   mc <- round(weight * mc, 0)
@@ -46,23 +46,10 @@ SSdeltaMVLN <- function(ss3rep, Fref = NULL, years = NULL, mc = 5000, weight = 1
 
   # check args
   valid_variance_method <- c("ww2019", "2T")
-  if (is.null(variance_method)) {
-    variance_method <- valid_variance_method[1]
-  } else {
-    if (!(variance_method %in% valid_variance_method)) {
-      stop(paste0("'variance_method' must be one of: '", paste0(valid_variance_method, collapse = "', '"), "'"))
-    }
-  }
+  variance_method <-  match.arg(arg = variance_method,choices = valid_variance_method)
 
   valid_bias_correct_mean <- c(FALSE, TRUE)
-  if (is.null(bias_correct_mean)) {
-    bias_correct_mean <- valid_bias_correct_mean[1]
-  } else {
-    if (!(bias_correct_mean %in% valid_bias_correct_mean)) {
-      stop(paste0("'bias_correct_mean' must be one of: '", paste0(valid_bias_correct_mean, collapse = "', '"), "'"))
-    }
-  }
-
+  bias_correct_mean <-  match.arg(arg = bias_correct_mean,choices = valid_bias_correct_mean)
 
   if (is.null(cv)) stop("CoVar from Hessian required")
   # Get years
