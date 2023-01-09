@@ -21,8 +21,8 @@
 #' }
 #' @param bias_correct_mean Specify if the Stock Synthesis MLE estimates should be bias corrected when used to specify the mean of the multivariate lognormal distribution
 #' \describe{
-#' 		\item{\emph{"FALSE"}}{Do not apply bias correction (Default for backwards compatibility).}
-#'    \item{\emph{"TRUE"}}{Apply bias correction.}
+#' 		\item{\emph{FALSE}}{Do not apply bias correction (Default for backwards compatibility).}
+#'    \item{\emph{TRUE}}{Apply bias correction.}
 #' }
 #'
 #' @return output list of maximum likelihood estimates and the MVLN Monte-Carlo distributions of the Kobe values, and kobe plot
@@ -37,7 +37,7 @@
 #'
 #' @export
 SSdeltaMVLN <- function(ss3rep, Fref = NULL, years = NULL, mc = 5000, weight = 1, run = "MVLN", plot = TRUE,
-                        addprj = FALSE, ymax = NULL, xmax = NULL, legendcex = 1, verbose = TRUE, variance_method = "ww2019", bias_correct_mean = "FALSE") {
+                        addprj = FALSE, ymax = NULL, xmax = NULL, legendcex = 1, verbose = TRUE, variance_method = "ww2019", bias_correct_mean = FALSE) {
   status <- c("Bratio", "F")
   quants <- c("SSB", "Recr")
   mc <- round(weight * mc, 0)
@@ -47,9 +47,6 @@ SSdeltaMVLN <- function(ss3rep, Fref = NULL, years = NULL, mc = 5000, weight = 1
   # check args
   valid_variance_method <- c("ww2019", "2T")
   variance_method <- match.arg(arg = variance_method, choices = valid_variance_method)
-
-  valid_bias_correct_mean <- c("FALSE", "TRUE")
-  bias_correct_mean <- match.arg(arg = bias_correct_mean, choices = valid_bias_correct_mean)
 
   if (is.null(cv)) stop("CoVar from Hessian required")
   # Get years
@@ -147,7 +144,7 @@ SSdeltaMVLN <- function(ss3rep, Fref = NULL, years = NULL, mc = 5000, weight = 1
       cov2 <- ((mean(x2[["corr"]]) * sdFref * sdF) / (y[["Value"]][1] * fref[["Value"]])) - ((sdFref^2 * sdF^2) / (4 * y[["Value"]][1]^2 * fref[["Value"]]^2)) # Fref & F
     }
     # MVN means of SSB/SBBmsy, Fvalue and Fref (Ftgt or Fmsy)
-    if (bias_correct_mean == "FALSE") {
+    if (!bias_correct_mean) {
       mvnmu <- log(c(y[["Value"]][2], y[["Value"]][1], fref[["Value"]])) # Assume order F_ then Bratio_
     } else {
       mvnmu <- c(
