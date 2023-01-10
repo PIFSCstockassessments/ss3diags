@@ -65,7 +65,9 @@
 <span>  ymax <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  xmax <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  legendcex <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  variance_method <span class="op">=</span> <span class="st">"ww2019"</span>,</span>
+<span>  bias_correct_mean <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -118,6 +120,28 @@
 <dt>verbose</dt>
 <dd><p>Report progress to R GUI?</p></dd>
 
+
+<dt>variance_method</dt>
+<dd><p>Specify method for approximating the variance and covariance of the multivariate lognormal distribution</p><dl><dt><em>ww2019</em></dt>
+<dd><p>Use the approximation from Walter and Winker 2019 (Default for backwards compatibility).</p></dd>
+
+<dt><em>2T</em></dt>
+<dd><p>Use the delta-method and a 2nd order Taylor series approximation.</p></dd>
+
+
+</dl></dd>
+
+
+<dt>bias_correct_mean</dt>
+<dd><p>Specify if the Stock Synthesis MLE estimates should be bias corrected when used to specify the mean of the multivariate lognormal distribution</p><dl><dt><em>FALSE</em></dt>
+<dd><p>Do not apply bias correction (Default for backwards compatibility).</p></dd>
+
+<dt><em>TRUE</em></dt>
+<dd><p>Apply bias correction.</p></dd>
+
+
+</dl></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -128,6 +152,7 @@
     <div id="author">
     <h2>Author</h2>
     <p>Henning Winker (JRC-EC)</p>
+<p>Nicholas Ducharme-Barth (PIFSC)</p>
     </div>
 
   </div>
