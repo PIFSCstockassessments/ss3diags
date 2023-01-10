@@ -18,7 +18,7 @@ SSdeltaMVLN(
   legendcex = 1,
   verbose = TRUE,
   variance_method = "ww2019",
-  bias_correct_mean = "FALSE"
+  bias_correct_mean = FALSE
 )
 }
 \arguments{
@@ -54,8 +54,8 @@ SSdeltaMVLN(
 
 \item{bias_correct_mean}{Specify if the Stock Synthesis MLE estimates should be bias corrected when used to specify the mean of the multivariate lognormal distribution
 \describe{
-\item{\emph{"FALSE"}}{Do not apply bias correction (Default for backwards compatibility).}
-\item{\emph{"TRUE"}}{Apply bias correction.}
+\item{\emph{FALSE}}{Do not apply bias correction (Default for backwards compatibility).}
+\item{\emph{TRUE}}{Apply bias correction.}
 }}
 }
 \value{
