@@ -16,7 +16,9 @@ SSdeltaMVLN(
   ymax = NULL,
   xmax = NULL,
   legendcex = 1,
-  verbose = TRUE
+  verbose = TRUE,
+  variance_method = "ww2019",
+  bias_correct_mean = FALSE
 )
 }
 \arguments{
@@ -43,6 +45,18 @@ SSdeltaMVLN(
 \item{legendcex}{Allows to adjust legend cex}
 
 \item{verbose}{Report progress to R GUI?}
+
+\item{variance_method}{Specify method for approximating the variance and covariance of the multivariate lognormal distribution
+\describe{
+\item{\emph{ww2019}}{Use the approximation from Walter and Winker 2019 (Default for backwards compatibility).}
+\item{\emph{2T}}{Use the delta-method and a 2nd order Taylor series approximation.}
+}}
+
+\item{bias_correct_mean}{Specify if the Stock Synthesis MLE estimates should be bias corrected when used to specify the mean of the multivariate lognormal distribution
+\describe{
+\item{\emph{FALSE}}{Do not apply bias correction (Default for backwards compatibility).}
+\item{\emph{TRUE}}{Apply bias correction.}
+}}
 }
 \value{
 output list of maximum likelihood estimates and the MVLN Monte-Carlo distributions of the Kobe values, and kobe plot
@@ -52,6 +66,8 @@ A function to generate joint distributions for stock status ratios (SSB/SSBref a
 }
 \author{
 Henning Winker (JRC-EC)
+
+Nicholas Ducharme-Barth (PIFSC)
 }
 \keyword{diags}
 \keyword{kobe}

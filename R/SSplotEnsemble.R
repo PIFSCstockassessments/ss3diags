@@ -458,7 +458,6 @@ ensemble_plot_index <- function(summaryoutput,
                                 legendsp = 0.9,
                                 legendncol = 1,
                                 type = "l") {
-
   # subfunction to add legend
   # add_legend <- function(legendlabels, cumulative = FALSE) {
   # if (cumulative) {
