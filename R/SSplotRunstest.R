@@ -146,7 +146,6 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
                            verbose = TRUE,
                            new = TRUE,
                            add = FALSE) {
-
   # Parameter DEPRECATION checks
   if (lifecycle::is_present(print)) {
     lifecycle::deprecate_warn("2.0.0", "SSplotRunstest(print)", "SSplotRunstest(print_plot)")
@@ -467,8 +466,6 @@ SSrunstest <- function(ss3rep = ss3diags::ss3sma,
 
   #---------------------------------------
   doruns <- function(resid) {
-
-
     # get quantities for plot
     yr <- resid[["Yr"]]
     ti <- resid[["Time"]]
