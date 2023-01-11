@@ -40,6 +40,12 @@
 #' @param print_plot
 #' Option to output plot as output image file. 
 #' 
+#' @param pdf 
+#' Deprecated. Please use 'use_pdf'.
+#' 
+#' @param use_pdf 
+#' Option to use the [`pdf`][grDevices::pdf()] graphical device to generate pdf plots. (Note: not tested  TRUE)
+#' 
 #' @param png 
 #' Deprecated. Please use `use_png`.
 #' 
