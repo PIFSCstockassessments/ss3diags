@@ -61,55 +61,57 @@ SSplotEnsemble(
 
 \item{subplots}{option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"}
 
-\item{models}{option to manually subset the models in \code{kb[["run"]]}}
+\item{models}{Optional subset of the models described in r4ss function \code{\link[r4ss:SSsummarize]{SSsummarize}}().  Either "all" or a vector of numbers indicating
+columns in summary tables.}
 
 \item{quantiles}{quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))}
 
 \item{ylabs}{yaxis labels for quants
 final year of values to show for each model. By default it is set to the}
 
-\item{endyrvec}{ending year specified in each model.}
+\item{endyrvec}{Ending year specified in each model.}
 
 \item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
 by default (TRUE), and the option to disable this, via FALSE, is unused.}
 
-\item{print}{Deprecated. Please use 'print_plot'.}
+\item{print}{Deprecated. Please use \code{print_plot}}
 
-\item{print_plot}{print to PNG files?}
+\item{print_plot}{Option to output plot as output image file.}
 
-\item{png}{Deprecated. Please use 'use_png'.}
+\item{png}{Deprecated. Please use \code{use_png}.}
 
-\item{use_png}{Draw plots in PNG format}
+\item{use_png}{Option to use the \code{\link[grDevices:png]{png}} graphical device to draw plot}
 
 \item{pdf}{Deprecated. Please use 'use_pdf'.}
 
-\item{use_pdf}{option for pdf plots (not tested for TRUE)}
+\item{use_pdf}{Option to use the \code{\link[grDevices:pdf]{pdf}} graphical device to generate pdf plots. (Note: not tested  TRUE)}
 
 \item{col}{Optional vector of colors to be used for lines. Input NULL}
 
-\item{pch}{Optional vector of plot character values}
+\item{pch}{Optional \code{\link[graphics:par]{par}} vector of plot character values}
 
-\item{lty}{Optional vector of line types}
+\item{lty}{Optional \code{\link[graphics:par]{par}} vector of line types}
 
-\item{lwd}{Optional vector of line widths}
+\item{lwd}{Optional \code{\link[graphics:par]{par}} vector of line widths}
 
-\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis mark at final
-year in timeseries plots.}
+\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis marks at final}
 
 \item{xlim}{Optional, years to use for x-axis. Default NULL uses all years available.}
 
 \item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space}
 
-\item{xaxs}{Choice of xaxs parameter (see ?par for more info)}
+\item{xaxs}{Choice of \code{\link[graphics:par]{par}} xaxs parameter (see \code{\link[graphics:par]{par}} for more info)}
 
-\item{yaxs}{Choice of yaxs parameter (see ?par for more info)}
+\item{yaxs}{Choice of \code{\link[graphics:par]{par}} yaxs parameter (see \code{\link[graphics:par]{par}} for more info)}
 
-\item{xylabs}{TRUE or FALSE, include x- and y-axis labels. Defaults to TRUE}
+\item{xylabs}{Option to include x- and y-axis labels. Defaults to TRUE}
 
-\item{type}{Type parameter passed to points (default 'o' overplots points on
-top of lines)}
+\item{type}{Type parameter passed to points. If type is \code{o}, it overplots points on
+top of lines. if type input is \code{l}, then turn off points on top of
+lines in legend. For more detail see \code{\link[graphics:plot.default]{plot.default}}}
 
-\item{uncertainty}{TRUE/FALSE include uncertainty intervals around SSB or F estimated time series. Defaults to TRUE.}
+\item{uncertainty}{\link[base:logical]{Logical vector} (TRUE/FALSE) to include uncertainty intervals
+around SSB or F estimated time series. Defaults to TRUE.}
 
 \item{legend}{Option to add a legend. TRUE by default.}
 
@@ -130,36 +132,37 @@ which is represented in the summary input object.}
 
 \item{legendsp}{Space between legend labels}
 
-\item{pwidth}{Width of plot}
+\item{pwidth}{Width of the plot}
 
-\item{pheight}{Height of plot}
+\item{pheight}{Height of the plot}
 
-\item{punits}{Units for PNG file}
+\item{punits}{Measurement units for output PNG image file}
 
-\item{res}{Resolution for PNG file}
+\item{res}{Resolution for output PNG image file}
 
-\item{ptsize}{Point size for PNG file}
+\item{ptsize}{Point size for output PNG image file}
 
-\item{cex.main}{Character expansion for plot titles}
+\item{cex.main}{Character Expansion for plot titles. See \link[graphics:par]{'par'} for more info.}
 
-\item{plotdir}{Directory where PNG or PDF files will be written. By default
+\item{plotdir}{Directory where output image files will be written. By default,
 it will be the directory where the model was run.}
 
-\item{filenameprefix}{Additional text to append to PNG or PDF file names.
-It will be separated from default name by an underscore.}
+\item{filenameprefix}{Additional text to append to output image file name. It will be separated from the
+default name by an underscore.}
 
-\item{par}{list of graphics parameter values passed to par() function}
+\item{par}{list of graphics parameter values passed to \link[graphics:par]{'par'} function}
 
-\item{verbose}{Report progress to R GUI?}
+\item{verbose}{Option to report progress to R console. Default is TRUE.}
 
 \item{shadealpha}{Transparency adjustment used to make uncertainty regions, default is 0.3}
 
-\item{new}{Deprecated. New plot windows are created by default (TRUE), and the
+\item{new}{Deprecated. New plot windows are created by default (\code{TRUE}), and the
 option to disable this, via FALSE, is unused.}
 
-\item{add}{suppresses par() to create multiplot figs}
+\item{add}{suppresses \code{\link[graphics:par]{par}} to create multiplot figs}
 
-\item{mcmcVec}{mcmc vector TODO TODO. Default is FALSE}
+\item{mcmcVec}{UNTESTED. Vector of TRUE/FALSE values (or single value) indicating mcmc
+values are used.}
 
 \item{indexQlabel}{TRUE/FALSE include labels for indices. Default is TRUE (currently not used)}
 
