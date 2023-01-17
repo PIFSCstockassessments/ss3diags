@@ -88,4 +88,3 @@
 #' top of lines. if type input is `l`, then turn off points on top of 
 #' lines in legend. For more detail see [`plot.default`][graphics::plot.default()]
 #' 
-#' 
