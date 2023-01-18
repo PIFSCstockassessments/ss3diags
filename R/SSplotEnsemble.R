@@ -5,6 +5,7 @@
 #' @template SSplot
 #' @template legend
 #' @template timeseries-plots
+#' @template indexQ
 #'
 #' @param kb SSdeltaMVLN $kb type output
 #' @param subplots option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"
@@ -15,8 +16,6 @@
 #' @param ylimAdj Multiplier for ylim parameter. Allows additional white space
 #' @param xlim Optional, years to use for x-axis. Default NULL uses all years available.
 #' @param shadealpha Transparency adjustment used to make uncertainty regions, default is 0.3
-#' @param indexQlabel TRUE/FALSE include labels for indices. Default is TRUE (currently not used)
-#' @param indexQdigits  Number of significant digits for catchability in legend. Default is 4
 #'
 #' @importFrom grDevices graphics.off rgb adjustcolor dev.new dev.off
 #' @importFrom graphics polygon abline axis box

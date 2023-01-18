@@ -61,7 +61,7 @@ SSplotEnsemble(
 
 \item{subplots}{option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"}
 
-\item{models}{Optional subset of the models described in r4ss function \code{\link[r4ss:SSsummarize]{SSsummarize}}().  Either "all" or a vector of numbers indicating
+\item{models}{Optional subset of the r4ss summary output object models described in r4ss function \code{\link[r4ss:SSsummarize]{SSsummarize}}().  Either "all" or a vector of numbers indicating
 columns in summary tables.}
 
 \item{quantiles}{quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))}
@@ -164,7 +164,7 @@ option to disable this, via FALSE, is unused.}
 \item{mcmcVec}{UNTESTED. Vector of TRUE/FALSE values (or single value) indicating mcmc
 values are used.}
 
-\item{indexQlabel}{TRUE/FALSE include labels for indices. Default is TRUE (currently not used)}
+\item{indexQlabel}{Logical; TRUE/FALSE. Option to include labels for indices. Default is TRUE (currently not used)}
 
 \item{indexQdigits}{Number of significant digits for catchability in legend. Default is 4}
 
