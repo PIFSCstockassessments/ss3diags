@@ -150,7 +150,8 @@ it will be the directory where the model was run.}
 \item{filenameprefix}{Additional text to append to output image file name. It will be separated from the
 default name by an underscore.}
 
-\item{par}{list of graphics parameter values passed to \link[graphics:par]{'par'} function}
+\item{par}{list of graphics parameter values passed to \link[graphics:par]{'par'} function.
+Used to adjust the plot margins.}
 
 \item{verbose}{Option to report progress to R console. Default is TRUE.}
 

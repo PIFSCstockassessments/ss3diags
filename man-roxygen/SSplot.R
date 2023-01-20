@@ -25,7 +25,8 @@
 #' it will be the directory where the model was run.
 #' 
 #' @param par
-#' list of graphics parameter values passed to ['par'][graphics::par()] function
+#' list of graphics parameter values passed to ['par'][graphics::par()] function.
+#' Used to adjust the plot margins.
 #' 
 #' @param verbose
 #' Option to report progress to R console. Default is TRUE.
@@ -88,3 +89,4 @@
 #' top of lines. if type input is `l`, then turn off points on top of 
 #' lines in legend. For more detail see [`plot.default`][graphics::plot.default()]
 #' 
+
