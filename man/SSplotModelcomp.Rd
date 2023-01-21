@@ -81,7 +81,8 @@ by default (TRUE), and the option to disable this, via FALSE, is unused.}
 
 \item{use_pdf}{Option to use the \code{\link[grDevices:pdf]{pdf}} graphical device to generate pdf plots. (Note: not tested  TRUE)}
 
-\item{models}{Optional subset of the r4ss summary output object models described in r4ss function \code{\link[r4ss:SSsummarize]{SSsummarize}}().  Either "all" or a vector of numbers indicating
+\item{models}{Optional subset of the r4ss summary output object models described in r4ss
+function \code{\link[r4ss:SSsummarize]{SSsummarize}}().  Either "all" or a vector of numbers indicating
 columns in summary tables.}
 
 \item{subplots}{option to "SSB","Bratio","Fvalue","Recruits","Index"}
@@ -93,7 +94,9 @@ columns in summary tables.}
 \item{ylabs}{yaxis labels for quants
 final year of values to show for each model. By default it is set to the}
 
-\item{endyrvec}{Ending year specified in each model.}
+\item{endyrvec}{Optional single year or vector of years representing the
+final year of values to show for each model. By default it is set to the
+ending year specified in each model.}
 
 \item{xmin}{= NULL optional number first year shown in plot (if available)}
 

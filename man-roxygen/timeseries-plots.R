@@ -8,9 +8,12 @@
 #' around SSB or F estimated time series. Defaults to TRUE.
 #' 
 #' @param endyrvec
-#' Ending year specified in each model.
+#' Optional single year or vector of years representing the
+#' final year of values to show for each model. By default it is set to the
+#' ending year specified in each model.
 #' 
 #' @param models
-#' Optional subset of the r4ss summary output object models described in r4ss function [`SSsummarize`][r4ss::SSsummarize]().  Either "all" or a vector of numbers indicating
+#' Optional subset of the r4ss summary output object models described in r4ss 
+#' function [`SSsummarize`][r4ss::SSsummarize]().  Either "all" or a vector of numbers indicating
 #' columns in summary tables.
 #' 

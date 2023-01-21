@@ -68,7 +68,9 @@ SSplotEnsemble(
 \item{ylabs}{yaxis labels for quants
 final year of values to show for each model. By default it is set to the}
 
-\item{endyrvec}{Ending year specified in each model.}
+\item{endyrvec}{Optional single year or vector of years representing the
+final year of values to show for each model. By default it is set to the
+ending year specified in each model.}
 
 \item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
 by default (TRUE), and the option to disable this, via FALSE, is unused.}
