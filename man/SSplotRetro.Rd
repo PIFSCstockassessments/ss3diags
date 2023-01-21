@@ -112,7 +112,7 @@ ending year specified in each model.}
 
 \item{lwd}{Optional \code{\link[graphics:par]{par}} vector of line widths}
 
-\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis marks at final}
+\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis marks at final year in timeseries plots.}
 
 \item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space.}
 

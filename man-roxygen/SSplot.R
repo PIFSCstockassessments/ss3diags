@@ -70,7 +70,7 @@
 #' Optional [`par`][graphics::par()] vector of line widths
 #' 
 #' @param tickEndYr 
-#' TRUE/FALSE switch to turn on/off extra axis marks at final
+#' TRUE/FALSE switch to turn on/off extra axis marks at final year in timeseries plots.
 #' 
 #' @param ylimAdj 
 #' Multiplier for ylim parameter. Allows additional white space.

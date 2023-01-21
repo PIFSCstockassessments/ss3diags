@@ -112,7 +112,7 @@ ending year specified in each model.}
 
 \item{lwd}{Optional \code{\link[graphics:par]{par}} vector of line widths}
 
-\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis marks at final}
+\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis marks at final year in timeseries plots.}
 
 \item{xlim}{Optional, values for x-axis range of years to display on plot. Default = "default" displays all years of available data. (currently not used)}
 

@@ -95,7 +95,7 @@ by default (TRUE), and the option to disable this, via FALSE, is unused.}
 
 \item{lwd}{Optional \code{\link[graphics:par]{par}} vector of line widths}
 
-\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis marks at final}
+\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis marks at final year in timeseries plots.}
 
 \item{xlim}{Optional, years to use for x-axis. Default NULL uses all years available.}
 
