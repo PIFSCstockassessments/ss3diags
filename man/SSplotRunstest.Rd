@@ -55,47 +55,47 @@ generalized size composition data, 'age' for age composition data,
 or 'con' for conditional age at length data}
 
 \item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
-by default (TRUE), the option to disable this via FALSE, is unused here.}
+by default (TRUE), and the option to disable this, via FALSE, is unused.}
 
-\item{print}{Deprecated. Please use 'print_plot'.}
+\item{print}{Deprecated. Please use \code{print_plot}}
 
-\item{print_plot}{Option to print to PNG files}
+\item{print_plot}{Option to output plot as output image file.}
 
-\item{png}{Deprecated, please use 'use_png'.}
+\item{png}{Deprecated. Please use \code{use_png}.}
 
-\item{use_png}{Draw plots in PNG format}
+\item{use_png}{Option to use the \code{\link[grDevices:png]{png}} graphical device to draw plot}
 
-\item{pdf}{PDF plots. Deprecated. Please use use_pdf.}
+\item{pdf}{Deprecated. Please use 'use_pdf'.}
 
-\item{use_pdf}{option for pdf plots}
+\item{use_pdf}{Option to use the \code{\link[grDevices:pdf]{pdf}} graphical device to generate pdf plots. (Note: not tested  TRUE)}
 
 \item{indexselect}{Vector of fleet numbers for each model for which to compare}
 
 \item{miny}{the absolute value of the min and max value for ylim, default is 1}
 
-\item{pch}{Optional vector of plot character values}
+\item{pch}{Optional \code{\link[graphics:par]{par}} vector of plot character values}
 
-\item{lty}{Optional vector of line types}
+\item{lty}{Optional \code{\link[graphics:par]{par}} vector of line types}
 
-\item{lwd}{Optional vector of line widths}
+\item{lwd}{Optional \code{\link[graphics:par]{par}} vector of line widths}
 
-\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis mark at final
-year in timeseries plots.}
+\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis marks at final year in timeseries plots.}
 
 \item{xlim}{Optional, values for x-axis range of years to display on plot. Default = "default" displays all years of available data.}
 
 \item{ylim}{Optional, values for y-axis range to display on plot. Default = "default" will range from -1 to 1.}
 
-\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space}
+\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space.}
 
-\item{xaxs}{Choice of xaxs parameter (see ?par for more info)}
+\item{xaxs}{Choice of \code{\link[graphics:par]{par}} xaxs parameter (see \code{\link[graphics:par]{par}} for more info)}
 
-\item{yaxs}{Choice of yaxs parameter (see ?par for more info)}
+\item{yaxs}{Choice of \code{\link[graphics:par]{par}} yaxs parameter (see \code{\link[graphics:par]{par}} for more info)}
 
-\item{xylabs}{TRUE or FALSE, include x- and y-axis labels}
+\item{xylabs}{Option to include x- and y-axis labels. Defaults to TRUE}
 
-\item{type}{Type parameter passed to points (default 'o' overplots points on
-top of lines)}
+\item{type}{Type parameter passed to points. If type is \code{o}, it overplots points on
+top of lines. if type input is \code{l}, then turn off points on top of
+lines in legend. For more detail see \code{\link[graphics:plot.default]{plot.default}}}
 
 \item{legend}{Option to add a legend. TRUE by default.}
 
@@ -103,31 +103,33 @@ top of lines)}
 
 \item{legendcex}{Allows to adjust legend cex}
 
-\item{pwidth}{Width of plot}
+\item{pwidth}{Width of the plot}
 
-\item{pheight}{Height of plot}
+\item{pheight}{Height of the plot}
 
-\item{punits}{Units for PNG file}
+\item{punits}{Measurement units for output PNG image file}
 
-\item{res}{Resolution for PNG file}
+\item{res}{Resolution for output PNG image file}
 
-\item{ptsize}{Point size for PNG file}
+\item{ptsize}{Point size for output PNG image file}
 
-\item{cex.main}{Character expansion for plot titles}
+\item{cex.main}{Character Expansion for plot titles. See \link[graphics:par]{'par'} for more info.}
 
-\item{plotdir}{Directory where PNG or PDF files will be written. By default
+\item{plotdir}{Directory where output image files will be written. By default,
 it will be the directory where the model was run.}
 
-\item{filenameprefix}{Additional text to append to PNG or PDF file names.
-It will be separated from default name by an underscore.}
+\item{filenameprefix}{Additional text to append to output image file name. It will be separated from the
+default name by an underscore.}
 
-\item{par}{list of graphics parameter values passed to par() function}
+\item{par}{list of graphics parameter values passed to \link[graphics:par]{'par'} function.
+Used to adjust the plot margins.}
 
-\item{verbose}{TRUE or FALSE, should the progress be reported to R GUI?}
+\item{verbose}{Option to report progress to R console. Default is TRUE.}
 
-\item{new}{Create new empty plot window (TRUE or FALSE)}
+\item{new}{Deprecated. New plot windows are created by default (\code{TRUE}), and the
+option to disable this, via FALSE, is unused.}
 
-\item{add}{suppresses par() to create multiplot figs}
+\item{add}{suppresses \code{\link[graphics:par]{par}} to create multiplot figs}
 }
 \value{
 a dataframe with runs test p-value, if the test has passed or failed, 3x sigma high and low limits, and the type of data used. Rows are for each fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and failed if p-value < 0.5 (residuals are not random)
