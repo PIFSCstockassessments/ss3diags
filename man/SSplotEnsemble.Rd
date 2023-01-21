@@ -61,8 +61,7 @@ SSplotEnsemble(
 
 \item{subplots}{option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"}
 
-\item{models}{Optional subset of the r4ss summary output object models described in r4ss function \code{\link[r4ss:SSsummarize]{SSsummarize}}().  Either "all" or a vector of numbers indicating
-columns in summary tables.}
+\item{models}{option to manually subset the models in \code{kb[["run"]]}}
 
 \item{quantiles}{quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))}
 
