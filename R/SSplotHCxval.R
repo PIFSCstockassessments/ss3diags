@@ -10,7 +10,8 @@
 #' @template legend
 #' @template indexQ
 #'
-#' @param retroSummary List created by r4ss::SSsummarize() or ss3diags::SSretroComps()
+#' @param retroSummary Stock synthesis summary list created by [`SSsummarize`][r4ss::SSsummarize()]
+#' or a summary list from age/length retrospective runs created by ['SSretroComps'][ss3diags::SSretroComps()]
 #' @param subplots optional use of c("cpue","len","age"), yet to be tested for age.
 #' @param Season option to specify Season as an integer of value 1-4 - Default uses first available, i.e. usual Seas = 1
 #' @param indexselect = Vector of fleet numbers for each model for which to compare

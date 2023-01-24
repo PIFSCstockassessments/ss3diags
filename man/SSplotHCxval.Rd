@@ -66,7 +66,8 @@ SSplotHCxval(
 )
 }
 \arguments{
-\item{retroSummary}{List created by r4ss::SSsummarize() or ss3diags::SSretroComps()}
+\item{retroSummary}{Stock synthesis summary list created by \code{\link[r4ss:SSsummarize]{SSsummarize}}
+or a summary list from age/length retrospective runs created by \link[=SSretroComps]{'SSretroComps'}}
 
 \item{subplots}{optional use of c("cpue","len","age"), yet to be tested for age.}
 
