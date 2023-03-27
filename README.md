@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ss3diags
+# ss3diags <a href="http://pifscstockassessments.github.io/ss3diags/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 
@@ -131,16 +131,20 @@ the example below, we plot the residuals for the mean age
 r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
 SSplotJABBAres(simple, subplots = "age", add = TRUE, seas="comb")
 #> RMSE stats by Index:
-#>    indices RMSE.perc nobs
-#> 1  Fishery       9.3   69
-#> 2   Survey       5.1   20
-#> 3 Combined       8.5   89
+#> # A tibble: 3 x 3
+#>   Fleet    RMSE.perc  Nobs
+#>   <chr>        <dbl> <int>
+#> 1 Fishery        9.3    69
+#> 2 Survey         5.1    20
+#> 3 Combined       8.5    89
 SSplotJABBAres(simple, subplots = "len", add = TRUE, seas="comb")
 #> RMSE stats by Index:
-#>    indices RMSE.perc nobs
-#> 1  Fishery       4.5   75
-#> 2   Survey       3.4   20
-#> 3 Combined       4.3   95
+#> # A tibble: 3 x 3
+#>   Fleet    RMSE.perc  Nobs
+#>   <chr>        <dbl> <int>
+#> 1 Fishery        4.5    75
+#> 2 Survey         3.4    20
+#> 3 Combined       4.3    95
 ```
 
 <img src="man/figures/README-JABBAruns-1.png" width="100%" />
@@ -263,27 +267,23 @@ To cite ss3diags for a publication you can use
 ``` r
 citation("ss3diags")
 #> 
-#> To cite ss3diags in publications use:
+#> To cite package 'ss3diags' in publications use:
 #> 
-#>   Carvalho, F., Winker, H., Courtney, D., Kapur, M., Kell, L.,
-#>   Cardinale, M., Schirripag, M., Kitakado, T., Yemane, D., Piner, K.R.,
-#>   Maunder, M.N., Taylor, I., Wetzel, C.R., Doering, K., Johnsonm, K.F.,
-#>   Methot, R.D. 2021. A cookbook for using model diagnostics in
-#>   integrated stock assessments. Fisheries Research. 240, 1-18.
-#>   https://doi.org/10.1016/j.fishres.2021.105959.
+#>   Henning Winker, Felipe Carvalho, Massimiliano Cardinale, Laurence
+#>   Kell, Megumi Oshima and Eric Fletcher (2022). ss3diags: Stock
+#>   Synthesis Model Diagnostics for Intergated Stock Assessments. R
+#>   package version 2.1.0.
+#>   https://github.com/PIFSCstockassessments/ss3diags
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
-#>   @Article{,
-#>     title = {A cookbook for using model diagnostics in integrated stock assessments},
-#>     author = {Felipe Carvalho and Henning Winker and Dean Courtney and Maia Kapur and Laurence Kell and Massimiliano Cardinale and Michael Schirripa and Toshihide Kitakado and Dawit Yemane and Kevin R. Piner and Mark N. Maunder and Ian Taylor and Chantel R. Wetzel and Kathryn Doering and Kelli F. Johnson and Richard D. Methot},
-#>     journal = {Fisheries Research},
-#>     year = {2021},
-#>     volume = {240},
-#>     pages = {105959},
-#>     url = {https://www.sciencedirect.com/science/article/pii/S0165783621000874},
-#>     issn = {0165-7836},
-#>     doi = {https://doi.org/10.1016/j.fishres.2021.105959},
+#>   @Manual{,
+#>     title = {ss3diags: Stock Synthesis Model Diagnostics for Intergated Stock
+#> Assessments},
+#>     author = {Henning Winker and Felipe Carvalho and Massimiliano Cardinale and Laurence Kell and Megumi Oshima and Eric Fletcher},
+#>     year = {2022},
+#>     note = {R package version 2.1.0},
+#>     url = {https://github.com/PIFSCstockassessments/ss3diags},
 #>   }
 ```
 
