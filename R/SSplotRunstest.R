@@ -302,12 +302,12 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
     runstest <- ssruns_sig3(x = as.numeric(resid[["residuals"]]), type = "resid", mixing = mixing)
 
     # if no values included in subset, then set ylim based on all values
-    if(ylim[1] == "default"){
+    if (ylim[1] == "default") {
       ylim <- c(min(-miny, runstest[["sig3lim"]][1] * ylimAdj), max(miny, runstest[["sig3lim"]][2] * ylimAdj))
     } else {
       ylim <- ylim * ylimAdj
     }
-   
+
 
     if (xlim[1] == "default") xlim <- c(floor(min(ti, yr) - .1), ceiling(max(ti, yr) + 0.1))
 
