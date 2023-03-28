@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stock Synthesis Model Diagnostics for Intergated Stock Assessments • ss3diags</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -14,6 +20,7 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="Stock Synthesis Model Diagnostics for Intergated Stock Assessments">
 <meta property="og:description" content='Compilation of diagnostic functions for Stock Synthesis models, which
   developed for the manuscript "Using Model Diagnostics in Integrated Stock Assessments".'>
+<meta property="og:image" content="https://pifscstockassessments.github.io/ss3diags/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -67,7 +74,8 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="ss3diags">ss3diags<a class="anchor" aria-label="anchor" href="#ss3diags"></a>
+<div class="page-header"><h1 id="ss3diags-">ss3diags <a href="http://pifscstockassessments.github.io/ss3diags/" class="external-link"><img src="reference/figures/logo.png" align="right" height="138"></a>
+<a class="anchor" aria-label="anchor" href="#ss3diags-"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -111,7 +119,7 @@
 </h4>
 <p>ss3diags provides 4 main functions to evaluate model misspecification: <code><a href="reference/SSplotRunstest.html">SSplotRunstest()</a></code> (and <code><a href="reference/SSrunstest.html">SSrunstest()</a></code>), <code><a href="reference/SSplotJABBAres.html">SSplotJABBAres()</a></code>, <code><a href="reference/SSplotRetro.html">SSplotRetro()</a></code>, and <code><a href="reference/SShcbias.html">SShcbias()</a></code>. A runs test is a test for randomness and in the runstest functions, it is applied to the residuals from model fits to abundance indices or composition data. Below, we show an example of performing a runs test on the index, length composition, and conditional age-at-length fits.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/r4ss/man/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/SSplotRunstest.html">SSplotRunstest</a></span><span class="op">(</span><span class="va">simple</span>, subplots <span class="op">=</span> <span class="st">"cpue"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Residual Runs Test (/w plot) stats by Index:</span></span>
 <span><span class="co">#&gt;    Index runs.p   test  sigma3.lo sigma3.hi type</span></span>
@@ -136,7 +144,7 @@
 <p>To only produce the summary table and skip the plot, use <code><a href="reference/SSrunstest.html">SSrunstest()</a></code>.</p>
 <p>The second function for residual diagnostics is the function <code><a href="reference/SSplotJABBAres.html">SSplotJABBAres()</a></code>. This function is from the R package <a href="https://github.com/jabbamodel/JABBA" class="external-link">JABBA</a> and plots a timeseries of residuals for all fleets of the indicated data (cpue or composition). In the example below, we plot the residuals for the mean age (age-composition) and mean length (length-composition) for both fleets.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/r4ss/man/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,plot.cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,plot.cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/SSplotJABBAres.html">SSplotJABBAres</a></span><span class="op">(</span><span class="va">simple</span>, subplots <span class="op">=</span> <span class="st">"age"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, seas<span class="op">=</span><span class="st">"comb"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; RMSE stats by Index:</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
@@ -162,10 +170,10 @@
 <p>Retrospective analysis is commonly used to check the consistency of model estimates such as spawning stock biomass (SSB) and fishing mortality (F) as the model is updated with new data in retrospect. The retrospective analysis involves sequentially removing observations from the terminal year (i.e., peels), fitting the model to the truncated series, and then comparing the relative difference between model estimates from the full-time series with the truncated time-series. Steps to conduct a retrospective analysis with a Stock Synthesis model are documented <a href="/Cookbook/Run_Retrospective_example.R">here</a>. An example of a retrospective analysis can be loaded in for use and summarized by:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"retroSimple"</span><span class="op">)</span></span>
-<span><span class="va">sumSimple</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/r4ss/man/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">retroSimple</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">sumSimple</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">retroSimple</span><span class="op">)</span></span></code></pre></div>
 <p>Note that <code>SSsummarize()</code> summarises the modelled quantities and abundance indices but not composition data. To plot the output from the retrospective analysis you can use the function</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/r4ss/man/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,plot.cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,plot.cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">sumSimple</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
 <span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
@@ -187,7 +195,7 @@
 <p><img src="reference/figures/README-retroSimple_plots-1.png" width="100%"></p>
 <p>Retrospective analysis is useful to evaluate how consistent the modeled quantities are in retrospect. However, providing fisheries management advice requires predicting a stock’s response to management and checking that predictions are consistent when updated by new data in the future. A first, intuitive extension of the retrospective analysis is to assess potential forecast bias by adding the additional step of forward projecting quantities, such as SSB, over the truncated years. This can be visualized by adding <code>forecast = TRUE</code> in the function above.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/r4ss/man/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,plot.cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,plot.cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">sumSimple</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, forecast <span class="op">=</span> <span class="cn">TRUE</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">94</span>,<span class="fl">100</span><span class="op">)</span>, uncertainty <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
 <span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
