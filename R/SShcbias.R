@@ -22,7 +22,6 @@ SShcbias <- function(summaryoutput, quants = c("SSB", "F"),
                      models = "all",
                      endyrvec = "default",
                      verbose = TRUE) {
-
   # get stuff from summary output (minimized)
   n <- summaryoutput[["n"]]
   startyrs <- summaryoutput[["startyrs"]]

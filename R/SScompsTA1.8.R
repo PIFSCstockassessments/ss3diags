@@ -37,7 +37,6 @@
 
 SScompsTA1.8 <- function(ss3rep, type = c("len", "age", "size", "con"), fleet = NULL, seas = NULL,
                          plotit = FALSE, maxpanel = 1000) {
-
   # Defaults
   part <- 0:2
   pick.gender <- 0:3

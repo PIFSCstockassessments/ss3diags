@@ -131,7 +131,7 @@ the example below, we plot the residuals for the mean age
 r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
 SSplotJABBAres(simple, subplots = "age", add = TRUE, seas="comb")
 #> RMSE stats by Index:
-#> # A tibble: 3 x 3
+#> # A tibble: 3 × 3
 #>   Fleet    RMSE.perc  Nobs
 #>   <chr>        <dbl> <int>
 #> 1 Fishery        9.3    69
@@ -139,7 +139,7 @@ SSplotJABBAres(simple, subplots = "age", add = TRUE, seas="comb")
 #> 3 Combined       8.5    89
 SSplotJABBAres(simple, subplots = "len", add = TRUE, seas="comb")
 #> RMSE stats by Index:
-#> # A tibble: 3 x 3
+#> # A tibble: 3 × 3
 #>   Fleet    RMSE.perc  Nobs
 #>   <chr>        <dbl> <int>
 #> 1 Fishery        4.5    75
@@ -269,17 +269,15 @@ citation("ss3diags")
 #> 
 #> To cite package 'ss3diags' in publications use:
 #> 
-#>   Henning Winker, Felipe Carvalho, Massimiliano Cardinale, Laurence
-#>   Kell, Megumi Oshima and Eric Fletcher (2022). ss3diags: Stock
-#>   Synthesis Model Diagnostics for Intergated Stock Assessments. R
-#>   package version 2.1.0.
-#>   https://github.com/PIFSCstockassessments/ss3diags
+#>   Winker H, Carvalho F, Cardinale M, Kell L, Oshima M, Fletcher E
+#>   (2022). _ss3diags: Stock Synthesis Model Diagnostics for Intergated
+#>   Stock Assessments_. R package version 2.1.0,
+#>   <https://github.com/PIFSCstockassessments/ss3diags>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {ss3diags: Stock Synthesis Model Diagnostics for Intergated Stock
-#> Assessments},
+#>     title = {ss3diags: Stock Synthesis Model Diagnostics for Intergated Stock Assessments},
 #>     author = {Henning Winker and Felipe Carvalho and Massimiliano Cardinale and Laurence Kell and Megumi Oshima and Eric Fletcher},
 #>     year = {2022},
 #>     note = {R package version 2.1.0},
