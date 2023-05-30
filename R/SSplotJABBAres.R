@@ -72,7 +72,6 @@
 #' @importFrom stats predict loess runif residuals
 #' @importFrom lifecycle deprecated
 #' @importFrom rlang .data
-#' @importFrom dplyr group_by arrange mutate summarise ungroup
 #' @importFrom r4ss save_png
 #'
 #' @export
