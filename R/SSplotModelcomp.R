@@ -80,7 +80,7 @@
 #'
 #' @keywords ssplot hindcasting
 #'
-SSplotModelcomp <- function(summaryoutput = ss3diags::aspm.sma, #TODO relpace w/ retroSimple
+SSplotModelcomp <- function(summaryoutput = ss3diags::retroSimple, 
                             plot = TRUE,
                             print = deprecated(),
                             print_plot = FALSE,
