@@ -413,7 +413,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
 #'
 #' @export
 
-SSrunstest <- function(ss3rep = ss3diags::ss3sma,
+SSrunstest <- function(ss3rep = ss3diags::ss3sma, #TODO: Replace witk "simple"
                        mixing = "less",
                        quants = c("cpue", "len", "age", "con")[1],
                        indexselect = NULL,
