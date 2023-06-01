@@ -42,7 +42,7 @@ Imports:
     dplyr,
     rlang,
     lifecycle
-Remotes: r4ss/r4ss@importFrom_kableExtra
+Remotes: r4ss/r4ss#819
 License: EUPL
 Encoding: UTF-8
 LazyData: True
