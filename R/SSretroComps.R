@@ -1,4 +1,3 @@
-
 #' Retrieve Composition Data from Multiple SS Models
 #'
 #' Wrapper to get observed and expected mean length/age from multiple Stock Synthesis models.
