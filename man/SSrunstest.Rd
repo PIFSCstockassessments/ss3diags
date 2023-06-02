@@ -5,7 +5,7 @@
 \title{Residual Diagnostics Plot}
 \usage{
 SSrunstest(
-  ss3rep = ss3diags::ss3sma,
+  ss3rep = ss3diags::simple,
   mixing = "less",
   quants = c("cpue", "len", "age", "con")[1],
   indexselect = NULL,

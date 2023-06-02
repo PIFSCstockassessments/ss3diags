@@ -39,10 +39,10 @@ Imports:
     r4ss(>= 1.44.0),
     gplots,
     magrittr,
-    rlang,
     dplyr,
+    rlang,
     lifecycle
-Remotes: r4ss/r4ss
+Remotes: r4ss/r4ss#821
 License: EUPL
 Encoding: UTF-8
 LazyData: True

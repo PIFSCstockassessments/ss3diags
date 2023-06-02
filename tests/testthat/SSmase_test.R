@@ -1,4 +1,3 @@
-
 library(ss3diags)
 # Tests
 # sma = r4ss::SSsummarize(retro.sma)
