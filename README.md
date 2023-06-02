@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ss3diags <a href="http://pifscstockassessments.github.io/ss3diags/"><img src="man/figures/logo.png" align="right" height="138" /></a>
+# ss3diags <img src="man/figures/logo.png" align="right" />
 
 <!-- badges: start -->
 
