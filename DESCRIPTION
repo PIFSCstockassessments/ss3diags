@@ -36,7 +36,7 @@ Imports:
     reshape2,
     mvtnorm,
     randtests,
-    r4ss(>= 1.44.0),
+    r4ss(>= 1.46.1),
     gplots,
     magrittr,
     dplyr,
