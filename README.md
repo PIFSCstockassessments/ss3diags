@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ss3diags <a href="http://pifscstockassessments.github.io/ss3diags/"><img src="man/figures/logo.png" align="right" height="138" /></a>
+# ss3diags <a href="http://pifscstockassessments.github.io/ss3diags/"><img src="man/figures/logo.png" align="right" /></a>
 
 <!-- badges: start -->
 
@@ -25,14 +25,14 @@ is currently being finalized.
 In addition, the ss3diags Github respository provides fully commented
 step-by-step R recipes on how to:
 
--   [Do log-likelood profiling for
-    R0](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Likelihood_profile_R0_example.R)
--   [Run the ASPM
-    diagnostic](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Setup_ASPM_example.R)
--   [Conduct iterative hindcasts for restrospective analysis with
-    forecasts](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Run_Retrospective_example.R)
--   [Do Jitter
-    tests](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Jitter_test_example.R)
+- [Do log-likelood profiling for
+  R0](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Likelihood_profile_R0_example.R)
+- [Run the ASPM
+  diagnostic](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Setup_ASPM_example.R)
+- [Conduct iterative hindcasts for restrospective analysis with
+  forecasts](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Run_Retrospective_example.R)
+- [Do Jitter
+  tests](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Jitter_test_example.R)
 
 with Stock Synthesis by making use of a comprehensive collection of R
 functions available in the R package
@@ -82,7 +82,7 @@ of performing a runs test on the index, length composition, and
 conditional age-at-length fits.
 
 ``` r
-r4ss::sspar(mfrow = c(2,2))
+r4ss::sspar(mfrow = c(2, 2))
 SSplotRunstest(simple, subplots = "cpue", add = TRUE)
 #> Residual Runs Test (/w plot) stats by Index:
 #>    Index runs.p   test  sigma3.lo sigma3.hi type
@@ -111,12 +111,12 @@ there is some misspecification with the indices or composition data
 (p-value \< 0.05). In addition to the residual plots, `SSplotRunstest()`
 produces a summary table of the runs test output values, including:
 
--   p-value for the runs test  
--   if the test passed or failed (indicated by green or red shading in
-    the plot)
--   upper and lower limits for the 3-sigma interval
--   type of data tested (cpue, length-composition, age-composition, or
-    conditional age-at-length)
+- p-value for the runs test  
+- if the test passed or failed (indicated by green or red shading in the
+  plot)
+- upper and lower limits for the 3-sigma interval
+- type of data tested (cpue, length-composition, age-composition, or
+  conditional age-at-length)
 
 To only produce the summary table and skip the plot, use `SSrunstest()`.
 
@@ -128,8 +128,8 @@ the example below, we plot the residuals for the mean age
 (age-composition) and mean length (length-composition) for both fleets.
 
 ``` r
-r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
-SSplotJABBAres(simple, subplots = "age", add = TRUE, seas="comb")
+r4ss::sspar(mfrow = c(1, 2), plot.cex = 0.8)
+SSplotJABBAres(simple, subplots = "age", add = TRUE, seas = "comb")
 #> RMSE stats by Index:
 #> # A tibble: 3 × 3
 #>   Fleet    RMSE.perc  Nobs
@@ -137,7 +137,7 @@ SSplotJABBAres(simple, subplots = "age", add = TRUE, seas="comb")
 #> 1 Fishery        9.3    69
 #> 2 Survey         5.1    20
 #> 3 Combined       8.5    89
-SSplotJABBAres(simple, subplots = "len", add = TRUE, seas="comb")
+SSplotJABBAres(simple, subplots = "len", add = TRUE, seas = "comb")
 #> RMSE stats by Index:
 #> # A tibble: 3 × 3
 #>   Fleet    RMSE.perc  Nobs
@@ -180,7 +180,7 @@ abundance indices but not composition data. To plot the output from the
 retrospective analysis you can use the function
 
 ``` r
-r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
+r4ss::sspar(mfrow = c(1, 2), plot.cex = 0.8)
 SSplotRetro(sumSimple, subplots = "SSB", add = TRUE)
 #> Mohn's Rho stats, including one step ahead forecasts:
 #>   type     peel         Rho  ForecastRho
@@ -213,8 +213,8 @@ projecting quantities, such as SSB, over the truncated years. This can
 be visualized by adding `forecast = TRUE` in the function above.
 
 ``` r
-r4ss::sspar(mfrow=c(1,2),plot.cex=0.8)
-SSplotRetro(sumSimple, subplots = "SSB", forecast = TRUE, add = TRUE, xlim = c(94,100), uncertainty = FALSE)
+r4ss::sspar(mfrow = c(1, 2), plot.cex = 0.8)
+SSplotRetro(sumSimple, subplots = "SSB", forecast = TRUE, add = TRUE, xlim = c(94, 100), uncertainty = FALSE)
 #> Mohn's Rho stats, including one step ahead forecasts:
 #>   type     peel         Rho  ForecastRho
 #> 1  SSB       99 0.007769174 -0.006152424
@@ -223,7 +223,7 @@ SSplotRetro(sumSimple, subplots = "SSB", forecast = TRUE, add = TRUE, xlim = c(9
 #> 4  SSB       96 0.202493492  0.211816848
 #> 5  SSB       95 0.245173711  0.254376716
 #> 6  SSB Combined 0.147629846  0.151841528
-SSplotRetro(sumSimple, subplots = "F", forecast = TRUE, add = TRUE, xlim = c(94,100), uncertainty = FALSE, ylim = c(0,0.16))
+SSplotRetro(sumSimple, subplots = "F", forecast = TRUE, add = TRUE, xlim = c(94, 100), uncertainty = FALSE, ylim = c(0, 0.16))
 #> Mohn's Rho stats, including one step ahead forecasts:
 #>   type     peel         Rho  ForecastRho
 #> 1    F       99 -0.00509569  0.006707778
@@ -266,7 +266,6 @@ To cite ss3diags for a publication you can use
 
 ``` r
 citation("ss3diags")
-#> 
 #> To cite package 'ss3diags' in publications use:
 #> 
 #>   Winker H, Carvalho F, Cardinale M, Kell L, Oshima M, Fletcher E
@@ -277,7 +276,8 @@ citation("ss3diags")
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {ss3diags: Stock Synthesis Model Diagnostics for Intergated Stock Assessments},
+#>     title = {ss3diags: Stock Synthesis Model Diagnostics for Intergated Stock
+#> Assessments},
 #>     author = {Henning Winker and Felipe Carvalho and Massimiliano Cardinale and Laurence Kell and Megumi Oshima and Eric Fletcher},
 #>     year = {2022},
 #>     note = {R package version 2.1.0},
