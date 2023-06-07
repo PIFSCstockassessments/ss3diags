@@ -1,7 +1,7 @@
 Package: ss3diags
 Title: Stock Synthesis Model Diagnostics for Intergated Stock Assessments
-Version: 2.1.0
-Date: 2022-08-24
+Version: 2.1.1
+Date: 2023-06-07
 Authors@R: 
   c(person(given = "Henning",
     family = "Winker",
