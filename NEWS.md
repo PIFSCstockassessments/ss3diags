@@ -1,3 +1,14 @@
+# ss3siags 2.1.1
+
+* Added new logo. Thanks @pdimens (#76, #77)
+* Added options to `SSdeltaMVLN` for Variance-Coveriance approximation and bias correction. Thanks @N-DucharmeBarth-NOAA (#64)
+* Updated r4ss dependency (#84)
+  * Dependency resolves r4ss function name conflicts w/ dplyr and kableExtra libraries (#83). Side effect of nmfs-fish-tools/ghactions4r#69
+* Removed `dplyr` from NAMESPACE. Removed roxygen import calls from `SSplotJABBAres()` and `SSrmse()`, and appended **dplyr** function calls with the double colon operator (`dplyr::`)  (#82)
+* Updated default **summaryoutput** used in `SSplotModelComp()` for `ss3diags::retroSimple` and default **ss3rep** used in `SSplotRunsTest()` for `ss3diags::simple`
+* Updated ss3diags citation. 
+* Minor documentation link fixes.
+
 # ss3diags 2.1.0
 
 * RMSE calculations are modularized as a standalone function that can be called independently from `SSplotJABBAres()` as `SSrmse()`. (#50) 
