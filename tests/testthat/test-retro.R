@@ -3,8 +3,6 @@
 path <- file.path(tempdir(), "test_runs")
 dir.create(path, showWarnings = FALSE)
 
-retroSimple <- ss3diags::retroSimple
-retrosum.simple <- r4ss::SSsummarize(retroSimple)
 
 ## SSB
 test_that("Retrospective plot is created for SSB (w/ deprecated parameters)", {
