@@ -6,6 +6,7 @@ on:
     paths-ignore:
       - 'README.md'
   pull_request:
+  workflow_call:
 
 name: get-ss-exe
 jobs:
@@ -34,6 +35,4 @@ jobs:
           sudo chmod a+x ss
           cp ss inst/extdata/simple_small/ss
           rm ss
-
-      - uses: nmfs-fish-tools/ghactions4r/.github/workflows/r-cmd-check.yml@main 
  

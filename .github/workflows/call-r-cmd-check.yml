@@ -4,10 +4,14 @@ name: call-r-cmd-check
 on:
 # The default build trigger is to run the action on every push and pull request, for any branch
   push:
+    paths-ignore:
+      - 'README.md'
   pull_request:
   # To run the default repository branch weekly on sunday, uncomment the following 2 lines
   #schedule:
     #- cron: '0 0 * * 0'
 jobs:
   call-workflow:
+    uses: ./.github/workflows/get-ss.yml@FEAT-update-testing-fixtures
+  call-workflow-r-cmd-check:
     uses: nmfs-fish-tools/ghactions4r/.github/workflows/r-cmd-check.yml@main
