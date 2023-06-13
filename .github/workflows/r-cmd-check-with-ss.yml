@@ -34,6 +34,6 @@ jobs:
           sudo chmod a+x ss
           cp ss inst/extdata/simple_small/ss
           rm ss
-  call-workflow:
-    uses: nmfs-fish-tools/ghactions4r/.github/workflows/r-cmd-check.yml@main
+
+      - uses: nmfs-fish-tools/ghactions4r/.github/workflows/r-cmd-check.yml@main 
  
