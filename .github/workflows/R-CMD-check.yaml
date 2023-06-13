@@ -1,0 +1,71 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+  pull_request:
+
+name: build-ss-R-CMD-check
+
+jobs:
+  R-CMD-check:
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: macOS-latest,   r: 'release'}
+          - {os: windows-latest, r: 'release'}
+          - {os: ubuntu-latest,   r: 'release'}
+
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-pandoc@v1
+
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          extra-packages: |
+            any::rcmdcheck
+            any::remotes
+            any::testthat
+      
+      - name: install r4ss
+        run: Rscript -e 'remotes::install_github("r4ss/r4ss")'
+
+      - name: create test fixtures directory
+        run: |
+          test_fixtures <- testthat::test_path("fixtures")
+          dir.create(test_fixtures)
+          r4ss.dir <- system.file("extdata/simple_small", package = "r4ss")
+          file.copy(paste0(r4ss.dir, "/",  c("data.ss", "starter.ss", "forecast.ss","control.ss")), to = test_fixtures)
+        shell: Rscript {0}
+      
+      - name: Get the latest SS3 executable and move to expected location
+        run: |
+          curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_linux" | xargs wget
+          mv ss_linux ss
+          sudo chmod a+x ss
+          cp ss tests/testthat/fixtures/ss
+          rm ss
+        
+      - name: Run retrospective
+        run: |
+          r4ss::retro(dir = test_fixtures, oldsubdir = "", newsubdir = "retrospectives", years = 0:-3, show_in_console = FALSE)
+
+      - uses: r-lib/actions/check-r-package@v1
