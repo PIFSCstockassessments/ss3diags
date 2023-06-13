@@ -12,6 +12,6 @@ on:
     #- cron: '0 0 * * 0'
 jobs:
   call-workflow:
-    uses: ./.github/workflows/get-ss.yml@FEAT-update-testing-fixtures #NOTE once in main branch update here
+    uses: ./.github/workflows/get-ss.yml 
   call-workflow-r-cmd-check:
     uses: nmfs-fish-tools/ghactions4r/.github/workflows/r-cmd-check.yml@main
