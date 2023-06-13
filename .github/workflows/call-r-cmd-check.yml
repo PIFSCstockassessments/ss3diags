@@ -11,7 +11,5 @@ on:
   #schedule:
     #- cron: '0 0 * * 0'
 jobs:
-  call-workflow:
-    uses: ./.github/workflows/get-ss.yml 
   call-workflow-r-cmd-check:
     uses: nmfs-fish-tools/ghactions4r/.github/workflows/r-cmd-check.yml@main
