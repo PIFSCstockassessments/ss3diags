@@ -42,7 +42,6 @@ jobs:
             any::rcmdcheck
             any::remotes
             any::testthat
-          working-directory: tests/testthat
       
       - name: install r4ss
         run: |
