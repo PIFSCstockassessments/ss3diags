@@ -76,7 +76,6 @@ jobs:
         shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v2
-          working-directory: 
 
       - name: cleanup
         run: rm -r tests/testthat/fixtures
