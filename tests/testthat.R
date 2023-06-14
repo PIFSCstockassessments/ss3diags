@@ -3,7 +3,7 @@ library(ss3diags)
 library(r4ss)
 
 test_example_path <- system.file("extdata", "simple_small", package = "r4ss")
-test_fixtures <- system.file("tests", "testthat", "fixtures", package = "ss3diags")
+test_fixtures <- system.file("fixtures", package = "ss3diags")
 #testthat::test_path("fixtures")
 file.path(
       test_fixtures, "retrospectives",
