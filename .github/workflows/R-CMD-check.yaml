@@ -48,6 +48,7 @@ jobs:
       - name: install r4ss
         run: |
           remotes::install_github("r4ss/r4ss")
+        shell: Rscript {0}
 
       - name: create test fixtures directory
         run: |
