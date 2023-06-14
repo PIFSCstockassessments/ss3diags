@@ -70,5 +70,6 @@ jobs:
         run: |
           test_fixtures <- testthat::test_path("fixtures")
           r4ss::retro(dir = test_fixtures, oldsubdir = "", newsubdir = "retrospectives", years = 0:-3, show_in_console = FALSE)
+        shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v1
