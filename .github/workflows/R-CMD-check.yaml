@@ -54,7 +54,6 @@ jobs:
         run: |
           test_fixtures <- testthat::test_path("fixtures")
           dir.create(test_fixtures)
-          print(test_fixtures)
           r4ss.dir <- system.file("extdata/simple_small", package = "r4ss")
           file.copy(paste0(r4ss.dir, "/",  c("data.ss", "starter.ss", "forecast.ss","control.ss")), to = test_fixtures)
         shell: Rscript {0}
@@ -69,6 +68,7 @@ jobs:
         
       - name: Run retrospective
         run: |
+          test_fixtures <- testthat::test_path("fixtures")
           r4ss::retro(dir = test_fixtures, oldsubdir = "", newsubdir = "retrospectives", years = 0:-3, show_in_console = FALSE)
 
       - uses: r-lib/actions/check-r-package@v1
