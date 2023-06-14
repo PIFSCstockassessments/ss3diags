@@ -70,6 +70,11 @@ jobs:
         run: |
           test_fixtures <- testthat::test_path("fixtures")
           r4ss::retro(dir = test_fixtures, oldsubdir = "", newsubdir = "retrospectives", years = 0:-3, show_in_console = FALSE)
+          unlink(file.path(test_fixture, "retrospectives", "retro0", "ss"))
+          unlink(file.path(test_fixture, "retrospectives", "retro-1", "ss"))
+          unlink(file.path(test_fixture, "retrospectives", "retro-2", "ss"))
+          unlink(file.path(test_fixture, "retrospectives", "retro-3", "ss"))
+          unlink(file.path(test_fixture, "ss"))
         shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v2
