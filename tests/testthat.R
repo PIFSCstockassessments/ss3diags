@@ -4,6 +4,17 @@ library(r4ss)
 
 test_example_path <- system.file("extdata", "simple_small", package = "r4ss")
 test_fixtures <- system.file("fixtures", package = "ss3diags")
+
+list.files(system.file("tests", "testthat", package = "ss3diags"))
+list.files(system.file("tests", "testthat", "fixtures", package = "ss3diags"))
+
+
+# runs_path avoids repeated use of "extdata" that would have to be added
+# if using tmp_path directly
+runs_path <- file.path(tmp_path, "extdata")
+path_simple_small <- file.path(runs_path, "simple_small")
+retro_years <- 0:-2
+
 #testthat::test_path("fixtures")
 file.path(
       test_fixtures, "retrospectives",
