@@ -3,28 +3,29 @@ library(ss3diags)
 library(r4ss)
 
 test_example_path <- system.file("extdata", "simple_small", package = "r4ss")
-test_fixtures <- system.file("fixtures", package = "ss3diags")
 
-list.files(system.file("tests", "testthat", package = "ss3diags"))
-list.files(system.file("tests", "testthat", "fixtures", package = "ss3diags"))
+tmp_path <- file.path(tempdir(check = TRUE), "test-retro")
+dir.create(tmp_path, showWarnings = FALSE)
+runs_path <- file.path(tmp_path, "simple_small")
+file.copy(test_example_path, tmp_path, recursive = TRUE)
+file.copy(file.path("tests", "testthat", "ss"), runs_path)
+retro_years <- 0:-3
+# clean up
+on.exit(unlink(tmp_path, recursive = TRUE))
 
+## Run retrospectives
+r4ss::retro(dir = runs_path, oldsubdir = "", newsubdir = "retrospectives", years = retro_years, show_in_console = FALSE)
+         # unlink(file.path(runs_path, "retrospectives", "retro0", "ss"))
+         # unlink(file.path(runs_path, "retrospectives", "retro-1", "ss"))
+         # unlink(file.path(runs_path, "retrospectives", "retro-2", "ss"))
+         # unlink(file.path(runs_path, "retrospectives", "retro-3", "ss"))
+        #  unlink(file.path(runs_path, "ss"))
 
-# runs_path avoids repeated use of "extdata" that would have to be added
-# if using tmp_path directly
-runs_path <- file.path(tmp_path, "extdata")
-path_simple_small <- file.path(runs_path, "simple_small")
-retro_years <- 0:-2
-
-#testthat::test_path("fixtures")
-file.path(
-      test_fixtures, "retrospectives",
-      paste0("retro", 0:-3)
-    )
 # Creating retrospective object here so that multiple test files can access it without having to re-run retrospective for each test
 retroModels <- r4ss::SSgetoutput(
     dirvec = file.path(
-      test_fixtures, "retrospectives",
-      paste0("retro", 0:-3)
+      runs_path, "retrospectives",
+      paste0("retro", retro_years)
     )
   )
 retrosum.simple <- r4ss::SSsummarize(retroModels)
