@@ -35,6 +35,10 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck
+
       - name: Get the latest SS3 executable and move to expected location
         run: |
           curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_linux" | xargs wget
