@@ -51,7 +51,7 @@ jobs:
         
       - uses: r-lib/actions/check-r-package@v2
         with: 
-          error-on: "error"
+          error-on: '"error"'
 
       - name: remove ss executable
         run: rm inst/extdata/ss
