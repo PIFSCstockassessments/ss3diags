@@ -3,9 +3,11 @@ library(ss3diags)
 library(r4ss)
 
 test_example_path <- system.file("extdata", "simple_small", package = "r4ss")
-
-## Run retrospectives
 runs_path <- file.path(".", "model_recipes", "test")
+file.copy(from = list.files(system.file("extdata", "simple_small", package = "r4ss"), 
+pattern = "data.ss|control.ss|starter.ss|forecast.ss", full.names = TRUE),
+to = runs_path)
+## Run retrospectives
 r4ss::retro(dir = runs_path, oldsubdir = "", newsubdir = "retrospectives", years = retro_years, show_in_console = FALSE)
          # unlink(file.path(runs_path, "retrospectives", "retro0", "ss"))
          # unlink(file.path(runs_path, "retrospectives", "retro-1", "ss"))
