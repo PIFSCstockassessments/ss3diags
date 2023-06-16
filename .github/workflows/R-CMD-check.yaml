@@ -46,6 +46,7 @@ jobs:
           curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_linux" | xargs wget
           mv ss_linux ss
           sudo chmod a+x ss
+          mkdir model_recipes/test
           cp ss model_recipes/test/ss
           rm ss
         
