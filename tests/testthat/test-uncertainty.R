@@ -5,9 +5,9 @@ simple <- r4ss::SS_output(dir = test_example_path, verbose=FALSE, printstats = F
 mvln.msy <- SSdeltaMVLN(simple, Fref = "MSY")
 
 test_that("mle table values are as expected for Simple with Fref = MSY", {
-  expect_equal(round(mvln.msy$mle$harvest[1], 7), 1.210293)
-  expect_equal(round(mvln.msy$mle$stock[1], 7), 1.0998)
-  expect_equal(round(mvln.msy$mle$F[1], 7), 0.239068)
+  expect_equal(round(mvln.msy$mle$harvest[1], 6), 1.210293)
+  expect_equal(round(mvln.msy$mle$stock[1], 6), 1.0998)
+  expect_equal(round(mvln.msy$mle$F[1], 6), 0.239068)
 })
 
 

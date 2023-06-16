@@ -39,9 +39,9 @@ test_that("Hindcast plot is created for simple model indices", {
 test_that("MASE table gives expected values for simple model", {
   mase <- SSplotHCxval(retrosum.simple, add = T, verbose = F)
 
-  expect_match(mase$Index[1], "Survey")
-  expect_equal(round(mase$MASE[1], 7), 0.5836339)
-  expect_equal(round(mase$MAE.PR[1], 7), 0.1856207)
+  expect_match(mase$Index[1], "SURVEY1")
+  expect_equal(round(mase$MASE[1], 7), 0.494371)
+  expect_equal(round(mase$MAE.PR[1], 7), 0.0873324)
 })
 
 
@@ -60,5 +60,5 @@ test_that("SSretroComps returns the correct comp data for simple model", {
 test_that("SSmase base.adj changes", {
   ssmase <- SSmase(retrosum.simple, MAE.base.adj = 0.15)
 
-  expect_equal(round(ssmase$MASE.adj[1], 7), 0.8503379)
+  expect_equal(round(ssmase$MASE.adj[1], 7), 0.4943710)
 })

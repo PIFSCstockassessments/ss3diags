@@ -148,26 +148,26 @@ dir.create(path, showWarnings = FALSE)
 ## Simple
 test_that("file of simple_cpue_residruns plot exists", {
   SSplotRunstest(simple,
-    png = TRUE,
-    print = T,
+    use_png = TRUE,
+    print_plot = T,
     subplots = "cpue",
     indexselect = 1,
     plotdir = path,
     filenameprefix = "simple_"
   )
 
-  expect_true(file.exists(file.path(path, "simple_residruns_Survey.png")))
+  expect_true(file.exists(file.path(path, "simple_residruns_SURVEY1.png")))
 })
 
 
 test_that("file of simple_len_residruns plot exists", {
   SSplotRunstest(simple,
-    png = TRUE,
-    print = T,
+    use_png = TRUE,
+    print_plot = T,
     subplots = "len",
     plotdir = path,
     filenameprefix = "simple_len_"
   )
 
-  expect_true(file.exists(file.path(path, "simple_len_residruns_Fishery.png")))
+  expect_true(file.exists(file.path(path, "simple_len_residruns_FISHERY.png")))
 })
