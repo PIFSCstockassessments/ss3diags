@@ -6,7 +6,7 @@ test_example_path <- system.file("extdata", "simple_small", package = "r4ss")
 files_path <- system.file("extdata", package = "ss3diags")
 run_tmp <- file.path(tempdir(check = TRUE), "test-runs")
 dir.create(run_tmp, showWarnings = FALSE)
-file.copy(from = files_path, to = run_tmp)
+file.copy(from = list.files(files_path, full.names = TRUE), to = run_tmp)
 ## Run retrospectives
 r4ss::retro(dir = run_tmp, oldsubdir = "", newsubdir = "retrospectives", years = retro_years, show_in_console = FALSE)
          # unlink(file.path(runs_path, "retrospectives", "retro0", "ss"))
