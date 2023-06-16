@@ -8,7 +8,7 @@ run_tmp <- file.path(tempdir(check = TRUE), "test-runs")
 dir.create(run_tmp, showWarnings = FALSE)
 file.copy(from = list.files(files_path, full.names = TRUE), to = run_tmp)
 ## Run retrospectives
-r4ss::retro(dir = run_tmp, oldsubdir = "", newsubdir = "retrospectives", years = retro_years, show_in_console = FALSE)
+r4ss::retro(dir = run_tmp, oldsubdir = "", newsubdir = "retrospectives", years = 0:-3, show_in_console = FALSE)
          # unlink(file.path(runs_path, "retrospectives", "retro0", "ss"))
          # unlink(file.path(runs_path, "retrospectives", "retro-1", "ss"))
          # unlink(file.path(runs_path, "retrospectives", "retro-2", "ss"))
