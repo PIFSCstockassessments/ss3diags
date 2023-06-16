@@ -3,24 +3,21 @@ library(ss3diags)
 library(r4ss)
 
 test_example_path <- system.file("extdata", "simple_small", package = "r4ss")
-runs_path <- file.path(".", "model_recipes", "test")
-runs_path
-list.files(system.file("extdata", "simple_small", package = "r4ss"), 
-pattern = "data.ss|control.ss|starter.ss|forecast.ss", full.names = TRUE)
-file.copy(from = list.files(system.file("extdata", "simple_small", package = "r4ss"), 
-pattern = "data.ss|control.ss|starter.ss|forecast.ss", full.names = TRUE),
-to = runs_path)
+files_path <- system.file("extdata", package = "ss3diags")
+run_tmp <- file.path(tempdir(check = TRUE), "test-runs")
+dir.create(tmp_path, showWarnings = FALSE)
+file.copy(from = files_path, to = run_tmp)
 ## Run retrospectives
-r4ss::retro(dir = runs_path, oldsubdir = "", newsubdir = "retrospectives", years = retro_years, show_in_console = FALSE)
+r4ss::retro(dir = run_tmp, oldsubdir = "", newsubdir = "retrospectives", years = retro_years, show_in_console = FALSE)
          # unlink(file.path(runs_path, "retrospectives", "retro0", "ss"))
          # unlink(file.path(runs_path, "retrospectives", "retro-1", "ss"))
          # unlink(file.path(runs_path, "retrospectives", "retro-2", "ss"))
          # unlink(file.path(runs_path, "retrospectives", "retro-3", "ss"))
         #  unlink(file.path(runs_path, "ss"))
-
+on.exit(unlink(tmp_path, recursive = TRUE))
 # Creating retrospective object here so that multiple test files can access it without having to re-run retrospective for each test
 retroModels <- r4ss::SSgetoutput(
-    dirvec = file.path(runs_path, "retrospectives",
+    dirvec = file.path(run_tmp, "retrospectives",
       paste0("retro", 0:-3)
     )
   )
