@@ -14,9 +14,8 @@ test_example_path <- system.file("extdata", "simple_small", package = "r4ss")
 
 # Creating retrospective object here so that multiple test files can access it without having to re-run retrospective for each test
 retroModels <- r4ss::SSgetoutput(
-    dirvec = file.path(
-      file.path("data", "test", "retrospectives",
-      paste0("retro", retro_years)
+    dirvec = file.path("model_recipes", "test", "retrospectives",
+      paste0("retro", 0:-3)
     )
   )
 retrosum.simple <- r4ss::SSsummarize(retroModels)

@@ -37,10 +37,6 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
           extra-packages: |
             any::rcmdcheck
             any::remotes
@@ -52,7 +48,7 @@ jobs:
 
       - name: copy files to test directory
         run: |
-          test_path <- file.path(".", "data", "test")
+          test_path <- file.path(".", "model_recipes", "test")
           dir.create(test_path)
           r4ss.dir <- system.file("extdata/simple_small", package = "r4ss")
           file.copy(paste0(r4ss.dir, "/",  c("data.ss", "starter.ss", "forecast.ss","control.ss")), to = test_path)
@@ -63,12 +59,12 @@ jobs:
           curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_linux" | xargs wget
           mv ss_linux ss
           sudo chmod a+x ss
-          cp ss data/test/ss
+          cp ss model_recipes/test/ss
           rm ss
         
       - name: Run retrospective
         run: |
-          test_path <- file.path(".", "data", "test")
+          test_path <- file.path(".", "model_recipes", "test")
           r4ss::retro(dir = test_path, oldsubdir = "", newsubdir = "retrospectives", years = 0:-3, show_in_console = FALSE)
           unlink(file.path(test_path, "retrospectives", "retro0", "ss"))
           unlink(file.path(test_path, "retrospectives", "retro-1", "ss"))
@@ -80,7 +76,7 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
 
       - name: cleanup
-        run: rm -r data/test
+        run: rm -r model_recipes/test
     
 
 
