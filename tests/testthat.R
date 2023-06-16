@@ -4,6 +4,9 @@ library(r4ss)
 
 test_example_path <- system.file("extdata", "simple_small", package = "r4ss")
 runs_path <- file.path(".", "model_recipes", "test")
+runs_path
+list.files(system.file("extdata", "simple_small", package = "r4ss"), 
+pattern = "data.ss|control.ss|starter.ss|forecast.ss", full.names = TRUE)
 file.copy(from = list.files(system.file("extdata", "simple_small", package = "r4ss"), 
 pattern = "data.ss|control.ss|starter.ss|forecast.ss", full.names = TRUE),
 to = runs_path)
