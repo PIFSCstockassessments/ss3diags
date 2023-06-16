@@ -62,17 +62,6 @@ jobs:
           cp ss model_recipes/test/ss
           rm ss
         
-      - name: Run retrospective
-        run: |
-          test_path <- file.path(".", "model_recipes", "test")
-          r4ss::retro(dir = test_path, oldsubdir = "", newsubdir = "retrospectives", years = 0:-3, show_in_console = FALSE)
-          unlink(file.path(test_path, "retrospectives", "retro0", "ss"))
-          unlink(file.path(test_path, "retrospectives", "retro-1", "ss"))
-          unlink(file.path(test_path, "retrospectives", "retro-2", "ss"))
-          unlink(file.path(test_path, "retrospectives", "retro-3", "ss"))
-          unlink(file.path(test_path, "ss"))
-        shell: Rscript {0}
-
       - uses: r-lib/actions/check-r-package@v2
 
       - name: cleanup
