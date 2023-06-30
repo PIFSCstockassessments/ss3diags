@@ -64,11 +64,11 @@ jobs:
       - name: Get the latest SS3 executable for windows and move to expected location
         if: matrix.config.os == 'windows-latest' 
         run:  |
-          curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_win.exe" | xargs wget
-          move ss_win ss
-          sudo chmod a+x ss
-          cp ss inst/extdata/ss
-          rm ss
+          Invoke-WebRequest -Uri https://github.com/nmfs-stock-synthesis/stock-synthesis/releases/download/v3.30.21/ss_win.exe
+          mv ss_win.exe ss.exe
+          sudo chmod a+x ss.exe
+          cp ss.exe inst/extdata/ss.exe
+          rm ss_win.exe
         
       - uses: r-lib/actions/check-r-package@v2
         with: 
