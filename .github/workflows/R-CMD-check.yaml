@@ -62,6 +62,7 @@ jobs:
           rm ss
 
       - uses: engineerd/configurator@v0.0.9
+        if: matrix.config.os == 'windows-latest'
         with: 
           name: "ss_win.exe"
           fromGitHubReleases: "true"
@@ -69,8 +70,14 @@ jobs:
           urlTemplate: "https://github.com/nmfs-stock-synthesis/stock-synthesis/releases/download/{{version}}/ss_win.exe"
           version: "latest"
           token: ${{ secrets.GITHUB_TOKEN }}
-
         
+      - name: move SS3 in windows to expected location
+        if: matrix.config.os == 'windows-latest'
+        run: |
+          mv ss_win.exe ss.exe
+          cp ss.exe inst/extdata/ss.exe
+          rm ss_win.exe
+
       - uses: r-lib/actions/check-r-package@v2
         with: 
           error-on: '"error"'
