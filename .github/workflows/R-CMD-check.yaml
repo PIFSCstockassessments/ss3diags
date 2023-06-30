@@ -64,7 +64,11 @@ jobs:
       - uses: engineerd/configurator@v0.0.9
         with: 
           name: "ss_win.exe"
-          url: "https://github.com/nmfs-stock-synthesis/stock-synthesis/releases/download/v3.30.21"
+          fromGitHubReleases: "true"
+          repo: "nmfs-stock-synthesis/stock-synthesis"
+          urlTemplate: "https://github.com/nmfs-stock-synthesis/stock-synthesis/releases/download/{{version}}/ss_win.exe"
+          version: "latest"
+          token: ${{ secrets.GITHUB_TOKEN }}
 
         
       - uses: r-lib/actions/check-r-package@v2
