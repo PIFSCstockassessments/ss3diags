@@ -61,13 +61,11 @@ jobs:
           cp ss inst/extdata/ss
           rm ss
 
-      - name: Get the latest SS3 executable for windows and move to expected location
-        if: matrix.config.os == 'windows-latest' 
-        run:  |
-          Invoke-WebRequest -Uri https://github.com/nmfs-stock-synthesis/stock-synthesis/releases/download/v3.30.21/ss_win.exe -Outfile "D:\a\ss3diags\ss3diags\ss_win.exe"
-          mv ss_win.exe ss.exe
-          cp ss.exe inst/extdata/ss.exe
-          rm ss_win.exe
+      - uses: engineerd/configurator@v0.0.9
+        with: 
+          name: "ss_win.exe"
+          url: "https://github.com/nmfs-stock-synthesis/stock-synthesis/releases/download/v3.30.21"
+
         
       - uses: r-lib/actions/check-r-package@v2
         with: 
