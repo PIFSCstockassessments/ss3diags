@@ -65,7 +65,7 @@ jobs:
         if: matrix.config.os == 'windows-latest' 
         run:  |
           curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_win.exe" | xargs wget
-          mv ss_win.exe ss
+          move ss_win ss
           sudo chmod a+x ss
           cp ss inst/extdata/ss
           rm ss
