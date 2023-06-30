@@ -43,10 +43,20 @@ jobs:
             any::rcmdcheck
             any::remotes
       
-      - name: Get the latest SS3 executable and move to expected location
+      - name: Get the latest SS3 executable for linux and move to expected location
+        if: matrix.config.os == 'ubuntu-latest'
         run: |
           curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_linux" | xargs wget
           mv ss_linux ss
+          sudo chmod a+x ss
+          cp ss inst/extdata/ss
+          rm ss
+      
+      - name: Get the latest SS3 executable for macOS and move to expected location
+        if: matrix.config.os == 'macOS-latest' 
+        run:  |
+          curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_osx" | xargs wget
+          mv ss_osx ss
           sudo chmod a+x ss
           cp ss inst/extdata/ss
           rm ss
