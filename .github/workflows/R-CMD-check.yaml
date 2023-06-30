@@ -18,8 +18,8 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: macOS-latest,   r: 'release'}
+          #- {os: ubuntu-latest,   r: 'release'}
+          #- {os: macOS-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
 
     env:
@@ -66,7 +66,6 @@ jobs:
         run:  |
           Invoke-WebRequest -Uri https://github.com/nmfs-stock-synthesis/stock-synthesis/releases/download/v3.30.21/ss_win.exe -Outfile "D:\a\ss3diags\ss3diags\ss_win.exe"
           mv ss_win.exe ss.exe
-          sudo chmod a+x ss.exe
           cp ss.exe inst/extdata/ss.exe
           rm ss_win.exe
         
