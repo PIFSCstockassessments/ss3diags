@@ -7,17 +7,13 @@ files_path <- system.file("extdata", package = "ss3diags")
 run_tmp <- file.path(tempdir(check = TRUE), "test-runs")
 dir.create(run_tmp, showWarnings = FALSE)
 file.copy(from = list.files(files_path, full.names = TRUE), to = run_tmp)
+
 ## Run retrospectives
 r4ss::retro(dir = run_tmp, oldsubdir = "", newsubdir = "retrospectives", years = 0:-3, show_in_console = FALSE)
-         # unlink(file.path(runs_path, "retrospectives", "retro0", "ss"))
-         # unlink(file.path(runs_path, "retrospectives", "retro-1", "ss"))
-         # unlink(file.path(runs_path, "retrospectives", "retro-2", "ss"))
-         # unlink(file.path(runs_path, "retrospectives", "retro-3", "ss"))
-        #  unlink(file.path(runs_path, "ss"))
 on.exit(unlink(tmp_path, recursive = TRUE))
 # Creating retrospective object here so that multiple test files can access it without having to re-run retrospective for each test
 retroModels <- r4ss::SSgetoutput(
-    dirvec = file.path(run_tmp, "retrospectives",
+    dirvec = file.path(file.path("tests", "testthat"), "retrospectives",
       paste0("retro", 0:-3)
     )
   )
