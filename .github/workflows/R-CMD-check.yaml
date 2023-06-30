@@ -64,7 +64,7 @@ jobs:
       - name: Get the latest SS3 executable for windows and move to expected location
         if: matrix.config.os == 'windows-latest' 
         run:  |
-          Invoke-WebRequest -Uri https://github.com/nmfs-stock-synthesis/stock-synthesis/releases/download/v3.30.21/ss_win.exe
+          Invoke-WebRequest -Uri https://github.com/nmfs-stock-synthesis/stock-synthesis/releases/download/v3.30.21/ss_win.exe -Outfile "D:\a\ss3diags\ss3diags\ss_win.exe"
           mv ss_win.exe ss.exe
           sudo chmod a+x ss.exe
           cp ss.exe inst/extdata/ss.exe
