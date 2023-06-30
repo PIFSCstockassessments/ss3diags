@@ -1,5 +1,5 @@
 # Test script for evaluating model uncertainty
-simple <- r4ss::SS_output(dir = test_example_path, verbose=FALSE, printstats = FALSE)
+simple <- r4ss::SS_output(dir = test_example_path, verbose = FALSE, printstats = FALSE)
 
 
 mvln.msy <- SSdeltaMVLN(simple, Fref = "MSY")
