@@ -13,7 +13,7 @@ r4ss::retro(dir = run_tmp, oldsubdir = "", newsubdir = "retrospectives", years =
 on.exit(unlink(tmp_path, recursive = TRUE))
 # Creating retrospective object here so that multiple test files can access it without having to re-run retrospective for each test
 retroModels <- r4ss::SSgetoutput(
-    dirvec = file.path(file.path("tests", "testthat"), "retrospectives",
+    dirvec = file.path(run_tmp, "retrospectives",
       paste0("retro", 0:-3)
     )
   )
