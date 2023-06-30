@@ -36,7 +36,7 @@ jobs:
           ls
           mv ss_win.exe ss.exe
           cp ss.exe inst/extdata/ss.exe
-          rm ss_win.exe
+          ls inst/extdata
       
       - uses: r-lib/actions/setup-pandoc@v2
 
