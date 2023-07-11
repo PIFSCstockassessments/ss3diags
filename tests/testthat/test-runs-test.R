@@ -1,4 +1,4 @@
-simple <- ss3diags::simple
+simple <- r4ss::SS_output(dir = test_example_path, verbose = FALSE, printstats = FALSE)
 
 #### Simple Model ###############################################################
 
@@ -7,7 +7,7 @@ simple <- ss3diags::simple
 
 ## SSrunstest function
 test_that("runs test works with simple model", {
-  test.resids <- simple$cpue[which(simple$cpue$Fleet_name == "Survey"), c("Fleet_name", "Yr", "Obs", "Exp")]
+  test.resids <- simple$cpue[which(simple$cpue$Fleet_name == "SURVEY2"), c("Fleet_name", "Yr", "Obs", "Exp")]
   test.resids$residuals <- log(test.resids$Obs) - log(test.resids$Exp)
 
   mu <- 0
@@ -30,13 +30,13 @@ test_that("runs test works with simple model", {
   run_cpue <- SSrunstest(simple, quants = "cpue")
 
   ## testing structure of dataframe
-  expect_match(run_cpue$Index[1], "Survey")
+  expect_match(run_cpue$Index[1], "SURVEY1")
   expect_equal(nrow(run_cpue), n.cpue)
   ## testing values in the first row
-  expect_match(run_cpue$test[1], "Failed")
-  expect_equal(run_cpue$runs.p[1], test.p)
-  expect_equal(run_cpue$sigma3.lo[1], lcl)
-  expect_equal(run_cpue$sigma3.hi[1], ucl)
+  expect_match(run_cpue$test[2], "Passed")
+  expect_equal(run_cpue$runs.p[2], test.p)
+  expect_equal(run_cpue$sigma3.lo[2], lcl)
+  expect_equal(run_cpue$sigma3.hi[2], ucl)
 
   ## for length comp
   len.test.resids <- simple$lendbase[which(simple$lendbase$Fleet == 1), ]
@@ -116,7 +116,7 @@ test_that("runs test works with simple model", {
   run_fish <- SSrunstest(simple, quants = "len")
 
   ## testing structure of dataframe
-  expect_match(run_fish$Index[1], "Fishery")
+  expect_match(run_fish$Index[1], "FISHERY")
   expect_equal(nrow(run_fish), n.fish)
   ## testing values in first row
   expect_equal(run_fish$runs.p[1], test.p)
@@ -125,13 +125,13 @@ test_that("runs test works with simple model", {
 
   ## specifying cpue index
   run_cpue <- SSrunstest(simple, quants = "len", indexselect = 2)
-  expect_match(run_cpue$Index, "Survey")
+  expect_match(run_cpue$Index, "SURVEY1")
 
-  # CAAL
-  run_con <- SSrunstest(simple, quants = "con")
+  # CAAL since switching to simple_small, there is no conditional-age-at-length data.
+  # run_con <- SSrunstest(simple, quants = "con")
 
-  expect_match(run_con$Index, "Fishery")
-  expect_match(run_con$test, "Passed")
+  # expect_match(run_con$Index, "Fishery")
+  # expect_match(run_con$test, "Passed")
 })
 
 
@@ -148,26 +148,26 @@ dir.create(path, showWarnings = FALSE)
 ## Simple
 test_that("file of simple_cpue_residruns plot exists", {
   SSplotRunstest(simple,
-    png = TRUE,
-    print = T,
+    use_png = TRUE,
+    print_plot = T,
     subplots = "cpue",
     indexselect = 1,
     plotdir = path,
     filenameprefix = "simple_"
   )
 
-  expect_true(file.exists(file.path(path, "simple_residruns_Survey.png")))
+  expect_true(file.exists(file.path(path, "simple_residruns_SURVEY1.png")))
 })
 
 
-test_that("file of simple_con_residruns plot exists", {
+test_that("file of simple_len_residruns plot exists", {
   SSplotRunstest(simple,
-    png = TRUE,
-    print = T,
-    subplots = "con",
+    use_png = TRUE,
+    print_plot = T,
+    subplots = "len",
     plotdir = path,
-    filenameprefix = "simple_con_"
+    filenameprefix = "simple_len_"
   )
 
-  expect_true(file.exists(file.path(path, "simple_con_residruns_Fishery.png")))
+  expect_true(file.exists(file.path(path, "simple_len_residruns_FISHERY.png")))
 })

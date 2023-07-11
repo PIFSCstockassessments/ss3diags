@@ -3,11 +3,13 @@
 path <- file.path(tempdir(), "test_runs")
 dir.create(path, showWarnings = FALSE)
 
-retroSimple <- ss3diags::retroSimple
-retrosum.simple <- r4ss::SSsummarize(retroSimple)
 
 ## SSB
 test_that("Retrospective plot is created for SSB (w/ deprecated parameters)", {
+  skip_if(
+    !exists("retrosum.simple"),
+    message = "skipping test that requires SS3 executable"
+  )
   SSplotRetro(retrosum.simple,
     subplots = "SSB",
     use_png = TRUE,
@@ -21,6 +23,10 @@ test_that("Retrospective plot is created for SSB (w/ deprecated parameters)", {
 
 ## F
 test_that("Retrospective plot is created for F (w/ deprecated parameters)", {
+  skip_if(
+    !exists("retrosum.simple"),
+    message = "skipping test that requires SS3 executable"
+  )
   SSplotRetro(retrosum.simple,
     subplots = "F",
     use_png = TRUE,
@@ -35,6 +41,10 @@ test_that("Retrospective plot is created for F (w/ deprecated parameters)", {
 ## Mohn's Rho table using SShcbias function. It's the same code used in SSplotRetro to make the table.
 ## SSB
 test_that("Mohn's Rho table is created for SSB", {
+  skip_if(
+    !exists("retrosum.simple"),
+    message = "skipping test that requires SS3 executable"
+  )
   n <- retrosum.simple$n
   endyrs <- retrosum.simple$endyrs - seq(0, n - 1, 1)
   exp <- retrosum.simple$SpawnBio
@@ -60,6 +70,10 @@ test_that("Mohn's Rho table is created for SSB", {
 
 ## F
 test_that("Mohn's Rho table is created for F", {
+  skip_if(
+    !exists("retrosum.simple"),
+    message = "skipping test that requires SS3 executable"
+  )
   n <- retrosum.simple$n
   endyrs <- retrosum.simple$endyrs - seq(0, n - 1, 1)
   exp <- retrosum.simple$Fvalue
