@@ -9,11 +9,10 @@ dir.create(path, showWarnings = FALSE)
 ## Hindcast plotting of indices
 
 test_that("Hindcast plot is created for simple model indices", {
-  skip_if(
-    !exists("retrosum.simple")) ,
+    skip_if(
+    !exists("retrosum.simple") ,
     message = "skipping test that requires SS3 executable"
   )
-  
   SSplotHCxval(retrosum.simple,
     add = T,
     verbose = F,
@@ -42,8 +41,8 @@ test_that("Hindcast plot is created for simple model indices", {
 #### note: function was too complicated to replicate in the test script so used values directly from running the function. If code for calculations changes, the values will change and it will error or if the SS3 input files change, the values will be different and it will error.
 
 test_that("MASE table gives expected values for simple model", {
-  skip_if(
-    !exists("retrosum.simple")) ,
+    skip_if(
+    !exists("retrosum.simple") ,
     message = "skipping test that requires SS3 executable"
   )
  
@@ -57,8 +56,8 @@ test_that("MASE table gives expected values for simple model", {
 
 test_that("SSretroComps returns the correct comp data for simple model", {
   
-  skip_if(
-    !exists("retrosum.simple")) ,
+     skip_if(
+    !exists("retrosum.simple") ,
     message = "skipping test that requires SS3 executable"
   )
   retro_comps <- SSretroComps(retroSimple)
@@ -73,8 +72,8 @@ test_that("SSretroComps returns the correct comp data for simple model", {
 
 
 test_that("SSmase base.adj changes", {
-  skip_if(
-    !exists("retrosum.simple")) ,
+    skip_if(
+    !exists("retrosum.simple") ,
     message = "skipping test that requires SS3 executable"
   )
   ssmase <- SSmase(retrosum.simple, MAE.base.adj = 0.15)
