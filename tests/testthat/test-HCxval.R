@@ -1,7 +1,7 @@
 ## Test script for hindcast cross validation and MASE
 
-#retroSimple <- ss3diags::retroSimple
-#retrosum.simple <- r4ss::SSsummarize(retroSimple)
+# retroSimple <- ss3diags::retroSimple
+# retrosum.simple <- r4ss::SSsummarize(retroSimple)
 
 path <- file.path(tempdir(), "test_runs")
 dir.create(path, showWarnings = FALSE)

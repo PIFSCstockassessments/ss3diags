@@ -1,4 +1,4 @@
-simple <- r4ss::SS_output(dir = test_example_path, verbose=FALSE, printstats = FALSE)
+simple <- r4ss::SS_output(dir = test_example_path, verbose = FALSE, printstats = FALSE)
 
 #### Simple Model ###############################################################
 
@@ -127,11 +127,11 @@ test_that("runs test works with simple model", {
   run_cpue <- SSrunstest(simple, quants = "len", indexselect = 2)
   expect_match(run_cpue$Index, "SURVEY1")
 
-  # CAAL since switching to simple_small, there is no conditional-age-at-length data. 
-  #run_con <- SSrunstest(simple, quants = "con")
+  # CAAL since switching to simple_small, there is no conditional-age-at-length data.
+  # run_con <- SSrunstest(simple, quants = "con")
 
-  #expect_match(run_con$Index, "Fishery")
-  #expect_match(run_con$test, "Passed")
+  # expect_match(run_con$Index, "Fishery")
+  # expect_match(run_con$test, "Passed")
 })
 
 
