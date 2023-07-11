@@ -2,57 +2,41 @@ Package: ss3diags
 Title: Stock Synthesis Model Diagnostics for Intergated Stock Assessments
 Version: 2.1.1
 Date: 2023-06-07
-Authors@R: 
-  c(person(given = "Henning",
-    family = "Winker",
-    role = c("aut"),
-    email = "henning.winker@ec.europa.eu"),
-    person(given = "Felipe",
-    family = "Carvalho",
-    role = c("aut"),
-    email = "felipe.carvalho@noaa.gov"),
-    person(given = "Massimiliano",
-    family = "Cardinale",
-    role = c("aut"),
-    email = "massimiliano.cardinale@slu.se"),
-    person(given = "Laurence",
-    family = "Kell",
-    role = c("aut"),
-    email = "laurie@seaplusplus.co.uk"),
-    person(given = "Megumi",
-    family = "Oshima",
-    role = c("aut","cre"),
-    email = "megumi.oshima@noaa.gov"),
-    person(given = "Eric",
-    family = "Fletcher",
-    role = c("aut"),
-    email = "eric.fletcher@noaa")
-  ) 
-Description: Compilation of diagnostic functions for Stock Synthesis models, which
-  developed for the manuscript "Using Model Diagnostics in Integrated Stock Assessments".
-Depends:
-  R (>= 3.5)
-Imports:
-    reshape2,
-    mvtnorm,
-    randtests,
-    r4ss(>= 1.46.1),
-    gplots,
-    magrittr,
-    dplyr,
-    rlang,
-    lifecycle
-Remotes: r4ss/r4ss#821
+Authors@R: c(
+    person("Henning", "Winker", , "henning.winker@ec.europa.eu", role = "aut"),
+    person("Felipe", "Carvalho", , "felipe.carvalho@noaa.gov", role = "aut"),
+    person("Massimiliano", "Cardinale", , "massimiliano.cardinale@slu.se", role = "aut"),
+    person("Laurence", "Kell", , "laurie@seaplusplus.co.uk", role = "aut"),
+    person("Megumi", "Oshima", , "megumi.oshima@noaa.gov", role = c("aut", "cre")),
+    person("Eric", "Fletcher", , "eric.fletcher@noaa", role = "aut")
+  )
+Description: Compilation of diagnostic functions for Stock Synthesis
+    models, which developed for the manuscript "Using Model Diagnostics in
+    Integrated Stock Assessments".
 License: EUPL
+URL: https://github.com/PIFSCstockassessments/ss3diags
+BugReports: https://github.com/PIFSCstockassessments/ss3diags/issues
+Depends:
+    R (>= 3.5)
+Imports:
+    dplyr,
+    gplots,
+    lifecycle,
+    magrittr,
+    mvtnorm,
+    r4ss(>= 1.46.1),
+    randtests,
+    reshape2,
+    rlang
+Suggests:
+    knitr,
+    markdown,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Remotes: 
+    r4ss/r4ss#821
 Encoding: UTF-8
 LazyData: True
 LazyDataCompression: gzip
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Suggests:
-  testthat (>= 3.0.0),
-  knitr,
-  rmarkdown,
-  markdown
-URL: https://github.com/PIFSCstockassessments/ss3diags
-BugReports: https://github.com/PIFSCstockassessments/ss3diags/issues
