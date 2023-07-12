@@ -47,18 +47,6 @@
 #' @param legendcex Allows to adjust legend cex
 #' @param legendsp Space between legend labels
 #' @param legendindex Allows to add lengend for selected indices (plots)
-#' @param pwidth Width of plot
-#' @param pheight Height of plot
-#' @param punits Units for PNG file
-#' @param res Resolution for PNG file
-#' @param ptsize Point size for PNG file
-#' @param cex.main Character expansion for plot titles
-#' @param plotdir Directory where PNG or PDF files will be written. By default
-#' it will be the directory where the model was run.
-#' @param filenameprefix Additional text to append to PNG or PDF file names.
-#' It will be separated from default name by an underscore.
-#' @param par list of graphics parameter values passed to par() function
-#' @param verbose Report progress to R GUI?
 #' @param shadecol uncertainty shading of hcxval horizon
 #' @param shadealpha Transparency adjustment used to make default shadecol
 #' @param new Deprecated. New plot windows are created by default (TRUE), and the
@@ -77,6 +65,8 @@
 #'
 #' @importFrom grDevices pdf
 #' @importFrom lifecycle deprecated
+#' 
+#' @inheritParams SSplotGeneric
 #'
 #' @keywords ssplot hindcasting
 #'
