@@ -148,27 +148,37 @@ which is represented in the summary input object.}
 
 \item{legendindex}{Allows to add lengend for selected indices (plots)}
 
-\item{pwidth}{Width of plot}
+\item{pwidth}{Default width of plot printed to plot in units of \code{punits}}
 
-\item{pheight}{Height of plot}
+\item{pheight}{Height of plot printed to plot in units of \code{punits }}
 
-\item{punits}{Units for PNG file}
+\item{punits}{Measurement units for \code{pwidth} and \code{pheight}. Default is \code{"in"}.
+\itemize{
+\item \code{"px"} (pixels)
+\item \code{"in"} (inches)
+\item \code{"cm"} (centimeters)
+\item \code{"mm"} (millimeters)
+}}
 
-\item{res}{Resolution for PNG file}
+\item{res}{Resolution for plots printed to files.}
 
-\item{ptsize}{Point size for PNG file}
+\item{ptsize}{Point size for plotted text in plots printed in files. See \code{help("png")}
+for more details}
 
-\item{cex.main}{Character expansion for plot titles}
+\item{cex.main}{Character expansion for plot titles.}
 
-\item{plotdir}{Directory where PNG or PDF files will be written. By default
+\item{plotdir}{Directory where output plot file will be written. By default,
 it will be the directory where the model was run.}
 
-\item{filenameprefix}{Additional text to append to PNG or PDF file names.
+\item{filenameprefix}{Additional text to append to output plot file name.
 It will be separated from default name by an underscore.}
 
-\item{par}{list of graphics parameter values passed to par() function}
+\item{par}{A numerical vector of the form c(bottom, left, top, right) which
+gives the number of lines of margin to be specified on the four sides of
+the plot,which is passed to \code{par()}. Entering \code{NULL} passes plot's default
+\code{par()} values (which depends on whether the main title is included or not)}
 
-\item{verbose}{Report progress to R GUI?}
+\item{verbose}{Flag to print additional diagnostic messages to R console}
 
 \item{shadecol}{uncertainty shading of hcxval horizon}
 

@@ -6,33 +6,43 @@
 #' production
 #'
 #' @param pwidth 
-#' Width of plot
+#' Default width of plot printed to plot in units of `punits`
 #' 
 #' @param pheight 
-#' Height of plot
+#' Height of plot printed to plot in units of `punits `
 #' 
 #' @param punits 
-#' Measurement units for PNG file
+#' Measurement units for `pwidth` and `pheight`. Default is `"in"`.
+#' \itemize{
+#'  \item `"px"` (pixels)
+#'  \item `"in"` (inches)
+#'  \item `"cm"` (centimeters)
+#'  \item `"mm"` (millimeters)
+#' }
 #' 
 #' @param res 
-#' Resolution for PNG file
+#' Resolution for plots printed to files.
 #' 
 #' @param ptsize 
-#' Point size for PNG file
+#' Point size for plotted text in plots printed in files. See `help("png")`
+#' for more details
 #' 
 #' @param cex.main 
-#' Character expansion for plot titles
+#' Character expansion for plot titles.
 #' 
 #' @param plotdir 
-#' Directory where PNG or PDF files will be written. By default, 
+#' Directory where output plot file will be written. By default, 
 #' it will be the directory where the model was run.
 #' 
 #' @param filenameprefix 
-#' Additional text to append to PNG or PDF file names.
+#' Additional text to append to output plot file name.
 #' It will be separated from default name by an underscore.
 #' 
 #' @param par 
-#' list of graphics parameter values passed to `par()` function
+#' A numerical vector of the form c(bottom, left, top, right) which 
+#' gives the number of lines of margin to be specified on the four sides of 
+#' the plot,which is passed to `par()`. Entering `NULL` passes plot's default 
+#' `par()` values (which depends on whether the main title is included or not)
 #' 
 #' @param verbose 
 #' Flag to print additional diagnostic messages to R console
@@ -97,3 +107,4 @@ SSplotGenericLegend <- function(legend = TRUE,
   
   stop("SSplotGenericLegend not implemented")
 }
+
