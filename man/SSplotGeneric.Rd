@@ -14,7 +14,16 @@ SSplotGeneric(
   plotdir = NULL,
   filenameprefix = "",
   par = list(mar = c(5, 4, 1, 1) + 0.1),
-  verbose = TRUE
+  verbose = TRUE,
+  plot = TRUE,
+  print = deprecated(),
+  print_plot = FALSE,
+  png = deprecated(),
+  use_png = print_plot,
+  pdf = deprecated(),
+  use_pdf = FALSE,
+  new = TRUE,
+  add = FALSE
 )
 }
 \arguments{
@@ -49,6 +58,27 @@ the plot,which is passed to \code{par()}. Entering \code{NULL} passes plot's def
 \code{par()} values (which depends on whether the main title is included or not)}
 
 \item{verbose}{Flag to print additional diagnostic messages to R console}
+
+\item{plot}{DEPRECATED. By default, TRUE, Plots (and subplots) are drawn to the
+plot device. The option to explicitly disable this option (FALSE), is not
+implemented. This option flag will be defunct in a future version}
+
+\item{print}{DEPRECATED, please use \code{print_plot}.}
+
+\item{print_plot}{Flag to enable plot graphic device to print to PNG or PNG files.}
+
+\item{png}{DEPRECATED. Please use \code{use_png}.}
+
+\item{use_png}{Enables plots to be generated to PNG files. Defaults to print value}
+
+\item{pdf}{DEPRECATED. Please use \code{use_pdf}.}
+
+\item{use_pdf}{Enables plots to be generated to pdf file.}
+
+\item{new}{Deprecated. New plot windows are created by default (TRUE), and the
+option to disable this, via FALSE, is unused.}
+
+\item{add}{suppresses \code{par()} to create multiplot figs}
 }
 \description{
 Generalized version of ss3diags SSplots functions. Not intended for

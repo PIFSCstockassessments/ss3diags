@@ -4,7 +4,7 @@
 #' 
 #' Generalized version of ss3diags SSplots functions. Not intended for 
 #' production
-#'
+#' 
 #' @param pwidth 
 #' Default width of plot printed to plot in units of `punits`
 #' 
@@ -47,16 +47,55 @@
 #' @param verbose 
 #' Flag to print additional diagnostic messages to R console
 #' 
+#' @param plot 
+#' DEPRECATED. By default, TRUE, Plots (and subplots) are drawn to the 
+#' plot device. The option to explicitly disable this option (FALSE), is not 
+#' implemented. This option flag will be defunct in a future version
+#' 
+#' @param print 
+#' DEPRECATED, please use `print_plot`.
+#' 
+#' @param print_plot 
+#' Flag to enable plot graphic device to print to PNG or PNG files.
+#' 
+#' @param png 
+#' DEPRECATED. Please use `use_png`.
+#' 
+#' @param use_png 
+#' Enables plots to be generated to PNG files. Defaults to print value
+#' 
+#' @param pdf 
+#' DEPRECATED. Please use `use_pdf`.
+#' 
+#' @param use_pdf 
+#' Enables plots to be generated to pdf file.
+#' 
+#' @param new 
+#' Deprecated. New plot windows are created by default (TRUE), and the
+#' option to disable this, via FALSE, is unused.
+#' 
+#' @param add 
+#' suppresses `par()` to create multiplot figs
+#' 
 SSplotGeneric <- function(pwidth = 6.5,
-                           pheight = 5.0,
-                           punits = "in",
-                           res = 300,
-                           ptsize = 10,
-                           cex.main = 1,
-                           plotdir = NULL,
-                           filenameprefix = "",
-                           par = list(mar = c(5, 4, 1, 1) + .1),
-                           verbose = TRUE) {
+                          pheight = 5.0,
+                          punits = "in",
+                          res = 300,
+                          ptsize = 10,
+                          cex.main = 1,
+                          plotdir = NULL,
+                          filenameprefix = "",
+                          par = list(mar = c(5, 4, 1, 1) + .1),
+                          verbose = TRUE,
+                          plot = TRUE,
+                          print = deprecated(),
+                          print_plot = FALSE,
+                          png = deprecated(),
+                          use_png = print_plot,
+                          pdf = deprecated(),
+                          use_pdf = FALSE,
+                          new = TRUE,
+                          add = FALSE) {
   
   stop("SSplotGeneric not implemented")
 }
