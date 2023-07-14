@@ -152,7 +152,7 @@ SSplotGenericLegend <- function(legend = TRUE,
 #'
 #' Generalized version of ss3diags SSplots functions to specify to `par()` or
 #' to pass plot attributes. Not intended for production.
-#'#'
+#'
 #' @param col 
 #' Optional vector of colors to be used for lines. Input NULL
 #' 
@@ -201,4 +201,41 @@ SSplotGenericPar <- function(col = NULL,
                              xylabs = TRUE,
                              type = "l") {
   stop("SSplotGenericPar not implemented")
+}
+
+
+#' Uncertainty parameters for Stock Synthesis Generic plots.
+#'
+#' Generalized version of ss3diags SSplots functions to specify uncertainty.
+#' Not intended for production.
+#'
+#'
+#' @param uncertainty 
+#' Logical flag to enable plots with uncertainty intervals. Either a single
+#' TRUE/FALSE value, or a vector of TRUE/FALSE values around SSB or F 
+#' estimated timeseries, or a set of integers corresponding to 
+#' the choice of models.
+#' 
+#' @param mcmcVec 
+#' Logical vector of TRUE/FALSE values (or single value) indicating
+#' whether input values are from MCMC or to use normal distribution around
+#' MLE.
+#' 
+#' @param endyrvec 
+#' Optional single year or vector of years representing the
+#' final year of values to show for each model. By `"default"` it is set to the
+#' ending year specified in each model.
+#' 
+#' @param models Optional subset of the models of `summaryoutput` (or a similar
+#' field with a different name): a list created by the function 
+#' [r4ss::SSsummarize]. Either `"all"` or a vector of numbers indicating 
+#' columns in summary tables.
+#' 
+#'
+SSplotGenericUncertainty <- function (uncertainty = TRUE,
+                                      mcmcVec = FALSE,
+                                      endyrvec = "default",
+                                      models = "all") {
+  
+  stop("SSplotGenericUncertainty not implemented")
 }
