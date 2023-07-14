@@ -84,3 +84,4 @@ option to disable this, via FALSE, is unused.}
 Generalized version of ss3diags SSplots functions. Not intended for
 production
 }
+\keyword{internal}

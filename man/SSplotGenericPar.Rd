@@ -48,3 +48,4 @@ y-axis labels to the plot. Defaults to TRUE}
 Generalized version of ss3diags SSplots functions to specify to \code{par()} or
 to pass plot attributes. Not intended for production.
 }
+\keyword{internal}

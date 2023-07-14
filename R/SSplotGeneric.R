@@ -77,6 +77,8 @@
 #' @param add 
 #' suppresses `par()` to create multiplot figs
 #' 
+#' @keywords internal
+#' 
 SSplotGeneric <- function(pwidth = 6.5,
                           pheight = 5.0,
                           punits = "in",
@@ -134,6 +136,8 @@ SSplotGeneric <- function(pwidth = 6.5,
 #' 
 #' @param legendindex 
 #' Allows to add legend for selected indices (plots)
+#' 
+#' @keywords internal
 #'
 SSplotGenericLegend <- function(legend = TRUE,
                                 legendlabels = "default",
@@ -189,6 +193,8 @@ SSplotGenericLegend <- function(legend = TRUE,
 #' @param type 
 #' The type of plot to be drawn. For more details, see [`plot`][base::plot].
 #' 
+#' @keywords internal
+#' 
 SSplotGenericPar <- function(col = NULL,
                              pch = NULL,
                              lty = 1,
@@ -208,7 +214,6 @@ SSplotGenericPar <- function(col = NULL,
 #'
 #' Generalized version of ss3diags SSplots functions to specify uncertainty.
 #' Not intended for production.
-#'
 #'
 #' @param uncertainty 
 #' Logical flag to enable plots with uncertainty intervals. Either a single
@@ -231,6 +236,7 @@ SSplotGenericPar <- function(col = NULL,
 #' [r4ss::SSsummarize]. Either `"all"` or a vector of numbers indicating 
 #' columns in summary tables.
 #' 
+#' @keywords internal
 #'
 SSplotGenericUncertainty <- function (uncertainty = TRUE,
                                       mcmcVec = FALSE,

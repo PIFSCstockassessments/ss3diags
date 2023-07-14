@@ -34,3 +34,4 @@ columns in summary tables.}
 Generalized version of ss3diags SSplots functions to specify uncertainty.
 Not intended for production.
 }
+\keyword{internal}

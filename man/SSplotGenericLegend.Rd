@@ -41,3 +41,4 @@ which is represented in the summary input object.}
 Generalized version of ss3diags SSplots functions specfic to plot legend
 parameters. Not intended for production.
 }
+\keyword{internal}
