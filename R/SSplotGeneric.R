@@ -147,3 +147,58 @@ SSplotGenericLegend <- function(legend = TRUE,
   stop("SSplotGenericLegend not implemented")
 }
 
+
+#' Graphical Parameters for Stock Synthesis Generic plots.
+#'
+#' Generalized version of ss3diags SSplots functions to specify to `par()` or
+#' to pass plot attributes. Not intended for production.
+#'#'
+#' @param col 
+#' Optional vector of colors to be used for lines. Input NULL
+#' 
+#' @param pch 
+#' Optional vector of plot character values
+#' 
+#' @param lty 
+#' Optional vector of line types
+#' 
+#' @param lwd 
+#' Optional vector of line widths
+#' 
+#' @param tickEndYr 
+#' [Logical][base::logical] flag: set TRUE or FALSE to switch to turn 
+#' on/off extra axis mark at final year in timeseries plots.
+#' 
+#' @param ylimAdj 
+#' Multiplier for ylim parameter. Allows additional white space.
+#' 
+#' @param xlim 
+#' Optional, years to use for x-axis. Default value NULL (or "default"), 
+#' uses all years available.
+#' 
+#' @param xaxs 
+#' Choice of xaxs parameter See `?par` for more info.
+#' 
+#' @param yaxs 
+#' Choice of yaxs parameter. See `?par` for more info.
+#' 
+#' @param xylabs 
+#' [Logical][base::logical] flag: set TRUE or FALSE to include x- and 
+#' y-axis labels to the plot. Defaults to TRUE
+#' 
+#' @param type 
+#' The type of plot to be drawn. For more details, see [`plot`][base::plot].
+#' 
+SSplotGenericPar <- function(col = NULL,
+                             pch = NULL,
+                             lty = 1,
+                             lwd = 2,
+                             tickEndYr = FALSE,
+                             xlim = NULL,
+                             ylimAdj = 1.05,
+                             xaxs = "i",
+                             yaxs = "i",
+                             xylabs = TRUE,
+                             type = "l") {
+  stop("SSplotGenericPar not implemented")
+}
