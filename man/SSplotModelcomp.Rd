@@ -82,8 +82,9 @@ implemented. This option flag will be defunct in a future version}
 
 \item{use_pdf}{Enables plots to be generated to pdf file.}
 
-\item{models}{Optional subset of the models described in
-r4ss function summaryoutput().  Either "all" or a vector of numbers indicating
+\item{models}{Optional subset of the models of \code{summaryoutput} (or a similar
+field with a different name): a list created by the function
+\link[r4ss:SSsummarize]{r4ss::SSsummarize}. Either \code{"all"} or a vector of numbers indicating
 columns in summary tables.}
 
 \item{subplots}{option to "SSB","Bratio","Fvalue","Recruits","Index"}
@@ -95,7 +96,9 @@ columns in summary tables.}
 \item{ylabs}{yaxis labels for quants
 final year of values to show for each model. By default it is set to the}
 
-\item{endyrvec}{ending year specified in each model.}
+\item{endyrvec}{Optional single year or vector of years representing the
+final year of values to show for each model. By \code{"default"} it is set to the
+ending year specified in each model.}
 
 \item{xmin}{= NULL optional number first year shown in plot (if available)}
 
@@ -128,7 +131,10 @@ y-axis labels to the plot. Defaults to TRUE}
 
 \item{type}{The type of plot to be drawn. For more details, see \code{\link[base:plot]{plot}}.}
 
-\item{uncertainty}{TRUE/FALSE include uncertainty intervals around SSB or F estimated timeseries. Defaults to TRUE.}
+\item{uncertainty}{Logical flag to enable plots with uncertainty intervals. Either a single
+TRUE/FALSE value, or a vector of TRUE/FALSE values around SSB or F
+estimated timeseries, or a set of integers corresponding to
+the choice of models.}
 
 \item{legend}{Flag to enable legend to plot. TRUE by default.}
 
@@ -192,7 +198,9 @@ option to disable this, via FALSE, is unused.}
 
 \item{add}{suppresses \code{par()} to create multiplot figs}
 
-\item{mcmcVec}{NOT TESTED Vector of TRUE/FALSE values (or single value) indicating}
+\item{mcmcVec}{Logical vector of TRUE/FALSE values (or single value) indicating
+whether input values are from MCMC or to use normal distribution around
+MLE.}
 
 \item{indexQlabel}{TRUE/FALSE, if TRUE add catchability to legend in plot of index fits (currently not used)}
 

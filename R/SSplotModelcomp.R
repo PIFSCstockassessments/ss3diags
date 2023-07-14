@@ -3,25 +3,19 @@
 #' A function to plot SSB, B-ratio, F, Recruits, and/or Index of Abundance fits from multiple SS models. This function uses an object of multiple SS models summarized with r4ss:SSsummarize().
 #'
 #' @param summaryoutput List created by r4ss::SSsummarize()
-#' @param models Optional subset of the models described in
-#' r4ss function summaryoutput().  Either "all" or a vector of numbers indicating
-#' columns in summary tables.
 #' @param subplots option to "SSB","Bratio","Fvalue","Recruits","Index"
 #' @param brp option to set reference point c("msy","btargs")
 #' @param fmsy to specify Fvalue as F/Fmsy if so in starter file setting
 #' @param ylabs yaxis labels for quants
 #' final year of values to show for each model. By default it is set to the
-#' @param endyrvec ending year specified in each model.
 #' @param xmin = NULL optional number first year shown in plot (if available)
 #' @param indexselect = Vector of fleet numbers for each model for which to compare
 #' @param indexfleets CHECK IF NEEDED or how to adjust indexfleets
 #' @param indexUncertainty Show fixed uncertainty intervals on index (not estimated)
 #' @param shadecol uncertainty shading of hcxval horizon
 #' @param shadealpha Transparency adjustment used to make default shadecol
-#' @param mcmcVec NOT TESTED Vector of TRUE/FALSE values (or single value) indicating
 #' @param indexQlabel TRUE/FALSE, if TRUE add catchability to legend in plot of index fits (currently not used)
 #' @param indexQdigits Number of significant digits for catchability in legend
-#' @param uncertainty TRUE/FALSE include uncertainty intervals around SSB or F estimated timeseries. Defaults to TRUE.
 #' 
 #' @author Mostly adopted from r4ss::SSplotComparisons by Taylor et al
 #' @export
@@ -32,6 +26,7 @@
 #' @inheritParams SSplotGeneric
 #' @inheritParams SSplotGenericLegend
 #' @inheritParams SSplotGenericPar
+#' @inheritParams SSplotGenericUncertainty
 #'
 #' @keywords ssplot hindcasting
 #'
