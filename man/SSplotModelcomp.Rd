@@ -66,20 +66,21 @@ SSplotModelcomp(
 \arguments{
 \item{summaryoutput}{List created by r4ss::SSsummarize()}
 
-\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
-by default (TRUE), the option to disable this via FALSE, is unused here.}
+\item{plot}{DEPRECATED. By default, TRUE, Plots (and subplots) are drawn to the
+plot device. The option to explicitly disable this option (FALSE), is not
+implemented. This option flag will be defunct in a future version}
 
-\item{print}{Deprecated. Please use 'print_plot'.}
+\item{print}{DEPRECATED, please use \code{print_plot}.}
 
-\item{print_plot}{print to PNG files?}
+\item{print_plot}{Flag to enable plot graphic device to print to PNG or PNG files.}
 
-\item{png}{draws to png files. Deprecated.}
+\item{png}{DEPRECATED. Please use \code{use_png}.}
 
-\item{use_png}{Draw plots in PNG format, defaults to 'print_plot' value}
+\item{use_png}{Enables plots to be generated to PNG files. Defaults to print value}
 
-\item{pdf}{Deprecated. Please use 'use_png'.}
+\item{pdf}{DEPRECATED. Please use \code{use_pdf}.}
 
-\item{use_pdf}{option for pdf plots (not tested for TRUE)}
+\item{use_pdf}{Enables plots to be generated to pdf file.}
 
 \item{models}{Optional subset of the models described in
 r4ss function summaryoutput().  Either "all" or a vector of numbers indicating
@@ -110,34 +111,36 @@ final year of values to show for each model. By default it is set to the}
 
 \item{lwd}{Optional vector of line widths}
 
-\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis mark at final
-year in timeseries plots. Default is FALSE}
+\item{tickEndYr}{\link[base:logical]{Logical} flag: set TRUE or FALSE to switch to turn
+on/off extra axis mark at final year in timeseries plots.}
 
-\item{xlim}{Optional, values for x-axis range of years to display on plot. Default = "default" displays all years of available data. (currently not used)}
+\item{xlim}{Optional, years to use for x-axis. Default value NULL (or "default"),
+uses all years available.}
 
-\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space}
+\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space.}
 
-\item{xaxs}{Choice of xaxs parameter (see ?par for more info)}
+\item{xaxs}{Choice of xaxs parameter See \code{?par} for more info.}
 
-\item{yaxs}{Choice of yaxs parameter (see ?par for more info)}
+\item{yaxs}{Choice of yaxs parameter. See \code{?par} for more info.}
 
-\item{xylabs}{TRUE or FALSE, include x- and y-axis labels}
+\item{xylabs}{\link[base:logical]{Logical} flag: set TRUE or FALSE to include x- and
+y-axis labels to the plot. Defaults to TRUE}
 
-\item{type}{Type parameter passed to points (default 'o' overplots points on
-top of lines)}
+\item{type}{The type of plot to be drawn. For more details, see \code{\link[base:plot]{plot}}.}
 
 \item{uncertainty}{TRUE/FALSE include uncertainty intervals around SSB or F estimated timeseries. Defaults to TRUE.}
 
-\item{legend}{Option to add a legend. TRUE by default.}
+\item{legend}{Flag to enable legend to plot. TRUE by default.}
 
 \item{legendlabels}{Optional vector of labels to include in legend.}
 
-\item{legendloc}{Location of legend. Either a string like "topleft" or a vector
-of two numeric values representing the fraction of the maximum in the x and y
-dimensions, respectively. See ?legend for more info on the string options.}
+\item{legendloc}{Location of legend. Either a string like "topleft" or a vector of two
+numeric values representing the fraction of the maximum in the x and y
+dimensions, respectively. See \code{help("legend")} for more info on the
+string options.}
 
-\item{legendorder}{Optional vector of model numbers that can be used to have
-the legend display the model names in an order that is different than that
+\item{legendorder}{Optional vector of model numbers that can be used to have the legend
+display the model names in an order that is different than that
 which is represented in the summary input object.}
 
 \item{legendncol}{Number of columns for the legend.}
@@ -146,7 +149,7 @@ which is represented in the summary input object.}
 
 \item{legendsp}{Space between legend labels}
 
-\item{legendindex}{Allows to add lengend for selected indices (plots)}
+\item{legendindex}{Allows to add legend for selected indices (plots)}
 
 \item{pwidth}{Default width of plot printed to plot in units of \code{punits}}
 
@@ -187,7 +190,7 @@ the plot,which is passed to \code{par()}. Entering \code{NULL} passes plot's def
 \item{new}{Deprecated. New plot windows are created by default (TRUE), and the
 option to disable this, via FALSE, is unused.}
 
-\item{add}{surpresses par() to create multiplot figs}
+\item{add}{suppresses \code{par()} to create multiplot figs}
 
 \item{mcmcVec}{NOT TESTED Vector of TRUE/FALSE values (or single value) indicating}
 

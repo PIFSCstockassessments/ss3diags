@@ -16,50 +16,13 @@
 #' @param indexselect = Vector of fleet numbers for each model for which to compare
 #' @param indexfleets CHECK IF NEEDED or how to adjust indexfleets
 #' @param indexUncertainty Show fixed uncertainty intervals on index (not estimated)
-#' @param plot Deprecated. Plots (and subplots) are drawn to the active plot device
-#' by default (TRUE), the option to disable this via FALSE, is unused here.
-#' @param print Deprecated. Please use 'print_plot'.
-#' @param print_plot print to PNG files?
-#' @param pdf Deprecated. Please use 'use_png'.
-#' @param use_pdf option for pdf plots (not tested for TRUE)
-#' @param png Deprecated. Please use 'use_png'.
-#' @param use_png png TODO TODO Defaults to print value
-#' @param col Optional vector of colors to be used for lines. Input NULL
-#' @param pch Optional vector of plot character values
-#' @param lty Optional vector of line types
-#' @param lwd Optional vector of line widths
-#' @param tickEndYr TRUE/FALSE switch to turn on/off extra axis mark at final
-#' year in timeseries plots. Default is FALSE
-#' @param ylimAdj Multiplier for ylim parameter. Allows additional white space
-#' @param xaxs Choice of xaxs parameter (see ?par for more info)
-#' @param yaxs Choice of yaxs parameter (see ?par for more info)
-#' @param type Type parameter passed to points (default 'o' overplots points on
-#' top of lines)
-#' @param legend Option to add a legend. TRUE by default.
-#' @param legendlabels Optional vector of labels to include in legend.
-#' @param legendloc Location of legend. Either a string like "topleft" or a vector
-#' of two numeric values representing the fraction of the maximum in the x and y
-#' dimensions, respectively. See ?legend for more info on the string options.
-#' @param legendorder Optional vector of model numbers that can be used to have
-#' the legend display the model names in an order that is different than that
-#' which is represented in the summary input object.
-#' @param legendncol Number of columns for the legend.
-#' @param legendcex Allows to adjust legend cex
-#' @param legendsp Space between legend labels
-#' @param legendindex Allows to add lengend for selected indices (plots)
 #' @param shadecol uncertainty shading of hcxval horizon
 #' @param shadealpha Transparency adjustment used to make default shadecol
-#' @param new Deprecated. New plot windows are created by default (TRUE), and the
-#' option to disable this, via FALSE, is unused.
-#' @param add surpresses par() to create multiplot figs
 #' @param mcmcVec NOT TESTED Vector of TRUE/FALSE values (or single value) indicating
 #' @param indexQlabel TRUE/FALSE, if TRUE add catchability to legend in plot of index fits (currently not used)
 #' @param indexQdigits Number of significant digits for catchability in legend
-#' @param png draws to png files. Deprecated.
-#' @param use_png Draw plots in PNG format, defaults to 'print_plot' value
-#' @param xlim Optional, values for x-axis range of years to display on plot. Default = "default" displays all years of available data. (currently not used)
-#' @param xylabs TRUE or FALSE, include x- and y-axis labels
 #' @param uncertainty TRUE/FALSE include uncertainty intervals around SSB or F estimated timeseries. Defaults to TRUE.
+#' 
 #' @author Mostly adopted from r4ss::SSplotComparisons by Taylor et al
 #' @export
 #'
@@ -67,6 +30,8 @@
 #' @importFrom lifecycle deprecated
 #' 
 #' @inheritParams SSplotGeneric
+#' @inheritParams SSplotGenericLegend
+#' @inheritParams SSplotGenericPar
 #'
 #' @keywords ssplot hindcasting
 #'
