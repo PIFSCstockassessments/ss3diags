@@ -72,6 +72,7 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 #' @param pdf PDF plots. Deprecated. Please use use_pdf.
 #' @param use_pdf option for pdf plots
 #' @param miny the absolute value of the min and max value for ylim, default is 1
+#' @param col Optional vector of colors to be used for lines. Input NULL
 #' @param pch Optional vector of plot character values
 #' @param lty Optional vector of line types
 #' @param lwd Optional vector of line widths
@@ -120,6 +121,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
                            use_pdf = FALSE,
                            indexselect = NULL,
                            miny = 1,
+                           col = NULL,
                            pch = 21,
                            lty = 1,
                            lwd = 2,

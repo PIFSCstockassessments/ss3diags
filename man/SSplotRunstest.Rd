@@ -17,6 +17,7 @@ SSplotRunstest(
   use_pdf = FALSE,
   indexselect = NULL,
   miny = 1,
+  col = NULL,
   pch = 21,
   lty = 1,
   lwd = 2,
@@ -72,6 +73,8 @@ by default (TRUE), the option to disable this via FALSE, is unused here.}
 \item{indexselect}{Vector of fleet numbers for each model for which to compare}
 
 \item{miny}{the absolute value of the min and max value for ylim, default is 1}
+
+\item{col}{Optional vector of colors to be used for lines. Input NULL}
 
 \item{pch}{Optional vector of plot character values}
 
