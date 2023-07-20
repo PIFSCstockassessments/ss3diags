@@ -45,14 +45,18 @@ jobs:
           mv ss_win.exe ss.exe
           cp ss.exe inst/extdata/ss.exe
 
-      - name: Get the latest SS3 executable for macOS and move to expected location
+      - uses: nick-fields/retry@v2
         if: matrix.config.os == 'macOS-latest' 
-        run:  |
-          curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_osx" | xargs wget
-          mv ss_osx ss
-          sudo chmod a+x ss
-          cp ss inst/extdata/ss
-          rm ss
+        with:
+          timeout_minutes: 3
+          max_attempts: 3
+          retry_on: error
+          command:  |
+            curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_osx" | xargs wget
+            mv ss_osx ss
+            sudo chmod a+x ss
+            cp ss inst/extdata/ss
+            rm ss
       
       - uses: r-lib/actions/setup-pandoc@v2
 
