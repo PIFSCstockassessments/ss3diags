@@ -62,52 +62,25 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 #' generalized size composition data, 'age' for age composition data,
 #' or 'con' for conditional age at length data
 #' @param indexselect Vector of fleet numbers for each model for which to compare
-#' @param miny  minimum abs values of ylim
-#' @param plot Deprecated. Plots (and subplots) are drawn to the active plot device
-#' by default (TRUE), the option to disable this via FALSE, is unused here.
-#' @param print Deprecated. Please use 'print_plot'.
-#' @param print_plot Option to print to PNG files
-#' @param png Deprecated, please use 'use_png'.
-#' @param use_png Draw plots in PNG format
-#' @param pdf PDF plots. Deprecated. Please use use_pdf.
-#' @param use_pdf option for pdf plots
 #' @param miny the absolute value of the min and max value for ylim, default is 1
-#' @param col Optional vector of colors to be used for lines. Input NULL
-#' @param pch Optional vector of plot character values
-#' @param lty Optional vector of line types
-#' @param lwd Optional vector of line widths
-#' @param tickEndYr TRUE/FALSE switch to turn on/off extra axis mark at final
-#' year in timeseries plots.
-#' @param ylimAdj Multiplier for ylim parameter. Allows additional white space
-#' @param xaxs Choice of xaxs parameter (see ?par for more info)
-#' @param yaxs Choice of yaxs parameter (see ?par for more info)
-#' @param type Type parameter passed to points (default 'o' overplots points on
-#' top of lines)
 #' @param legend Option to add a legend. TRUE by default.
 #' @param legendloc Location of legend. Either a string like "topleft" or a vector
 #' @param legendcex Allows to adjust legend cex
-#' @param pwidth Width of plot
-#' @param pheight Height of plot
-#' @param punits Units for PNG file
-#' @param res Resolution for PNG file
-#' @param ptsize Point size for PNG file
-#' @param cex.main Character expansion for plot titles
-#' @param plotdir Directory where PNG or PDF files will be written. By default
-#' it will be the directory where the model was run.
-#' @param filenameprefix Additional text to append to PNG or PDF file names.
-#' It will be separated from default name by an underscore.
-#' @param par list of graphics parameter values passed to par() function
-#' @param verbose TRUE or FALSE, should the progress be reported to R GUI?
-#' @param new Create new empty plot window (TRUE or FALSE)
-#' @param add suppresses par() to create multiplot figs
-#' @param xlim Optional, values for x-axis range of years to display on plot. Default = "default" displays all years of available data.
 #' @param ylim Optional, values for y-axis range to display on plot. Default = "default" will range from -1 to 1.
-#' @param xylabs TRUE or FALSE, include x- and y-axis labels
+#' 
+#' @inheritParams SSplotGeneric
+#' @inheritParams SSplotGenericPar
+#' 
 #' @return a dataframe with runs test p-value, if the test has passed or failed, 3x sigma high and low limits, and the type of data used. Rows are for each fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and failed if p-value < 0.5 (residuals are not random)
+#' 
 #' @author Henning Winker (JRC-EC) and Laurance Kell (Sea++)
+#' 
 #' @keywords ssplot runsTest
+#' 
 #' @importFrom lifecycle deprecated
+#' 
 #' @export
+#' 
 
 SSplotRunstest <- function(ss3rep = ss3diags::simple,
                            mixing = "less",
