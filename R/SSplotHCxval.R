@@ -1,81 +1,63 @@
 #' Hindcasting Cross-Validations of Multiple Models
 #'
-#' Plots one-step ahead hindcasting cross-validations and computes MASE from prediction residuals.
-#' MASE is calculated as the average ratio of mean absolute error (MAE) of prediction residuals (MAE.PR) and naive predictions (MAE.base)
-#' MASE.adj sets the MAE.base to a minimum MAE.base.adj (default=0.1)
-#' MASE.adj allow passing (MASE<1) if MAE.PE < 0.1 and thus accurate if obs show very little annual variation
+#' Plots one-step ahead hindcasting cross-validations and computes MASE from 
+#' prediction residuals.`MASE` is calculated as the average ratio of mean 
+#' absolute error (`MAE`) of prediction residuals (`MAE.PR`) and naive 
+#' predictions (`MAE.base`). `MASE.adj` sets the `MAE.base` to a minimum 
+#' `MAE.base.adj` (`default=0.1`). `MASE.adj` allow passing (`MASE<1`) if 
+#' `MAE.PE < 0.1` and thus accurate if obs show very little annual variation
 #'
-#' @param retroSummary List created by r4ss::SSsummarize() or ss3diags::SSretroComps()
-#' @param subplots optional use of c("cpue","len","age"), yet to be tested for age.
-#' @param models Optional subset of the models described in
-#' r4ss function summaryoutput().  Either "all" or a vector of numbers indicating
-#' columns in summary tables.
-#' @param Season option to specify Season as an integer of value 1-4 - Default uses first available, i.e. usual Seas = 1
+#' @param retroSummary List created by [r4ss::SSsummarize()] or 
+#' [ss3diags::SSretroComps()]
+#' @param subplots optional use of the following:
+#' \itemize{
+#'  \item `"cpue"` Index data
+#'  \item `"len"` Length composition data
+#'  \item `"age"` Age composition data (yet to be tested)
+#' } 
+#' @param Season option to specify Season as an integer of value 1-4. Default 
+#' uses first available, i.e. usual Seas = 1
 #' @param endyrvec Optional single year or vector of years representing the
 #' final year of values to show for each model. By default it is set to the
 #' ending year specified in each model.
-#' @param indexselect = Vector of fleet numbers for each model for which to compare
-#' @param MAE.base.adj minimum MASE denominator (naive predictions) for MASE.adj (default = 0.1)
-#' @param show.mase.adj if TRUE it show mase.adj in () in plot
-#' @param indexfleets CHECK IF NEEDED or how to adjust indexfleets
+#' @param MAE.base.adj minimum `MASE` denominator (naive predictions) for 
+#' `MASE.adj` (default = 0.1)
+#' @param show.mase.adj if TRUE, it show `mase.adj` in plot
+#' @param indexfleets Fleet numbers for each model to compare
+#' indices of abundance. Can take different forms:
+#' \itemize{
+#'   \item NULL: create a separate plot for each index as long as the fleet
+#' numbering is the same across all models.
+#'   \item integer: (default) create a single comparison plot for the chosen 
+#' index
+#'   \item vector of length equal to number of models: a single fleet number
+#' for each model to be compared in a single plot
+#'   \item list: list of fleet numbers associated with indices within each
+#' model to be compared, where the list elements are each a vector of the
+#' same length but the names of the list elements don't matter and can be
+#' absent.
+#' }
 #' @param xmin optional number first year shown in plot (if available)
-#' @param indexUncertainty Show fixed uncertainty intervals on index (not estimated)
-#' @param plot Deprecated. Plots (and subplots) are drawn to the active plot device
-#' by default (TRUE), and the option to disable this, via FALSE, is unused.
-#' @param print Deprecated. Please use 'print_plot'.
-#' @param print_plot Option to print to PNG files
-#' @param png Deprecated, please use 'use_png'.
-#' @param use_png Draw plots in PNG format
-#' @param pdf PDF plots. Deprecated. Please use use_pdf.
-#' @param use_pdf option for pdf plots
-#' @param col Optional vector of colors to be used for lines. Input NULL
-#' @param pch Optional vector of plot character values
-#' @param lty Optional vector of line types
-#' @param lwd Optional vector of line widths
-#' @param tickEndYr TRUE/FALSE switch to turn on/off extra axis mark at final
-#' year in timeseries plots.
-#' @param ylimAdj Multiplier for ylim parameter. Allows additional white space
-#' @param ylim will over-write ylimAdj if specified
-#' @param xaxs Choice of xaxs parameter (see ?par for more info)
-#' @param yaxs Choice of yaxs parameter (see ?par for more info)
-#' @param type Type parameter passed to points (default 'o' overplots points on
-#' top of lines)
-#' @param legend Option to add a legend. TRUE by default.
-#' @param legendlabels Optional vector of labels to include in legend.
-#' @param legendloc Location of legend. Either a string like "topleft" or a vector
-#' of two numeric values representing the fraction of the maximum in the x and y
-#' dimensions, respectively. See ?legend for more info on the string options.
-#' @param legendorder Optional vector of model numbers that can be used to have
-#' the legend display the model names in an order that is different than that
-#' which is represented in the summary input object.
-#' @param legendncol Number of columns for the legend.
-#' @param legendcex Allows to adjust legend cex
-#' @param legendsp Space between legend labels
-#' @param legendindex Allows to add legend for selected indices (plots)
-#' @param pwidth Width of plot
-#' @param pheight Height of plot
-#' @param punits Units for PNG file
-#' @param res Resolution for PNG file
-#' @param ptsize Point size for PNG file
-#' @param cex.main Character expansion for plot titles
-#' @param plotdir Directory where PNG or PDF files will be written. By default
-#' it will be the directory where the model was run.
-#' @param filenameprefix Additional text to append to PNG or PDF file names.
-#' It will be separated from default name by an underscore.
-#' @param par list of graphics parameter values passed to par() function
-#' @param verbose Report progress to R GUI?
+#' @param ylim will over-write `ylimAdj` if specified
 #' @param shadecol uncertainty shading of hcxval horizon
-#' @param shadecol1 uncertainty shading of early years not affected by hindcast (currently not used)
-#' @param new Create new empty plot window
-#' @param add suppresses par() to create multiplot figs
-#' @param mcmcVec NOT TESTED Vector of TRUE/FALSE values (or single value) indicating
-#' @param indexQlabel Add catchability to legend in plot of index fits (TRUE/FALSE)?
+#' @param shadecol1 uncertainty shading of early years not affected by 
+#' hindcast (currently not used)
+#' @param shadecol2 color for uncertainty in early years not affected by 
+#' hindcast
+#' @param shadealpha Transparency adjustment used to make default `shadecol`. 
+#' (currently not used)
+#' @param indexselect Vector of fleet numbers for each model for which to 
+#' compare
+#' @param indexQlabel [Logical][base::logical] flag to add catchability to 
+#' legend in plot of index fits.
 #' @param indexQdigits Number of significant digits for catchability in legend
-#' @param shadealpha Transparancy adjustment used to make default shadecol. (currently not used)
-#' @param xlim Optional, values for x-axis range of years to display on plot. Default = "default" displays all years of available data. (currently not in use)
-#' @param xylabs TRUE or FALSE, include x- and y-axis labels
-#' @param uncertainty TRUE/FALSE include uncertainty intervals around SSB or F estimated timeseries. Defaults to TRUE.
-#' @param shadecol2 color for uncertainty in early years not affected by hindcast
+#' @param indexUncertainty Show fixed uncertainty intervals on index 
+#' (not estimated)
+#'
+#' @inheritParams SSplotGeneric
+#' @inheritParams SSplotGenericLegend
+#' @inheritParams SSplotGenericPar
+#' @inheritParams SSplotGenericUncertainty
 #'
 #' @author Henning Winker (JRC-EC) and Laurence Kell (Sea++)
 #'
