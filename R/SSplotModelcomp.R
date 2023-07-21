@@ -16,6 +16,9 @@
 #' @param shadealpha Transparency adjustment used to make default shadecol
 #' @param indexQlabel TRUE/FALSE, if TRUE add catchability to legend in plot of index fits (currently not used)
 #' @param indexQdigits Number of significant digits for catchability in legend
+#' @param endyrvec Optional single year or vector of years representing the
+#' final year of values to show for each model. By `"default"` it is set to the
+#' ending year specified in each model.
 #' 
 #' @author Mostly adopted from r4ss::SSplotComparisons by Taylor et al
 #' @export
@@ -83,7 +86,9 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::retroSimple,
                             mcmcVec = FALSE,
                             indexQlabel = TRUE,
                             indexQdigits = 4,
-                            indexfleets = 1) { # plot different fits to a single index of abundance
+                            indexfleets = 1) { 
+  
+  # plot different fits to a single index of abundance
 
   # Parameter DEPRECATION checks
   if (lifecycle::is_present(print)) {

@@ -226,11 +226,6 @@ SSplotGenericPar <- function(col = NULL,
 #' whether input values are from MCMC or to use normal distribution around
 #' MLE.
 #' 
-#' @param endyrvec 
-#' Optional single year or vector of years representing the
-#' final year of values to show for each model. By `"default"` it is set to the
-#' ending year specified in each model.
-#' 
 #' @param models Optional subset of the models of `summaryoutput` (or a similar
 #' field with a different name): a list created by the function 
 #' [r4ss::SSsummarize]. Either `"all"` or a vector of numbers indicating 
@@ -240,7 +235,6 @@ SSplotGenericPar <- function(col = NULL,
 #'
 SSplotGenericUncertainty <- function (uncertainty = TRUE,
                                       mcmcVec = FALSE,
-                                      endyrvec = "default",
                                       models = "all") {
   
   stop("SSplotGenericUncertainty not implemented")

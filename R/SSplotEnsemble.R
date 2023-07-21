@@ -15,6 +15,9 @@
 #' (currently not used)
 #' @param indexQdigits Number of significant digits for catchability in legend. 
 #' Default is 4
+#' @param endyrvec Optional single year or vector of years representing the
+#' final year of values to show for each model. By `"default"` it is set to the
+#' ending year specified in each model.
 #'
 #' @importFrom grDevices graphics.off rgb adjustcolor dev.new dev.off
 #' @importFrom graphics polygon abline axis box
@@ -86,7 +89,9 @@ SSplotEnsemble <- function(kb,
                            mcmcVec = FALSE,
                            indexQlabel = TRUE,
                            indexQdigits = 4,
-                           legendindex = NULL) { # plot different fits to a single index of abundance
+                           legendindex = NULL) { 
+  
+  # plot different fits to a single index of abundance
 
   # Parameter DEPRECATION checks
   if (lifecycle::is_present(print)) {

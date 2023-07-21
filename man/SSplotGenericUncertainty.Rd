@@ -4,12 +4,7 @@
 \alias{SSplotGenericUncertainty}
 \title{Uncertainty parameters for Stock Synthesis Generic plots.}
 \usage{
-SSplotGenericUncertainty(
-  uncertainty = TRUE,
-  mcmcVec = FALSE,
-  endyrvec = "default",
-  models = "all"
-)
+SSplotGenericUncertainty(uncertainty = TRUE, mcmcVec = FALSE, models = "all")
 }
 \arguments{
 \item{uncertainty}{Logical flag to enable plots with uncertainty intervals. Either a single
@@ -20,10 +15,6 @@ the choice of models.}
 \item{mcmcVec}{Logical vector of TRUE/FALSE values (or single value) indicating
 whether input values are from MCMC or to use normal distribution around
 MLE.}
-
-\item{endyrvec}{Optional single year or vector of years representing the
-final year of values to show for each model. By \code{"default"} it is set to the
-ending year specified in each model.}
 
 \item{models}{Optional subset of the models of \code{summaryoutput} (or a similar
 field with a different name): a list created by the function
