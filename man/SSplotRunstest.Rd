@@ -47,13 +47,19 @@ SSplotRunstest(
 )
 }
 \arguments{
-\item{ss3rep}{Stock Synthesis output as read by r4SS function SS_output}
+\item{ss3rep}{Stock Synthesis output as read by \code{\link[r4ss:SS_output]{r4ss::SS_output()}}}
 
-\item{mixing}{c("less","greater","two.sided"). Default less is checking for positive autocorrelation only}
+\item{mixing}{\code{c("less","greater","two.sided")}. Default less is checking
+for positive autocorrelation only}
 
-\item{subplots}{optional 'cpue' for index data, 'len' for length composition data, 'size' for
-generalized size composition data, 'age' for age composition data,
-or 'con' for conditional age at length data}
+\item{subplots}{optional flag for:
+\itemize{
+\item \code{"cpue"} Index data
+\item \code{"len"} Length composition data
+\item \code{"size"} Generalized size composition data
+\item \code{"age"} Age composition data
+\item \code{"con"} Conditional age at length data
+}}
 
 \item{plot}{DEPRECATED. By default, TRUE, Plots (and subplots) are drawn to the
 plot device. The option to explicitly disable this option (FALSE), is not
@@ -71,9 +77,11 @@ implemented. This option flag will be defunct in a future version}
 
 \item{use_pdf}{Enables plots to be generated to pdf file.}
 
-\item{indexselect}{Vector of fleet numbers for each model for which to compare}
+\item{indexselect}{Vector of fleet numbers for each model for which to
+compare}
 
-\item{miny}{the absolute value of the min and max value for ylim, default is 1}
+\item{miny}{the absolute value of the min and max value for \code{ylim}.
+Default is 1}
 
 \item{col}{Optional vector of colors to be used for lines. Input NULL}
 
@@ -89,7 +97,8 @@ on/off extra axis mark at final year in timeseries plots.}
 \item{xlim}{Optional, years to use for x-axis. Default value NULL (or "default"),
 uses all years available.}
 
-\item{ylim}{Optional, values for y-axis range to display on plot. Default = "default" will range from -1 to 1.}
+\item{ylim}{Optional, values for y-axis range to display on plot.
+The default: \code{"default"}, will range from -1 to 1.}
 
 \item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space.}
 
@@ -102,9 +111,12 @@ y-axis labels to the plot. Defaults to TRUE}
 
 \item{type}{The type of plot to be drawn. For more details, see \code{\link[base:plot]{plot}}.}
 
-\item{legend}{Option to add a legend. TRUE by default.}
+\item{legend}{Flag to enable legend to plot. TRUE by default.}
 
-\item{legendloc}{Location of legend. Either a string like "topleft" or a vector}
+\item{legendloc}{Location of legend. Either a string like "topleft" or a
+vector of two numeric values representing the fraction of the maximum in
+the x and y dimensions, respectively. See \code{help("legend")} for more info
+on the string options.}
 
 \item{legendcex}{Allows to adjust legend cex}
 
@@ -146,10 +158,15 @@ option to disable this, via FALSE, is unused.}
 \item{add}{suppresses \code{par()} to create multiplot figs}
 }
 \value{
-a dataframe with runs test p-value, if the test has passed or failed, 3x sigma high and low limits, and the type of data used. Rows are for each fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and failed if p-value < 0.5 (residuals are not random)
+a dataframe with runs test p-value, if the test has passed or failed,
+3x sigma high and low limits, and the type of data used. Rows are for each
+fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and
+failed if p-value < 0.5 (residuals are not random)
 }
 \description{
-Function for residual diagnostics. Plots residuals and 3x sigma limits for indices or mean age or length and outputs a runs test table. Note, if you do not want to plot the residuals, use function ss3diags::SSrunstest.
+Function for residual diagnostics. Plots residuals and 3x sigma limits for
+indices or mean age or length and outputs a runs test table. Note, if you do
+not want to plot the residuals, use \code{\link[=SSrunstest]{SSrunstest()}}.
 }
 \author{
 Henning Winker (JRC-EC) and Laurance Kell (Sea++)
