@@ -1,0 +1,58 @@
+---
+title: "Retrospective Analysis"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+```{r setup}
+library(ss3diags)
+```
+
+Retrospective analysis is a widely used diagnostic to test for patterns and bias in model estimated quantities (e.g. spawning stock biomass (SSB) and fishing mortality (F)). To implement a retrospective analysis with stock synthesis the `r4ss` package provides the `retro()` function. Here we provide a step-by-step example of how to run and analyze a retrospective analysis using a simple, example SS model.   
+
+## Model inputs  
+To run a stock synthesis model, 4 input files are required: starter, forecast, control, and data. The input files for the example model can be found within the `r4ss` package and accessed as shown below. If you do not have `r4ss` installed, you will need to install for this tutorial. 
+
+```{r}
+install.packages("pak")
+pak::pkg_install("r4ss/r4ss")
+```
+
+```{r}
+library(r4ss) 
+
+r4ss_path <- system.file("extdata", "simple_small", package = "r4ss")
+dir_retro <- file.path(tempdir(check = TRUE), "retrospectives")
+dir.create(dir_retro, showWarnings = FALSE)
+files <- c("data.ss", "control.ss", "forecast.ss", "starter.ss")
+file.copy(from = paste(r4ss_path, files, sep = "/"), 
+          to = paste(dir_retro, files, sep = "/"))
+
+```
+
+You will need to make sure you have the SS executable [file](https://github.com/nmfs-stock-synthesis/stock-synthesis) either in your path or in the directory you are running the retrospective from (in this case `dir_retro`). 
+
+
+Once you have the 4 input files and SS executable, you can run retrospective analysis as shown below. We are running it for 5 1-year peels, so with each run, the last year of data is removed and the model is re-run for a total of 5 times. The number of year peels can be adjusted with the `years` argument. If the SS executable file you are using is named something other than "ss" (e.g. ss_opt_win.exe), you will need to specify this with the argument `exe = "ss_opt_win"`. 
+
+```{r }
+
+r4ss::retro(dir = dir_retro, exe = "ss", years = 0:-5)
+
+```
+
+To visualize the output and inspect for any patterns or biases, you need to load the report files into R and can use the `SSplotRetro()` function from `ss3diags`. The easiest way to load mulitple report files is using `r4ss::SSgetoutput()` and `r4ss::SSsummarize()` functions. Use the `keyvec` argument to indicate which folders to access, in this case since we ran 5 peels, we want the folders `retro0` to `retro-5`.
+
+```{r}
+
+retro_mods <- r4ss::SSgetoutput(dirvec = dir_retro, keyvec = seq(0, -5, by = -1))
+retroSummary <- r4ss::SSsummarize(retro_mods)
+
+```
+
