@@ -1,75 +1,39 @@
 #' Retrospective-Forecast with One-Step Ahead Hindcasting
 #'
-#' Plots retrospective pattern, including (optional) one-step ahead forecast and computes Mohn's Rho
+#' Plots retrospective pattern, including (optional) one-step ahead forecast 
+#' and computes Mohn's Rho
 #'
-#' @param summaryoutput List created by r4ss::SSsummarize()
-#' @param models Optional subset of the models described in
-#' r4ss function summaryoutput().  Either "all" or a vector of numbers indicating
-#' columns in summary tables.
+#' @param summaryoutput List created by [r4ss::SSsummarize()]
 #' @param endyrvec Optional single year or vector of years representing the
 #' final year of values to show for each model. By default it is set to the
 #' ending year specified in each model.
-#' @param subplots Optional vector of subplots to be created, "SSB", "Bratio", "Fvalue", "Recruits", "Index"
-#' @param plot Option to draw subplots and plot in the interface. Deprecated. Option to disable will be removed in future version.
-#' @param print print to PNG files? Deprecated. Please use print_plot.
-#' @param print_plot Option to print to PNG files
-#' @param png Deprecated, please use 'use_png'
-#' @param use_png Draw plots in PNG format
-#' @param pdf PDF plots. Deprecated. Please use use_pdf.
-#' @param use_pdf option for pdf plots (currently does not work when subplots specified)
-#' @param xlim  optional xlim, which overwrites xmin
-#' @param xmin  optional minimum year shown in plot (default first yr)
-#' @param labels yaxis lable for biomass (bony fish and sharks)
-#' @param ylim option to specify ylim range
-#' @param forecast if true one-step ahead forecasts are shown in plot
-#' @param forecastrho if true one-step ahead forecast rho value is denoted in plot
-#' @param col Optional vector of colors to be used for lines. Input NULL
-#' @param pch Optional vector of plot character values
-#' @param lty Optional vector of line types
-#' @param lwd Optional vector of line widths
-#' @param tickEndYr TRUE/FALSE switch to turn on/off extra axis mark at final
-#' year in timeseries plots.
-#' @param ylimAdj Multiplier for ylim parameter. Allows additional white space
-#' @param xaxs Choice of xaxs parameter (see ?par for more info)
-#' @param yaxs Choice of yaxs parameter (see ?par for more info)
-#' @param type Type parameter passed to points (default 'o' overplots points on
-#' top of lines)
-#' @param legend Add a legend?
-#' @param legendlabels Optional vector of labels to include in legend.
-#' @param legendloc Location of legend. Either a string like "topleft" or a vector
-#' of two numeric values representing the fraction of the maximum in the x and y
-#' dimensions, respectively. See ?legend for more info on the string options.
-#' @param legendorder Optional vector of model numbers that can be used to have
-#' the legend display the model names in an order that is different than that
-#' which is represented in the summary input object.
-#' @param legendncol Number of columns for the legend.
-#' @param legendcex Allows to adjust legend cex
-#' @param legendsp Space between legend labels
-#' @param legendindex Allows to add lengend for selected indices (plots)
-#' @param pwidth Width of plot
-#' @param pheight Height of plot
-#' @param punits Units for PNG file
-#' @param res Resolution for PNG file
-#' @param ptsize Point size for PNG file
-#' @param cex.main Character expansion for plot titles
-#' @param plotdir Directory where PNG or PDF files will be written. By default
-#' it will be the directory where the model was run.
-#' @param filenameprefix Additional text to append to PNG or PDF file names.
-#' It will be separated from default name by an underscore.
-#' @param par list of graphics parameter values passed to par() function
-#' @param verbose Report progress to R GUI?
+#' @param subplots Optional vector of subplots to be created:
+#' \itemize{
+#'  \item `"SSB"` Spawning Stock Biomass
+#'  \item `"F"` Fishing Mortality 
+#' } 
+#' @param xmin optional minimum year shown in plot (default first yr)
+#' @param labels `yaxis` label for biomass (bony fish and sharks)
+#' @param ylim option to specify `ylim` range
+#' @param forecast [Logical][base::logical]. If TRUE, one-step ahead forecasts 
+#' are shown in plot
+#' @param forecastrho [Logical][base::logical]. If TRUE, one-step ahead 
+#' forecast rho value is denoted in plot
 #' @param shadecol uncertainty shading of hcxval horizon
 #' @param shadecol1 uncertainty shading of early years not affected by hindcast
-#' @param new Deprecated. New plot windows are created by default (TRUE), and the
-#' option to disable this, via FALSE, is unused.
-#' @param add surpresses par() to create multiplot figs
-#' @param mcmcVec NOT TESTED Vector of TRUE/FALSE values (or single value) indicating mcmc values are used
-#' @param indexQlabel TRUE/FALSE, if TRUE add catchability to legend in plot of index fits (currently not used)
+#' @param shadealpha set the transparency level (alpha) of the area of 
+#' uncertainty. Defaults to 0.3 (currently not used)
+#' @param indexQlabel [Logical][base::logical]. If TRUE, add catchability to 
+#' legend in plot of index fits (currently not used)
 #' @param indexQdigits Number of significant digits for catchability in legend
-#' @param showrho TRUE/FALSE include Mohn's rho value? Defaults to TRUE
-#' @param xylabs TRUE or FALSE, include x- and y-axis labels. Defaults to TRUE
-#' @param uncertainty TRUE/FALSE include uncertainty intervals around SSB or F estimated timeseries. Defaults to TRUE.
-#' @param shadealpha set the transparency level (alpha) of the area of uncertainty. Defalut to 0.3 (currently not used)
+#' @param showrho [Logical][base::logical] flag to include Mohn's rho value. 
+#' Defaults to TRUE
+#'
+#' @inheritParams SSplotGeneric
+#' @inheritParams SSplotGenericLegend
+#' @inheritParams SSplotGenericPar
+#' @inheritParams SSplotGenericUncertainty
+#'
 #'
 #' @author Henning Winker (JRC-EC) and Laurance Kell (Sea++)
 #'
@@ -129,7 +93,6 @@ SSplotRetro <- function(summaryoutput,
                         new = TRUE,
                         add = FALSE,
                         mcmcVec = FALSE,
-                        # documented params not in usage -ef
                         shadecol1 = grey(0.5, 0.4),
                         indexQlabel = TRUE,
                         indexQdigits = 4,
