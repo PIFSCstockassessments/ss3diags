@@ -1,7 +1,7 @@
 #' Compare Multiple SS Model Estimates
 #'
-#' A function to plot SSB, B-ratio, F, Recruits, and/or Index of Abundance fits 
-#' from multiple SS models. This function uses an object of multiple SS models 
+#' A function to plot SSB, B-ratio, F, Recruits, and/or Index of Abundance fits
+#' from multiple SS models. This function uses an object of multiple SS models
 #' summarized with [r4ss::SSsummarize()].
 #'
 #' @param summaryoutput List created by [r4ss::SSsummarize()]
@@ -13,19 +13,19 @@
 #'  \item `"Recruits"` Recruits
 #'  \item `"Index"` Index
 #'  \item `"RecDev"` Recruitment Deviations
-#' } 
+#' }
 #' @param brp option to set reference point `c("msy","btargs")`
 #' @param fmsy to specify `Fvalue` as `F/Fmsy` if so in starter file setting
 #' @param ylabs yaxis labels for quants
 #' final year of values to show for each model. By default it is set to the
 #' @param xmin NULL optional number first year shown in plot (if available)
-#' @param indexselect Vector of fleet numbers for each model for which to 
+#' @param indexselect Vector of fleet numbers for each model for which to
 #' compare
 #' @param indexfleets Fleet numbers for each model to compare
 #' indices of abundance. Can take different forms:
 #' \itemize{
-#'   \item integer (default): create a single comparison plot for the chosen 
-#'index
+#'   \item integer (default): create a single comparison plot for the chosen
+#' index
 #'   \item NULL: create a separate plot for each index as long as the fleet
 #' numbering is the same across all models.
 #'   \item vector of length equal to number of models: a single fleet number
@@ -35,23 +35,23 @@
 #' same length but the names of the list elements don't matter and can be
 #' absent.
 #' }
-#' @param indexUncertainty Show fixed uncertainty intervals on index 
+#' @param indexUncertainty Show fixed uncertainty intervals on index
 #' (not estimated)
 #' @param shadecol uncertainty shading of hcxval horizon
 #' @param shadealpha Transparency adjustment used to make default shadecol
-#' @param indexQlabel [Logical][base::logical]. If TRUE add catchability to 
+#' @param indexQlabel [Logical][base::logical]. If TRUE add catchability to
 #' legend in plot of index fits (currently not used)
 #' @param indexQdigits Number of significant digits for catchability in legend
 #' @param endyrvec Optional single year or vector of years representing the
 #' final year of values to show for each model. By `"default"` it is set to the
 #' ending year specified in each model.
-#' 
+#'
 #' @author Mostly adopted from r4ss::SSplotComparisons by Taylor et al
 #' @export
 #'
 #' @importFrom grDevices pdf
 #' @importFrom lifecycle deprecated
-#' 
+#'
 #' @inheritParams SSplotGeneric
 #' @inheritParams SSplotGenericLegend
 #' @inheritParams SSplotGenericPar
@@ -112,8 +112,7 @@ SSplotModelcomp <- function(summaryoutput = ss3diags::retroSimple,
                             mcmcVec = FALSE,
                             indexQlabel = TRUE,
                             indexQdigits = 4,
-                            indexfleets = 1) { 
-  
+                            indexfleets = 1) {
   # plot different fits to a single index of abundance
 
   # Parameter DEPRECATION checks

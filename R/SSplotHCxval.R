@@ -1,32 +1,32 @@
 #' Hindcasting Cross-Validations of Multiple Models
 #'
-#' Plots one-step ahead hindcasting cross-validations and computes MASE from 
-#' prediction residuals.`MASE` is calculated as the average ratio of mean 
-#' absolute error (`MAE`) of prediction residuals (`MAE.PR`) and naive 
-#' predictions (`MAE.base`). `MASE.adj` sets the `MAE.base` to a minimum 
-#' `MAE.base.adj` (`default=0.1`). `MASE.adj` allow passing (`MASE<1`) if 
+#' Plots one-step ahead hindcasting cross-validations and computes MASE from
+#' prediction residuals.`MASE` is calculated as the average ratio of mean
+#' absolute error (`MAE`) of prediction residuals (`MAE.PR`) and naive
+#' predictions (`MAE.base`). `MASE.adj` sets the `MAE.base` to a minimum
+#' `MAE.base.adj` (`default=0.1`). `MASE.adj` allow passing (`MASE<1`) if
 #' `MAE.PE < 0.1` and thus accurate if obs show very little annual variation
 #'
-#' @param retroSummary List created by [r4ss::SSsummarize()] or 
+#' @param retroSummary List created by [r4ss::SSsummarize()] or
 #' [ss3diags::SSretroComps()]
 #' @param subplots optional use of the following:
 #' \itemize{
 #'  \item `"cpue"` Index data
 #'  \item `"len"` Length composition data
 #'  \item `"age"` Age composition data (yet to be tested)
-#' } 
-#' @param Season option to specify Season as an integer of value 1-4. Default 
+#' }
+#' @param Season option to specify Season as an integer of value 1-4. Default
 #' uses first available, i.e. usual Seas = 1
 #' @param endyrvec Optional single year or vector of years representing the
 #' final year of values to show for each model. By default it is set to the
 #' ending year specified in each model.
-#' @param MAE.base.adj minimum `MASE` denominator (naive predictions) for 
+#' @param MAE.base.adj minimum `MASE` denominator (naive predictions) for
 #' `MASE.adj` (default = 0.1)
 #' @param show.mase.adj if TRUE, it show `mase.adj` in plot
 #' @param indexfleets Fleet numbers for each model to compare
 #' indices of abundance. Can take different forms:
 #' \itemize{
-#'   \item integer: (default) create a single comparison plot for the chosen 
+#'   \item integer: (default) create a single comparison plot for the chosen
 #' index
 #'   \item NULL: create a separate plot for each index as long as the fleet
 #' numbering is the same across all models.
@@ -40,18 +40,18 @@
 #' @param xmin optional number first year shown in plot (if available)
 #' @param ylim will over-write `ylimAdj` if specified
 #' @param shadecol uncertainty shading of hcxval horizon
-#' @param shadecol1 uncertainty shading of early years not affected by 
+#' @param shadecol1 uncertainty shading of early years not affected by
 #' hindcast (currently not used)
-#' @param shadecol2 color for uncertainty in early years not affected by 
+#' @param shadecol2 color for uncertainty in early years not affected by
 #' hindcast
-#' @param shadealpha Transparency adjustment used to make default `shadecol`. 
+#' @param shadealpha Transparency adjustment used to make default `shadecol`.
 #' (currently not used)
-#' @param indexselect Vector of fleet numbers for each model for which to 
+#' @param indexselect Vector of fleet numbers for each model for which to
 #' compare
-#' @param indexQlabel [Logical][base::logical] flag to add catchability to 
+#' @param indexQlabel [Logical][base::logical] flag to add catchability to
 #' legend in plot of index fits.
 #' @param indexQdigits Number of significant digits for catchability in legend
-#' @param indexUncertainty Show fixed uncertainty intervals on index 
+#' @param indexUncertainty Show fixed uncertainty intervals on index
 #' (not estimated)
 #'
 #' @inheritParams SSplotGeneric

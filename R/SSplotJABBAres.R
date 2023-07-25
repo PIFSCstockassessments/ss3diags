@@ -1,7 +1,7 @@
 #' Residual plot
 #'
-#' Plots residuals for all indices as boxplot (color coded by fleet) with a 
-#' loess showing systematic trends over time. This function is from the package 
+#' Plots residuals for all indices as boxplot (color coded by fleet) with a
+#' loess showing systematic trends over time. This function is from the package
 #' JABBA (Just Another Bayesian Biomass Assessment).
 #'
 #' @param ss3rep Stock Synthesis output as read by [r4SS::SS_output()]
@@ -17,14 +17,14 @@
 #' \itemize{
 #'  \item `"comb"` Combine seasonal data for each year and plot against Yr
 #'  \item `"sep"` Treat season separately, plotting against `Yr.S`.
-#'  \item `NULL` If NULL, it is assumed that there is only one season and 
+#'  \item `NULL` If NULL, it is assumed that there is only one season and
 #'  option `"comb"` is used.
 #' }
-#' @param indexselect Vector of fleet numbers for each model for which to 
+#' @param indexselect Vector of fleet numbers for each model for which to
 #' compare
 #' @param miny minimum abs values of `ylim`
 #' @param boxcol color boxes
-#' @param ylim Optional, min and max values for the ylim to override the 
+#' @param ylim Optional, min and max values for the ylim to override the
 #' `"default"` value (-0.7, 0.5)
 #' @param xylabs [Logical][base::logical] flag. Enables x- and y-axis labels.
 #'
