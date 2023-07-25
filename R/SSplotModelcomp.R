@@ -1,20 +1,46 @@
 #' Compare Multiple SS Model Estimates
 #'
-#' A function to plot SSB, B-ratio, F, Recruits, and/or Index of Abundance fits from multiple SS models. This function uses an object of multiple SS models summarized with r4ss:SSsummarize().
+#' A function to plot SSB, B-ratio, F, Recruits, and/or Index of Abundance fits 
+#' from multiple SS models. This function uses an object of multiple SS models 
+#' summarized with [r4ss::SSsummarize()].
 #'
-#' @param summaryoutput List created by r4ss::SSsummarize()
+#' @param summaryoutput List created by [r4ss::SSsummarize()]
 #' @param subplots option to "SSB","Bratio","Fvalue","Recruits","Index"
-#' @param brp option to set reference point c("msy","btargs")
-#' @param fmsy to specify Fvalue as F/Fmsy if so in starter file setting
+#' \itemize{
+#'  \item `"SSB"` Spawning Stock Biomass
+#'  \item `"Bratio"` B Ratio denominator
+#'  \item `"Fvalue"` Fishing Mortality
+#'  \item `"Recruits"` Recruits
+#'  \item `"Index"` Index
+#'  \item `"RecDev"` Recruitment Deviations
+#' } 
+#' @param brp option to set reference point `c("msy","btargs")`
+#' @param fmsy to specify `Fvalue` as `F/Fmsy` if so in starter file setting
 #' @param ylabs yaxis labels for quants
 #' final year of values to show for each model. By default it is set to the
-#' @param xmin = NULL optional number first year shown in plot (if available)
-#' @param indexselect = Vector of fleet numbers for each model for which to compare
-#' @param indexfleets CHECK IF NEEDED or how to adjust indexfleets
-#' @param indexUncertainty Show fixed uncertainty intervals on index (not estimated)
+#' @param xmin NULL optional number first year shown in plot (if available)
+#' @param indexselect Vector of fleet numbers for each model for which to 
+#' compare
+#' @param indexfleets Fleet numbers for each model to compare
+#' indices of abundance. Can take different forms:
+#' \itemize{
+#'   \item integer (default): create a single comparison plot for the chosen 
+#'index
+#'   \item NULL: create a separate plot for each index as long as the fleet
+#' numbering is the same across all models.
+#'   \item vector of length equal to number of models: a single fleet number
+#' for each model to be compared in a single plot
+#'   \item list: list of fleet numbers associated with indices within each
+#' model to be compared, where the list elements are each a vector of the
+#' same length but the names of the list elements don't matter and can be
+#' absent.
+#' }
+#' @param indexUncertainty Show fixed uncertainty intervals on index 
+#' (not estimated)
 #' @param shadecol uncertainty shading of hcxval horizon
 #' @param shadealpha Transparency adjustment used to make default shadecol
-#' @param indexQlabel TRUE/FALSE, if TRUE add catchability to legend in plot of index fits (currently not used)
+#' @param indexQlabel [Logical][base::logical]. If TRUE add catchability to 
+#' legend in plot of index fits (currently not used)
 #' @param indexQdigits Number of significant digits for catchability in legend
 #' @param endyrvec Optional single year or vector of years representing the
 #' final year of values to show for each model. By `"default"` it is set to the

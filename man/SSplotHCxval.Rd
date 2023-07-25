@@ -223,10 +223,10 @@ legend in plot of index fits.}
 \item{indexfleets}{Fleet numbers for each model to compare
 indices of abundance. Can take different forms:
 \itemize{
-\item NULL: create a separate plot for each index as long as the fleet
-numbering is the same across all models.
 \item integer: (default) create a single comparison plot for the chosen
 index
+\item NULL: create a separate plot for each index as long as the fleet
+numbering is the same across all models.
 \item vector of length equal to number of models: a single fleet number
 for each model to be compared in a single plot
 \item list: list of fleet numbers associated with indices within each

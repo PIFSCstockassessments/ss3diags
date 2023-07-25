@@ -64,7 +64,7 @@ SSplotModelcomp(
 )
 }
 \arguments{
-\item{summaryoutput}{List created by r4ss::SSsummarize()}
+\item{summaryoutput}{List created by \code{\link[r4ss:SSsummarize]{r4ss::SSsummarize()}}}
 
 \item{plot}{DEPRECATED. By default, TRUE, Plots (and subplots) are drawn to the
 plot device. The option to explicitly disable this option (FALSE), is not
@@ -87,11 +87,19 @@ field with a different name): a list created by the function
 \link[r4ss:SSsummarize]{r4ss::SSsummarize}. Either \code{"all"} or a vector of numbers indicating
 columns in summary tables.}
 
-\item{subplots}{option to "SSB","Bratio","Fvalue","Recruits","Index"}
+\item{subplots}{option to "SSB","Bratio","Fvalue","Recruits","Index"
+\itemize{
+\item \code{"SSB"} Spawning Stock Biomass
+\item \code{"Bratio"} B Ratio denominator
+\item \code{"Fvalue"} Fishing Mortality
+\item \code{"Recruits"} Recruits
+\item \code{"Index"} Index
+\item \code{"RecDev"} Recruitment Deviations
+}}
 
-\item{brp}{option to set reference point c("msy","btargs")}
+\item{brp}{option to set reference point \code{c("msy","btargs")}}
 
-\item{fmsy}{to specify Fvalue as F/Fmsy if so in starter file setting}
+\item{fmsy}{to specify \code{Fvalue} as \code{F/Fmsy} if so in starter file setting}
 
 \item{ylabs}{yaxis labels for quants
 final year of values to show for each model. By default it is set to the}
@@ -100,11 +108,13 @@ final year of values to show for each model. By default it is set to the}
 final year of values to show for each model. By \code{"default"} it is set to the
 ending year specified in each model.}
 
-\item{xmin}{= NULL optional number first year shown in plot (if available)}
+\item{xmin}{NULL optional number first year shown in plot (if available)}
 
-\item{indexselect}{= Vector of fleet numbers for each model for which to compare}
+\item{indexselect}{Vector of fleet numbers for each model for which to
+compare}
 
-\item{indexUncertainty}{Show fixed uncertainty intervals on index (not estimated)}
+\item{indexUncertainty}{Show fixed uncertainty intervals on index
+(not estimated)}
 
 \item{col}{Optional vector of colors to be used for lines. Input NULL}
 
@@ -202,14 +212,30 @@ option to disable this, via FALSE, is unused.}
 whether input values are from MCMC or to use normal distribution around
 MLE.}
 
-\item{indexQlabel}{TRUE/FALSE, if TRUE add catchability to legend in plot of index fits (currently not used)}
+\item{indexQlabel}{\link[base:logical]{Logical}. If TRUE add catchability to
+legend in plot of index fits (currently not used)}
 
 \item{indexQdigits}{Number of significant digits for catchability in legend}
 
-\item{indexfleets}{CHECK IF NEEDED or how to adjust indexfleets}
+\item{indexfleets}{Fleet numbers for each model to compare
+indices of abundance. Can take different forms:
+\itemize{
+\item integer (default): create a single comparison plot for the chosen
+index
+\item NULL: create a separate plot for each index as long as the fleet
+numbering is the same across all models.
+\item vector of length equal to number of models: a single fleet number
+for each model to be compared in a single plot
+\item list: list of fleet numbers associated with indices within each
+model to be compared, where the list elements are each a vector of the
+same length but the names of the list elements don't matter and can be
+absent.
+}}
 }
 \description{
-A function to plot SSB, B-ratio, F, Recruits, and/or Index of Abundance fits from multiple SS models. This function uses an object of multiple SS models summarized with r4ss:SSsummarize().
+A function to plot SSB, B-ratio, F, Recruits, and/or Index of Abundance fits
+from multiple SS models. This function uses an object of multiple SS models
+summarized with \code{\link[r4ss:SSsummarize]{r4ss::SSsummarize()}}.
 }
 \author{
 Mostly adopted from r4ss::SSplotComparisons by Taylor et al
