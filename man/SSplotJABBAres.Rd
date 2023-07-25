@@ -55,31 +55,43 @@ SSplotJABBAres(
 \arguments{
 \item{ss3rep}{Stock Synthesis output as read by r4SS function SS_output}
 
-\item{subplots}{string of type of data to plot, 'cpue' for index of abundance data, 'len' or 'age' for length- or age-composition, 'size' for generalized size composition, or 'con' for conditional age-at-length data.}
+\item{subplots}{string of type of data to plot:
+\itemize{
+\item \code{"cpue"} Index of abundance data
+\item \code{"len"} Length-composition
+\item \code{"age"} Age-composition
+\item \code{"size"} Generalized size composition
+\item \code{"con"} Conditional age-at-length data.
+}}
 
-\item{seas}{string indicating how to treat data from multiple seasons
-'comb' - combine seasonal data for each year and plot against Yr
-'sep' - treat season separately, plotting against Yr.S.
-If is.null(seas), it is assumed that there is only one season and option 'comb' is used.}
+\item{seas}{string indicating how to treat data from multiple seasons:
+\itemize{
+\item \code{"comb"} Combine seasonal data for each year and plot against Yr
+\item \code{"sep"} Treat season separately, plotting against \code{Yr.S}.
+\item \code{NULL} If NULL, it is assumed that there is only one season and
+option \code{"comb"} is used.
+}}
 
-\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
-by default (TRUE), and the option to disable this, via FALSE, is unused.}
+\item{plot}{DEPRECATED. By default, TRUE, Plots (and subplots) are drawn to the
+plot device. The option to explicitly disable this option (FALSE), is not
+implemented. This option flag will be defunct in a future version}
 
-\item{print}{Deprecated. Please use 'print_plot'.}
+\item{print}{DEPRECATED, please use \code{print_plot}.}
 
-\item{print_plot}{Option to print to PNG files}
+\item{print_plot}{Flag to enable plot graphic device to print to PNG or PNG files.}
 
-\item{png}{Deprecated. please use 'use_png'.}
+\item{png}{DEPRECATED. Please use \code{use_png}.}
 
-\item{use_png}{Draw plots in PNG format}
+\item{use_png}{Enables plots to be generated to PNG files. Defaults to print value}
 
-\item{pdf}{Deprecated. Please use 'use_pdf'.}
+\item{pdf}{DEPRECATED. Please use \code{use_pdf}.}
 
-\item{use_pdf}{option for pdf plots (not tested for TRUE)}
+\item{use_pdf}{Enables plots to be generated to pdf file.}
 
-\item{indexselect}{Vector of fleet numbers for each model for which to compare}
+\item{indexselect}{Vector of fleet numbers for each model for which to
+compare}
 
-\item{miny}{minimum abs values of ylim}
+\item{miny}{minimum abs values of \code{ylim}}
 
 \item{col}{Optional vector of colors to be used for lines. Input NULL}
 
@@ -89,76 +101,89 @@ by default (TRUE), and the option to disable this, via FALSE, is unused.}
 
 \item{lwd}{Optional vector of line widths}
 
-\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis mark at final
-year in time series plots.}
+\item{tickEndYr}{\link[base:logical]{Logical} flag: set TRUE or FALSE to switch to turn
+on/off extra axis mark at final year in timeseries plots.}
 
-\item{xlim}{Optional, values for x-axis range of years to display on plot.
-Default = "default" displays all years of available data. (currently not used)}
+\item{xlim}{Optional, years to use for x-axis. Default value NULL (or "default"),
+uses all years available.}
 
-\item{ylim}{Optional, min and max values for the ylim to override the "default" value (-0.7, 0.5)}
+\item{ylim}{Optional, min and max values for the ylim to override the
+\code{"default"} value (-0.7, 0.5)}
 
-\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space}
+\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space.}
 
-\item{xaxs}{Choice of x-axis parameter (see ?par for more info)}
+\item{xaxs}{Choice of xaxs parameter See \code{?par} for more info.}
 
-\item{yaxs}{Choice of y-axis parameter (see ?par for more info)}
+\item{yaxs}{Choice of yaxs parameter. See \code{?par} for more info.}
 
-\item{xylabs}{TRUE or FALSE, include x- and y-axis labels}
+\item{xylabs}{\link[base:logical]{Logical} flag. Enables x- and y-axis labels.}
 
-\item{type}{Type parameter passed to points (default 'o' overplots points on
-top of lines)}
+\item{type}{The type of plot to be drawn. For more details, see \code{\link[base:plot]{plot}}.}
 
-\item{legend}{Option to add a legend. TRUE by default.}
+\item{legend}{Flag to enable legend to plot. TRUE by default.}
 
 \item{legendlabels}{Optional vector of labels to include in legend.}
 
-\item{legendloc}{Location of legend. Either a string like "topleft" or a vector
-of two numeric values representing the fraction of the maximum in the x and y
-dimensions, respectively. See ?legend for more info on the string options.}
+\item{legendloc}{Location of legend. Either a string like "topleft" or a vector of two
+numeric values representing the fraction of the maximum in the x and y
+dimensions, respectively. See \code{help("legend")} for more info on the
+string options.}
 
-\item{legendorder}{Optional vector of model numbers that can be used to have
-the legend display the model names in an order that is different than that
+\item{legendorder}{Optional vector of model numbers that can be used to have the legend
+display the model names in an order that is different than that
 which is represented in the summary input object.}
 
 \item{legendncol}{Number of columns for the legend.}
 
-\item{legendcex}{Allows to adjust legend cex. Defaults to 1.}
+\item{legendcex}{Allows to adjust legend cex}
 
 \item{legendsp}{Space between legend labels}
 
 \item{legendindex}{Allows to add legend for selected indices (plots)}
 
-\item{pwidth}{Width of plot}
+\item{pwidth}{Default width of plot printed to plot in units of \code{punits}}
 
-\item{pheight}{Height of plot}
+\item{pheight}{Height of plot printed to plot in units of \code{punits }}
 
-\item{punits}{Units for PNG file}
+\item{punits}{Measurement units for \code{pwidth} and \code{pheight}. Default is \code{"in"}.
+\itemize{
+\item \code{"px"} (pixels)
+\item \code{"in"} (inches)
+\item \code{"cm"} (centimeters)
+\item \code{"mm"} (millimeters)
+}}
 
-\item{res}{Resolution for PNG file}
+\item{res}{Resolution for plots printed to files.}
 
-\item{ptsize}{Point size for PNG file}
+\item{ptsize}{Point size for plotted text in plots printed in files. See \code{help("png")}
+for more details}
 
-\item{cex.main}{Character expansion for plot titles}
+\item{cex.main}{Character expansion for plot titles.}
 
-\item{plotdir}{Directory where PNG or PDF files will be written. By default
+\item{plotdir}{Directory where output plot file will be written. By default,
 it will be the directory where the model was run.}
 
-\item{filenameprefix}{Additional text to append to PNG or PDF file names.
+\item{filenameprefix}{Additional text to append to output plot file name.
 It will be separated from default name by an underscore.}
 
-\item{par}{list of graphics parameter values passed to par() function}
+\item{par}{A numerical vector of the form c(bottom, left, top, right) which
+gives the number of lines of margin to be specified on the four sides of
+the plot,which is passed to \code{par()}. Entering \code{NULL} passes plot's default
+\code{par()} values (which depends on whether the main title is included or not)}
 
-\item{verbose}{Report progress to R GUI?}
+\item{verbose}{Flag to print additional diagnostic messages to R console}
 
 \item{boxcol}{color boxes}
 
 \item{new}{Deprecated. New plot windows are created by default (TRUE), and the
 option to disable this, via FALSE, is unused.}
 
-\item{add}{supresses par() to create multiplot figs}
+\item{add}{suppresses \code{par()} to create multiplot figs}
 }
 \description{
-plots residuals for all indices as boxplot (color coded by fleet) with a loess showing systematic trends over time. This function is from the package JABBA.
+Plots residuals for all indices as boxplot (color coded by fleet) with a l
+oess showing systematic trends over time. This function is from the package
+JABBA (Just Another Bayesian Biomass Assessment).
 }
 \author{
 Henning Winker (JRC-EC)
