@@ -59,7 +59,15 @@ SSplotEnsemble(
 \arguments{
 \item{kb}{\code{kb} type output created by \code{SSdeltaMVLN()}}
 
-\item{subplots}{option to "Bratio","Fvalue","SSB", "F", "Recr", "Catch"}
+\item{subplots}{vector to create subplots with these options:
+\itemize{
+\item \code{"stock"} Fish Population
+\item \code{"harvest"} Harvest Rate
+\item \code{"SSB"} Spawning Stock Biomass
+\item \code{"F"} Fishing Mortality
+\item \code{"Recr"} Recruitment
+\item \code{"Catch"} Total Catch
+}}
 
 \item{models}{option to manually subset the models in \code{kb[["run"]]}}
 
@@ -190,7 +198,7 @@ Default is 4}
 \item{legendindex}{Allows to add legend for selected indices (plots)}
 }
 \description{
-Plots model ensembles and forecasts with uncertaity represented by MVLN or
+Plots model ensembles and forecasts with uncertainty represented by MVLN or
 MCMC posteriors
 }
 \examples{

@@ -1,10 +1,18 @@
 #' Model ensemble plots
 #'
-#' Plots model ensembles and forecasts with uncertaity represented by MVLN or 
+#' Plots model ensembles and forecasts with uncertainty represented by MVLN or 
 #' MCMC posteriors
 #'
 #' @param kb `kb` type output created by `SSdeltaMVLN()`
-#' @param subplots option to "Bratio","Fvalue","SSB", "F", "Recr", "Catch"
+#' @param subplots vector to create subplots with these options:
+#' \itemize{
+#'  \item `"stock"` Fish Population
+#'  \item `"harvest"` Harvest Rate
+#'  \item `"SSB"` Spawning Stock Biomass
+#'  \item `"F"` Fishing Mortality 
+#'  \item `"Recr"` Recruitment
+#'  \item `"Catch"` Total Catch
+#' } 
 #' @param models option to manually subset the models in `kb[["run"]]`
 #' @param quantiles quantiles for uncertainty in plots. Input as a list, 
 #' default is the 95TH percentile: `list(c(0.025, 0.975))`
