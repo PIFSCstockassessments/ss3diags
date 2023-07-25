@@ -53,7 +53,7 @@ SSplotJABBAres(
 )
 }
 \arguments{
-\item{ss3rep}{Stock Synthesis output as read by r4SS function SS_output}
+\item{ss3rep}{Stock Synthesis output as read by \code{\link[r4SS:SS_output]{r4SS::SS_output()}}}
 
 \item{subplots}{string of type of data to plot:
 \itemize{
@@ -181,8 +181,8 @@ option to disable this, via FALSE, is unused.}
 \item{add}{suppresses \code{par()} to create multiplot figs}
 }
 \description{
-Plots residuals for all indices as boxplot (color coded by fleet) with a l
-oess showing systematic trends over time. This function is from the package
+Plots residuals for all indices as boxplot (color coded by fleet) with a
+loess showing systematic trends over time. This function is from the package
 JABBA (Just Another Bayesian Biomass Assessment).
 }
 \author{

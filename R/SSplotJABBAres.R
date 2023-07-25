@@ -1,10 +1,10 @@
 #' Residual plot
 #'
-#' Plots residuals for all indices as boxplot (color coded by fleet) with a l
-#' oess showing systematic trends over time. This function is from the package 
+#' Plots residuals for all indices as boxplot (color coded by fleet) with a 
+#' loess showing systematic trends over time. This function is from the package 
 #' JABBA (Just Another Bayesian Biomass Assessment).
 #'
-#' @param ss3rep Stock Synthesis output as read by r4SS function SS_output
+#' @param ss3rep Stock Synthesis output as read by [r4SS::SS_output()]
 #' @param subplots string of type of data to plot:
 #' \itemize{
 #'  \item `"cpue"` Index of abundance data
