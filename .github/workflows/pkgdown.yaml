@@ -17,6 +17,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Get the latest SS3 executable for linux and move to expected location
+        run: |
+          curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_linux" | xargs wget
+          mv ss_linux ss
+          sudo chmod a+x ss
+          cp ss inst/extdata/ss
+          rm ss
+
       - uses: r-lib/actions/setup-pandoc@v2
 
       - uses: r-lib/actions/setup-r@v2
