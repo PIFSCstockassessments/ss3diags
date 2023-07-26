@@ -5,8 +5,7 @@ title: "Retrospective Analysis"
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  eval = FALSE
+  comment = "#>"
 )
 ```
 
@@ -17,9 +16,9 @@ library(ss3diags)
 Retrospective analysis is a widely used diagnostic to test for patterns and bias in model estimated quantities (e.g. spawning stock biomass (SSB) and fishing mortality (F)). To implement a retrospective analysis with stock synthesis the `r4ss` package provides the `retro()` function. Here we provide a step-by-step example of how to run and analyze a retrospective analysis using a simple, example SS model.   
 
 ## Model inputs  
-To run a stock synthesis model, 4 input files are required: starter, forecast, control, and data. The input files for the example model can be found within the `r4ss` package and accessed as shown below. If you do not have `r4ss` installed, you will need to install for this tutorial. 
+To run a stock synthesis model, 4 input files are required: starter, forecast, control, and data. The input files for the example model can be found within the `ss3diags` package and accessed as shown below. Also, if you do not have `r4ss` installed, you will need to install for this tutorial. 
 
-```{r}
+```{r eval=FALSE}
 install.packages("pak")
 pak::pkg_install("r4ss/r4ss")
 ```
@@ -27,12 +26,12 @@ pak::pkg_install("r4ss/r4ss")
 ```{r}
 library(r4ss) 
 
-r4ss_path <- system.file("extdata", "simple_small", package = "r4ss")
+files_path <- system.file("extdata", package = "ss3diags")
 dir_retro <- file.path(tempdir(check = TRUE), "retrospectives")
 dir.create(dir_retro, showWarnings = FALSE)
-files <- c("data.ss", "control.ss", "forecast.ss", "starter.ss")
-file.copy(from = paste(r4ss_path, files, sep = "/"), 
-          to = paste(dir_retro, files, sep = "/"))
+list.files(files_path)
+file.copy(from = list.files(files_path, full.names = TRUE), to = dir_retro)
+#file.copy(from ="C:/Users/Megumi.Oshima/Documents/ss3diags/inst/extdata/ss_opt_win.exe", to = dir_retro)
 
 ```
 
@@ -51,8 +50,10 @@ To visualize the output and inspect for any patterns or biases, you need to load
 
 ```{r}
 
-retro_mods <- r4ss::SSgetoutput(dirvec = dir_retro, keyvec = seq(0, -5, by = -1))
-retroSummary <- r4ss::SSsummarize(retro_mods)
+retro_mods <- r4ss::SSgetoutput(dirvec = file.path(dir_retro, "retrospectives", paste0("retro", seq(0,-5,by=-1))), verbose = F)
+retroSummary <- r4ss::SSsummarize(retro_mods, verbose = F)
 
+SSplotRetro(retroSummary, subplots = "SSB", add = TRUE)
+SSplotRetro(retroSummary, subplots = "F", add = TRUE)
 ```
 
