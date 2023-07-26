@@ -23,7 +23,7 @@ install.packages("pak")
 pak::pkg_install("r4ss/r4ss")
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(r4ss) 
 
 files_path <- system.file("extdata", package = "ss3diags")
@@ -35,20 +35,20 @@ file.copy(from = list.files(files_path, full.names = TRUE), to = dir_retro)
 
 ```
 
-You will need to make sure you have the SS executable [file](https://github.com/nmfs-stock-synthesis/stock-synthesis) either in your path or in the directory you are running the retrospective from (in this case `dir_retro`). 
+You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the retrospective from (in this case `dir_retro`). 
 
 
 Once you have the 4 input files and SS executable, you can run retrospective analysis as shown below. We are running it for 5 1-year peels, so with each run, the last year of data is removed and the model is re-run for a total of 5 times. The number of year peels can be adjusted with the `years` argument. If the SS executable file you are using is named something other than "ss" (e.g. ss_opt_win.exe), you will need to specify this with the argument `exe = "ss_opt_win"`. 
 
 ```{r }
 
-r4ss::retro(dir = dir_retro, exe = "ss", years = 0:-5)
+r4ss::retro(dir = dir_retro, exe = "ss", years = 0:-5, verbose = FALSE)
 
 ```
 
-To visualize the output and inspect for any patterns or biases, you need to load the report files into R and can use the `SSplotRetro()` function from `ss3diags`. The easiest way to load mulitple report files is using `r4ss::SSgetoutput()` and `r4ss::SSsummarize()` functions. Use the `keyvec` argument to indicate which folders to access, in this case since we ran 5 peels, we want the folders `retro0` to `retro-5`.
+To visualize the output and inspect for any patterns or biases, you need to load the report files into R and can use the `SSplotRetro()` function from `ss3diags`. The easiest way to load multiple report files is using `r4ss::SSgetoutput()` and `r4ss::SSsummarize()` functions. The default sub-directories for each peel, 0 to 5, are labeled `retro0` to `retro-5`.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 retro_mods <- r4ss::SSgetoutput(dirvec = file.path(dir_retro, "retrospectives", paste0("retro", seq(0,-5,by=-1))), verbose = F)
 retroSummary <- r4ss::SSsummarize(retro_mods, verbose = F)
@@ -56,4 +56,4 @@ retroSummary <- r4ss::SSsummarize(retro_mods, verbose = F)
 SSplotRetro(retroSummary, subplots = "SSB", add = TRUE)
 SSplotRetro(retroSummary, subplots = "F", add = TRUE)
 ```
-
+The rule of thumb proposed by Hurtado-Ferror et al. (2014) for Mohn's rho values is that for long-lived species, the rho value should fall between -0.15 and 0.20. 
