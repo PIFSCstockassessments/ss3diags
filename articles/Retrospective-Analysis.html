@@ -117,14 +117,6 @@ need to install for this tutorial.</p>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r4ss/r4ss" class="external-link">r4ss</a></span><span class="op">)</span> </span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'r4ss'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     profile</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     jitter</span></span>
 <span></span>
 <span><span class="va">files_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"ss3diags"</span><span class="op">)</span></span>
 <span><span class="va">dir_retro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="st">"retrospectives"</span><span class="op">)</span></span>
@@ -134,9 +126,10 @@ need to install for this tutorial.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">files_path</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, to <span class="op">=</span> <span class="va">dir_retro</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE TRUE TRUE TRUE TRUE</span></span>
 <span><span class="co">#file.copy(from ="C:/Users/Megumi.Oshima/Documents/ss3diags/inst/extdata/ss_opt_win.exe", to = dir_retro)</span></span></code></pre></div>
-<p>You will need to make sure you have the SS executable <a href="https://github.com/nmfs-stock-synthesis/stock-synthesis" class="external-link">file</a>
-either in your path or in the directory you are running the
-retrospective from (in this case <code>dir_retro</code>).</p>
+<p>You will need to make sure you have the <a href="https://github.com/nmfs-stock-synthesis/stock-synthesis" class="external-link">SS
+executable</a> file either in your path or in the directory you are
+running the retrospective from (in this case
+<code>dir_retro</code>).</p>
 <p>Once you have the 4 input files and SS executable, you can run
 retrospective analysis as shown below. We are running it for 5 1-year
 peels, so with each run, the last year of data is removed and the model
@@ -147,34 +140,26 @@ you will need to specify this with the argument
 <code>exe = "ss_opt_win"</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_retro</span>, exe <span class="op">=</span> <span class="st">"ss"</span>, years <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="op">-</span><span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/RtmpizNkT8/retrospectives/retrospectives/retro0</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/RtmpizNkT8/retrospectives/retrospectives/retro-1</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/RtmpizNkT8/retrospectives/retrospectives/retro-2</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/RtmpizNkT8/retrospectives/retrospectives/retro-3</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/RtmpizNkT8/retrospectives/retrospectives/retro-4</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/RtmpizNkT8/retrospectives/retrospectives/retro-5</span></span></code></pre></div>
+<span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_retro</span>, exe <span class="op">=</span> <span class="st">"ss"</span>, years <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="op">-</span><span class="fl">5</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro0</span></span>
+<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro-1</span></span>
+<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro-2</span></span>
+<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro-3</span></span>
+<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro-4</span></span>
+<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro-5</span></span></code></pre></div>
 <p>To visualize the output and inspect for any patterns or biases, you
 need to load the report files into R and can use the
 <code><a href="../reference/SSplotRetro.html">SSplotRetro()</a></code> function from <code>ss3diags</code>. The
-easiest way to load mulitple report files is using
+easiest way to load multiple report files is using
 <code><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">r4ss::SSgetoutput()</a></code> and <code><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">r4ss::SSsummarize()</a></code>
-functions. Use the <code>keyvec</code> argument to indicate which
-folders to access, in this case since we ran 5 peels, we want the
-folders <code>retro0</code> to <code>retro-5</code>.</p>
+functions. The default sub-directories for each peel, 0 to 5, are
+labeled <code>retro0</code> to <code>retro-5</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">retro_mods</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>dirvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_retro</span>, <span class="st">"retrospectives"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"retro"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">5</span>,by<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
 <span><span class="va">retroSummary</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">retro_mods</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Plotting Retrospective pattern</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Retrospective-Analysis_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
 <span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
@@ -184,8 +169,7 @@ folders <code>retro0</code> to <code>retro-5</code>.</p>
 <span><span class="co">#&gt; 4  SSB     2018 -0.00474920 -0.007462034</span></span>
 <span><span class="co">#&gt; 5  SSB     2017  0.08716428  0.098849082</span></span>
 <span><span class="co">#&gt; 6  SSB Combined -0.12270351 -0.139113722</span></span>
-<span><span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"F"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Plotting Retrospective pattern</span></span></code></pre>
+<span><span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"F"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
 <p><img src="Retrospective-Analysis_files/figure-html/unnamed-chunk-5-2.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
 <span><span class="co">#&gt;   type     peel         Rho ForecastRho</span></span>
@@ -195,6 +179,9 @@ folders <code>retro0</code> to <code>retro-5</code>.</p>
 <span><span class="co">#&gt; 4    F     2018  0.01822898  0.02282296</span></span>
 <span><span class="co">#&gt; 5    F     2017 -0.04896989 -0.05388236</span></span>
 <span><span class="co">#&gt; 6    F Combined  0.21784401  0.24744008</span></span></code></pre>
+<p>The rule of thumb proposed by Hurtado-Ferror et al. (2014) for Mohn’s
+rho values is that for long-lived species, the rho value should fall
+between -0.15 and 0.20.</p>
 </div>
   </div>
 
