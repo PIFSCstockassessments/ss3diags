@@ -1,8 +1,9 @@
 pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
-articles: {}
-last_built: 2023-07-20T00:22Z
+articles:
+  Retrospective-Analysis: Retrospective-Analysis.html
+last_built: 2023-07-26T02:13Z
 urls:
   reference: https://pifscstockassessments.github.io/ss3diags/reference
   article: https://pifscstockassessments.github.io/ss3diags/articles
