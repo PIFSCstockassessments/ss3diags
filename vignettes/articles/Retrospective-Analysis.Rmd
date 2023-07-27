@@ -72,9 +72,9 @@ Examples of each of these changes are shown below, incrementally making each adj
 
 r4ss::sspar(mfrow = c(2, 2), plot.cex = 0.8)
 SSplotRetro(retroSummary, subplots = "SSB", add = TRUE, uncertainty = FALSE)
-SSplotRetro(retroSummary, subplots = "SSB", add = TRUE,  uncertainty = FALSE, xlim = c(2010, 2023))
-SSplotRetro(retroSummary, subplots = "SSB", add = TRUE,  uncertainty = FALSE, xlim = c(2010, 2023), forecast = FALSE)
-SSplotRetro(retroSummary, subplots = "SSB", add = TRUE,  uncertainty = FALSE, xlim = c(2010, 2023), forecast = FALSE, showrho = FALSE, forecastrho = FALSE)
+SSplotRetro(retroSummary, subplots = "SSB", add = TRUE,  uncertainty = FALSE, xlim = c(2015, 2022))
+SSplotRetro(retroSummary, subplots = "SSB", add = TRUE,  uncertainty = FALSE, xlim = c(2015, 2022), forecast = FALSE)
+SSplotRetro(retroSummary, subplots = "SSB", add = TRUE,  uncertainty = FALSE, xlim = c(2015, 2022), forecast = FALSE, showrho = FALSE, forecastrho = FALSE)
 
 ```
 Additionally, the fishing mortality can be plotted instead of spawning biomass by replacing `subplots = "SSB"` with `subplots = "F"`
