@@ -4,6 +4,8 @@ on:
   push:
     paths-ignore:
       - 'README.md'
+    branches-ignore:
+      - "FEAT-cookbook-recipe-articles"
   pull_request:
 
 name: build-ss-R-CMD-check
