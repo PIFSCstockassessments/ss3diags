@@ -25,7 +25,8 @@ jobs:
           cp ss inst/extdata/ss
           rm ss
 
-      - uses: lc5415/rmarkdown-action@v1
+      - name: Github action for rmarkdown
+        uses: lucharo/rmarkdown-action@v1
         with:
           input_file: vignettes/articles/Retrospective-Analysis.Rmd
 	        output_format: html_document
