@@ -97,13 +97,17 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PIFSCstockassessments/ss3diags" class="external-link">ss3diags</a></span><span class="op">)</span></span></code></pre></div>
-<p>Retrospective analysis is a widely used diagnostic to test for
-patterns and bias in model estimated quantities (e.g. spawning stock
-biomass (SSB) and fishing mortality (F)). To implement a retrospective
-analysis with stock synthesis the <code>r4ss</code> package provides the
-<code><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro()</a></code> function. Here we provide a step-by-step example of
-how to run and analyze a retrospective analysis using a simple, example
-SS model.</p>
+<p>Retrospective analysis is commonly used to check the consistency of
+model estimates such as spawning stock biomass (SSB) and fishing
+mortality (F) as the model is updated with new data in retrospect. The
+retrospective analysis involves sequentially removing observations from
+the terminal year (i.e., peels), fitting the model to the truncated
+series, and then comparing the relative difference between model
+estimates from the full-time series with the truncated time-series. To
+implement a retrospective analysis with stock synthesis the
+<code>r4ss</code> package provides the <code><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro()</a></code> function.
+Here we provide a step-by-step example of how to run and analyze a
+retrospective analysis using a simple, example SS model.</p>
 <div class="section level2">
 <h2 id="model-inputs">Model inputs<a class="anchor" aria-label="anchor" href="#model-inputs"></a>
 </h2>
@@ -130,6 +134,10 @@ need to install for this tutorial.</p>
 executable</a> file either in your path or in the directory you are
 running the retrospective from (in this case
 <code>dir_retro</code>).</p>
+</div>
+<div class="section level2">
+<h2 id="retrospective-analysis">Retrospective Analysis<a class="anchor" aria-label="anchor" href="#retrospective-analysis"></a>
+</h2>
 <p>Once you have the 4 input files and SS executable, you can run
 retrospective analysis as shown below. We are running it for 5 1-year
 peels, so with each run, the last year of data is removed and the model
@@ -141,12 +149,16 @@ you will need to specify this with the argument
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_retro</span>, exe <span class="op">=</span> <span class="st">"ss"</span>, years <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="op">-</span><span class="fl">5</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro0</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro-1</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro-2</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro-3</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro-4</span></span>
-<span><span class="co">#&gt; Running retrospective in /tmp/Rtmpr1yfPZ/retrospectives/retrospectives/retro-5</span></span></code></pre></div>
+<span><span class="co">#&gt; Running retrospective in /tmp/RtmpFkDoJV/retrospectives/retrospectives/retro0</span></span>
+<span><span class="co">#&gt; Running retrospective in /tmp/RtmpFkDoJV/retrospectives/retrospectives/retro-1</span></span>
+<span><span class="co">#&gt; Running retrospective in /tmp/RtmpFkDoJV/retrospectives/retrospectives/retro-2</span></span>
+<span><span class="co">#&gt; Running retrospective in /tmp/RtmpFkDoJV/retrospectives/retrospectives/retro-3</span></span>
+<span><span class="co">#&gt; Running retrospective in /tmp/RtmpFkDoJV/retrospectives/retrospectives/retro-4</span></span>
+<span><span class="co">#&gt; Running retrospective in /tmp/RtmpFkDoJV/retrospectives/retrospectives/retro-5</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="visualizing-output">Visualizing Output<a class="anchor" aria-label="anchor" href="#visualizing-output"></a>
+</h2>
 <p>To visualize the output and inspect for any patterns or biases, you
 need to load the report files into R and can use the
 <code><a href="../reference/SSplotRetro.html">SSplotRetro()</a></code> function from <code>ss3diags</code>. The
@@ -158,8 +170,71 @@ labeled <code>retro0</code> to <code>retro-5</code>.</p>
 <code class="sourceCode R"><span></span>
 <span><span class="va">retro_mods</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>dirvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_retro</span>, <span class="st">"retrospectives"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"retro"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">5</span>,by<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="va">retroSummary</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">retro_mods</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">retroSummary</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 54</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Retrospective-Analysis_files/figure-html/get_retro_files-1.png" width="700"></p>
+<pre><code><span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
+<span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
+<span><span class="co">#&gt; 1  SSB     2021 -0.20753686 -0.221050163</span></span>
+<span><span class="co">#&gt; 2  SSB     2020 -0.19601072 -0.227304734</span></span>
+<span><span class="co">#&gt; 3  SSB     2019 -0.29238505 -0.338600758</span></span>
+<span><span class="co">#&gt; 4  SSB     2018 -0.00474920 -0.007462034</span></span>
+<span><span class="co">#&gt; 5  SSB     2017  0.08716428  0.098849082</span></span>
+<span><span class="co">#&gt; 6  SSB Combined -0.12270351 -0.139113722</span></span></code></pre>
+<p>The default settings plot the spawning stock biomass timeseries for
+each peel, with the reference run (e.g. model with no years removed) as
+the “Ref” line and each successive peel as different colored lines
+labeled by their end year. The solid line ends at the end year and the
+dashed line to the point shows the 1 year forecast. Displaying the
+projected SSB can help assess forecast bias. The grey shaded area
+represents the 95% confidence intervals of uncertainty around the
+spawning biomass timeseries. Displayed in the center of the plot is the
+combined Mohn’s <span class="math inline">\(\rho\)</span> for all
+retrospective runs, and in parentheses is the forecast Mohn’s <span class="math inline">\(\rho\)</span>.</p>
+<div class="section level3">
+<h3 id="customizing-the-plot">Customizing the Plot<a class="anchor" aria-label="anchor" href="#customizing-the-plot"></a>
+</h3>
+<p>Retro plots can be customized in many ways, some common features that
+you may want to specify are:<br>
+* removing uncertainty intervals * adjusting the years shown on the
+x-axis * turning off the 1-year ahead forecasting * not displaying the
+combined <span class="math inline">\(\rho\)</span> value on the
+plot<br>
+Examples of each of these changes are shown below, incrementally making
+each adjustment.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, plot.cex <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, uncertainty <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
+<span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
+<span><span class="co">#&gt; 1  SSB     2021 -0.20753686 -0.221050163</span></span>
+<span><span class="co">#&gt; 2  SSB     2020 -0.19601072 -0.227304734</span></span>
+<span><span class="co">#&gt; 3  SSB     2019 -0.29238505 -0.338600758</span></span>
+<span><span class="co">#&gt; 4  SSB     2018 -0.00474920 -0.007462034</span></span>
+<span><span class="co">#&gt; 5  SSB     2017  0.08716428  0.098849082</span></span>
+<span><span class="co">#&gt; 6  SSB Combined -0.12270351 -0.139113722</span></span>
+<span><span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>,  uncertainty <span class="op">=</span> <span class="cn">FALSE</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2015</span>, <span class="fl">2022</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
+<span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
+<span><span class="co">#&gt; 1  SSB     2021 -0.20753686 -0.221050163</span></span>
+<span><span class="co">#&gt; 2  SSB     2020 -0.19601072 -0.227304734</span></span>
+<span><span class="co">#&gt; 3  SSB     2019 -0.29238505 -0.338600758</span></span>
+<span><span class="co">#&gt; 4  SSB     2018 -0.00474920 -0.007462034</span></span>
+<span><span class="co">#&gt; 5  SSB     2017  0.08716428  0.098849082</span></span>
+<span><span class="co">#&gt; 6  SSB Combined -0.12270351 -0.139113722</span></span>
+<span><span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>,  uncertainty <span class="op">=</span> <span class="cn">FALSE</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2015</span>, <span class="fl">2022</span><span class="op">)</span>, forecast <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
+<span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
+<span><span class="co">#&gt; 1  SSB     2021 -0.20753686 -0.221050163</span></span>
+<span><span class="co">#&gt; 2  SSB     2020 -0.19601072 -0.227304734</span></span>
+<span><span class="co">#&gt; 3  SSB     2019 -0.29238505 -0.338600758</span></span>
+<span><span class="co">#&gt; 4  SSB     2018 -0.00474920 -0.007462034</span></span>
+<span><span class="co">#&gt; 5  SSB     2017  0.08716428  0.098849082</span></span>
+<span><span class="co">#&gt; 6  SSB Combined -0.12270351 -0.139113722</span></span>
+<span><span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>,  uncertainty <span class="op">=</span> <span class="cn">FALSE</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2015</span>, <span class="fl">2022</span><span class="op">)</span>, forecast <span class="op">=</span> <span class="cn">FALSE</span>, showrho <span class="op">=</span> <span class="cn">FALSE</span>, forecastrho <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Retrospective-Analysis_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
 <span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
@@ -168,20 +243,25 @@ labeled <code>retro0</code> to <code>retro-5</code>.</p>
 <span><span class="co">#&gt; 3  SSB     2019 -0.29238505 -0.338600758</span></span>
 <span><span class="co">#&gt; 4  SSB     2018 -0.00474920 -0.007462034</span></span>
 <span><span class="co">#&gt; 5  SSB     2017  0.08716428  0.098849082</span></span>
-<span><span class="co">#&gt; 6  SSB Combined -0.12270351 -0.139113722</span></span>
-<span><span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"F"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
-<p><img src="Retrospective-Analysis_files/figure-html/unnamed-chunk-5-2.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
-<span><span class="co">#&gt;   type     peel         Rho ForecastRho</span></span>
-<span><span class="co">#&gt; 1    F     2021  0.28425747  0.28593618</span></span>
-<span><span class="co">#&gt; 2    F     2020  0.30941305  0.34974877</span></span>
-<span><span class="co">#&gt; 3    F     2019  0.52629045  0.63257483</span></span>
-<span><span class="co">#&gt; 4    F     2018  0.01822898  0.02282296</span></span>
-<span><span class="co">#&gt; 5    F     2017 -0.04896989 -0.05388236</span></span>
-<span><span class="co">#&gt; 6    F Combined  0.21784401  0.24744008</span></span></code></pre>
-<p>The rule of thumb proposed by Hurtado-Ferror et al. (2014) for Mohn’s
-rho values is that for long-lived species, the rho value should fall
-between -0.15 and 0.20.</p>
+<span><span class="co">#&gt; 6  SSB Combined -0.12270351 -0.139113722</span></span></code></pre>
+<p>Additionally, the fishing mortality can be plotted instead of
+spawning biomass by replacing <code>subplots = "SSB"</code> with
+<code>subplots = "F"</code></p>
+</div>
+<div class="section level3">
+<h3 id="summary-table">Summary Table<a class="anchor" aria-label="anchor" href="#summary-table"></a>
+</h3>
+<p>In addition to the retrospective plots, a summary statistics table
+can be produced using <code><a href="../reference/SShcbias.html">SShcbias()</a></code>. This table includes *
+type of estimate (SSB or F) * the year removed or “peel” * Mohn’s <span class="math inline">\(\rho\)</span> * forecast bias</p>
+<p>by year and overall (“Combined”). Mohn’s rho is a measure of the
+severity of bias in the retrospective patterns and the forecast bias is
+an estimate of bias in the forecasted quantities when years of data were
+removed. The rule of thumb proposed by Hurtado-Ferror et al. (2014) for
+Mohn’s <span class="math inline">\(\rho\)</span> values is that for
+long-lived species, the <span class="math inline">\(\rho\)</span> value
+should fall between -0.15 and 0.20.</p>
+</div>
 </div>
   </div>
 
