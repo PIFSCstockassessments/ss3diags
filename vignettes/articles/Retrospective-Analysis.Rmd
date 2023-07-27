@@ -49,12 +49,13 @@ r4ss::retro(dir = dir_retro, exe = "ss", years = 0:-5, verbose = FALSE)
 
 To visualize the output and inspect for any patterns or biases, you need to load the report files into R and can use the `SSplotRetro()` function from `ss3diags`. The easiest way to load multiple report files is using `r4ss::SSgetoutput()` and `r4ss::SSsummarize()` functions. The default sub-directories for each peel, 0 to 5, are labeled `retro0` to `retro-5`.
 
-```{r message=FALSE, warning=FALSE}
+```{r get_retro_files, message=FALSE, warning=FALSE}
 
 retro_mods <- r4ss::SSgetoutput(dirvec = file.path(dir_retro, "retrospectives", paste0("retro", seq(0,-5,by=-1))), verbose = F)
 retroSummary <- r4ss::SSsummarize(retro_mods, verbose = F)
+length(retroSummary)
 
-SSplotRetro(retroSummary, add = TRUE)
+SSplotRetro(retroSummary, subplots = "SSB", add = TRUE)
 
 ```
 The default settings plot the spawning stock biomass timeseries for each peel, with the reference run (e.g. model with no years removed) as the "Ref" line and each successive peel as different colored lines labeled by their end year. The solid line ends at the end year and the dashed line to the point shows the 1 year forecast. Displaying the projected SSB can help assess forecast bias. The grey shaded area represents the 95% confidence intervals of uncertainty around the spawning biomass timeseries. Displayed in the center of the plot is the combined Mohn's $\rho$ for all retrospective runs, and in parentheses is the forecast Mohn's $\rho$. 
