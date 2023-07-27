@@ -31,7 +31,7 @@ dir_retro <- file.path(tempdir(check = TRUE), "retrospectives")
 dir.create(dir_retro, showWarnings = FALSE)
 list.files(files_path)
 file.copy(from = list.files(files_path, full.names = TRUE), to = dir_retro)
-#file.copy(from ="C:/Users/Megumi.Oshima/Documents/ss3diags/inst/extdata/ss_opt_win.exe", to = dir_retro)
+file.copy(from ="C:/Users/Megumi.Oshima/Documents/ss3diags/inst/extdata/ss_opt_win.exe", to = dir_retro)
 
 ```
 
