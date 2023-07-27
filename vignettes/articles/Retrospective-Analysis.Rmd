@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 library(ss3diags)
 ```
 
-Retrospective analysis is a widely used diagnostic to test for patterns and bias in model estimated quantities (e.g. spawning stock biomass (SSB) and fishing mortality (F)). To implement a retrospective analysis with stock synthesis the `r4ss` package provides the `retro()` function. Here we provide a step-by-step example of how to run and analyze a retrospective analysis using a simple, example SS model.   
+Retrospective analysis is commonly used to check the consistency of model estimates such as spawning stock biomass (SSB) and fishing mortality (F) as the model is updated with new data in retrospect. The retrospective analysis involves sequentially removing observations from the terminal year (i.e., peels), fitting the model to the truncated series, and then comparing the relative difference between model estimates from the full-time series with the truncated time-series. To implement a retrospective analysis with stock synthesis the `r4ss` package provides the `retro()` function. Here we provide a step-by-step example of how to run and analyze a retrospective analysis using a simple, example SS model.   
 
 ## Model inputs  
 To run a stock synthesis model, 4 input files are required: starter, forecast, control, and data. The input files for the example model can be found within the `ss3diags` package and accessed as shown below. Also, if you do not have `r4ss` installed, you will need to install for this tutorial. 
@@ -37,7 +37,7 @@ file.copy(from = list.files(files_path, full.names = TRUE), to = dir_retro)
 
 You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the retrospective from (in this case `dir_retro`). 
 
-
+## Retrospective Analysis
 Once you have the 4 input files and SS executable, you can run retrospective analysis as shown below. We are running it for 5 1-year peels, so with each run, the last year of data is removed and the model is re-run for a total of 5 times. The number of year peels can be adjusted with the `years` argument. If the SS executable file you are using is named something other than "ss" (e.g. ss_opt_win.exe), you will need to specify this with the argument `exe = "ss_opt_win"`. 
 
 ```{r }
@@ -45,6 +45,7 @@ Once you have the 4 input files and SS executable, you can run retrospective ana
 r4ss::retro(dir = dir_retro, exe = "ss", years = 0:-5, verbose = FALSE)
 
 ```
+## Visualizing Output 
 
 To visualize the output and inspect for any patterns or biases, you need to load the report files into R and can use the `SSplotRetro()` function from `ss3diags`. The easiest way to load multiple report files is using `r4ss::SSgetoutput()` and `r4ss::SSsummarize()` functions. The default sub-directories for each peel, 0 to 5, are labeled `retro0` to `retro-5`.
 
@@ -53,7 +54,35 @@ To visualize the output and inspect for any patterns or biases, you need to load
 retro_mods <- r4ss::SSgetoutput(dirvec = file.path(dir_retro, "retrospectives", paste0("retro", seq(0,-5,by=-1))), verbose = F)
 retroSummary <- r4ss::SSsummarize(retro_mods, verbose = F)
 
-SSplotRetro(retroSummary, subplots = "SSB", add = TRUE)
-SSplotRetro(retroSummary, subplots = "F", add = TRUE)
+SSplotRetro(retroSummary, add = TRUE)
+
 ```
-The rule of thumb proposed by Hurtado-Ferror et al. (2014) for Mohn's rho values is that for long-lived species, the rho value should fall between -0.15 and 0.20. 
+The default settings plot the spawning stock biomass timeseries for each peel, with the reference run (e.g. model with no years removed) as the "Ref" line and each successive peel as different colored lines labeled by their end year. The solid line ends at the end year and the dashed line to the point shows the 1 year forecast. Displaying the projected SSB can help assess forecast bias. The grey shaded area represents the 95% confidence intervals of uncertainty around the spawning biomass timeseries. Displayed in the center of the plot is the combined Mohn's $\rho$ for all retrospective runs, and in parentheses is the forecast Mohn's $\rho$. 
+
+### Customizing the Plot  
+
+Retro plots can be customized in many ways, some common features that you may want to specify are:  
+  * removing uncertainty intervals 
+  * adjusting the years shown on the x-axis
+  * turning off the 1-year ahead forecasting
+  * not displaying the combined $\rho$ value on the plot  
+Examples of each of these changes are shown below, incrementally making each adjustment. 
+```{r message=FALSE, warning=FALSE}
+
+r4ss::sspar(mfrow = c(2, 2), plot.cex = 0.8)
+SSplotRetro(retrosum, subplots = "SSB", add = TRUE, uncertainty = FALSE)
+SSplotRetro(retrosum, subplots = "SSB", add = TRUE,  uncertainty = FALSE, xlim = c(2010, 2023))
+SSplotRetro(retrosum, subplots = "SSB", add = TRUE,  uncertainty = FALSE, xlim = c(2010, 2023), forecast = FALSE)
+SSplotRetro(retrosum, subplots = "SSB", add = TRUE,  uncertainty = FALSE, xlim = c(2010, 2023), forecast = FALSE, showrho = FALSE, forecastrho = FALSE)
+
+```
+Additionally, the fishing mortality can be plotted instead of spawning biomass by replacing `subplots = "SSB"` with `subplots = "F"`
+
+### Summary Table
+In addition to the retrospective plots, a summary statistics table can be produced using `SShcbias()`. This table includes 
+  * type of estimate (SSB or F)
+  * the year removed or "peel"
+  * Mohn's $\rho$ 
+  * forecast bias 
+
+by year and overall ("Combined"). Mohn's rho is a measure of the severity of bias in the retrospective patterns and the forecast bias is an estimate of bias in the forecasted quantities when years of data were removed. The rule of thumb proposed by Hurtado-Ferror et al. (2014) for Mohn's $\rho$ values is that for long-lived species, the $\rho$ value should fall between -0.15 and 0.20. 
