@@ -18,7 +18,7 @@ Retrospective analysis is commonly used to check the consistency of model estima
 ## Model inputs  
 To run a stock synthesis model, 4 input files are required: starter, forecast, control, and data. The input files for the example model can be found within the `ss3diags` package and accessed as shown below. Also, if you do not have `r4ss` installed, you will need to install for this tutorial. 
 
-```{r eval=FALSE}
+```{r message = FALSE,warning=FALSE}
 install.packages("pak")
 pak::pkg_install("r4ss/r4ss")
 ```

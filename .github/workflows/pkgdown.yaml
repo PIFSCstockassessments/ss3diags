@@ -23,6 +23,11 @@ jobs:
         with:
           use-public-rspm: true
 
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::pkgdown, local::., any::pak 
+          needs: website
+
       - name: Get the latest SS3 executable for linux and move to expected location
         run: |
           curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_linux" | xargs wget
@@ -42,10 +47,7 @@ jobs:
           git commit -m 'Re-build my-document' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::pkgdown, local::.
-          needs: website
+
 
       - name: Deploy package
         run: |
