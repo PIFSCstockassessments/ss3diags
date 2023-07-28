@@ -17,6 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
       - name: Get the latest SS3 executable for linux and move to expected location
         run: |
           curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_linux" | xargs wget
@@ -25,33 +31,16 @@ jobs:
           cp ss inst/extdata/ss
           rm ss
 
-      - name: Github action for rmarkdown
-        uses: lucharo/rmarkdown-action@v1
-        with:
-          input_file: vignettes/articles/Retrospective-Analysis.Rmd
-          output_format: html_document
+      - name: Install rmarkdown
+        run: Rscript -e 'install.packages("rmarkdown")'
+      - name: Render my document to all types
+        run: Rscript -e 'rmarkdown::render("vignettes/articles/Retrospective-Analysis.Rmd", output_format = "html")'
 
-      - name: Commit files
+      - name: Commit results
         run: |
-          git config --local core.autocrlf false
-          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-          git config --local user.name "${{ github.actor }}"
-          git add . && git add --renormalize .
-          git pull origin ${{ github.head_ref }} --autostash --rebase -X ours
-          git commit --allow-empty -am "AUTO-GH ACTION: ${{ github.workflow }}"
-          NO_PAGER=1 git --no-pager diff HEAD^
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          branch: ${{ github.head_ref }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: r-lib/actions/setup-pandoc@v2
-
-      - uses: r-lib/actions/setup-r@v2
-        with:
-          use-public-rspm: true
+          git add vignettes/articles/Retrospective-Analysis*
+          git commit -m 'Re-build my-document' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
