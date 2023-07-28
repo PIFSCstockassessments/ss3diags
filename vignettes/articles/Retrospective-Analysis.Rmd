@@ -35,8 +35,8 @@ file.copy(from = list.files(files_path, full.names = TRUE), to = dir_retro)
 
 ```
 
-```{r results=FALSE}
-#file.copy(from ="C:/Users/Megumi.Oshima/Documents/ss3diags/inst/extdata/ss.exe", to = dir_retro)
+```{r echo=FALSE, eval=TRUE}
+file.copy(from ="./inst/extdata/ss.exe", to = dir_retro)
 ```
 
 
