@@ -30,7 +30,7 @@ step-by-step R recipes on how to:
 - [Run the ASPM
   diagnostic](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Setup_ASPM_example.R)
 - [Conduct iterative hindcasts for restrospective analysis with
-  forecasts](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Run_Retrospective_example.R)
+  forecasts](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)
 - [Do Jitter
   tests](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Jitter_test_example.R)
 
@@ -157,94 +157,6 @@ quantiles for that year. Additionally, the root-mean squared error is
 reported in the top right-hand corner to indicate how well the model
 fits the data (lower RMSE indicates better fit).
 
-#### Retrospective and Forecast Bias
-
-Retrospective analysis is commonly used to check the consistency of
-model estimates such as spawning stock biomass (SSB) and fishing
-mortality (F) as the model is updated with new data in retrospect. The
-retrospective analysis involves sequentially removing observations from
-the terminal year (i.e., peels), fitting the model to the truncated
-series, and then comparing the relative difference between model
-estimates from the full-time series with the truncated time-series.
-Steps to conduct a retrospective analysis with a Stock Synthesis model
-are documented [here](/Cookbook/Run_Retrospective_example.R). An example
-of a retrospective analysis can be loaded in for use and summarized by:
-
-``` r
-data("retroSimple")
-sumSimple <- r4ss::SSsummarize(retroSimple)
-```
-
-Note that `SSsummarize()` summarises the modelled quantities and
-abundance indices but not composition data. To plot the output from the
-retrospective analysis you can use the function
-
-``` r
-r4ss::sspar(mfrow = c(1, 2), plot.cex = 0.8)
-SSplotRetro(sumSimple, subplots = "SSB", add = TRUE)
-#> Mohn's Rho stats, including one step ahead forecasts:
-#>   type     peel         Rho  ForecastRho
-#> 1  SSB       99 0.007769174 -0.006152424
-#> 2  SSB       98 0.075590953  0.069386314
-#> 3  SSB       97 0.207121898  0.229780185
-#> 4  SSB       96 0.202493492  0.211816848
-#> 5  SSB       95 0.245173711  0.254376716
-#> 6  SSB Combined 0.147629846  0.151841528
-SSplotRetro(sumSimple, subplots = "F", add = TRUE)
-#> Mohn's Rho stats, including one step ahead forecasts:
-#>   type     peel         Rho  ForecastRho
-#> 1    F       99 -0.00509569  0.006707778
-#> 2    F       98 -0.06829083 -0.057673536
-#> 3    F       97 -0.17225678 -0.184649147
-#> 4    F       96 -0.16735016 -0.175990996
-#> 5    F       95 -0.19535279 -0.199995306
-#> 6    F Combined -0.12166925 -0.122320241
-```
-
-<img src="man/figures/README-retroSimple_plots-1.png" width="100%" />
-
-Retrospective analysis is useful to evaluate how consistent the modeled
-quantities are in retrospect. However, providing fisheries management
-advice requires predicting a stock’s response to management and checking
-that predictions are consistent when updated by new data in the future.
-A first, intuitive extension of the retrospective analysis is to assess
-potential forecast bias by adding the additional step of forward
-projecting quantities, such as SSB, over the truncated years. This can
-be visualized by adding `forecast = TRUE` in the function above.
-
-``` r
-r4ss::sspar(mfrow = c(1, 2), plot.cex = 0.8)
-SSplotRetro(sumSimple, subplots = "SSB", forecast = TRUE, add = TRUE, xlim = c(94, 100), uncertainty = FALSE)
-#> Mohn's Rho stats, including one step ahead forecasts:
-#>   type     peel         Rho  ForecastRho
-#> 1  SSB       99 0.007769174 -0.006152424
-#> 2  SSB       98 0.075590953  0.069386314
-#> 3  SSB       97 0.207121898  0.229780185
-#> 4  SSB       96 0.202493492  0.211816848
-#> 5  SSB       95 0.245173711  0.254376716
-#> 6  SSB Combined 0.147629846  0.151841528
-SSplotRetro(sumSimple, subplots = "F", forecast = TRUE, add = TRUE, xlim = c(94, 100), uncertainty = FALSE, ylim = c(0, 0.16))
-#> Mohn's Rho stats, including one step ahead forecasts:
-#>   type     peel         Rho  ForecastRho
-#> 1    F       99 -0.00509569  0.006707778
-#> 2    F       98 -0.06829083 -0.057673536
-#> 3    F       97 -0.17225678 -0.184649147
-#> 4    F       96 -0.16735016 -0.175990996
-#> 5    F       95 -0.19535279 -0.199995306
-#> 6    F Combined -0.12166925 -0.122320241
-# Note xlim and ylim were adjusted manually and uncertainty intervals were removed to better display the forecasted estimates
-```
-
-<img src="man/figures/README-retroSimple_forecast_plots-1.png" width="100%" />
-
-In addition to the retrospective plots, a summary statistics table can
-be produced using `SShcbias()`. This table includes \* type of estimate
-(SSB or F) \* the year removed or “peel” \* mohn’s rho \* forecast bias
-
-by year and overall (“Combined”). Mohn’s rho is a measure of the
-severity of bias in the retrospective patterns and the forecast bias is
-an estimate of bias in the forecasted quantities when years of data were
-removed.
 
 #### Further Diagnostics
 
