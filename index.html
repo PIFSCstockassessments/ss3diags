@@ -101,7 +101,7 @@
 <ul>
 <li><a href="https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Likelihood_profile_R0_example.R" class="external-link">Do log-likelood profiling for R0</a></li>
 <li><a href="https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Setup_ASPM_example.R" class="external-link">Run the ASPM diagnostic</a></li>
-<li><a href="https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Run_Retrospective_example.R" class="external-link">Conduct iterative hindcasts for restrospective analysis with forecasts</a></li>
+<li><a href="https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html">Conduct iterative hindcasts for restrospective analysis with forecasts</a></li>
 <li><a href="https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Jitter_test_example.R" class="external-link">Do Jitter tests</a></li>
 </ul>
 <p>with Stock Synthesis by making use of a comprehensive collection of R functions available in the R package <a href="https://github.com/r4ss/r4ss" class="external-link"><code>r4ss</code></a></p>
@@ -178,61 +178,6 @@
 <p>The plots above show the residuals for both fishery and survey length and age-composition data for each year, and the black line is a LOESS smoother fit to all of the residuals. When data from multiple fleets are avaialble in a year, a boxplot is displayed to show the median and quantiles for that year. Additionally, the root-mean squared error is reported in the top right-hand corner to indicate how well the model fits the data (lower RMSE indicates better fit).</p>
 </div>
 <div class="section level4">
-<h4 id="retrospective-and-forecast-bias">Retrospective and Forecast Bias<a class="anchor" aria-label="anchor" href="#retrospective-and-forecast-bias"></a>
-</h4>
-<p>Retrospective analysis is commonly used to check the consistency of model estimates such as spawning stock biomass (SSB) and fishing mortality (F) as the model is updated with new data in retrospect. The retrospective analysis involves sequentially removing observations from the terminal year (i.e., peels), fitting the model to the truncated series, and then comparing the relative difference between model estimates from the full-time series with the truncated time-series. Steps to conduct a retrospective analysis with a Stock Synthesis model are documented <a href="/Cookbook/Run_Retrospective_example.R">here</a>. An example of a retrospective analysis can be loaded in for use and summarized by:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"retroSimple"</span><span class="op">)</span></span>
-<span><span class="va">sumSimple</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">retroSimple</span><span class="op">)</span></span></code></pre></div>
-<p>Note that <code>SSsummarize()</code> summarises the modelled quantities and abundance indices but not composition data. To plot the output from the retrospective analysis you can use the function</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, plot.cex <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">sumSimple</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
-<span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
-<span><span class="co">#&gt; 1  SSB       99 0.007769174 -0.006152424</span></span>
-<span><span class="co">#&gt; 2  SSB       98 0.075590953  0.069386314</span></span>
-<span><span class="co">#&gt; 3  SSB       97 0.207121898  0.229780185</span></span>
-<span><span class="co">#&gt; 4  SSB       96 0.202493492  0.211816848</span></span>
-<span><span class="co">#&gt; 5  SSB       95 0.245173711  0.254376716</span></span>
-<span><span class="co">#&gt; 6  SSB Combined 0.147629846  0.151841528</span></span>
-<span><span class="fu"><a href="reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">sumSimple</span>, subplots <span class="op">=</span> <span class="st">"F"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
-<span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
-<span><span class="co">#&gt; 1    F       99 -0.00509569  0.006707778</span></span>
-<span><span class="co">#&gt; 2    F       98 -0.06829083 -0.057673536</span></span>
-<span><span class="co">#&gt; 3    F       97 -0.17225678 -0.184649147</span></span>
-<span><span class="co">#&gt; 4    F       96 -0.16735016 -0.175990996</span></span>
-<span><span class="co">#&gt; 5    F       95 -0.19535279 -0.199995306</span></span>
-<span><span class="co">#&gt; 6    F Combined -0.12166925 -0.122320241</span></span></code></pre></div>
-<p><img src="reference/figures/README-retroSimple_plots-1.png" width="100%"></p>
-<p>Retrospective analysis is useful to evaluate how consistent the modeled quantities are in retrospect. However, providing fisheries management advice requires predicting a stock’s response to management and checking that predictions are consistent when updated by new data in the future. A first, intuitive extension of the retrospective analysis is to assess potential forecast bias by adding the additional step of forward projecting quantities, such as SSB, over the truncated years. This can be visualized by adding <code>forecast = TRUE</code> in the function above.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, plot.cex <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">sumSimple</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, forecast <span class="op">=</span> <span class="cn">TRUE</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">94</span>, <span class="fl">100</span><span class="op">)</span>, uncertainty <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
-<span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
-<span><span class="co">#&gt; 1  SSB       99 0.007769174 -0.006152424</span></span>
-<span><span class="co">#&gt; 2  SSB       98 0.075590953  0.069386314</span></span>
-<span><span class="co">#&gt; 3  SSB       97 0.207121898  0.229780185</span></span>
-<span><span class="co">#&gt; 4  SSB       96 0.202493492  0.211816848</span></span>
-<span><span class="co">#&gt; 5  SSB       95 0.245173711  0.254376716</span></span>
-<span><span class="co">#&gt; 6  SSB Combined 0.147629846  0.151841528</span></span>
-<span><span class="fu"><a href="reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">sumSimple</span>, subplots <span class="op">=</span> <span class="st">"F"</span>, forecast <span class="op">=</span> <span class="cn">TRUE</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">94</span>, <span class="fl">100</span><span class="op">)</span>, uncertainty <span class="op">=</span> <span class="cn">FALSE</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.16</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
-<span><span class="co">#&gt;   type     peel         Rho  ForecastRho</span></span>
-<span><span class="co">#&gt; 1    F       99 -0.00509569  0.006707778</span></span>
-<span><span class="co">#&gt; 2    F       98 -0.06829083 -0.057673536</span></span>
-<span><span class="co">#&gt; 3    F       97 -0.17225678 -0.184649147</span></span>
-<span><span class="co">#&gt; 4    F       96 -0.16735016 -0.175990996</span></span>
-<span><span class="co">#&gt; 5    F       95 -0.19535279 -0.199995306</span></span>
-<span><span class="co">#&gt; 6    F Combined -0.12166925 -0.122320241</span></span>
-<span><span class="co"># Note xlim and ylim were adjusted manually and uncertainty intervals were removed to better display the forecasted estimates</span></span></code></pre></div>
-<p><img src="reference/figures/README-retroSimple_forecast_plots-1.png" width="100%"></p>
-<p>In addition to the retrospective plots, a summary statistics table can be produced using <code><a href="reference/SShcbias.html">SShcbias()</a></code>. This table includes * type of estimate (SSB or F) * the year removed or “peel” * mohn’s rho * forecast bias</p>
-<p>by year and overall (“Combined”). Mohn’s rho is a measure of the severity of bias in the retrospective patterns and the forecast bias is an estimate of bias in the forecasted quantities when years of data were removed.</p>
-</div>
-<div class="section level4">
 <h4 id="further-diagnostics">Further Diagnostics<a class="anchor" aria-label="anchor" href="#further-diagnostics"></a>
 </h4>
 <p>For more advanced model diagnostics we provide the functions <code><a href="reference/SSplotHCxval.html">SSplotHCxval()</a></code> and <code><a href="reference/SSmase.html">SSmase()</a></code> for evaluating hindcast cross-validation and prediction skill. To evaluate model uncertainty, we provide the functions <code><a href="reference/SSdeltaMVLN.html">SSdeltaMVLN()</a></code>, <code><a href="reference/SSplotEnsemble.html">SSplotEnsemble()</a></code>, and <code><a href="reference/SSplotKobe.html">SSplotKobe()</a></code>.</p>
@@ -247,7 +192,7 @@
 <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a>
 </h2>
 <p>To cite ss3diags for a publication you can use</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"ss3diags"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite package 'ss3diags' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
