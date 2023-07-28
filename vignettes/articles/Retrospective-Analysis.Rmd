@@ -5,7 +5,8 @@ title: "Retrospective Analysis"
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = F
 )
 ```
 
@@ -23,7 +24,7 @@ install.packages("pak")
 pak::pkg_install("r4ss/r4ss")
 ```
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=TRUE}
 library(r4ss) 
 
 files_path <- system.file("extdata", package = "ss3diags")
