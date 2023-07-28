@@ -34,7 +34,7 @@ jobs:
       - name: Install rmarkdown
         run: Rscript -e 'install.packages("rmarkdown")'
       - name: Render my document to all types
-        run: Rscript -e 'rmarkdown::render("vignettes/articles/Retrospective-Analysis.Rmd", output_format = "html")'
+        run: Rscript -e 'rmarkdown::render("vignettes/articles/Retrospective-Analysis.Rmd", output_format = "html_document")'
 
       - name: Commit results
         run: |
