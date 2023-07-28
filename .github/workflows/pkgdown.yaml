@@ -29,7 +29,7 @@ jobs:
         uses: lucharo/rmarkdown-action@v1
         with:
           input_file: vignettes/articles/Retrospective-Analysis.Rmd
-	        output_format: html_document
+          output_format: html_document
 
       - name: Commit files
         run: |
