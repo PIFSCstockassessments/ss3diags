@@ -35,9 +35,9 @@ file.copy(from = list.files(files_path, full.names = TRUE), to = dir_retro)
 
 ```
 
-```{r echo=FALSE, eval=TRUE}
+```{r eval=TRUE}
 list.files("../../inst/extdata")
-#file.copy(from ="./inst/extdata/ss.exe", to = dir_retro)
+file.copy(from ="../../inst/extdata/ss", to = dir_retro)
 ```
 
 
