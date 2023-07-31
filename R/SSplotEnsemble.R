@@ -1,6 +1,6 @@
 #' Model ensemble plots
 #'
-#' Plots model ensembles and forecasts with uncertainty represented by MVLN or 
+#' Plots model ensembles and forecasts with uncertainty represented by MVLN or
 #' MCMC posteriors
 #'
 #' @param kb `kb` type output created by `SSdeltaMVLN()`
@@ -9,19 +9,19 @@
 #'  \item `"stock"` Fish Population
 #'  \item `"harvest"` Harvest Rate
 #'  \item `"SSB"` Spawning Stock Biomass
-#'  \item `"F"` Fishing Mortality 
+#'  \item `"F"` Fishing Mortality
 #'  \item `"Recr"` Recruitment
 #'  \item `"Catch"` Total Catch
-#' } 
+#' }
 #' @param models option to manually subset the models in `kb[["run"]]`
-#' @param quantiles quantiles for uncertainty in plots. Input as a list, 
+#' @param quantiles quantiles for uncertainty in plots. Input as a list,
 #' default is the 95TH percentile: `list(c(0.025, 0.975))`
 #' @param ylabs y-axis labels for quants
-#' @param shadealpha Transparency adjustment used to make uncertainty regions, 
+#' @param shadealpha Transparency adjustment used to make uncertainty regions,
 #' default is 0.3
-#' @param indexQlabel TRUE/FALSE include labels for indices. Default is TRUE 
+#' @param indexQlabel TRUE/FALSE include labels for indices. Default is TRUE
 #' (currently not used)
-#' @param indexQdigits Number of significant digits for catchability in legend. 
+#' @param indexQdigits Number of significant digits for catchability in legend.
 #' Default is 4
 #' @param endyrvec Optional single year or vector of years representing the
 #' final year of values to show for each model. By `"default"` it is set to the
@@ -97,8 +97,7 @@ SSplotEnsemble <- function(kb,
                            mcmcVec = FALSE,
                            indexQlabel = TRUE,
                            indexQdigits = 4,
-                           legendindex = NULL) { 
-  
+                           legendindex = NULL) {
   # plot different fits to a single index of abundance
 
   # Parameter DEPRECATION checks

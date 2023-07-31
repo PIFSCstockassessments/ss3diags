@@ -1,7 +1,7 @@
 #' Runs Test for Residuals
 #'
-#' This function uses randtests::runs.test to do perform a runs test on 
-#' residuals to determine if they are randomly distributed. It also calculates 
+#' This function uses randtests::runs.test to do perform a runs test on
+#' residuals to determine if they are randomly distributed. It also calculates
 #' the 3 x sigma limits
 #'
 
@@ -9,7 +9,7 @@
 #'
 #' @param x residuals from CPUE fits
 #' @param type only `c("resid","observations")`
-#' @param mixing `c("less","greater","two.sided")`. Default less is checking 
+#' @param mixing `c("less","greater","two.sided")`. Default less is checking
 #' for positive autocorrelation only
 #'
 #' @return runs p value and 3 x sigma limits
@@ -56,12 +56,12 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 
 #' Residual Diagnostics
 #'
-#' Function for residual diagnostics. Plots residuals and 3x sigma limits for 
-#' indices or mean age or length and outputs a runs test table. Note, if you do 
+#' Function for residual diagnostics. Plots residuals and 3x sigma limits for
+#' indices or mean age or length and outputs a runs test table. Note, if you do
 #' not want to plot the residuals, use [ss3diags::SSrunstest()].
 #'
 #' @param ss3rep Stock Synthesis output as read by [r4ss::SS_output()]
-#' @param mixing `c("less","greater","two.sided")`. Default less is checking 
+#' @param mixing `c("less","greater","two.sided")`. Default less is checking
 #' for positive autocorrelation only
 #' @param subplots optional flag for:
 #' \itemize{
@@ -69,37 +69,41 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 #'  \item `"len"` Length composition data
 #'  \item `"size"` Generalized size composition data
 #'  \item `"age"` Age composition data
+<<<<<<< HEAD
 #'  \item `"con"` Conditional age-at-length data 
+=======
+#'  \item `"con"` Conditional age at length data
+>>>>>>> 0e7b097af2c4cc4bddee7b3d75bc67b6544047c2
 #' }
-#' @param indexselect Vector of fleet numbers for each model for which to 
+#' @param indexselect Vector of fleet numbers for each model for which to
 #' compare
-#' @param miny the absolute value of the min and max value for `ylim`. 
+#' @param miny the absolute value of the min and max value for `ylim`.
 #' Default is 1
 #' @param legend  Flag to enable legend to plot. TRUE by default.
-#' @param legendloc Location of legend. Either a string like "topleft" or a 
-#' vector of two numeric values representing the fraction of the maximum in 
-#' the x and y dimensions, respectively. See `help("legend")` for more info 
+#' @param legendloc Location of legend. Either a string like "topleft" or a
+#' vector of two numeric values representing the fraction of the maximum in
+#' the x and y dimensions, respectively. See `help("legend")` for more info
 #' on the string options.
 #' @param legendcex Allows to adjust legend cex
-#' @param ylim Optional, values for y-axis range to display on plot. 
+#' @param ylim Optional, values for y-axis range to display on plot.
 #' The default: `"default"`, will range from -1 to 1.
-#' 
+#'
 #' @inheritParams SSplotGeneric
 #' @inheritParams SSplotGenericPar
-#' 
+#'
 #' @return a dataframe with runs test p-value, if the test has passed or failed,
-#' 3x sigma high and low limits, and the type of data used. Rows are for each 
-#' fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and 
+#' 3x sigma high and low limits, and the type of data used. Rows are for each
+#' fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and
 #' failed if p-value < 0.5 (residuals are not random)
-#' 
+#'
 #' @author Henning Winker (JRC-EC) and Laurance Kell (Sea++)
-#' 
+#'
 #' @keywords ssplot runsTest
-#' 
+#'
 #' @importFrom lifecycle deprecated
-#' 
+#'
 #' @export
-#' 
+#'
 
 SSplotRunstest <- function(ss3rep = ss3diags::simple,
                            mixing = "less",
@@ -392,12 +396,13 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
 #-----------------------------------------------------------------------------------------
 #' Residual Diagnostics Plot
 #'
-#' Function for residual diagnostics. Outputs a runs test table that gives runs 
-#' test p-values, if the runs test passed (p-value > 0.05, residuals are random) 
-#' or failed (p-value < 0.05, residuals are not random), the 3x sigma limits for 
-#' indices or mean age or length and the type of input data (cpue, length comp, 
+#' Function for residual diagnostics. Outputs a runs test table that gives runs
+#' test p-values, if the runs test passed (p-value > 0.05, residuals are random)
+#' or failed (p-value < 0.05, residuals are not random), the 3x sigma limits for
+#' indices or mean age or length and the type of input data (cpue, length comp,
 #' age comp, size comp, or conditional age-at-length).
 #'
+<<<<<<< HEAD
 #' @param ss3rep Stock Synthesis output as read by [r4SS::SS_output()]
 #' @param mixing `c("less","greater","two.sided")`. Default less is checking for 
 #' positive autocorrelation only
@@ -410,14 +415,22 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
 #'  \item `"con"` Conditional age-at-length data 
 #' }
 #' @param indexselect Vector of fleet numbers for each model for which to 
+=======
+#' @param ss3rep Stock Synthesis output as read by r4SS function SS_output
+#' @param mixing `c("less","greater","two.sided")`. Default less is checking for
+#' positive autocorrelation only
+#' @param quants optional use of `c("cpue","len","age","con")`, default uses
+#' CPUE.
+#' @param indexselect Vector of fleet numbers for each model for which to
+>>>>>>> 0e7b097af2c4cc4bddee7b3d75bc67b6544047c2
 #' compare
 #' @param verbose Report progress to R GUI?
-#' 
-#' @return a dataframe with runs test p-value, if the test has passed or failed, 
-#' 3x sigma high and low limits, and the type of data used. Rows are for each 
-#' fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and 
+#'
+#' @return a dataframe with runs test p-value, if the test has passed or failed,
+#' 3x sigma high and low limits, and the type of data used. Rows are for each
+#' fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and
 #' failed if p-value < 0.5 (residuals are not random)
-#' 
+#'
 #' @author Henning Winker (JRC-EC) and Laurance Kell (Sea++)
 #'
 #' @keywords diags runsTest

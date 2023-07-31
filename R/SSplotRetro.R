@@ -1,6 +1,6 @@
 #' Retrospective-Forecast with One-Step Ahead Hindcasting
 #'
-#' Plots retrospective pattern, including (optional) one-step ahead forecast 
+#' Plots retrospective pattern, including (optional) one-step ahead forecast
 #' and computes Mohn's Rho
 #'
 #' @param summaryoutput List created by [r4ss::SSsummarize()]
@@ -10,23 +10,23 @@
 #' @param subplots Optional vector of subplots to be created:
 #' \itemize{
 #'  \item `"SSB"` Spawning Stock Biomass
-#'  \item `"F"` Fishing Mortality 
-#' } 
+#'  \item `"F"` Fishing Mortality
+#' }
 #' @param xmin optional minimum year shown in plot (default first yr)
 #' @param labels `yaxis` label for biomass (bony fish and sharks)
 #' @param ylim option to specify `ylim` range
-#' @param forecast [Logical][base::logical]. If TRUE, one-step ahead forecasts 
+#' @param forecast [Logical][base::logical]. If TRUE, one-step ahead forecasts
 #' are shown in plot
-#' @param forecastrho [Logical][base::logical]. If TRUE, one-step ahead 
+#' @param forecastrho [Logical][base::logical]. If TRUE, one-step ahead
 #' forecast rho value is denoted in plot
 #' @param shadecol uncertainty shading of hcxval horizon
 #' @param shadecol1 uncertainty shading of early years not affected by hindcast
-#' @param shadealpha set the transparency level (alpha) of the area of 
+#' @param shadealpha set the transparency level (alpha) of the area of
 #' uncertainty. Defaults to 0.3 (currently not used)
-#' @param indexQlabel [Logical][base::logical]. If TRUE, add catchability to 
+#' @param indexQlabel [Logical][base::logical]. If TRUE, add catchability to
 #' legend in plot of index fits (currently not used)
 #' @param indexQdigits Number of significant digits for catchability in legend
-#' @param showrho [Logical][base::logical] flag to include Mohn's rho value. 
+#' @param showrho [Logical][base::logical] flag to include Mohn's rho value.
 #' Defaults to TRUE
 #'
 #' @inheritParams SSplotGeneric
