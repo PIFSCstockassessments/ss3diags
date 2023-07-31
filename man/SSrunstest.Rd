@@ -13,7 +13,7 @@ SSrunstest(
 )
 }
 \arguments{
-\item{ss3rep}{Stock Synthesis output as read by \code{\link[r4SS:SS_output]{r4SS::SS_output()}}}
+\item{ss3rep}{Stock Synthesis output as read by \code{\link[r4ss:SS_output]{r4ss::SS_output()}}}
 
 \item{mixing}{\code{c("less","greater","two.sided")}. Default less is checking for
 positive autocorrelation only}
