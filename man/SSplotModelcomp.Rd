@@ -64,43 +64,57 @@ SSplotModelcomp(
 )
 }
 \arguments{
-\item{summaryoutput}{List created by r4ss::SSsummarize()}
+\item{summaryoutput}{List created by \code{\link[r4ss:SSsummarize]{r4ss::SSsummarize()}}}
 
-\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
-by default (TRUE), the option to disable this via FALSE, is unused here.}
+\item{plot}{DEPRECATED. By default, TRUE, Plots (and subplots) are drawn to the
+plot device. The option to explicitly disable this option (FALSE), is not
+implemented. This option flag will be defunct in a future version}
 
-\item{print}{Deprecated. Please use 'print_plot'.}
+\item{print}{DEPRECATED, please use \code{print_plot}.}
 
-\item{print_plot}{print to PNG files?}
+\item{print_plot}{Flag to enable plot graphic device to print to PNG or PNG files.}
 
-\item{png}{draws to png files. Deprecated.}
+\item{png}{DEPRECATED. Please use \code{use_png}.}
 
-\item{use_png}{Draw plots in PNG format, defaults to 'print_plot' value}
+\item{use_png}{Enables plots to be generated to PNG files. Defaults to print value}
 
-\item{pdf}{Deprecated. Please use 'use_png'.}
+\item{pdf}{DEPRECATED. Please use \code{use_pdf}.}
 
-\item{use_pdf}{option for pdf plots (not tested for TRUE)}
+\item{use_pdf}{Enables plots to be generated to pdf file.}
 
-\item{models}{Optional subset of the models described in
-r4ss function summaryoutput().  Either "all" or a vector of numbers indicating
+\item{models}{Optional subset of the models of \code{summaryoutput} (or a similar
+field with a different name): a list created by the function
+\link[r4ss:SSsummarize]{r4ss::SSsummarize}. Either \code{"all"} or a vector of numbers indicating
 columns in summary tables.}
 
-\item{subplots}{option to "SSB","Bratio","Fvalue","Recruits","Index"}
+\item{subplots}{option to "SSB","Bratio","Fvalue","Recruits","Index"
+\itemize{
+\item \code{"SSB"} Spawning Stock Biomass
+\item \code{"Bratio"} Stock Biomass relative to biomass reference point
+\item \code{"Fvalue"} Fishing Mortality
+\item \code{"Recruits"} Age-0 Recruits
+\item \code{"Index"} Index of abundance
+\item \code{"RecDev"} Recruitment Deviations
+}}
 
-\item{brp}{option to set reference point c("msy","btargs")}
+\item{brp}{option to set reference point \code{c("msy","btargs")}}
 
-\item{fmsy}{to specify Fvalue as F/Fmsy if so in starter file setting}
+\item{fmsy}{to specify \code{Fvalue} as \code{F/Fmsy} if so in starter file setting}
 
 \item{ylabs}{yaxis labels for quants
 final year of values to show for each model. By default it is set to the}
 
-\item{endyrvec}{ending year specified in each model.}
+\item{endyrvec}{Optional single year or vector of years representing the
+final year of values to show for each model. By \code{"default"} it is set to the
+ending year specified in each model.}
 
-\item{xmin}{= NULL optional number first year shown in plot (if available)}
+\item{xmin}{NULL optional number first year shown in plot (if available)}
 
-\item{indexselect}{= Vector of fleet numbers for each model for which to compare}
+\item{indexselect}{Vector of fleet numbers for each model for which to
+compare}
 
-\item{indexUncertainty}{Show fixed uncertainty intervals on index (not estimated)}
+\item{indexUncertainty}{Show fixed uncertainty intervals on index
+(not estimated)}
 
 \item{col}{Optional vector of colors to be used for lines. Input NULL}
 
@@ -110,34 +124,39 @@ final year of values to show for each model. By default it is set to the}
 
 \item{lwd}{Optional vector of line widths}
 
-\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis mark at final
-year in timeseries plots. Default is FALSE}
+\item{tickEndYr}{\link[base:logical]{Logical} flag: set TRUE or FALSE to switch to turn
+on/off extra axis mark at final year in timeseries plots.}
 
-\item{xlim}{Optional, values for x-axis range of years to display on plot. Default = "default" displays all years of available data. (currently not used)}
+\item{xlim}{Optional, years to use for x-axis. Default value NULL (or "default"),
+uses all years available.}
 
-\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space}
+\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space.}
 
-\item{xaxs}{Choice of xaxs parameter (see ?par for more info)}
+\item{xaxs}{Choice of xaxs parameter See \code{?par} for more info.}
 
-\item{yaxs}{Choice of yaxs parameter (see ?par for more info)}
+\item{yaxs}{Choice of yaxs parameter. See \code{?par} for more info.}
 
-\item{xylabs}{TRUE or FALSE, include x- and y-axis labels}
+\item{xylabs}{\link[base:logical]{Logical} flag: set TRUE or FALSE to include x- and
+y-axis labels to the plot. Defaults to TRUE}
 
-\item{type}{Type parameter passed to points (default 'o' overplots points on
-top of lines)}
+\item{type}{The type of plot to be drawn. For more details, see \code{\link[base:plot]{plot}}.}
 
-\item{uncertainty}{TRUE/FALSE include uncertainty intervals around SSB or F estimated timeseries. Defaults to TRUE.}
+\item{uncertainty}{Logical flag to enable plots with uncertainty intervals. Either a single
+TRUE/FALSE value, or a vector of TRUE/FALSE values around SSB or F
+estimated timeseries, or a set of integers corresponding to
+the choice of models.}
 
-\item{legend}{Option to add a legend. TRUE by default.}
+\item{legend}{Flag to enable legend to plot. TRUE by default.}
 
 \item{legendlabels}{Optional vector of labels to include in legend.}
 
-\item{legendloc}{Location of legend. Either a string like "topleft" or a vector
-of two numeric values representing the fraction of the maximum in the x and y
-dimensions, respectively. See ?legend for more info on the string options.}
+\item{legendloc}{Location of legend. Either a string like "topleft" or a vector of two
+numeric values representing the fraction of the maximum in the x and y
+dimensions, respectively. See \code{help("legend")} for more info on the
+string options.}
 
-\item{legendorder}{Optional vector of model numbers that can be used to have
-the legend display the model names in an order that is different than that
+\item{legendorder}{Optional vector of model numbers that can be used to have the legend
+display the model names in an order that is different than that
 which is represented in the summary input object.}
 
 \item{legendncol}{Number of columns for the legend.}
@@ -146,29 +165,39 @@ which is represented in the summary input object.}
 
 \item{legendsp}{Space between legend labels}
 
-\item{legendindex}{Allows to add lengend for selected indices (plots)}
+\item{legendindex}{Allows to add legend for selected indices (plots)}
 
-\item{pwidth}{Width of plot}
+\item{pwidth}{Default width of plot printed to plot in units of \code{punits}}
 
-\item{pheight}{Height of plot}
+\item{pheight}{Height of plot printed to plot in units of \code{punits }}
 
-\item{punits}{Units for PNG file}
+\item{punits}{Measurement units for \code{pwidth} and \code{pheight}. Default is \code{"in"}.
+\itemize{
+\item \code{"px"} (pixels)
+\item \code{"in"} (inches)
+\item \code{"cm"} (centimeters)
+\item \code{"mm"} (millimeters)
+}}
 
-\item{res}{Resolution for PNG file}
+\item{res}{Resolution for plots printed to files.}
 
-\item{ptsize}{Point size for PNG file}
+\item{ptsize}{Point size for plotted text in plots printed in files. See \code{help("png")}
+for more details}
 
-\item{cex.main}{Character expansion for plot titles}
+\item{cex.main}{Character expansion for plot titles.}
 
-\item{plotdir}{Directory where PNG or PDF files will be written. By default
+\item{plotdir}{Directory where output plot file will be written. By default,
 it will be the directory where the model was run.}
 
-\item{filenameprefix}{Additional text to append to PNG or PDF file names.
+\item{filenameprefix}{Additional text to append to output plot file name.
 It will be separated from default name by an underscore.}
 
-\item{par}{list of graphics parameter values passed to par() function}
+\item{par}{A numerical vector of the form c(bottom, left, top, right) which
+gives the number of lines of margin to be specified on the four sides of
+the plot,which is passed to \code{par()}. Entering \code{NULL} passes plot's default
+\code{par()} values (which depends on whether the main title is included or not)}
 
-\item{verbose}{Report progress to R GUI?}
+\item{verbose}{Flag to print additional diagnostic messages to R console}
 
 \item{shadecol}{uncertainty shading of hcxval horizon}
 
@@ -177,18 +206,36 @@ It will be separated from default name by an underscore.}
 \item{new}{Deprecated. New plot windows are created by default (TRUE), and the
 option to disable this, via FALSE, is unused.}
 
-\item{add}{surpresses par() to create multiplot figs}
+\item{add}{suppresses \code{par()} to create multiplot figs}
 
-\item{mcmcVec}{NOT TESTED Vector of TRUE/FALSE values (or single value) indicating}
+\item{mcmcVec}{Logical vector of TRUE/FALSE values (or single value) indicating
+whether input values are from MCMC or to use normal distribution around
+MLE.}
 
-\item{indexQlabel}{TRUE/FALSE, if TRUE add catchability to legend in plot of index fits (currently not used)}
+\item{indexQlabel}{\link[base:logical]{Logical}. If TRUE add catchability to
+legend in plot of index fits (currently not used)}
 
 \item{indexQdigits}{Number of significant digits for catchability in legend}
 
-\item{indexfleets}{CHECK IF NEEDED or how to adjust indexfleets}
+\item{indexfleets}{Fleet numbers for each model to compare
+indices of abundance. Can take different forms:
+\itemize{
+\item integer (default): create a single comparison plot for the chosen
+index
+\item NULL: create a separate plot for each index as long as the fleet
+numbering is the same across all models.
+\item vector of length equal to number of models: a single fleet number
+for each model to be compared in a single plot
+\item list: list of fleet numbers associated with indices within each
+model to be compared, where the list elements are each a vector of the
+same length but the names of the list elements don't matter and can be
+absent.
+}}
 }
 \description{
-A function to plot SSB, B-ratio, F, Recruits, and/or Index of Abundance fits from multiple SS models. This function uses an object of multiple SS models summarized with r4ss:SSsummarize().
+A function to plot SSB, B-ratio, F, Recruits, and/or Index of Abundance fits
+from multiple SS models. This function uses an object of multiple SS models
+summarized with \code{\link[r4ss:SSsummarize]{r4ss::SSsummarize()}}.
 }
 \author{
 Mostly adopted from r4ss::SSplotComparisons by Taylor et al

@@ -9,18 +9,21 @@ ssruns_sig3(x, type = NULL, mixing = "less")
 \arguments{
 \item{x}{residuals from CPUE fits}
 
-\item{type}{only c("resid","observations")}
+\item{type}{only \code{c("resid","observations")}}
 
-\item{mixing}{c("less","greater","two.sided"). Default less is checking for positive autocorrelation only}
+\item{mixing}{\code{c("less","greater","two.sided")}. Default less is checking
+for positive autocorrelation only}
 }
 \value{
 runs p value and 3 x sigma limits
 }
 \description{
-This function uses randtests::runs.test to do perform a runs test on residuals to determine if they are randomly distributed. It also calculates the 3 x sigma limits
+This function uses randtests::runs.test to do perform a runs test on
+residuals to determine if they are randomly distributed. It also calculates
+the 3 x sigma limits
 }
 \details{
-runs test is conducted with library(randtests)
+runs test is conducted with \code{library(randtests)}
 }
 \author{
 Henning Winker (JRC-EC) and Laurence Kell (Sea++)

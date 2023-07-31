@@ -1,72 +1,41 @@
 #' Model ensemble plots
 #'
-#' Plots model ensembles and forecasts with uncertaity represented by MVLN or MCMC posteriors
+#' Plots model ensembles and forecasts with uncertainty represented by MVLN or
+#' MCMC posteriors
 #'
-#' @param kb SSdeltaMVLN $kb type output
-#' @param subplots option to "Bratio","Fvalue","SSB", "F", "Recr","Catch"
+#' @param kb `kb` type output created by `SSdeltaMVLN()`
+#' @param subplots vector to create subplots with these options:
+#' \itemize{
+#'  \item `"stock"` Fish Population
+#'  \item `"harvest"` Harvest Rate
+#'  \item `"SSB"` Spawning Stock Biomass
+#'  \item `"F"` Fishing Mortality
+#'  \item `"Recr"` Recruitment
+#'  \item `"Catch"` Total Catch
+#' }
 #' @param models option to manually subset the models in `kb[["run"]]`
-#' @param quantiles quantiles for uncertainty in plots. Input as a list, default is the 95TH percentile: list(c(0.025, 0.975))
-#' @param ylabs yaxis labels for quants
-#' final year of values to show for each model. By default it is set to the
-#' @param endyrvec ending year specified in each model.
-#' @param plot Deprecated. Plots (and subplots) are drawn to the active plot device
-#' by default (TRUE), and the option to disable this, via FALSE, is unused.
-#' @param print Deprecated. Please use 'print_plot'.
-#' @param print_plot print to PNG files?
-#' @param pdf Deprecated. Please use 'use_pdf'.
-#' @param use_pdf option for pdf plots (not tested for TRUE)
-#' @param png Deprecated. Please use 'use_png'.
-#' @param use_png Draw plots in PNG format
-#' @param col Optional vector of colors to be used for lines. Input NULL
-#' @param pch Optional vector of plot character values
-#' @param lty Optional vector of line types
-#' @param lwd Optional vector of line widths
-#' @param tickEndYr TRUE/FALSE switch to turn on/off extra axis mark at final
-#' year in timeseries plots.
-#' @param ylimAdj Multiplier for ylim parameter. Allows additional white space
-#' @param xlim Optional, years to use for x-axis. Default NULL uses all years available.
-#' @param xaxs Choice of xaxs parameter (see ?par for more info)
-#' @param yaxs Choice of yaxs parameter (see ?par for more info)
-#' @param type Type parameter passed to points (default 'o' overplots points on
-#' top of lines)
-#' @param legend Add a legend to plot. TRUE by default.
-#' @param legendlabels Optional vector of labels to include in legend.
-#' @param legendloc Location of legend. Either a string like "topleft" or a vector
-#' of two numeric values representing the fraction of the maximum in the x and y
-#' dimensions, respectively. See ?legend for more info on the string options.
-#' @param legendorder Optional vector of model numbers that can be used to have
-#' the legend display the model names in an order that is different than that
-#' which is represented in the summary input object.
-#' @param legendncol Number of columns for the legend.
-#' @param legendcex Allows to adjust legend cex
-#' @param legendsp Space between legend labels
-#' @param legendindex Allows to add legend for selected indices (plots)
-#' @param pwidth Width of plot
-#' @param pheight Height of plot
-#' @param punits Units for PNG file
-#' @param res Resolution for PNG file
-#' @param ptsize Point size for PNG file
-#' @param cex.main Character expansion for plot titles
-#' @param plotdir Directory where PNG or PDF files will be written. By default
-#' it will be the directory where the model was run.
-#' @param filenameprefix Additional text to append to PNG or PDF file names.
-#' It will be separated from default name by an underscore.
-#' @param par list of graphics parameter values passed to par() function
-#' @param verbose Report progress to R GUI?
-#' @param shadealpha Transparency adjustment used to make uncertainty regions, default is 0.3
-#' @param new Deprecated. New plot windows are created by default (TRUE), and the
-#' option to disable this, via FALSE, is unused.
-#' @param add suppresses par() to create multiplot figs
-#' @param xylabs TRUE or FALSE, include x- and y-axis labels. Defaults to TRUE
-#' @param uncertainty TRUE/FALSE include uncertainty intervals around SSB or F estimated time series. Defaults to TRUE.
-#' @param mcmcVec mcmc vector TODO TODO. Default is FALSE
-#' @param indexQlabel TRUE/FALSE include labels for indices. Default is TRUE (currently not used)
-#' @param indexQdigits  Number of significant digits for catchability in legend. Default is 4
+#' @param quantiles quantiles for uncertainty in plots. Input as a list,
+#' default is the 95TH percentile: `list(c(0.025, 0.975))`
+#' @param ylabs y-axis labels for quants
+#' @param shadealpha Transparency adjustment used to make uncertainty regions,
+#' default is 0.3
+#' @param indexQlabel TRUE/FALSE include labels for indices. Default is TRUE
+#' (currently not used)
+#' @param indexQdigits Number of significant digits for catchability in legend.
+#' Default is 4
+#' @param endyrvec Optional single year or vector of years representing the
+#' final year of values to show for each model. By `"default"` it is set to the
+#' ending year specified in each model.
 #'
 #' @importFrom grDevices graphics.off rgb adjustcolor dev.new dev.off
 #' @importFrom graphics polygon abline axis box
 #' @importFrom stats dnorm
 #' @importFrom lifecycle deprecated
+#'
+#' @inheritParams SSplotGeneric
+#' @inheritParams SSplotGenericLegend
+#' @inheritParams SSplotGenericPar
+#' @inheritParams SSplotGenericUncertainty
 #'
 #' @author Mostly adopted from r4ss::SSplotComparisons by Taylor et al
 #'
@@ -128,7 +97,8 @@ SSplotEnsemble <- function(kb,
                            mcmcVec = FALSE,
                            indexQlabel = TRUE,
                            indexQdigits = 4,
-                           legendindex = NULL) { # plot different fits to a single index of abundance
+                           legendindex = NULL) {
+  # plot different fits to a single index of abundance
 
   # Parameter DEPRECATION checks
   if (lifecycle::is_present(print)) {

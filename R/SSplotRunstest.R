@@ -1,13 +1,16 @@
 #' Runs Test for Residuals
 #'
-#' This function uses randtests::runs.test to do perform a runs test on residuals to determine if they are randomly distributed. It also calculates the 3 x sigma limits
+#' This function uses randtests::runs.test to do perform a runs test on
+#' residuals to determine if they are randomly distributed. It also calculates
+#' the 3 x sigma limits
 #'
 
-#' runs test is conducted with library(randtests)
+#' runs test is conducted with `library(randtests)`
 #'
 #' @param x residuals from CPUE fits
-#' @param type only c("resid","observations")
-#' @param mixing c("less","greater","two.sided"). Default less is checking for positive autocorrelation only
+#' @param type only `c("resid","observations")`
+#' @param mixing `c("less","greater","two.sided")`. Default less is checking
+#' for positive autocorrelation only
 #'
 #' @return runs p value and 3 x sigma limits
 #'
@@ -53,60 +56,50 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 
 #' Residual Diagnostics
 #'
-#' Function for residual diagnostics. Plots residuals and 3x sigma limits for indices or mean age or length and outputs a runs test table. Note, if you do not want to plot the residuals, use function ss3diags::SSrunstest.
+#' Function for residual diagnostics. Plots residuals and 3x sigma limits for
+#' indices or mean age or length and outputs a runs test table. Note, if you do
+#' not want to plot the residuals, use [ss3diags::SSrunstest()].
 #'
-#'
-#' @param ss3rep Stock Synthesis output as read by r4SS function SS_output
-#' @param mixing c("less","greater","two.sided"). Default less is checking for positive autocorrelation only
-#' @param subplots optional 'cpue' for index data, 'len' for length composition data, 'size' for
-#' generalized size composition data, 'age' for age composition data,
-#' or 'con' for conditional age at length data
-#' @param indexselect Vector of fleet numbers for each model for which to compare
-#' @param miny  minimum abs values of ylim
-#' @param plot Deprecated. Plots (and subplots) are drawn to the active plot device
-#' by default (TRUE), the option to disable this via FALSE, is unused here.
-#' @param print Deprecated. Please use 'print_plot'.
-#' @param print_plot Option to print to PNG files
-#' @param png Deprecated, please use 'use_png'.
-#' @param use_png Draw plots in PNG format
-#' @param pdf PDF plots. Deprecated. Please use use_pdf.
-#' @param use_pdf option for pdf plots
-#' @param miny the absolute value of the min and max value for ylim, default is 1
-#' @param pch Optional vector of plot character values
-#' @param lty Optional vector of line types
-#' @param lwd Optional vector of line widths
-#' @param tickEndYr TRUE/FALSE switch to turn on/off extra axis mark at final
-#' year in timeseries plots.
-#' @param ylimAdj Multiplier for ylim parameter. Allows additional white space
-#' @param xaxs Choice of xaxs parameter (see ?par for more info)
-#' @param yaxs Choice of yaxs parameter (see ?par for more info)
-#' @param type Type parameter passed to points (default 'o' overplots points on
-#' top of lines)
-#' @param legend Option to add a legend. TRUE by default.
-#' @param legendloc Location of legend. Either a string like "topleft" or a vector
+#' @param ss3rep Stock Synthesis output as read by [r4ss::SS_output()]
+#' @param mixing `c("less","greater","two.sided")`. Default less is checking
+#' for positive autocorrelation only
+#' @param subplots optional flag for:
+#' \itemize{
+#'  \item `"cpue"` Index of abundance data
+#'  \item `"len"` Length composition data
+#'  \item `"size"` Generalized size composition data
+#'  \item `"age"` Age composition data
+#'  \item `"con"` Conditional age-at-length data
+#' }
+#' @param indexselect Vector of fleet numbers for each model for which to
+#' compare
+#' @param miny the absolute value of the min and max value for `ylim`.
+#' Default is 1
+#' @param legend  Flag to enable legend to plot. TRUE by default.
+#' @param legendloc Location of legend. Either a string like "topleft" or a
+#' vector of two numeric values representing the fraction of the maximum in
+#' the x and y dimensions, respectively. See `help("legend")` for more info
+#' on the string options.
 #' @param legendcex Allows to adjust legend cex
-#' @param pwidth Width of plot
-#' @param pheight Height of plot
-#' @param punits Units for PNG file
-#' @param res Resolution for PNG file
-#' @param ptsize Point size for PNG file
-#' @param cex.main Character expansion for plot titles
-#' @param plotdir Directory where PNG or PDF files will be written. By default
-#' it will be the directory where the model was run.
-#' @param filenameprefix Additional text to append to PNG or PDF file names.
-#' It will be separated from default name by an underscore.
-#' @param par list of graphics parameter values passed to par() function
-#' @param verbose TRUE or FALSE, should the progress be reported to R GUI?
-#' @param new Create new empty plot window (TRUE or FALSE)
-#' @param add suppresses par() to create multiplot figs
-#' @param xlim Optional, values for x-axis range of years to display on plot. Default = "default" displays all years of available data.
-#' @param ylim Optional, values for y-axis range to display on plot. Default = "default" will range from -1 to 1.
-#' @param xylabs TRUE or FALSE, include x- and y-axis labels
-#' @return a dataframe with runs test p-value, if the test has passed or failed, 3x sigma high and low limits, and the type of data used. Rows are for each fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and failed if p-value < 0.5 (residuals are not random)
+#' @param ylim Optional, values for y-axis range to display on plot.
+#' The default: `"default"`, will range from -1 to 1.
+#'
+#' @inheritParams SSplotGeneric
+#' @inheritParams SSplotGenericPar
+#'
+#' @return a dataframe with runs test p-value, if the test has passed or failed,
+#' 3x sigma high and low limits, and the type of data used. Rows are for each
+#' fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and
+#' failed if p-value < 0.5 (residuals are not random)
+#'
 #' @author Henning Winker (JRC-EC) and Laurance Kell (Sea++)
+#'
 #' @keywords ssplot runsTest
+#'
 #' @importFrom lifecycle deprecated
+#'
 #' @export
+#'
 
 SSplotRunstest <- function(ss3rep = ss3diags::simple,
                            mixing = "less",
@@ -120,6 +113,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
                            use_pdf = FALSE,
                            indexselect = NULL,
                            miny = 1,
+                           col = NULL,
                            pch = 21,
                            lty = 1,
                            lwd = 2,
@@ -398,15 +392,32 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
 #-----------------------------------------------------------------------------------------
 #' Residual Diagnostics Plot
 #'
-#' Function for residual diagnostics. Outputs a runs test table that gives runs test p-values, if the runs test passed (p-value > 0.05, residuals are random) or failed (p-value < 0.05, residuals are not random), the 3x sigma limits for indices or mean age or length and the type of input data (cpue, length comp, age comp, size comp, or conditional age-at-length).
+#' Function for residual diagnostics. Outputs a runs test table that gives runs
+#' test p-values, if the runs test passed (p-value > 0.05, residuals are random)
+#' or failed (p-value < 0.05, residuals are not random), the 3x sigma limits for
+#' indices or mean age or length and the type of input data (cpue, length comp,
+#' age comp, size comp, or conditional age-at-length).
 #'
-#'
-#' @param ss3rep Stock Synthesis output as read by r4SS function SS_output
-#' @param mixing c("less","greater","two.sided"). Default less is checking for positive autocorrelation only
-#' @param quants optional use of c("cpue","len","age","con"), default uses CPUE.
-#' @param indexselect Vector of fleet numbers for each model for which to compare
+#' @param ss3rep Stock Synthesis output as read by [r4ss::SS_output()]
+#' @param mixing `c("less","greater","two.sided")`. Default less is checking for
+#' positive autocorrelation only
+#' @param quants optional use of `c("cpue","len","age","con")`, default uses
+#' `"cpue"`.
+#' \itemize{
+#'  \item `"cpue"` Index of abundance data
+#'  \item `"len"` Length composition data
+#'  \item `"age"` Age composition data
+#'  \item `"con"` Conditional age-at-length data
+#' }
+#' @param indexselect Vector of fleet numbers for each model for which to
+#' compare
 #' @param verbose Report progress to R GUI?
-#' @return a dataframe with runs test p-value, if the test has passed or failed, 3x sigma high and low limits, and the type of data used. Rows are for each fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and failed if p-value < 0.5 (residuals are not random)
+#'
+#' @return a dataframe with runs test p-value, if the test has passed or failed,
+#' 3x sigma high and low limits, and the type of data used. Rows are for each
+#' fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and
+#' failed if p-value < 0.5 (residuals are not random)
+#'
 #' @author Henning Winker (JRC-EC) and Laurance Kell (Sea++)
 #'
 #' @keywords diags runsTest
