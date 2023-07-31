@@ -90,10 +90,10 @@ columns in summary tables.}
 \item{subplots}{option to "SSB","Bratio","Fvalue","Recruits","Index"
 \itemize{
 \item \code{"SSB"} Spawning Stock Biomass
-\item \code{"Bratio"} B Ratio denominator
+\item \code{"Bratio"} Stock Biomass relative to biomass reference point
 \item \code{"Fvalue"} Fishing Mortality
-\item \code{"Recruits"} Recruits
-\item \code{"Index"} Index
+\item \code{"Recruits"} Age-0 Recruits
+\item \code{"Index"} Index of abundance
 \item \code{"RecDev"} Recruitment Deviations
 }}
 

@@ -8,10 +8,10 @@
 #' @param subplots option to "SSB","Bratio","Fvalue","Recruits","Index"
 #' \itemize{
 #'  \item `"SSB"` Spawning Stock Biomass
-#'  \item `"Bratio"` B Ratio denominator
+#'  \item `"Bratio"` Stock Biomass relative to biomass reference point
 #'  \item `"Fvalue"` Fishing Mortality
-#'  \item `"Recruits"` Recruits
-#'  \item `"Index"` Index
+#'  \item `"Recruits"` Age-0 Recruits
+#'  \item `"Index"` Index of abundance
 #'  \item `"RecDev"` Recruitment Deviations
 #' } 
 #' @param brp option to set reference point `c("msy","btargs")`

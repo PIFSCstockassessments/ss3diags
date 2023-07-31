@@ -4,13 +4,13 @@
 #' loess showing systematic trends over time. This function is from the package 
 #' JABBA (Just Another Bayesian Biomass Assessment).
 #'
-#' @param ss3rep Stock Synthesis output as read by [r4SS::SS_output()]
+#' @param ss3rep Stock Synthesis output as read by [r4ss::SS_output()]
 #' @param subplots string of type of data to plot:
 #' \itemize{
 #'  \item `"cpue"` Index of abundance data
-#'  \item `"len"` Length-composition
-#'  \item `"age"` Age-composition
-#'  \item `"size"` Generalized size composition
+#'  \item `"len"` Length-composition data
+#'  \item `"age"` Age-composition data
+#'  \item `"size"` Generalized size composition data
 #'  \item `"con"` Conditional age-at-length data.
 #' }
 #' @param seas string indicating how to treat data from multiple seasons:

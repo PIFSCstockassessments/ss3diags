@@ -13,13 +13,19 @@ SSrunstest(
 )
 }
 \arguments{
-\item{ss3rep}{Stock Synthesis output as read by r4SS function SS_output}
+\item{ss3rep}{Stock Synthesis output as read by \code{\link[r4SS:SS_output]{r4SS::SS_output()}}}
 
 \item{mixing}{\code{c("less","greater","two.sided")}. Default less is checking for
 positive autocorrelation only}
 
 \item{quants}{optional use of \code{c("cpue","len","age","con")}, default uses
-CPUE.}
+\code{"cpue"}.
+\itemize{
+\item \code{"cpue"} Index of abundance data
+\item \code{"len"} Length composition data
+\item \code{"age"} Age composition data
+\item \code{"con"} Conditional age-at-length data
+}}
 
 \item{indexselect}{Vector of fleet numbers for each model for which to
 compare}

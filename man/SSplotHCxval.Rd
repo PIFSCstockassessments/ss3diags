@@ -71,9 +71,9 @@ SSplotHCxval(
 
 \item{subplots}{optional use of the following:
 \itemize{
-\item \code{"cpue"} Index data
-\item \code{"len"} Length composition data
-\item \code{"age"} Age composition data (yet to be tested)
+\item \code{"cpue"} Index of abundance data
+\item \code{"len"} Length-composition data
+\item \code{"age"} Age-composition data
 }}
 
 \item{Season}{option to specify Season as an integer of value 1-4. Default

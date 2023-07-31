@@ -11,9 +11,9 @@
 #' [ss3diags::SSretroComps()]
 #' @param subplots optional use of the following:
 #' \itemize{
-#'  \item `"cpue"` Index data
-#'  \item `"len"` Length composition data
-#'  \item `"age"` Age composition data (yet to be tested)
+#'  \item `"cpue"` Index of abundance data
+#'  \item `"len"` Length-composition data
+#'  \item `"age"` Age-composition data
 #' } 
 #' @param Season option to specify Season as an integer of value 1-4. Default 
 #' uses first available, i.e. usual Seas = 1

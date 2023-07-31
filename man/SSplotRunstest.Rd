@@ -54,11 +54,11 @@ for positive autocorrelation only}
 
 \item{subplots}{optional flag for:
 \itemize{
-\item \code{"cpue"} Index data
+\item \code{"cpue"} Index of abundance data
 \item \code{"len"} Length composition data
 \item \code{"size"} Generalized size composition data
 \item \code{"age"} Age composition data
-\item \code{"con"} Conditional age at length data
+\item \code{"con"} Conditional age-at-length data
 }}
 
 \item{plot}{DEPRECATED. By default, TRUE, Plots (and subplots) are drawn to the

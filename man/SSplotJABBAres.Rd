@@ -53,14 +53,14 @@ SSplotJABBAres(
 )
 }
 \arguments{
-\item{ss3rep}{Stock Synthesis output as read by \code{\link[r4SS:SS_output]{r4SS::SS_output()}}}
+\item{ss3rep}{Stock Synthesis output as read by \code{\link[r4ss:SS_output]{r4ss::SS_output()}}}
 
 \item{subplots}{string of type of data to plot:
 \itemize{
 \item \code{"cpue"} Index of abundance data
-\item \code{"len"} Length-composition
-\item \code{"age"} Age-composition
-\item \code{"size"} Generalized size composition
+\item \code{"len"} Length-composition data
+\item \code{"age"} Age-composition data
+\item \code{"size"} Generalized size composition data
 \item \code{"con"} Conditional age-at-length data.
 }}
 
