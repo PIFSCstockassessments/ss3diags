@@ -14,8 +14,8 @@
 #'  \item `"cpue"` Index of abundance data
 #'  \item `"len"` Length-composition data
 #'  \item `"age"` Age-composition data
-#' } 
-#' @param Season option to specify Season as an integer of value 1-4. Default 
+#' }
+#' @param Season option to specify Season as an integer of value 1-4. Default
 #' uses first available, i.e. usual Seas = 1
 #' @param endyrvec Optional single year or vector of years representing the
 #' final year of values to show for each model. By default it is set to the

@@ -69,7 +69,7 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 #'  \item `"len"` Length composition data
 #'  \item `"size"` Generalized size composition data
 #'  \item `"age"` Age composition data
-#'  \item `"con"` Conditional age-at-length data 
+#'  \item `"con"` Conditional age-at-length data
 #' }
 #' @param indexselect Vector of fleet numbers for each model for which to
 #' compare
@@ -399,17 +399,17 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
 #' age comp, size comp, or conditional age-at-length).
 #'
 #' @param ss3rep Stock Synthesis output as read by [r4ss::SS_output()]
-#' @param mixing `c("less","greater","two.sided")`. Default less is checking for 
+#' @param mixing `c("less","greater","two.sided")`. Default less is checking for
 #' positive autocorrelation only
-#' @param quants optional use of `c("cpue","len","age","con")`, default uses 
+#' @param quants optional use of `c("cpue","len","age","con")`, default uses
 #' `"cpue"`.
 #' \itemize{
 #'  \item `"cpue"` Index of abundance data
 #'  \item `"len"` Length composition data
 #'  \item `"age"` Age composition data
-#'  \item `"con"` Conditional age-at-length data 
+#'  \item `"con"` Conditional age-at-length data
 #' }
-#' @param indexselect Vector of fleet numbers for each model for which to 
+#' @param indexselect Vector of fleet numbers for each model for which to
 #' compare
 #' @param verbose Report progress to R GUI?
 #'
