@@ -108,7 +108,10 @@ the influence of information sources on model estimates. R_0 is a
 commonly profiled parameter because it represents a global scaling
 parameter. To conduct a profile, values of the parameter over a given
 range are fixed and the model re-run and then changes in total
-likelihood and data-component likelihoods are examined.</p>
+likelihood and data-component likelihoods are examined. It is
+recommended to run this throughout the development process, particularly
+after incorporating new data sets to understand how informative each
+component is on the estimation of R0.</p>
 <div class="section level2">
 <h2 id="model-inputs">Model inputs<a class="anchor" aria-label="anchor" href="#model-inputs"></a>
 </h2>
@@ -188,16 +191,19 @@ calculated for non-estimated quantities.</p>
 <span><span class="va">START</span><span class="op">$</span><span class="va">prior_like</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">START</span><span class="op">$</span><span class="va">ctlfile</span> <span class="op">&lt;-</span> <span class="st">"control_modified.ss"</span></span>
 <span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_writestarter.html" class="external-link">SS_writestarter</a></span><span class="op">(</span><span class="va">START</span>, dir <span class="op">=</span> <span class="va">dir_profile</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<p>To run the profile, use <code><a href="https://r4ss.github.io/r4ss/reference/profile.html" class="external-link">r4ss::profile()</a></code> and you will
+need to specify a partial string of the name of the parameter you are
+profiling over (in this case “SR_LN” will match with “SR_LN(R0)”), and
+the vector of values to profile across. The <code>newctlfile</code> is
+the control file that will be adjusted with values from the
+<code>profilevec</code> and can be named anything you prefer, it just
+needs to match what you put in the starter file for “cltfile”.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/profile.html" class="external-link">profile</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_profile</span>, </span>
 <span>        newctlfile <span class="op">=</span> <span class="st">"control_modified.ss"</span>,</span>
 <span>        string <span class="op">=</span> <span class="st">"SR_LN"</span>, </span>
-<span>        profilevec <span class="op">=</span> <span class="va">r0_vec</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Doing runs: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,</span></span>
-<span><span class="co">#&gt;   out of n = 11</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile,</span></span>
-<span><span class="co">#&gt;  but will be changed back on exit from function.</span></span>
+<span>        profilevec <span class="op">=</span> <span class="va">r0_vec</span>, </span>
+<span>        verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; running profile i=1/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -207,10 +213,6 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 1  8.9274  7.9274        1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile and running model using the command: ./ss</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=2/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -220,10 +222,6 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 1  7.9274  8.1274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile and running model using the command: ./ss</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=3/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -233,10 +231,6 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 1  8.1274  8.3274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile and running model using the command: ./ss</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=4/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -246,10 +240,6 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 1  8.3274  8.5274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile and running model using the command: ./ss</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=5/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -259,10 +249,6 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 1  8.5274  8.7274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile and running model using the command: ./ss</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=6/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -272,10 +258,6 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 1  8.7274  8.9274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile and running model using the command: ./ss</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=7/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -285,10 +267,6 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 1  8.9274  9.1274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile and running model using the command: ./ss</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=8/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -298,10 +276,6 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 1  9.1274  9.3274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile and running model using the command: ./ss</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=9/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -311,10 +285,6 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 1  9.3274  9.5274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile and running model using the command: ./ss</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=10/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -324,10 +294,6 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 1  9.5274  9.7274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile and running model using the command: ./ss</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=11/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -337,10 +303,6 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 1  9.7274  9.9274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpmPaI3Z/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpmPaI3Z/profile and running model using the command: ./ss</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt;     Value converged    TOTAL       Catch Equil_catch    Survey Length_comp</span></span>
 <span><span class="co">#&gt; 1  7.9274      TRUE 1067.570 4.40715e-01   16.620400  6.065520     453.198</span></span>
 <span><span class="co">#&gt; 2  8.1274      TRUE  940.077 2.29735e-01   12.985200  1.965820     418.750</span></span>
@@ -377,6 +339,89 @@ calculated for non-estimated quantities.</p>
 <span><span class="co">#&gt; 9            0      0.00166199         0         0</span></span>
 <span><span class="co">#&gt; 10           0      0.00171844         0         0</span></span>
 <span><span class="co">#&gt; 11           0      0.00176282         0         0</span></span></code></pre></div>
+<p>Once the profile is finished running, we can visualize the results to
+determine if there is conflict between the data sources. If all data
+sources reach a minimum at the same R0 value, this indicates good
+agreement between them. However, more likely, one or more will be
+minimized at different R0 values from the global R0 value. This is a
+sign of conflict between your data sources and may require you to
+consider data weighting.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">profile_mods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>dirvec <span class="op">=</span> <span class="va">dir_profile</span>, keyvec <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">r0_vec</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
+<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
+<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
+<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
+<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
+<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
+<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
+<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
+<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
+<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
+<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
+<span><span class="va">profile_mods_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">profile_mods</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSplotProfile.html" class="external-link">SSplotProfile</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>, </span>
+<span>              profile.string <span class="op">=</span> <span class="st">"SR_LN"</span>,   </span>
+<span>              profile.label <span class="op">=</span> <span class="st">"SR_LN(R0)"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Parameter matching profile.string=SR_LN: SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Parameter values (after subsetting based on input 'models'): 7.9274, 8.1274, 8.3274, 8.5274, 8.7274, 8.9274, 9.1274, 9.3274, 9.5274, 9.7274, 9.9274</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Likelihood components showing max change as fraction of total change.</span></span>
+<span><span class="co">#&gt; To change which components are included, change input 'minfraction'.</span></span>
+<span><span class="co">#&gt;                      frac_change include                            label</span></span>
+<span><span class="co">#&gt; TOTAL                     1.0000    TRUE                            Total</span></span>
+<span><span class="co">#&gt; Catch                     0.0014   FALSE                            Catch</span></span>
+<span><span class="co">#&gt; Equil_catch               0.0525    TRUE                Equilibrium catch</span></span>
+<span><span class="co">#&gt; Survey                    0.0422    TRUE                       Index data</span></span>
+<span><span class="co">#&gt; Length_comp               0.2759    TRUE                      Length data</span></span>
+<span><span class="co">#&gt; Age_comp                  0.3495    TRUE                         Age data</span></span>
+<span><span class="co">#&gt; Size_at_age               0.2181    TRUE                 Size-at-age data</span></span>
+<span><span class="co">#&gt; Recruitment               0.0605    TRUE                      Recruitment</span></span>
+<span><span class="co">#&gt; InitEQ_Regime             0.0000   FALSE Initital equilibrium recruitment</span></span>
+<span><span class="co">#&gt; Forecast_Recruitment      0.0000   FALSE             Forecast recruitment</span></span>
+<span><span class="co">#&gt; Parm_priors               0.0000   FALSE                           Priors</span></span>
+<span><span class="co">#&gt; Parm_softbounds           0.0000   FALSE                      Soft bounds</span></span>
+<span><span class="co">#&gt; Parm_devs                 0.0000   FALSE             Parameter deviations</span></span>
+<span><span class="co">#&gt; Crash_Pen                 0.0000   FALSE                    Crash penalty</span></span></code></pre></div>
+<p><img src="likelihood_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<p>The profile plot shows the changes in log-likelihood across the
+vector of values profiled over for the total likelihood and each of the
+contributing components. There is a minimum threshold that a component
+must contribute so if there is a data source that is in your model but
+does not show up in the plot, the contribution may not be large enough.
+The steepness of each trajectory indicates how informative (or not) that
+data source was. For example, the age data in the plot above is much
+steeper on the left side of the minimum R0 value than the index data,
+which suggests that age composition data is more informative in the
+model.</p>
+<p>You can also plot data-type and fleet-specific profiles using
+<code><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">r4ss::PinerPlot()</a></code>. Below we are plotting the profile for
+the length composition data by fleet and the likelihood of survey data
+by fleet. This will allow us to see if there are conflicts and what
+sources are the main drivers.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">PinerPlot</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>, component <span class="op">=</span> <span class="st">"Length_like"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Parameter matching profile.string = 'R0': 'SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Parameter values (after subsetting based on input 'models'): 7.9274, 8.1274, 8.3274, 8.5274, 8.7274, 8.9274, 9.1274, 9.3274, 9.5274, 9.7274, 9.9274,</span></span>
+<span><span class="co">#&gt; Fleet-specific likelihoods showing max change as fraction of total change.</span></span>
+<span><span class="co">#&gt; To change which components are included, change input 'minfraction'.</span></span>
+<span><span class="co">#&gt;         frac_change include</span></span>
+<span><span class="co">#&gt; FISHERY      0.6825    TRUE</span></span>
+<span><span class="co">#&gt; SURVEY1      0.3208    TRUE</span></span>
+<span><span class="co">#&gt; SURVEY2      0.0000   FALSE</span></span>
+<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">PinerPlot</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>, </span>
+<span>          component <span class="op">=</span> <span class="st">"Surv_like"</span>, </span>
+<span>          main <span class="op">=</span> <span class="st">"Changes in survey likelihoods by fleet"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Parameter matching profile.string = 'R0': 'SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Parameter values (after subsetting based on input 'models'): 7.9274, 8.1274, 8.3274, 8.5274, 8.7274, 8.9274, 9.1274, 9.3274, 9.5274, 9.7274, 9.9274,</span></span>
+<span><span class="co">#&gt; Fleet-specific likelihoods showing max change as fraction of total change.</span></span>
+<span><span class="co">#&gt; To change which components are included, change input 'minfraction'.</span></span>
+<span><span class="co">#&gt;         frac_change include</span></span>
+<span><span class="co">#&gt; FISHERY      0.0000   FALSE</span></span>
+<span><span class="co">#&gt; SURVEY1      0.3218    TRUE</span></span>
+<span><span class="co">#&gt; SURVEY2      0.9202    TRUE</span></span></code></pre></div>
+<p><img src="likelihood_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 </div>
   </div>
 
