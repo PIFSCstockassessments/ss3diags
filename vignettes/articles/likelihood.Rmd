@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ss3diags)
 ```
-Likelihood profiling is a key model diagnostic that helps identify the influence of information sources on model estimates. R_0 is a commonly profiled parameter because it represents a global scaling parameter. To conduct a profile, values of the parameter over a given range are fixed and the model re-run and then changes in total likelihood and data-component likelihoods are examined. 
+Likelihood profiling is a key model diagnostic that helps identify the influence of information sources on model estimates. R_0 is a commonly profiled parameter because it represents a global scaling parameter. To conduct a profile, values of the parameter over a given range are fixed and the model re-run and then changes in total likelihood and data-component likelihoods are examined. It is recommended to run this throughout the development process, particularly after incorporating new data sets to understand how informative each component is on the estimation of R0.
 
 ## Model inputs  
 To run a stock synthesis model, 4 input files are required: starter, forecast, control, and data. The input files for the example model can be found within the `ss3diags` package and accessed as shown below. Also, if you do not have `r4ss` installed, you will need to install for this tutorial. 
@@ -73,10 +73,35 @@ SS_writestarter(START, dir = dir_profile, overwrite = TRUE, verbose = F)
 
 ```
 
+To run the profile, use `r4ss::profile()` and you will need to specify a partial string of the name of the parameter you are profiling over (in this case "SR_LN" will match with "SR_LN(R0)"), and the vector of values to profile across. The `newctlfile` is the control file that will be adjusted with values from the `profilevec` and can be named anything you prefer, it just needs to match what you put in the starter file for "cltfile". 
 ```{r}
 profile(dir = dir_profile, 
         newctlfile = "control_modified.ss",
         string = "SR_LN", 
-        profilevec = r0_vec)
+        profilevec = r0_vec, 
+        verbose = FALSE)
+```
+
+Once the profile is finished running, we can visualize the results to determine if there is conflict between the data sources. If all data sources reach a minimum at the same R0 value, this indicates good agreement between them. However, more likely, one or more will be minimized at different R0 values from the global R0 value. This is a sign of conflict between your data sources and may require you to consider data weighting. 
+
+```{r}
+profile_mods <- SSgetoutput(dirvec = dir_profile, keyvec = 1:length(r0_vec), verbose = FALSE)
+profile_mods_sum <- SSsummarize(profile_mods, verbose = FALSE)
+SSplotProfile(profile_mods_sum, 
+              profile.string = "SR_LN",   
+              profile.label = "SR_LN(R0)")
+
+```
+
+The profile plot shows the changes in log-likelihood across the vector of values profiled over for the total likelihood and each of the contributing components. There is a minimum threshold that a component must contribute so if there is a data source that is in your model but does not show up in the plot, the contribution may not be large enough. The steepness of each trajectory indicates how informative (or not) that data source was. For example, the age data in the plot above is much steeper on the left side of the minimum R0 value than the index data, which suggests that age composition data is more informative in the model.
+
+
+You can also plot data-type and fleet-specific profiles using `r4ss::PinerPlot()`. Below we are plotting the profile for the length composition data by fleet and the likelihood of survey data by fleet. This will allow us to see if there are conflicts and what sources are the main drivers. 
+```{r}
+sspar(mfrow = c(1,2))
+PinerPlot(profile_mods_sum, component = "Length_like")
+PinerPlot(profile_mods_sum, 
+          component = "Surv_like", 
+          main = "Changes in survey likelihoods by fleet")
 ```
 

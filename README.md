@@ -18,17 +18,13 @@ that presented in the paper ‘A Cookbook for Using Model Diagnostics in
 Integrated Stock Assessments’.
 
 
-The ss3diags Github respository provides fully commented
+The ss3diags Github respository provides 
 step-by-step R recipes on how to:
 
-- [Do log-likelood profiling for
-  R0](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Likelihood_profile_R0_example.R)
-- [Run the ASPM
-  diagnostic](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Setup_ASPM_example.R)
-- [Conduct iterative hindcasts for restrospective analysis with
-  forecasts](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)
-- [Do Jitter
-  tests](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Jitter_test_example.R)
+- [Do log-likelihood profiling for R0](https://pifscstockassessments.github.io/ss3diags/articles/likelihood.html)
+- [Run the ASPM diagnostic](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Setup_ASPM_example.R)
+- [Conduct restrospective analysis](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)
+- [Run jitter analysis](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Jitter_test_example.R)
 
 with Stock Synthesis by making use of a comprehensive collection of R
 functions available in the R package
