@@ -1,0 +1,82 @@
+---
+title: "Likelihood Profile"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ss3diags)
+```
+Likelihood profiling is a key model diagnostic that helps identify the influence of information sources on model estimates. R_0 is a commonly profiled parameter because it represents a global scaling parameter. To conduct a profile, values of the parameter over a given range are fixed and the model re-run and then changes in total likelihood and data-component likelihoods are examined. 
+
+## Model inputs  
+To run a stock synthesis model, 4 input files are required: starter, forecast, control, and data. The input files for the example model can be found within the `ss3diags` package and accessed as shown below. Also, if you do not have `r4ss` installed, you will need to install for this tutorial. 
+
+```{r eval=FALSE}
+install.packages("pak")
+pak::pkg_install("r4ss/r4ss")
+```
+
+```{r message=FALSE, warning=FALSE}
+library(r4ss) 
+
+files_path <- system.file("extdata", package = "ss3diags")
+dir_tmp  <- file.path(tempdir(check = TRUE))
+dir_profile <- file.path(dir_tmp, "profile")
+dir.create(dir_profile, showWarnings = FALSE, recursive = TRUE)
+list.files(files_path)
+file.copy(from = list.files(files_path, full.names = TRUE), to = dir_tmp)
+
+```
+
+```{r echo=FALSE, results = FALSE}
+file.copy(from ="../../inst/extdata/ss", to = dir_tmp)
+file.copy(from ="../../inst/extdata/ss", to = dir_profile)
+```
+
+
+You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the retrospective from (in this case `dir_profile`). 
+
+## R0 Profile  
+Once you have the 4 input files and SS executable, you can run a likelihood profile as shown below. The first step is to run the model you would like to do a profile for. We will do this in `dir_tmp` and then copy the necessary files to `dir_profile`.  It's best to run the profile in a subdirectory of your main model run to keep the output files separate from other diagnostic tests you may run. 
+
+```{r}
+r4ss::run(dir = dir_tmp, verbose = FALSE)
+files <- c("data.ss", "control.ss_new", "starter.ss", "forecast.ss", "ss.par")
+file.copy(from = file.path(dir_tmp, files), to = dir_profile)
+```
+
+Once you have the input files you need in `dir_profile` you will need to create a vector of values to profile across. The range and increments to choose depend on your model and the resolution at which you want to analyze the likelihood profile. For this example we will use a fairly course resolution to speed up total run time. 
+
+```{r}
+CTL <- SS_readctl_3.30(file = file.path(dir_profile, "control.ss_new"), datlist = file.path(dir_profile, "data.ss"))
+
+CTL$SR_parms
+#getting the estimated r0 value 
+r0 <- CTL$SR_parms$INIT[1]
+#creating a vector that is +/- 1 unit away from the estimated value in increments of 0.2
+r0_vec <- seq(r0-1, r0+1, by = 0.2)
+r0_vec
+
+```
+We also need to modify the starter file by changing the name of the control file that it will read from and making sure the likelihood is calculated for non-estimated quantities.  
+```{r}
+START <- SS_readstarter(file = file.path(dir_profile, "starter.ss"), verbose = FALSE)
+START$prior_like <- 1
+START$ctlfile <- "control_modified.ss"
+SS_writestarter(START, dir = dir_profile, overwrite = TRUE, verbose = F)
+
+```
+
+```{r}
+profile(dir = dir_profile, 
+        newctlfile = "control_modified.ss",
+        string = "SR_LN", 
+        profilevec = r0_vec)
+```
+
