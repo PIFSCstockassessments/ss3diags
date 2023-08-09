@@ -58,7 +58,7 @@ retroSummary <- r4ss::SSsummarize(retro_mods, verbose = F)
 SSplotRetro(retroSummary, subplots = "SSB", add = TRUE)
 
 ```
-The default settings plot the spawning stock biomass timeseries for each peel, with the reference run (e.g. model with no years removed) as the "Ref" line and each successive peel as different colored lines labeled by their end year. The solid line ends at the end year and the dashed line to the point shows the 1 year forecast. Displaying the projected SSB can help assess forecast bias. The grey shaded area represents the 95% confidence intervals of uncertainty around the spawning biomass timeseries. Displayed in the center of the plot is the combined Mohn's $\rho$ for all retrospective runs, and in parentheses is the forecast Mohn's $\rho$. 
+The default settings plot the spawning stock biomass time series for each peel, with the reference run (e.g. model with no years removed) as the "Ref" line and each successive peel as colored lines labeled by their end year. The solid line ends at the end year and the dashed line to the point shows the 1 year forecast. Displaying the projected SSB can help assess forecast bias. Note, forecasts are done automatically when using `r4ss::retro()` and are based on the settings in forecast.ss. The grey shaded area represents the 95% confidence intervals of uncertainty around the spawning biomass time series. Displayed in the center of the plot is the combined Mohn's $\rho$ for all retrospective runs, and in parentheses is the forecast Mohn's $\rho$. 
 
 ### Customizing the Plot  
 
