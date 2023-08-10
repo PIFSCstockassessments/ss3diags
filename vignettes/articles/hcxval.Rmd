@@ -15,7 +15,19 @@ library(ss3diags)
 
 Hindcast Cross-Validation is used to evaluate the prediction skill of a model by removing a portion of data, fitting the model to the subsequent time series, then projecting over the period that was removed and comparing the projected values to the observations that were omitted. Prediction skill is determined using the mean absolute scaled error (MASE) for input data (index of abundance, length composition, etc). In brief, the MASE score scales the mean absolute error (MAE) of forecasts (i.e., prediction residuals) to mean absolute error (MAE) of a naïve in-sample prediction, which is realized in the form of a simple 'persistence algorithm', i.e. index of abunduance will be the same next year as it is this year (see Eq. 3, p.5 in [Carvalho and Winker et al. 2021](https://www.sciencedirect.com/science/article/pii/S0165783621000874)). A MASE score > 1 indicates that the average model forecasts are worse than a random walk. Conversely, a MASE score < 1 indicates a level of prediction skill, for example, a MASE of 0.5 indicates that the model forecasts twice as accurately as a naïve baseline prediction; thus, the model has prediction skill.
 
-Implementing the Hindcast Cross-Validation (HCxval) diagnostic in Stock Synthesis requires the same model outputs generated when running a retrospective analysis. Therefore, no additional step is needed for HCxval if conducted in conjunction with retrospective analysis (see how to conduct a [restrospective analysis](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)). 
+Implementing the Hindcast Cross-Validation (HCxval) diagnostic in Stock Synthesis requires the same model outputs generated when running a retrospective analysis. Therefore, no additional step is needed for HCxval if conducted in conjunction with retrospective analysis (see how to conduct a [restrospective analysis](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)). For this example we will use the same output created in the retrospective example.
+
+```{r echo=FALSE, message=FALSE}
+library(r4ss) 
+
+files_path <- system.file("extdata", package = "ss3diags")
+dir_retro <- file.path(tempdir(check = TRUE), "retrospectives")
+dir.create(dir_retro, showWarnings = FALSE)
+file.copy(from = list.files(files_path, full.names = TRUE), to = dir_retro)
+file.copy(from ="../../inst/extdata/ss", to = dir_retro)
+r4ss::retro(dir = dir_retro, exe = "ss", years = 0:-5, verbose = FALSE)
+```
+
 
 ```{r}
 retro_mods <- r4ss::SSgetoutput(dirvec = file.path(dir_retro, "retrospectives", paste0("retro", seq(0,-5,by=-1))), verbose = F)
