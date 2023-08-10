@@ -339,6 +339,10 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 9            0      0.00166199         0         0</span></span>
 <span><span class="co">#&gt; 10           0      0.00171844         0         0</span></span>
 <span><span class="co">#&gt; 11           0      0.00176282         0         0</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="visualizing-output">Visualizing Output<a class="anchor" aria-label="anchor" href="#visualizing-output"></a>
+</h2>
 <p>Once the profile is finished running, we can visualize the results to
 determine if there is conflict between the data sources. If all data
 sources reach a minimum at the same R0 value, this indicates good
@@ -401,7 +405,9 @@ by fleet. This will allow us to see if there are conflicts and what
 sources are the main drivers.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">PinerPlot</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>, component <span class="op">=</span> <span class="st">"Length_like"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">PinerPlot</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>, </span>
+<span>          component <span class="op">=</span> <span class="st">"Length_like"</span>,</span>
+<span>          main <span class="op">=</span> <span class="st">"Length"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Parameter matching profile.string = 'R0': 'SR_LN(R0)</span></span>
 <span><span class="co">#&gt; Parameter values (after subsetting based on input 'models'): 7.9274, 8.1274, 8.3274, 8.5274, 8.7274, 8.9274, 9.1274, 9.3274, 9.5274, 9.7274, 9.9274,</span></span>
 <span><span class="co">#&gt; Fleet-specific likelihoods showing max change as fraction of total change.</span></span>
@@ -411,8 +417,8 @@ sources are the main drivers.</p>
 <span><span class="co">#&gt; SURVEY1      0.3208    TRUE</span></span>
 <span><span class="co">#&gt; SURVEY2      0.0000   FALSE</span></span>
 <span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">PinerPlot</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>, </span>
-<span>          component <span class="op">=</span> <span class="st">"Surv_like"</span>, </span>
-<span>          main <span class="op">=</span> <span class="st">"Changes in survey likelihoods by fleet"</span><span class="op">)</span></span>
+<span>          component <span class="op">=</span> <span class="st">"Surv_like"</span>,</span>
+<span>          main <span class="op">=</span> <span class="st">"Survey"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Parameter matching profile.string = 'R0': 'SR_LN(R0)</span></span>
 <span><span class="co">#&gt; Parameter values (after subsetting based on input 'models'): 7.9274, 8.1274, 8.3274, 8.5274, 8.7274, 8.9274, 9.1274, 9.3274, 9.5274, 9.7274, 9.9274,</span></span>
 <span><span class="co">#&gt; Fleet-specific likelihoods showing max change as fraction of total change.</span></span>
