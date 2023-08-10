@@ -299,6 +299,44 @@ top right corner. When assessing this plot, it is important to see if
 there are any patterns or trends in the residuals, how large the overall
 RMSE is, and whether the data from different fleets generally agrees or
 conflicts with each other.</p>
+<p>To retrieve just RMSE and residual values without generating the
+plot, <code><a href="../reference/SSrmse.html">SSrmse()</a></code> produces a named list with 2 objects,
+<code>RMSE</code> and <code>residuals</code>. These can be accessed as
+shown below. This function is useful for automating analyses.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rmse</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SSrmse.html">SSrmse</a></span><span class="op">(</span><span class="va">report</span>, quants <span class="op">=</span> <span class="st">"cpue"</span><span class="op">)</span><span class="op">$</span><span class="va">RMSE</span></span>
+<span><span class="va">residuals</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SSrmse.html">SSrmse</a></span><span class="op">(</span><span class="va">report</span>, quants <span class="op">=</span> <span class="st">"cpue"</span><span class="op">)</span><span class="op">$</span><span class="va">residuals</span></span>
+<span></span>
+<span><span class="va">rmse</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 3</span></span></span>
+<span><span class="co">#&gt;   Fleet    RMSE.perc  Nobs</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> SURVEY1       21.6     4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> SURVEY2       27.7    12</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Combined      26.3    16</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     Fleet Fleet_name Area   Yr Seas Subseas Month   Time Vuln_bio         Obs</span></span>
+<span><span class="co">#&gt; 925     2    SURVEY1    1 2013    1       2     7 2013.5 62947.50 144745.0000</span></span>
+<span><span class="co">#&gt; 926     2    SURVEY1    1 2016    1       2     7 2016.5 49335.70  63760.3000</span></span>
+<span><span class="co">#&gt; 927     2    SURVEY1    1 2019    1       2     7 2019.5 38132.00  59242.9000</span></span>
+<span><span class="co">#&gt; 928     2    SURVEY1    1 2022    1       2     7 2022.5 34045.80  49649.7000</span></span>
+<span><span class="co">#&gt; 929     3    SURVEY2    1 2011    1       2     7 2011.5  6306.83     11.5668</span></span>
+<span><span class="co">#&gt; 930     3    SURVEY2    1 2012    1       2     7 2012.5  6544.96     13.9955</span></span>
+<span><span class="co">#&gt;             Exp     Calc_Q      Eff_Q  SE SE_input         Dev        Like</span></span>
+<span><span class="co">#&gt; 925 101399.0000 1.61084000 1.61084000 0.3      0.3  0.35591400 7.03749e-01</span></span>
+<span><span class="co">#&gt; 926  79472.2000 1.61084000 1.61084000 0.3      0.3 -0.22027600 2.69564e-01</span></span>
+<span><span class="co">#&gt; 927  61424.7000 1.61084000 1.61084000 0.3      0.3 -0.03616590 7.26653e-03</span></span>
+<span><span class="co">#&gt; 928  54842.4000 1.61084000 1.61084000 0.3      0.3 -0.09947210 5.49706e-02</span></span>
+<span><span class="co">#&gt; 929     11.5342 0.00182885 0.00182885 0.7      0.7  0.00281831 8.10497e-06</span></span>
+<span><span class="co">#&gt; 930     11.9698 0.00182885 0.00182885 0.7      0.7  0.15635300 2.49451e-02</span></span>
+<span><span class="co">#&gt;     Like+log(s) SuprPer Use    residuals</span></span>
+<span><span class="co">#&gt; 925   -0.500223      NA   1  0.355910344</span></span>
+<span><span class="co">#&gt; 926   -0.934409      NA   1 -0.220276535</span></span>
+<span><span class="co">#&gt; 927   -1.196710      NA   1 -0.036166093</span></span>
+<span><span class="co">#&gt; 928   -1.149000      NA   1 -0.099471269</span></span>
+<span><span class="co">#&gt; 929   -0.356667      NA   1  0.002822391</span></span>
+<span><span class="co">#&gt; 930   -0.331730      NA   1  0.156349038</span></span></code></pre></div>
 </div>
   </div>
 
