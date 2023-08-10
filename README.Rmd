@@ -21,20 +21,18 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/PIFSCstockassessments/ss3diags/workflows/R-CMD-check/badge.svg)](https://github.com/PIFSCstockassessments/ss3diags/actions)
 <!-- badges: end -->
 
-### Build Status
 
-The R package `ss3diags` enables users to apply advanced diagnostics to evaluate a Stock Synthesis model. Diagnostics include residual analyses, hindcasting and cross-validation techniques, and retrospective analyses. Functions also allow users to reproduce the key model diagnostics plots that presented in the paper 'A Cookbook for Using Model Diagnostics in Integrated Stock Assessments'. 
+The R package `ss3diags` enables users to apply advanced diagnostics to evaluate a Stock Synthesis model. Diagnostics include residual analyses, hindcast cross-validation techniques, and retrospective analyses. Functions also allow users to reproduce the key model diagnostics plots that presented in the paper 'A Cookbook for Using Model Diagnostics in Integrated Stock Assessments'. 
 
-A handbook with detailed [User guidelines for Advanced Model Diagnostics with ss3diags](https://github.com/jabbamodel/ss3diags/blob/master/Vignette/ss3diags_handbook.pdf) is currently being finalized. 
+The `ss3diags` Github respository provides step-by-step R recipes on how to:  
 
-In addition, the ss3diags Github respository provides fully commented step-by-step R recipes on how to:  
-
-- [Do log-likelood  profiling for R0](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Likelihood_profile_R0_example.R)
+- [Do log-likelood  profiling for R0](https://pifscstockassessments.github.io/ss3diags/articles/likelihood.html)
 - [Run the ASPM diagnostic](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Setup_ASPM_example.R)
-- [Conduct iterative hindcasts for restrospective analysis with forecasts](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Run_Retrospective_example.R)
-- [Do Jitter tests](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Jitter_test_example.R)
+- [Conduct restrospective analysis](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)
+- [Run jitter analysis](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Jitter_test_example.R)
+- [Use hindcast cross-validation](https://pifscstockassessments.github.io/ss3diags/articles/hcxval.html)
 
-with Stock Synthesis by making use of a comprehensive collection of R functions available in the R package [`r4ss`](https://github.com/r4ss/r4ss)
+with Stock Synthesis by making use of a comprehensive collection of R functions available in the R packages [`r4ss`](https://github.com/r4ss/r4ss) and `ss3diags`.
 
 ## Installation
 
@@ -50,38 +48,6 @@ Once the package is installed it can be loaded by:
 library(ss3diags)
 ```
 For examples of how to run common diagnostic tests for SS models and visualize the results of those diagnostic tests using the `r4ss` and `ssdiags` packages, please refer to the articles on the package [website](https://pifscstockassessments.github.io/ss3diags/).
-
-
-#### Residual Diagnostics
-ss3diags provides 4 main functions to evaluate model misspecification: `SSplotRunstest()` (and `SSrunstest()`), `SSplotJABBAres()`, `SSplotRetro()`, and `SShcbias()`. A runs test is a test for randomness and in the runstest functions, it is applied to the residuals from model fits to abundance indices or composition data. Below, we show an example of performing a runs test on the index, length composition, and conditional age-at-length fits. 
-```{r simpleRuns, warning=FALSE, message=FALSE}
-r4ss::sspar(mfrow = c(2, 2))
-SSplotRunstest(simple, subplots = "cpue", add = TRUE)
-SSplotRunstest(simple, subplots = "len", add = TRUE)
-SSplotRunstest(simple, subplots = "con", add = TRUE)
-```
-The output for `SSplotRunstest()` includes a plot of the residuals by fleet and a table with the results from the runs test and 'three-sigma limit' values. In the plots above, the shaded area  represents the 'three-sigma limit', or three residual standard deviations from zero. If any of the individual residual points fall outside of the three-sigma limit, they are colored red as in the fishery length-composition. Green shaded area indicates the residuals are randomly distributed (p-value >= 0.05) and red shaded area indicates the residuals are not randomly distributed and there is some misspecification with the indices or composition data (p-value < 0.05). In addition to the residual plots, `SSplotRunstest()` produces a summary table of the runs test output values, including: 
-
-  * p-value for the runs test  
-  * if the test passed or failed (indicated by green or red shading in the plot)
-  * upper and lower limits for the 3-sigma interval 
-  * type of data tested (cpue, length-composition, age-composition, or conditional age-at-length)
-  
-To only produce the summary table and skip the plot, use `SSrunstest()`. 
-
-The second function for residual diagnostics is the function `SSplotJABBAres()`. This function is from the R package [JABBA](https://github.com/jabbamodel/JABBA) and plots a timeseries of residuals for all fleets of the indicated data (cpue or composition). In the example below, we plot the residuals for the mean age (age-composition) and mean length (length-composition) for both fleets. 
-
-```{r JABBAruns, message=FALSE, warning=FALSE}
-r4ss::sspar(mfrow = c(1, 2), plot.cex = 0.8)
-SSplotJABBAres(simple, subplots = "age", add = TRUE, seas = "comb")
-SSplotJABBAres(simple, subplots = "len", add = TRUE, seas = "comb")
-```
-
-The plots above show the residuals for both fishery and survey length and age-composition data for each year, and the black line is a LOESS smoother fit to all of the residuals. When data from multiple fleets are avaialble in a year, a boxplot is displayed to show the median and quantiles for that year. Additionally, the root-mean squared error is reported in the top right-hand corner to indicate how well the model fits the data (lower RMSE indicates better fit).
-
-
-#### Further Diagnostics  
-For more advanced model diagnostics we provide the functions `SSplotHCxval()` and `SSmase()` for evaluating hindcast cross-validation and prediction skill. To evaluate model uncertainty, we provide the functions `SSdeltaMVLN()`, `SSplotEnsemble()`, and `SSplotKobe()`.
 
 
 ## Contributing to ss3diags  

@@ -6,29 +6,33 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/r4ss/r4ss/workflows/R-CMD-check/badge.svg)](https://github.com/PIFSCstockassessments/ss3diags/actions)
+[![R-CMD-check](https://github.com/PIFSCstockassessments/ss3diags/workflows/R-CMD-check/badge.svg)](https://github.com/PIFSCstockassessments/ss3diags/actions)
 <!-- badges: end -->
-
-### Build Status
 
 The R package `ss3diags` enables users to apply advanced diagnostics to
 evaluate a Stock Synthesis model. Diagnostics include residual analyses,
-hindcasting and cross-validation techniques, and retrospective analyses.
+hindcast cross-validation techniques, and retrospective analyses.
 Functions also allow users to reproduce the key model diagnostics plots
 that presented in the paper ‘A Cookbook for Using Model Diagnostics in
 Integrated Stock Assessments’.
 
+The `ss3diags` Github respository provides step-by-step R recipes on how
+to:
 
-The ss3diags Github respository provides 
-step-by-step R recipes on how to:
-
-- [Do log-likelihood profiling for R0](https://pifscstockassessments.github.io/ss3diags/articles/likelihood.html)
-- [Run the ASPM diagnostic](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Setup_ASPM_example.R)
-- [Conduct restrospective analysis](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)
-- [Run jitter analysis](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Jitter_test_example.R)
+-   [Do log-likelood profiling for
+    R0](https://pifscstockassessments.github.io/ss3diags/articles/likelihood.html)
+-   [Run the ASPM
+    diagnostic](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Setup_ASPM_example.R)
+-   [Conduct restrospective
+    analysis](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)
+-   [Run jitter
+    analysis](https://github.com/PIFSCstockassessments/ss3diags/blob/master/Cookbook/Jitter_test_example.R)
+-   [Use hindcast
+    cross-validation](https://pifscstockassessments.github.io/ss3diags/articles/hcxval.html)
 
 with Stock Synthesis by making use of a comprehensive collection of R
-functions available in the R package
-[`r4ss`](https://github.com/r4ss/r4ss)
+functions available in the R packages
+[`r4ss`](https://github.com/r4ss/r4ss) and `ss3diags`.
 
 ## Installation
 
@@ -46,22 +50,10 @@ Once the package is installed it can be loaded by:
 library(ss3diags)
 ```
 
-## Applying ss3diags for Model Diagnostics
-
-#### Example Model
-
-For demonstration purposes, a simple, cod-like SS model was simulated
-using [ss3sim](https://github.com/ss3sim/ss3sim). The model includes 2
-fleets, one fishery and one survey. Catch data is available from year 26
-to year 100 (final year of model). An index of abundance is available
-from the survey fleet for years 62 - 100. No discard data was simulated.
-Simulated composition data includes length (fleets 1 and 2), age (fleets
-1 and 2), and conditional age-at-length (fleet 1). The SS output for
-this model can be loaded into the environment using
-
-``` r
-data("simple")
-```
+For examples of how to run common diagnostic tests for SS models and
+visualize the results of those diagnostic tests using the `r4ss` and
+`ssdiags` packages, please refer to the articles on the package
+[website](https://pifscstockassessments.github.io/ss3diags/).
 
 ## Contributing to ss3diags
 
@@ -76,21 +68,22 @@ To cite ss3diags for a publication you can use
 
 ``` r
 citation("ss3diags")
+#> 
 #> To cite package 'ss3diags' in publications use:
 #> 
-#>   Winker H, Carvalho F, Cardinale M, Kell L, Oshima M, Fletcher E
-#>   (2022). _ss3diags: Stock Synthesis Model Diagnostics for Intergated
-#>   Stock Assessments_. R package version 2.1.0,
-#>   <https://github.com/PIFSCstockassessments/ss3diags>.
+#>   Henning Winker, Felipe Carvalho, Massimiliano Cardinale, Laurence
+#>   Kell, Megumi Oshima and Eric Fletcher (2023). ss3diags: Stock
+#>   Synthesis Model Diagnostics for Intergated Stock Assessments. R
+#>   package version 2.1.1.
+#>   https://github.com/PIFSCstockassessments/ss3diags
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {ss3diags: Stock Synthesis Model Diagnostics for Intergated Stock
-#> Assessments},
+#>     title = {ss3diags: Stock Synthesis Model Diagnostics for Intergated Stock Assessments},
 #>     author = {Henning Winker and Felipe Carvalho and Massimiliano Cardinale and Laurence Kell and Megumi Oshima and Eric Fletcher},
-#>     year = {2022},
-#>     note = {R package version 2.1.0},
+#>     year = {2023},
+#>     note = {R package version 2.1.1},
 #>     url = {https://github.com/PIFSCstockassessments/ss3diags},
 #>   }
 ```
