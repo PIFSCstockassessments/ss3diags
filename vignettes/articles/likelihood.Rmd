@@ -82,6 +82,7 @@ profile(dir = dir_profile,
         verbose = FALSE)
 ```
 
+## Visualizing Output
 Once the profile is finished running, we can visualize the results to determine if there is conflict between the data sources. If all data sources reach a minimum at the same R0 value, this indicates good agreement between them. However, more likely, one or more will be minimized at different R0 values from the global R0 value. This is a sign of conflict between your data sources and may require you to consider data weighting. 
 
 ```{r}
@@ -99,9 +100,11 @@ The profile plot shows the changes in log-likelihood across the vector of values
 You can also plot data-type and fleet-specific profiles using `r4ss::PinerPlot()`. Below we are plotting the profile for the length composition data by fleet and the likelihood of survey data by fleet. This will allow us to see if there are conflicts and what sources are the main drivers. 
 ```{r}
 sspar(mfrow = c(1,2))
-PinerPlot(profile_mods_sum, component = "Length_like")
 PinerPlot(profile_mods_sum, 
-          component = "Surv_like", 
-          main = "Changes in survey likelihoods by fleet")
+          component = "Length_like",
+          main = "Length")
+PinerPlot(profile_mods_sum, 
+          component = "Surv_like",
+          main = "Survey")
 ```
 
