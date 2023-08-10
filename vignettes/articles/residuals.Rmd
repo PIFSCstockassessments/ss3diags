@@ -86,3 +86,16 @@ SSplotJABBAres(report, subplots = "len", add = TRUE, ylim = c(-0.2,0.2))
 ```
 
 In the plots above, each point represents the difference between the observed and expected value (residual) and is color-coded to correspond to a specific fleet. The solid, color-coded vertical lines from the horizontal dashed line (at y = 0) show the distance between 0 and the residual value. Box plots summarize the spread of residual values across all fleets within each year and the thick solid black line is a loess smoother fit through all residual points. Total RMSE is displayed in the top right corner. When assessing this plot, it is important to see if there are any patterns or trends in the residuals, how large the overall RMSE is, and whether the data from different fleets generally agrees or conflicts with each other. 
+
+To retrieve just RMSE and residual values without generating the plot, `SSrmse()` produces a named list with 2 objects, `RMSE` and `residuals`. These can be accessed as shown below. This function is useful for automating analyses. 
+
+```{r}
+rmse <- SSrmse(report, quants = "cpue")$RMSE
+residuals <- SSrmse(report, quants = "cpue")$residuals
+
+rmse
+
+head(residuals)
+
+```
+
