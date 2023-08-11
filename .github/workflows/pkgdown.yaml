@@ -25,7 +25,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pkgdown, local::. 
+          extra-packages: any::pkgdown, local::., any::tidyverse
           needs: website
 
       - name: Get the latest SS3 executable and move to expected location
