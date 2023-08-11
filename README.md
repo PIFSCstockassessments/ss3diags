@@ -5,7 +5,6 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/r4ss/r4ss/workflows/R-CMD-check/badge.svg)](https://github.com/PIFSCstockassessments/ss3diags/actions)
 [![R-CMD-check](https://github.com/PIFSCstockassessments/ss3diags/workflows/R-CMD-check/badge.svg)](https://github.com/PIFSCstockassessments/ss3diags/actions)
 <!-- badges: end -->
 
@@ -36,8 +35,9 @@ functions available in the R packages
 
 ## Installation
 
-ss3diags is not currently supported on CRAN. You can install the
-development version of ss3diags from [GitHub](https://github.com/) with:
+`ss3diags` is not currently supported on CRAN. You can install the
+development version of `ss3diags` from [GitHub](https://github.com/)
+with:
 
 ``` r
 # install.packages("remotes")
@@ -52,19 +52,19 @@ library(ss3diags)
 
 For examples of how to run common diagnostic tests for SS models and
 visualize the results of those diagnostic tests using the `r4ss` and
-`ssdiags` packages, please refer to the articles on the package
+`ss3diags` packages, please refer to the articles on the package
 [website](https://pifscstockassessments.github.io/ss3diags/).
 
 ## Contributing to ss3diags
 
-If you would like to contribute to ss3diags or have suggestions for
+If you would like to contribute to `ss3diags` or have suggestions for
 diagnostic tests to include in the package, you can submit a new
 [issue](https://github.com/PIFSCstockassessments/ss3diags/issues) or at
 <megumi.oshima@noaa.gov>.
 
 ## Reference
 
-To cite ss3diags for a publication you can use
+To cite `ss3diags` for a publication you can use
 
 ``` r
 citation("ss3diags")
