@@ -26,7 +26,7 @@ pak::pkg_install("r4ss/r4ss")
 library(r4ss) 
 
 files_path <- system.file("extdata", package = "ss3diags")
-dir_tmp  <- file.path(tempdir(check = TRUE))
+dir_tmp  <- tempdir(check = TRUE)
 dir_profile <- file.path(dir_tmp, "profile")
 dir.create(dir_profile, showWarnings = FALSE, recursive = TRUE)
 list.files(files_path)
