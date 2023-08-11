@@ -17,6 +17,10 @@
 #' }
 #' @param Season option to specify Season as an integer of value 1-4. Default
 #' uses first available, i.e. usual Seas = 1
+#' @param models Optional subset of the models of `summaryoutput` (or a similar
+#' field with a different name): a list created by the function
+#' [r4ss::SSsummarize]. Either `"all"` or a vector of numbers indicating
+#' columns in summary tables.
 #' @param endyrvec Optional single year or vector of years representing the
 #' final year of values to show for each model. By default it is set to the
 #' ending year specified in each model.
@@ -53,11 +57,15 @@
 #' @param indexQdigits Number of significant digits for catchability in legend
 #' @param indexUncertainty Show fixed uncertainty intervals on index
 #' (not estimated)
+#' @param mcmcVec
+#' Logical vector of TRUE/FALSE values (or single value) indicating
+#' whether input values are from MCMC or to use normal distribution around
+#' MLE.
+#'
 #'
 #' @inheritParams SSplotGeneric
 #' @inheritParams SSplotGenericLegend
 #' @inheritParams SSplotGenericPar
-#' @inheritParams SSplotGenericUncertainty
 #'
 #' @author Henning Winker (JRC-EC) and Laurence Kell (Sea++)
 #'
@@ -96,7 +104,6 @@ SSplotHCxval <- function(retroSummary,
                          yaxs = "i",
                          xylabs = TRUE,
                          type = "o",
-                         uncertainty = TRUE,
                          legend = TRUE,
                          legendlabels = "default",
                          legendloc = "topright",
