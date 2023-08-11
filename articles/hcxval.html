@@ -48,6 +48,7 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/Jitter.html">Jitter Analysis</a>
     <a class="dropdown-item" href="../articles/Retrospective-Analysis.html">Retrospective Analysis</a>
     <a class="dropdown-item" href="../articles/hcxval.html">Hindcast Cross-Validation</a>
     <a class="dropdown-item" href="../articles/likelihood.html">Likelihood Profile</a>
@@ -115,9 +116,7 @@ HCxval if conducted in conjunction with retrospective analysis (see how
 to conduct a <a href="https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html">restrospective
 analysis</a>). For this example we will use the same output created in
 the retrospective example.</p>
-<pre><code><span><span class="co">#&gt; [1] TRUE TRUE TRUE TRUE</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span></code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">retro_mods</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>dirvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_retro</span>, <span class="st">"retrospectives"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"retro"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">5</span>,by<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
 <span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
@@ -137,7 +136,7 @@ observations falling within the hindcast evaluation period.</p>
 summarizing the list of retrospective runs as for the retrospective
 analysis, which therefore only needs be done once. In this example we
 will use <code>retroSummary</code> created <a href="https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html">here</a>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"cpue"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting Hindcast Cross-Validation (one-step-ahead) </span></span>
@@ -174,7 +173,7 @@ additional step. Because the forecast length- and age-composition
 information are stored as “ghost files” in the SS report.sso file, you
 need to use <code><a href="../reference/SSretroComps.html">ss3diags::SSretroComps()</a></code> to extract and
 summarize that information before creating the plots.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">retroSummary_comps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SSretroComps.html">SSretroComps</a></span><span class="op">(</span><span class="va">retro_mods</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
@@ -203,7 +202,7 @@ that you may want to specify are:</p>
 </ul>
 <p>Examples of each of these changes are shown below, incrementally
 making each adjustment.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, subplots <span class="op">=</span> <span class="st">"len"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, indexselect <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting Hindcast Cross-Validation (one-step-ahead) </span></span>
@@ -266,7 +265,7 @@ residuals must be already very accurate to fall below this threshold.
 The adjusted MASE essential keep the naive prediction MAE denominator of
 the MASE to a maximum. Below we show the effect of changing adjustment
 threshold from the default <code>MAE.base.adj = 0.1</code></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mase1</span> <span class="op">=</span> <span class="fu"><a href="../reference/SSmase.html">SSmase</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, quant<span class="op">=</span><span class="st">"len"</span>, MAE.base.adj <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="va">mase1</span></span>
 <span><span class="co">#&gt;     Index Season      MASE     MAE.PR   MAE.base  MASE.adj n.eval</span></span>
@@ -274,7 +273,7 @@ threshold from the default <code>MAE.base.adj = 0.1</code></p>
 <span><span class="co">#&gt; 2 SURVEY1      1 0.6526074 0.05142002 0.07879167 0.5142002      1</span></span>
 <span><span class="co">#&gt; 3   joint        0.4628955 0.01719056 0.03713702 0.1719056      6</span></span></code></pre></div>
 <p>to a larger value <code>MAE.base.adj = 0.15</code></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/SSmase.html">SSmase</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, quant<span class="op">=</span><span class="st">"len"</span>, MAE.base.adj <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     Index Season      MASE     MAE.PR   MAE.base   MASE.adj n.eval</span></span>
 <span><span class="co">#&gt; 1 FISHERY      1 0.3591138 0.01034467 0.02880609 0.06896444      5</span></span>
@@ -283,13 +282,13 @@ threshold from the default <code>MAE.base.adj = 0.1</code></p>
 <p>where <code>MASE</code> is the ratio of the mean absolute error of
 the prediction residuals <code>MAE.PR</code> to the residuals of the
 naive predictions <code>MAE.base</code></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mase1</span><span class="op">$</span><span class="va">MAE.PR</span><span class="op">/</span><span class="va">mase1</span><span class="op">$</span><span class="va">MAE.base</span></span>
 <span><span class="co">#&gt; [1] 0.3591138 0.6526074 0.4628955</span></span>
 <span><span class="va">mase1</span><span class="op">$</span><span class="va">MASE</span></span>
 <span><span class="co">#&gt; [1] 0.3591138 0.6526074 0.4628955</span></span></code></pre></div>
 <p>and MASE.adj</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mase1</span><span class="op">$</span><span class="va">MAE.PR</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmax</a></span><span class="op">(</span><span class="va">mase1</span><span class="op">$</span><span class="va">MAE.base</span>,<span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.1034467 0.5142002 0.1719056</span></span>
 <span><span class="va">mase1</span><span class="op">$</span><span class="va">MASE.adj</span></span>
