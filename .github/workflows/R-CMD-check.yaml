@@ -73,7 +73,11 @@ jobs:
           extra-packages: |
             any::rcmdcheck
             any::remotes
-            any::tidyverse
+            any::tidyr
+            any::dplyr
+            any::ggplot
+            any::tibble
+            any::stringr
 
       - uses: r-lib/actions/check-r-package@v2
         with: 

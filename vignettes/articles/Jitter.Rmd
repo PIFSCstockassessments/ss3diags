@@ -12,7 +12,11 @@ knitr::opts_chunk$set(
 ```{r setup, message=FALSE}
 library(ss3diags)
 library(r4ss)
-library(tidyverse)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(tibble)
+library(stringr)
 ```
 
 Jitter analyses are commonly implemented in Stock Synthesis to ensure a model has reached global convergence. Jitter involves changing the parameter start values by a small increment and rerunning the model to see if that adjustment causes the model to converge at a lower likelihood. This can be useful for distinguishing if a model reached a local minimum or a global minimum. The number of jitter iterations should be anywhere between 50-100 to ensure a good spread of start values. If any of those runs has a lower likelihood than your current model, parameter start values should be adjusted to use those from the run with a lower likelihood. You can do this by adjusting the values in the control.ss file to match those in the ss.par_#_of_the_lower_likelihood_run. We provide the steps for running jitter analysis using `r4ss::jitter()` below. 
@@ -29,11 +33,10 @@ pak::pkg_install("r4ss/r4ss")
 library(r4ss) 
 
 files_path <- system.file("extdata", package = "ss3diags")
-dir_tmp <- tempdir(check = TRUE)
-dir_jitter <- file.path(dir_tmp, "jitter")
+dir_jitter <- file.path(tempdir(check = TRUE), "jitter")
 dir.create(dir_jitter, showWarnings = FALSE, recursive = TRUE)
 list.files(files_path)
-file.copy(from = list.files(files_path, full.names = TRUE), to = dir_tmp)
+file.copy(from = list.files(files_path, full.names = TRUE), to = dir_jitter)
 
 ```
 
