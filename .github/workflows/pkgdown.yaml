@@ -30,7 +30,7 @@ jobs:
 
       - name: Get the latest SS3 executable and move to expected location
         run: |
-          curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_linux" | xargs wget
+          wget -O ss3 https://github.com/nmfs-ost/ss3-source-code/releases/latest/download/ss_linux
           mv ss_linux ss
           sudo chmod a+x ss
           cp ss inst/extdata/ss
