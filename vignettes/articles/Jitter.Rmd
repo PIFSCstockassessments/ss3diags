@@ -37,7 +37,7 @@ file.copy(from = list.files(files_path, full.names = TRUE), to = dir_jitter)
 ```
 
 ```{r echo=FALSE, results = FALSE}
-file.copy(from ="../../inst/extdata/ss", to = dir_jitter)
+file.copy(from ="./inst/extdata/ss", to = dir_jitter)
 ```
 
 
