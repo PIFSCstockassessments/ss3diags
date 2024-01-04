@@ -33,8 +33,6 @@ Suggests:
     markdown,
     rmarkdown,
     testthat (>= 3.0.0)
-Remotes: 
-    r4ss/r4ss#821
 Encoding: UTF-8
 LazyData: True
 LazyDataCompression: gzip
