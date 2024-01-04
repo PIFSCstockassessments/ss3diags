@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ss3diags)
 ```
-Likelihood profiling is a key model diagnostic that helps identify the influence of information sources on model estimates. R_0 is a commonly profiled parameter because it represents a global scaling parameter. To conduct a profile, values of the parameter over a given range are fixed and the model re-run and then changes in total likelihood and data-component likelihoods are examined. It is recommended to run this throughout the development process, particularly after incorporating new data sets to understand how informative each component is on the estimation of R0.
+Likelihood profiling is a key model diagnostic that helps identify the influence of information sources on model estimates. R_0 is a commonly profiled parameter because it represents a global scaling parameter. To conduct a profile, values of the parameter over a given range are fixed and the model re-run and then changes in total likelihood and data-component likelihoods are examined. It is recommended to run this throughout the development process, particularly after incorporating new data sets to understand how informative each component is on the estimation of R0 and if there is conflict between data sources.
 
 ## Model inputs  
 To run a stock synthesis model, 4 input files are required: starter, forecast, control, and data. The input files for the example model can be found within the `ss3diags` package and accessed as shown below. Also, if you do not have `r4ss` installed, you will need to install for this tutorial. 
@@ -40,7 +40,7 @@ file.copy(from ="../../inst/extdata/ss", to = dir_profile)
 ```
 
 
-You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the retrospective from (in this case `dir_profile`). 
+You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the profile from (in this case `dir_profile`). 
 
 ## R0 Profile  
 Once you have the 4 input files and SS executable, you can run a likelihood profile as shown below. The first step is to run the model you would like to do a profile for. We will do this in `dir_tmp` and then copy the necessary files to `dir_profile`.  It's best to run the profile in a subdirectory of your main model run to keep the output files separate from other diagnostic tests you may run. 
