@@ -49,8 +49,8 @@ r4ss::get_ss3_exe(dir = dir_jitter)
 Once you have the 4 input files and SS executable, you can run a likelihood profile as shown below. The first step is to run the model you would like to do a profile for. We will do this in `dir_tmp` and then copy the necessary files to `dir_profile`.  It's best to run the profile in a subdirectory of your main model run to keep the output files separate from other diagnostic tests you may run. 
 
 ```{r}
-r4ss::run(dir = dir_tmp, verbose = FALSE)
-files <- c("data.ss", "control.ss_new", "starter.ss", "forecast.ss", "ss.par")
+r4ss::run(dir = dir_tmp, exe = "ss3", verbose = FALSE)
+files <- c("data.ss", "control.ss_new", "starter.ss", "forecast.ss", "ss.par", "ss3")
 file.copy(from = file.path(dir_tmp, files), to = dir_profile)
 ```
 
