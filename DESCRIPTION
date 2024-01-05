@@ -24,6 +24,7 @@ Imports:
     lifecycle,
     magrittr,
     mvtnorm,
+    r4ss (>= 1.46.1),
     randtests,
     reshape2,
     rlang
