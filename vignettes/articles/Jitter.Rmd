@@ -45,14 +45,15 @@ r4ss::get_ss3_exe(dir = dir_jitter, version = "v3.30.21")
 We will run the model in `dir_jitter` first to produce the necessary output files. It is recommended to do jitter runs in a subdirectory of your model run. This will keep all of the output files separate from other diagnostic tests you may run. 
 ```{r}
 r4ss::run(dir = dir_jitter, exe = "ss3", verbose = FALSE)
-
+rep <- SS_output(dir_jitter)
+SSplotData(rep)
 ```
 
 ## Jitter 
 For this example, we will run 50 jitters. The `jitter()` function automates the entire process so you only need to give it a few arguments and it will run and produce the total likelihoods for each run. 
 
-```{r run-jitter}
-Njitter <- 5 
+```{r run-jitter, eval = F}
+Njitter <- 50 
 jit.likes <- r4ss::jitter(dir = dir_jitter, 
                           Njitter = Njitter, 
                           init_values_src = 1, 
@@ -63,7 +64,7 @@ jit.likes <- r4ss::jitter(dir = dir_jitter,
 
 To analyze the output of all 50 runs, use `r4ss::SSgetoutput()` and `r4ss::SSsummarize()` as shown below. 
 
-```{r}
+```{r eval = F}
 jit_mods <- SSgetoutput(keyvec = 0:Njitter, #0 to include reference run
                        getcomp = FALSE, 
                        dirvec = dir_jitter, 
@@ -73,7 +74,7 @@ jit_summary <- SSsummarize(jit_mods, verbose = FALSE)
 ```
 
 Some key sections you may want to check and compare across models are, likelihoods, derived quantities, and estimated parameters. 
-```{r}
+```{r eval = F}
 head(jit_summary$likelihoods)
 head(jit_summary$quants)
 head(jit_summary$pars)
@@ -81,7 +82,7 @@ head(jit_summary$pars)
 
 You may also want to check that the models converged. To do this you can check the maximum gradients to make sure they are all small (< 0.0001). You can also compare the estimated spawning biomass, if they are extreme values (+2x or <0.5x the base spawning biomass) this suggests the model didn't converge.
 
-```{r}
+```{r eval = F}
 # Maximum gradient
 converged_grad <- which(jit_summary$maxgrad < 0.0001)
 
@@ -104,7 +105,7 @@ converged_sum <- SSsummarize(converged_jitters, verbose = FALSE)
 
 ## Visualizing Output
 To compare the likelihoods of all runs, we plot them as shown below. There are no built in functions (as of writing this recipe) in `r4ss` or `ss3diags` to generate a likelihood plot, therefore we provide code in the tidyverse syntax (using `ggplot2`) to visualize the results. 
-```{r}
+```{r eval = F}
 converged_sum$likelihoods %>% 
   filter(str_detect(Label, "TOTAL")) %>% 
   select(-Label) %>% 
@@ -121,7 +122,7 @@ converged_sum$likelihoods %>%
 
 The figure plots the Total likelihood from each jitter run and the red line indicates the total likelihood value from the reference run. If there are any runs with points below the red line, use the parameter values from the run with the lowest likelihood value. 
 We can also use `r4ss::SSplotComparisons()` to compare the spawning biomass trajectories between jitter runs to see the impact of different parameter values on the estimated quantities. 
-```{r}
+```{r eval = F}
 SSplotComparisons(converged_sum,     
                   subplots = 2,
                   ylimAdj=1)
