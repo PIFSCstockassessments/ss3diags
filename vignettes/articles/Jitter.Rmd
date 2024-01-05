@@ -33,10 +33,10 @@ dir_jitter <- file.path(tempdir(check = TRUE), "jitter")
 dir.create(dir_jitter, showWarnings = FALSE, recursive = TRUE)
 list.files(files_path)
 file.copy(from = list.files(files_path, full.names = TRUE), to = dir_jitter)
-
+r4ss::get_ss3_exe(dir = dir_jitter)
 ```
 
-```{r echo=FALSE, results = FALSE}
+```{r eval=FALSE, echo=FALSE, results = FALSE}
 file.copy(from ="./inst/extdata/ss", to = dir_jitter)
 ```
 
