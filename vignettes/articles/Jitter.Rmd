@@ -33,7 +33,7 @@ dir_jitter <- file.path(tempdir(check = TRUE), "jitter")
 dir.create(dir_jitter, showWarnings = FALSE, recursive = TRUE)
 list.files(files_path)
 file.copy(from = list.files(files_path, full.names = TRUE), to = dir_jitter)
-r4ss::get_ss3_exe(dir = dir_jitter)
+
 ```
 
 ```{r eval=FALSE, echo=FALSE, results = FALSE}
@@ -41,7 +41,11 @@ file.copy(from ="./inst/extdata/ss", to = dir_jitter)
 ```
 
 
-You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the retrospective from (in this case `dir_jitter`). 
+You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the retrospective from (in this case `dir_jitter`). An easy way to get the latest release of stock synthesis is to use the `r4ss` function `get_ss3_exe()`.
+
+```{r}
+r4ss::get_ss3_exe(dir = dir_jitter)
+```
  
 We will run the model in `dir_jitter` first to produce the necessary output files. It is recommended to do jitter runs in a subdirectory of your model run. This will keep all of the output files separate from other diagnostic tests you may run. 
 ```{r}
@@ -57,7 +61,8 @@ Njitter <- 50
 jit.likes <- r4ss::jitter(dir = dir_jitter, 
                           Njitter = Njitter, 
                           init_values_src = 1, 
-                          jitter_fraction = 0.1, 
+                          jitter_fraction = 0.1,
+                          exe = "ss3", 
                           verbose = FALSE)
 ```
 

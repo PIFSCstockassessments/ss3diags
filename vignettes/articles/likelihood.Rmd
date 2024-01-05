@@ -31,16 +31,19 @@ dir_profile <- file.path(dir_tmp, "profile")
 dir.create(dir_profile, showWarnings = FALSE, recursive = TRUE)
 list.files(files_path)
 file.copy(from = list.files(files_path, full.names = TRUE), to = dir_tmp)
-
 ```
 
-```{r echo=FALSE, results = FALSE}
+```{r eval=FALSE, echo=FALSE, results = FALSE}
 file.copy(from ="../../inst/extdata/ss", to = dir_tmp)
 file.copy(from ="../../inst/extdata/ss", to = dir_profile)
 ```
 
 
-You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the profile from (in this case `dir_profile`). 
+You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the profile from (in this case `dir_profile`). An easy way to get the latest release of stock synthesis is to use the `r4ss` function `get_ss3_exe()`.
+
+```{r}
+r4ss::get_ss3_exe(dir = dir_jitter)
+```
 
 ## R0 Profile  
 Once you have the 4 input files and SS executable, you can run a likelihood profile as shown below. The first step is to run the model you would like to do a profile for. We will do this in `dir_tmp` and then copy the necessary files to `dir_profile`.  It's best to run the profile in a subdirectory of your main model run to keep the output files separate from other diagnostic tests you may run. 
@@ -79,6 +82,7 @@ profile(dir = dir_profile,
         newctlfile = "control_modified.ss",
         string = "SR_LN", 
         profilevec = r0_vec, 
+        exe = "ss3",
         verbose = FALSE)
 ```
 
