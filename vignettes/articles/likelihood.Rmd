@@ -42,7 +42,7 @@ file.copy(from ="../../inst/extdata/ss", to = dir_profile)
 You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the profile from (in this case `dir_profile`). An easy way to get the latest release of stock synthesis is to use the `r4ss` function `get_ss3_exe()`.
 
 ```{r}
-r4ss::get_ss3_exe(dir = dir_jitter)
+r4ss::get_ss3_exe(dir = dir_jitter, version = "v3.30.21")
 ```
 
 ## R0 Profile  
