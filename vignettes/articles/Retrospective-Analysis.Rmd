@@ -42,14 +42,14 @@ file.copy(from ="../../inst/extdata/ss", to = dir_retro)
 You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the retrospective from (in this case `dir_retro`). An easy way to get the latest release of stock synthesis is to use the `r4ss` function `get_ss3_exe()`.
 
 ```{r}
-r4ss::get_ss3_exe(dir = dir_jitter, version = "v3.30.21")
+r4ss::get_ss3_exe(dir = dir_retro, version = "v3.30.21")
 ```
 
 ## Retrospective Analysis
 Once you have the 4 input files and SS executable, you can run retrospective analysis as shown below. We are running it for 5 1-year peels, so with each run, the last year of data is removed and the model is re-run for a total of 5 times. The number of year peels can be adjusted with the `years` argument. If the SS executable file you are using is named something other than "ss" (e.g. ss_opt_win.exe), you will need to specify this with the argument `exe = "ss_opt_win"`. 
 
 ```{r message=FALSE}
-r4ss::retro(dir = dir_retro, exe = "ss3", years = 0:-5, verbose = FALSE)
+r4ss::retro(dir = dir_retro, exe = "ss3.exe", years = 0:-5, verbose = FALSE)
 
 ```
 ## Visualizing Output 
