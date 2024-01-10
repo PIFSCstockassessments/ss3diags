@@ -35,7 +35,7 @@ file.copy(from = list.files(files_path, full.names = TRUE), to = dir_tmp)
 You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the ASPM from (in this case `dir_aspm`). An easy way to get the latest release of stock synthesis is to use the `r4ss` function `get_ss3_exe()`.
 
 ```{r}
-r4ss::get_ss3_exe(dir = dir_aspm, version = "v3.30.21")
+r4ss::get_ss3_exe(dir = dir_tmp, version = "v3.30.21")
 ```
 
 ## ASPM 
@@ -49,7 +49,7 @@ In order to get the `ss.par` file, you need to run the model once. This will als
 
 ```{r}
 r4ss::run(dir = dir_tmp, verbose = FALSE, exe = "ss3")
-files <- c("data_echo.ss_new", "control.ss_new", "starter.ss", "forecast.ss", "ss.par")
+files <- c("data_echo.ss_new", "control.ss_new", "starter.ss", "forecast.ss", "ss.par", "ss3")
 file.copy(from = file.path(dir_tmp, files), to = dir_aspm)
 ```
 
