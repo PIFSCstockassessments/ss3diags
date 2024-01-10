@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Jitter Analysis">
 <meta property="og:description" content="ss3diags">
@@ -50,6 +50,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Jitter.html">Jitter Analysis</a>
     <a class="dropdown-item" href="../articles/Retrospective-Analysis.html">Retrospective Analysis</a>
+    <a class="dropdown-item" href="../articles/aspm.html">ASPM</a>
     <a class="dropdown-item" href="../articles/hcxval.html">Hindcast Cross-Validation</a>
     <a class="dropdown-item" href="../articles/likelihood.html">Likelihood Profile</a>
     <a class="dropdown-item" href="../articles/residuals.html">Residual Analyses</a>
@@ -118,7 +119,7 @@ below. Also, if you do not have <code>r4ss</code> installed, you will
 need to install for this tutorial.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r4ss/r4ss" class="external-link">r4ss</a></span><span class="op">)</span> </span>
 <span></span>
@@ -131,14 +132,18 @@ need to install for this tutorial.</p>
 <span><span class="co">#&gt; [1] TRUE TRUE TRUE TRUE</span></span></code></pre></div>
 <p>You will need to make sure you have the <a href="https://github.com/nmfs-stock-synthesis/stock-synthesis" class="external-link">SS
 executable</a> file either in your path or in the directory you are
-running the retrospective from (in this case
-<code>dir_jitter</code>).</p>
+running the retrospective from (in this case <code>dir_jitter</code>).
+An easy way to get the latest release of stock synthesis is to use the
+<code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_jitter</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpUjAHxk/jitter/ss3</span></span></code></pre></div>
 <p>We will run the model in <code>dir_jitter</code> first to produce the
 necessary output files. It is recommended to do jitter runs in a
 subdirectory of your model run. This will keep all of the output files
 separate from other diagnostic tests you may run.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/run.html" class="external-link">run</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_jitter</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/run.html" class="external-link">run</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_jitter</span>, exe <span class="op">=</span> <span class="st">"ss3"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "ran model"</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -148,68 +153,19 @@ separate from other diagnostic tests you may run.</p>
 function automates the entire process so you only need to give it a few
 arguments and it will run and produce the total likelihoods for each
 run.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Njitter</span> <span class="op">&lt;-</span> <span class="fl">50</span> </span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Njitter</span> <span class="op">&lt;-</span> <span class="fl">5</span> </span>
 <span><span class="va">jit.likes</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/jitter.html" class="external-link">jitter</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_jitter</span>, </span>
 <span>                          Njitter <span class="op">=</span> <span class="va">Njitter</span>, </span>
 <span>                          init_values_src <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>                          jitter_fraction <span class="op">=</span> <span class="fl">0.1</span>, </span>
-<span>                          verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 1 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 2 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 3 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 4 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 5 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 6 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 7 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 8 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 9 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 10 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 11 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 12 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 13 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 14 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 15 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 16 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 17 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 18 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 19 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 20 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 21 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 22 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 23 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 24 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 25 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 26 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 27 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 28 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 29 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 30 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 31 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 32 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 33 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 34 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 35 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 36 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 37 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 38 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 39 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 40 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 41 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 42 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 43 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 44 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 45 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 46 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 47 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 48 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 49 = 754.302</span></span>
-<span><span class="co">#&gt; Likelihood for jitter 50 = 754.302</span></span>
-<span><span class="co">#&gt; Table of likelihood values:</span></span></code></pre></div>
+<span>                          jitter_fraction <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>                          exe <span class="op">=</span> <span class="st">"ss3"</span>, </span>
+<span>                          printlikes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                          verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>To analyze the output of all 50 runs, use
 <code><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">r4ss::SSgetoutput()</a></code> and <code><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">r4ss::SSsummarize()</a></code> as
 shown below.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">jit_mods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>keyvec <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="va">Njitter</span>, <span class="co">#0 to include reference run</span></span>
 <span>                       getcomp <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>                       dirvec <span class="op">=</span> <span class="va">dir_jitter</span>, </span>
@@ -218,191 +174,16 @@ shown below.</p>
 <span><span class="va">jit_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">jit_mods</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Some key sections you may want to check and compare across models
 are, likelihoods, derived quantities, and estimated parameters.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">jit_summary</span><span class="op">$</span><span class="va">likelihoods</span><span class="op">)</span></span>
-<span><span class="co">#&gt;       replist0     replist1     replist2     replist3     replist4     replist5</span></span>
-<span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
-<span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
-<span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
-<span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
-<span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
-<span><span class="co">#&gt;       replist6     replist7     replist8     replist9    replist10    replist11</span></span>
-<span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
-<span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
-<span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
-<span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
-<span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
-<span><span class="co">#&gt;      replist12    replist13    replist14    replist15    replist16    replist17</span></span>
-<span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
-<span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
-<span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
-<span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
-<span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
-<span><span class="co">#&gt;      replist18    replist19    replist20    replist21    replist22    replist23</span></span>
-<span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
-<span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
-<span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
-<span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
-<span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
-<span><span class="co">#&gt;      replist24    replist25    replist26    replist27    replist28    replist29</span></span>
-<span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
-<span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
-<span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
-<span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
-<span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
-<span><span class="co">#&gt;      replist30    replist31    replist32    replist33    replist34    replist35</span></span>
-<span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
-<span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
-<span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
-<span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
-<span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
-<span><span class="co">#&gt;      replist36    replist37    replist38    replist39    replist40    replist41</span></span>
-<span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
-<span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
-<span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
-<span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
-<span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
-<span><span class="co">#&gt;      replist42    replist43    replist44    replist45    replist46    replist47</span></span>
-<span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
-<span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
-<span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
-<span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
-<span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
-<span><span class="co">#&gt;      replist48    replist49    replist50       Label</span></span>
-<span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02       TOTAL</span></span>
-<span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10       Catch</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01 Equil_catch</span></span>
-<span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00      Survey</span></span>
-<span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02 Length_comp</span></span>
-<span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02    Age_comp</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">jit_summary</span><span class="op">$</span><span class="va">quants</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   replist0 replist1 replist2 replist3 replist4 replist5 replist6 replist7</span></span>
-<span><span class="co">#&gt; 1  54773.8  54773.8  54773.8  54773.8  54773.8  54773.8  54773.8  54773.8</span></span>
-<span><span class="co">#&gt; 2  26071.4  26071.4  26071.4  26071.4  26071.4  26071.4  26071.4  26071.4</span></span>
-<span><span class="co">#&gt; 3  26071.4  26071.4  26071.4  26071.4  26071.4  26071.4  26071.4  26071.4</span></span>
-<span><span class="co">#&gt; 4  24096.1  24096.1  24096.1  24096.1  24096.1  24096.1  24096.1  24096.1</span></span>
-<span><span class="co">#&gt; 5  22126.1  22126.1  22126.1  22126.1  22126.1  22126.1  22126.1  22126.1</span></span>
-<span><span class="co">#&gt; 6  20143.5  20143.5  20143.5  20143.5  20143.5  20143.5  20143.5  20143.5</span></span>
-<span><span class="co">#&gt;   replist8 replist9 replist10 replist11 replist12 replist13 replist14 replist15</span></span>
-<span><span class="co">#&gt; 1  54773.8  54773.8   54773.8   54773.8   54773.8   54773.8   54773.8   54773.8</span></span>
-<span><span class="co">#&gt; 2  26071.4  26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 3  26071.4  26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 4  24096.1  24096.1   24096.1   24096.1   24096.1   24096.1   24096.1   24096.1</span></span>
-<span><span class="co">#&gt; 5  22126.1  22126.1   22126.1   22126.1   22126.1   22126.1   22126.1   22126.1</span></span>
-<span><span class="co">#&gt; 6  20143.5  20143.5   20143.5   20143.5   20143.5   20143.5   20143.5   20143.5</span></span>
-<span><span class="co">#&gt;   replist16 replist17 replist18 replist19 replist20 replist21 replist22</span></span>
-<span><span class="co">#&gt; 1   54773.8   54773.8   54773.8   54773.8   54773.8   54773.8   54773.8</span></span>
-<span><span class="co">#&gt; 2   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 3   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 4   24096.1   24096.1   24096.1   24096.1   24096.1   24096.1   24096.1</span></span>
-<span><span class="co">#&gt; 5   22126.1   22126.1   22126.1   22126.1   22126.1   22126.1   22126.1</span></span>
-<span><span class="co">#&gt; 6   20143.5   20143.5   20143.5   20143.5   20143.5   20143.5   20143.5</span></span>
-<span><span class="co">#&gt;   replist23 replist24 replist25 replist26 replist27 replist28 replist29</span></span>
-<span><span class="co">#&gt; 1   54773.8   54773.8   54773.8   54773.8   54773.8   54773.8   54773.8</span></span>
-<span><span class="co">#&gt; 2   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 3   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 4   24096.1   24096.1   24096.1   24096.1   24096.1   24096.1   24096.1</span></span>
-<span><span class="co">#&gt; 5   22126.1   22126.1   22126.1   22126.1   22126.1   22126.1   22126.1</span></span>
-<span><span class="co">#&gt; 6   20143.5   20143.5   20143.5   20143.5   20143.5   20143.5   20143.5</span></span>
-<span><span class="co">#&gt;   replist30 replist31 replist32 replist33 replist34 replist35 replist36</span></span>
-<span><span class="co">#&gt; 1   54773.8   54773.8   54773.8   54773.8   54773.8   54773.8   54773.8</span></span>
-<span><span class="co">#&gt; 2   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 3   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 4   24096.1   24096.1   24096.1   24096.1   24096.1   24096.1   24096.1</span></span>
-<span><span class="co">#&gt; 5   22126.1   22126.1   22126.1   22126.1   22126.1   22126.1   22126.1</span></span>
-<span><span class="co">#&gt; 6   20143.5   20143.5   20143.5   20143.5   20143.5   20143.5   20143.5</span></span>
-<span><span class="co">#&gt;   replist37 replist38 replist39 replist40 replist41 replist42 replist43</span></span>
-<span><span class="co">#&gt; 1   54773.8   54773.8   54773.8   54773.8   54773.8   54773.8   54773.8</span></span>
-<span><span class="co">#&gt; 2   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 3   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 4   24096.1   24096.1   24096.1   24096.1   24096.1   24096.1   24096.1</span></span>
-<span><span class="co">#&gt; 5   22126.1   22126.1   22126.1   22126.1   22126.1   22126.1   22126.1</span></span>
-<span><span class="co">#&gt; 6   20143.5   20143.5   20143.5   20143.5   20143.5   20143.5   20143.5</span></span>
-<span><span class="co">#&gt;   replist44 replist45 replist46 replist47 replist48 replist49 replist50</span></span>
-<span><span class="co">#&gt; 1   54773.8   54773.8   54773.8   54773.8   54773.8   54773.8   54773.8</span></span>
-<span><span class="co">#&gt; 2   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 3   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4   26071.4</span></span>
-<span><span class="co">#&gt; 4   24096.1   24096.1   24096.1   24096.1   24096.1   24096.1   24096.1</span></span>
-<span><span class="co">#&gt; 5   22126.1   22126.1   22126.1   22126.1   22126.1   22126.1   22126.1</span></span>
-<span><span class="co">#&gt; 6   20143.5   20143.5   20143.5   20143.5   20143.5   20143.5   20143.5</span></span>
-<span><span class="co">#&gt;         Label   Yr</span></span>
-<span><span class="co">#&gt; 1  SSB_Virgin   NA</span></span>
-<span><span class="co">#&gt; 2 SSB_Initial   NA</span></span>
-<span><span class="co">#&gt; 3    SSB_2011 2011</span></span>
-<span><span class="co">#&gt; 4    SSB_2012 2012</span></span>
-<span><span class="co">#&gt; 5    SSB_2013 2013</span></span>
-<span><span class="co">#&gt; 6    SSB_2014 2014</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">jit_summary</span><span class="op">$</span><span class="va">pars</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    replist0  replist1  replist2  replist3  replist4  replist5  replist6</span></span>
-<span><span class="co">#&gt; 1  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 2 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000</span></span>
-<span><span class="co">#&gt; 3 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200</span></span>
-<span><span class="co">#&gt; 4  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165</span></span>
-<span><span class="co">#&gt; 5  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 6  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt;    replist7  replist8  replist9 replist10 replist11 replist12 replist13</span></span>
-<span><span class="co">#&gt; 1  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 2 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000</span></span>
-<span><span class="co">#&gt; 3 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200</span></span>
-<span><span class="co">#&gt; 4  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165</span></span>
-<span><span class="co">#&gt; 5  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 6  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt;   replist14 replist15 replist16 replist17 replist18 replist19 replist20</span></span>
-<span><span class="co">#&gt; 1  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 2 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000</span></span>
-<span><span class="co">#&gt; 3 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200</span></span>
-<span><span class="co">#&gt; 4  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165</span></span>
-<span><span class="co">#&gt; 5  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 6  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt;   replist21 replist22 replist23 replist24 replist25 replist26 replist27</span></span>
-<span><span class="co">#&gt; 1  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 2 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000</span></span>
-<span><span class="co">#&gt; 3 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200</span></span>
-<span><span class="co">#&gt; 4  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165</span></span>
-<span><span class="co">#&gt; 5  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 6  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt;   replist28 replist29 replist30 replist31 replist32 replist33 replist34</span></span>
-<span><span class="co">#&gt; 1  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 2 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000</span></span>
-<span><span class="co">#&gt; 3 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200</span></span>
-<span><span class="co">#&gt; 4  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165</span></span>
-<span><span class="co">#&gt; 5  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 6  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt;   replist35 replist36 replist37 replist38 replist39 replist40 replist41</span></span>
-<span><span class="co">#&gt; 1  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 2 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000</span></span>
-<span><span class="co">#&gt; 3 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200</span></span>
-<span><span class="co">#&gt; 4  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165</span></span>
-<span><span class="co">#&gt; 5  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 6  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt;   replist42 replist43 replist44 replist45 replist46 replist47 replist48</span></span>
-<span><span class="co">#&gt; 1  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 2 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000 22.769000</span></span>
-<span><span class="co">#&gt; 3 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200 71.807200</span></span>
-<span><span class="co">#&gt; 4  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165  0.142165</span></span>
-<span><span class="co">#&gt; 5  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt; 6  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000  0.100000</span></span>
-<span><span class="co">#&gt;   replist49 replist50                 Label Yr recdev</span></span>
-<span><span class="co">#&gt; 1  0.100000  0.100000 NatM_uniform_Fem_GP_1 NA  FALSE</span></span>
-<span><span class="co">#&gt; 2 22.769000 22.769000    L_at_Amin_Fem_GP_1 NA  FALSE</span></span>
-<span><span class="co">#&gt; 3 71.807200 71.807200    L_at_Amax_Fem_GP_1 NA  FALSE</span></span>
-<span><span class="co">#&gt; 4  0.142165  0.142165    VonBert_K_Fem_GP_1 NA  FALSE</span></span>
-<span><span class="co">#&gt; 5  0.100000  0.100000     CV_young_Fem_GP_1 NA  FALSE</span></span>
-<span><span class="co">#&gt; 6  0.100000  0.100000       CV_old_Fem_GP_1 NA  FALSE</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">jit_summary</span><span class="op">$</span><span class="va">pars</span><span class="op">)</span></span></code></pre></div>
 <p>You may also want to check that the models converged. To do this you
 can check the maximum gradients to make sure they are all small (&lt;
 0.0001). You can also compare the estimated spawning biomass, if they
 are extreme values (+2x or &lt;0.5x the base spawning biomass) this
 suggests the model didn’t converge.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Maximum gradient</span></span>
 <span><span class="va">converged_grad</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">jit_summary</span><span class="op">$</span><span class="va">maxgrad</span> <span class="op">&lt;</span> <span class="fl">0.0001</span><span class="op">)</span></span>
 <span></span>
@@ -413,7 +194,7 @@ suggests the model didn’t converge.</p>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Njitter</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"jitter"</span>, values_to <span class="op">=</span> <span class="st">"SSB"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Yr</span>, values_from <span class="op">=</span> <span class="va">SSB</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>rownumber <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"jitter"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"jitter"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter_all.html" class="external-link">filter_at</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/all_vars.html" class="external-link">all_vars</a></span><span class="op">(</span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">2</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co">#keep only </span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rownumber</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">rownumber</span><span class="op">)</span></span>
@@ -429,7 +210,7 @@ There are no built in functions (as of writing this recipe) in
 <code>r4ss</code> or <code>ss3diags</code> to generate a likelihood
 plot, therefore we provide code in the tidyverse syntax (using
 <code>ggplot2</code>) to visualize the results.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">converged_sum</span><span class="op">$</span><span class="va">likelihoods</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">Label</span>, <span class="st">"TOTAL"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Label</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -442,7 +223,6 @@ plot, therefore we provide code in the tidyverse syntax (using
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Total Likelihood"</span>, </span>
 <span>       x <span class="op">=</span> <span class="st">"Jitter runs at a converged solution"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Jitter_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <p>The figure plots the Total likelihood from each jitter run and the
 red line indicates the total likelihood value from the reference run. If
 there are any runs with points below the red line, use the parameter
@@ -450,12 +230,10 @@ values from the run with the lowest likelihood value. We can also use
 <code><a href="https://r4ss.github.io/r4ss/reference/SSplotComparisons.html" class="external-link">r4ss::SSplotComparisons()</a></code> to compare the spawning biomass
 trajectories between jitter runs to see the impact of different
 parameter values on the estimated quantities.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSplotComparisons.html" class="external-link">SSplotComparisons</a></span><span class="op">(</span><span class="va">converged_sum</span>,     </span>
 <span>                  subplots <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>                  ylimAdj<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; showing uncertainty for all models</span></span>
-<span><span class="co">#&gt; subplot 2: spawning biomass with uncertainty intervals</span></span></code></pre></div>
+<span>                  ylimAdj<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

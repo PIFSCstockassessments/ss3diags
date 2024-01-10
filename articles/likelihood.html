@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Likelihood Profile">
 <meta property="og:description" content="ss3diags">
@@ -50,6 +50,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Jitter.html">Jitter Analysis</a>
     <a class="dropdown-item" href="../articles/Retrospective-Analysis.html">Retrospective Analysis</a>
+    <a class="dropdown-item" href="../articles/aspm.html">ASPM</a>
     <a class="dropdown-item" href="../articles/hcxval.html">Hindcast Cross-Validation</a>
     <a class="dropdown-item" href="../articles/likelihood.html">Likelihood Profile</a>
     <a class="dropdown-item" href="../articles/residuals.html">Residual Analyses</a>
@@ -101,7 +102,8 @@ range are fixed and the model re-run and then changes in total
 likelihood and data-component likelihoods are examined. It is
 recommended to run this throughout the development process, particularly
 after incorporating new data sets to understand how informative each
-component is on the estimation of R0.</p>
+component is on the estimation of R0 and if there is conflict between
+data sources.</p>
 <div class="section level2">
 <h2 id="model-inputs">Model inputs<a class="anchor" aria-label="anchor" href="#model-inputs"></a>
 </h2>
@@ -112,7 +114,7 @@ below. Also, if you do not have <code>r4ss</code> installed, you will
 need to install for this tutorial.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r4ss/r4ss" class="external-link">r4ss</a></span><span class="op">)</span> </span>
 <span></span>
@@ -126,8 +128,12 @@ need to install for this tutorial.</p>
 <span><span class="co">#&gt; [1] TRUE TRUE TRUE TRUE</span></span></code></pre></div>
 <p>You will need to make sure you have the <a href="https://github.com/nmfs-stock-synthesis/stock-synthesis" class="external-link">SS
 executable</a> file either in your path or in the directory you are
-running the retrospective from (in this case
-<code>dir_profile</code>).</p>
+running the profile from (in this case <code>dir_profile</code>). An
+easy way to get the latest release of stock synthesis is to use the
+<code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpIhqCWi/ss3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="r0-profile">R0 Profile<a class="anchor" aria-label="anchor" href="#r0-profile"></a>
@@ -139,18 +145,18 @@ you would like to do a profile for. We will do this in
 <code>dir_profile</code>. It’s best to run the profile in a subdirectory
 of your main model run to keep the output files separate from other
 diagnostic tests you may run.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/run.html" class="external-link">run</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/run.html" class="external-link">run</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, exe <span class="op">=</span> <span class="st">"ss3"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "ran model"</span></span>
-<span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.ss"</span>, <span class="st">"control.ss_new"</span>, <span class="st">"starter.ss"</span>, <span class="st">"forecast.ss"</span>, <span class="st">"ss.par"</span><span class="op">)</span></span>
+<span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.ss"</span>, <span class="st">"control.ss_new"</span>, <span class="st">"starter.ss"</span>, <span class="st">"forecast.ss"</span>, <span class="st">"ss.par"</span>, <span class="st">"ss3"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_tmp</span>, <span class="va">files</span><span class="op">)</span>, to <span class="op">=</span> <span class="va">dir_profile</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] TRUE TRUE TRUE TRUE TRUE</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] TRUE TRUE TRUE TRUE TRUE TRUE</span></span></code></pre></div>
 <p>Once you have the input files you need in <code>dir_profile</code>
 you will need to create a vector of values to profile across. The range
 and increments to choose depend on your model and the resolution at
 which you want to analyze the likelihood profile. For this example we
 will use a fairly course resolution to speed up total run time.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CTL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_readctl_3.30.html" class="external-link">SS_readctl_3.30</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_profile</span>, <span class="st">"control.ss_new"</span><span class="op">)</span>, datlist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_profile</span>, <span class="st">"data.ss"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">CTL</span><span class="op">$</span><span class="va">SR_parms</span></span>
@@ -176,7 +182,7 @@ will use a fairly course resolution to speed up total run time.</p>
 <p>We also need to modify the starter file by changing the name of the
 control file that it will read from and making sure the likelihood is
 calculated for non-estimated quantities.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">START</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_readstarter.html" class="external-link">SS_readstarter</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_profile</span>, <span class="st">"starter.ss"</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">START</span><span class="op">$</span><span class="va">prior_like</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">START</span><span class="op">$</span><span class="va">ctlfile</span> <span class="op">&lt;-</span> <span class="st">"control_modified.ss"</span></span>
@@ -188,12 +194,18 @@ the vector of values to profile across. The <code>newctlfile</code> is
 the control file that will be adjusted with values from the
 <code>profilevec</code> and can be named anything you prefer, it just
 needs to match what you put in the starter file for “cltfile”.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/profile.html" class="external-link">profile</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_profile</span>, </span>
 <span>        newctlfile <span class="op">=</span> <span class="st">"control_modified.ss"</span>,</span>
 <span>        string <span class="op">=</span> <span class="st">"SR_LN"</span>, </span>
 <span>        profilevec <span class="op">=</span> <span class="va">r0_vec</span>, </span>
-<span>        verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>        exe <span class="op">=</span> <span class="st">"ss3"</span>,</span>
+<span>        verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Doing runs: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,</span></span>
+<span><span class="co">#&gt;   out of n = 11</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile,</span></span>
+<span><span class="co">#&gt;  but will be changed back on exit from function.</span></span>
 <span><span class="co">#&gt; running profile i=1/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -203,6 +215,10 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.9274  7.9274        1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile and running model using the command: ./ss3</span></span>
+<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
+<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=2/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -212,6 +228,10 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  7.9274  8.1274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile and running model using the command: ./ss3</span></span>
+<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
+<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=3/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -221,6 +241,10 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.1274  8.3274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile and running model using the command: ./ss3</span></span>
+<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
+<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=4/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -230,6 +254,10 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.3274  8.5274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile and running model using the command: ./ss3</span></span>
+<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
+<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=5/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -239,6 +267,10 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.5274  8.7274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile and running model using the command: ./ss3</span></span>
+<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
+<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=6/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -248,6 +280,10 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.7274  8.9274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile and running model using the command: ./ss3</span></span>
+<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
+<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=7/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -257,6 +293,10 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.9274  9.1274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile and running model using the command: ./ss3</span></span>
+<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
+<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=8/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -266,6 +306,10 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  9.1274  9.3274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile and running model using the command: ./ss3</span></span>
+<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
+<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=9/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -275,6 +319,10 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  9.3274  9.5274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile and running model using the command: ./ss3</span></span>
+<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
+<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=10/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -284,6 +332,10 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  9.5274  9.7274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile and running model using the command: ./ss3</span></span>
+<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
+<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=11/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -293,42 +345,46 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  9.7274  9.9274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt;     Value converged    TOTAL       Catch Equil_catch    Survey Length_comp</span></span>
-<span><span class="co">#&gt; 1  7.9274      TRUE 1067.570 4.40715e-01   16.620400  6.065520     453.198</span></span>
-<span><span class="co">#&gt; 2  8.1274      TRUE  940.077 2.29735e-01   12.985200  1.965820     418.750</span></span>
-<span><span class="co">#&gt; 3  8.3274      TRUE  844.236 1.08857e-01    9.799480 -2.132340     393.384</span></span>
-<span><span class="co">#&gt; 4  8.5274      TRUE  790.513 9.17170e-06    3.930790 -5.726270     379.721</span></span>
-<span><span class="co">#&gt; 5  8.7274      TRUE  762.562 6.48948e-08    0.271032 -7.140910     370.420</span></span>
-<span><span class="co">#&gt; 6  8.9274      TRUE  754.302 1.33458e-10    0.174869 -7.118110     366.756</span></span>
-<span><span class="co">#&gt; 7  9.1274      TRUE  758.927 2.10816e-13    1.337060 -6.106700     367.497</span></span>
-<span><span class="co">#&gt; 8  9.3274      TRUE  767.708 1.90347e-13    3.424990 -4.917570     369.543</span></span>
-<span><span class="co">#&gt; 9  9.5274      TRUE  777.243 1.15331e-13    6.433440 -3.857200     371.605</span></span>
-<span><span class="co">#&gt; 10 9.7274      TRUE  787.189 6.73658e-14   10.382600 -2.563580     373.376</span></span>
-<span><span class="co">#&gt; 11 9.9274      TRUE  798.152 4.05051e-14   15.279300 -0.380771     374.815</span></span>
-<span><span class="co">#&gt;    Age_comp Size_at_age Recruitment InitEQ_Regime Forecast_Recruitment</span></span>
-<span><span class="co">#&gt; 1   341.340     230.715   19.181500   0.00000e+00                    0</span></span>
-<span><span class="co">#&gt; 2   291.595     201.557   12.989400   0.00000e+00                    0</span></span>
-<span><span class="co">#&gt; 3   257.968     179.068    6.036600   0.00000e+00                    0</span></span>
-<span><span class="co">#&gt; 4   243.456     167.416    1.713560   1.54502e-30                    0</span></span>
-<span><span class="co">#&gt; 5   234.970     163.525    0.515980   1.54502e-30                    0</span></span>
-<span><span class="co">#&gt; 6   231.845     162.399    0.244060   1.54502e-30                    0</span></span>
-<span><span class="co">#&gt; 7   233.210     162.675    0.312441   0.00000e+00                    0</span></span>
-<span><span class="co">#&gt; 8   235.957     163.170    0.529082   0.00000e+00                    0</span></span>
-<span><span class="co">#&gt; 9   238.622     163.598    0.839498   1.54502e-30                    0</span></span>
-<span><span class="co">#&gt; 10  240.872     163.942    1.178030   0.00000e+00                    0</span></span>
-<span><span class="co">#&gt; 11  242.718     164.208    1.510550   0.00000e+00                    0</span></span>
-<span><span class="co">#&gt;    Parm_priors Parm_softbounds Parm_devs Crash_Pen</span></span>
-<span><span class="co">#&gt; 1            0      0.00756177         0         0</span></span>
-<span><span class="co">#&gt; 2            0      0.00433602         0         0</span></span>
-<span><span class="co">#&gt; 3            0      0.00337783         0         0</span></span>
-<span><span class="co">#&gt; 4            0      0.00197985         0         0</span></span>
-<span><span class="co">#&gt; 5            0      0.00143663         0         0</span></span>
-<span><span class="co">#&gt; 6            0      0.00141332         0         0</span></span>
-<span><span class="co">#&gt; 7            0      0.00150262         0         0</span></span>
-<span><span class="co">#&gt; 8            0      0.00159065         0         0</span></span>
-<span><span class="co">#&gt; 9            0      0.00166199         0         0</span></span>
-<span><span class="co">#&gt; 10           0      0.00171844         0         0</span></span>
-<span><span class="co">#&gt; 11           0      0.00176282         0         0</span></span></code></pre></div>
+<span><span class="co">#&gt; Executable found in directory /tmp/RtmpIhqCWi/profile</span></span>
+<span><span class="co">#&gt; Changing working directory to /tmp/RtmpIhqCWi/profile and running model using the command: ./ss3</span></span>
+<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
+<span><span class="co">#&gt; console output written to console.output.txt</span></span>
+<span><span class="co">#&gt;     Value converged[whichruns]    TOTAL       Catch Equil_catch    Survey</span></span>
+<span><span class="co">#&gt; 1  7.9274                 TRUE 1067.570 4.40715e-01   16.620400  6.065520</span></span>
+<span><span class="co">#&gt; 2  8.1274                 TRUE  940.077 2.29735e-01   12.985200  1.965820</span></span>
+<span><span class="co">#&gt; 3  8.3274                 TRUE  844.236 1.08857e-01    9.799480 -2.132340</span></span>
+<span><span class="co">#&gt; 4  8.5274                 TRUE  790.513 9.17170e-06    3.930790 -5.726270</span></span>
+<span><span class="co">#&gt; 5  8.7274                 TRUE  762.562 6.48948e-08    0.271032 -7.140910</span></span>
+<span><span class="co">#&gt; 6  8.9274                 TRUE  754.302 1.33458e-10    0.174869 -7.118110</span></span>
+<span><span class="co">#&gt; 7  9.1274                 TRUE  758.927 2.10816e-13    1.337060 -6.106700</span></span>
+<span><span class="co">#&gt; 8  9.3274                 TRUE  767.708 1.90347e-13    3.424990 -4.917570</span></span>
+<span><span class="co">#&gt; 9  9.5274                 TRUE  777.243 1.15331e-13    6.433440 -3.857200</span></span>
+<span><span class="co">#&gt; 10 9.7274                 TRUE  787.189 6.73658e-14   10.382600 -2.563580</span></span>
+<span><span class="co">#&gt; 11 9.9274                 TRUE  798.152 4.05051e-14   15.279300 -0.380771</span></span>
+<span><span class="co">#&gt;    Length_comp Age_comp Size_at_age Recruitment InitEQ_Regime</span></span>
+<span><span class="co">#&gt; 1      453.198  341.340     230.715   19.181500   0.00000e+00</span></span>
+<span><span class="co">#&gt; 2      418.750  291.595     201.557   12.989400   0.00000e+00</span></span>
+<span><span class="co">#&gt; 3      393.384  257.968     179.068    6.036600   0.00000e+00</span></span>
+<span><span class="co">#&gt; 4      379.721  243.456     167.416    1.713560   1.54502e-30</span></span>
+<span><span class="co">#&gt; 5      370.420  234.970     163.525    0.515980   1.54502e-30</span></span>
+<span><span class="co">#&gt; 6      366.756  231.845     162.399    0.244060   1.54502e-30</span></span>
+<span><span class="co">#&gt; 7      367.497  233.210     162.675    0.312441   0.00000e+00</span></span>
+<span><span class="co">#&gt; 8      369.543  235.957     163.170    0.529082   0.00000e+00</span></span>
+<span><span class="co">#&gt; 9      371.605  238.622     163.598    0.839498   1.54502e-30</span></span>
+<span><span class="co">#&gt; 10     373.376  240.872     163.942    1.178030   0.00000e+00</span></span>
+<span><span class="co">#&gt; 11     374.815  242.718     164.208    1.510550   0.00000e+00</span></span>
+<span><span class="co">#&gt;    Forecast_Recruitment Parm_priors Parm_softbounds Parm_devs Crash_Pen</span></span>
+<span><span class="co">#&gt; 1                     0           0      0.00756177         0         0</span></span>
+<span><span class="co">#&gt; 2                     0           0      0.00433602         0         0</span></span>
+<span><span class="co">#&gt; 3                     0           0      0.00337783         0         0</span></span>
+<span><span class="co">#&gt; 4                     0           0      0.00197985         0         0</span></span>
+<span><span class="co">#&gt; 5                     0           0      0.00143663         0         0</span></span>
+<span><span class="co">#&gt; 6                     0           0      0.00141332         0         0</span></span>
+<span><span class="co">#&gt; 7                     0           0      0.00150262         0         0</span></span>
+<span><span class="co">#&gt; 8                     0           0      0.00159065         0         0</span></span>
+<span><span class="co">#&gt; 9                     0           0      0.00166199         0         0</span></span>
+<span><span class="co">#&gt; 10                    0           0      0.00171844         0         0</span></span>
+<span><span class="co">#&gt; 11                    0           0      0.00176282         0         0</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="visualizing-output">Visualizing Output<a class="anchor" aria-label="anchor" href="#visualizing-output"></a>
@@ -340,26 +396,14 @@ agreement between them. However, more likely, one or more will be
 minimized at different R0 values from the global R0 value. This is a
 sign of conflict between your data sources and may require you to
 consider data weighting.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">profile_mods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>dirvec <span class="op">=</span> <span class="va">dir_profile</span>, keyvec <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">r0_vec</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
-<span><span class="co">#&gt; Removing 0 out of 1472 rows in CompReport.sso which are duplicates.</span></span>
 <span><span class="va">profile_mods_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">profile_mods</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSplotProfile.html" class="external-link">SSplotProfile</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>, </span>
 <span>              profile.string <span class="op">=</span> <span class="st">"SR_LN"</span>,   </span>
 <span>              profile.label <span class="op">=</span> <span class="st">"SR_LN(R0)"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Parameter matching profile.string=SR_LN: SR_LN(R0)</span></span>
 <span><span class="co">#&gt; Parameter values (after subsetting based on input 'models'): 7.9274, 8.1274, 8.3274, 8.5274, 8.7274, 8.9274, 9.1274, 9.3274, 9.5274, 9.7274, 9.9274</span></span>
-<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Likelihood components showing max change as fraction of total change.</span></span>
 <span><span class="co">#&gt; To change which components are included, change input 'minfraction'.</span></span>
 <span><span class="co">#&gt;                      frac_change include                            label</span></span>
@@ -393,7 +437,7 @@ model.</p>
 the length composition data by fleet and the likelihood of survey data
 by fleet. This will allow us to see if there are conflicts and what
 sources are the main drivers.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">PinerPlot</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>, </span>
 <span>          component <span class="op">=</span> <span class="st">"Length_like"</span>,</span>

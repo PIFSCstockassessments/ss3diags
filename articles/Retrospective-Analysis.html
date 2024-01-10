@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Retrospective Analysis">
 <meta property="og:description" content="ss3diags">
@@ -50,6 +50,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Jitter.html">Jitter Analysis</a>
     <a class="dropdown-item" href="../articles/Retrospective-Analysis.html">Retrospective Analysis</a>
+    <a class="dropdown-item" href="../articles/aspm.html">ASPM</a>
     <a class="dropdown-item" href="../articles/hcxval.html">Hindcast Cross-Validation</a>
     <a class="dropdown-item" href="../articles/likelihood.html">Likelihood Profile</a>
     <a class="dropdown-item" href="../articles/residuals.html">Residual Analyses</a>
@@ -114,7 +115,7 @@ below. Also, if you do not have <code>r4ss</code> installed, you will
 need to install for this tutorial.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r4ss/r4ss" class="external-link">r4ss</a></span><span class="op">)</span> </span>
 <span></span>
@@ -127,8 +128,12 @@ need to install for this tutorial.</p>
 <span><span class="co">#&gt; [1] TRUE TRUE TRUE TRUE</span></span></code></pre></div>
 <p>You will need to make sure you have the <a href="https://github.com/nmfs-stock-synthesis/stock-synthesis" class="external-link">SS
 executable</a> file either in your path or in the directory you are
-running the retrospective from (in this case
-<code>dir_retro</code>).</p>
+running the retrospective from (in this case <code>dir_retro</code>). An
+easy way to get the latest release of stock synthesis is to use the
+<code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_retro</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpmHjEhl/retrospectives/ss3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="retrospective-analysis">Retrospective Analysis<a class="anchor" aria-label="anchor" href="#retrospective-analysis"></a>
@@ -141,8 +146,9 @@ adjusted with the <code>years</code> argument. If the SS executable file
 you are using is named something other than “ss” (e.g. ss_opt_win.exe),
 you will need to specify this with the argument
 <code>exe = "ss_opt_win"</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_retro</span>, exe <span class="op">=</span> <span class="st">"ss"</span>, years <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="op">-</span><span class="fl">5</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_retro</span>, exe <span class="op">=</span> <span class="st">"ss3.exe"</span>, years <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="op">-</span><span class="fl">5</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in base::sink(type = "output", split = FALSE): no sink to remove</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="visualizing-output">Visualizing Output<a class="anchor" aria-label="anchor" href="#visualizing-output"></a>
@@ -154,7 +160,7 @@ easiest way to load multiple report files is using
 <code><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">r4ss::SSgetoutput()</a></code> and <code><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">r4ss::SSsummarize()</a></code>
 functions. The default sub-directories for each peel, 0 to 5, are
 labeled <code>retro0</code> to <code>retro-5</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">retro_mods</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>dirvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_retro</span>, <span class="st">"retrospectives"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"retro"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">5</span>,by<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="va">retroSummary</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">retro_mods</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -191,7 +197,7 @@ you may want to specify are:</p>
 </ul>
 <p>Examples of each of these changes are shown below, incrementally
 making each adjustment.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, plot.cex <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="va">retro1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, uncertainty <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
@@ -200,7 +206,7 @@ making each adjustment.</p>
 <span><span class="va">retro3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>,  uncertainty <span class="op">=</span> <span class="cn">FALSE</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2015</span>, <span class="fl">2022</span><span class="op">)</span>, forecast <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
 <span><span class="va">retro4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>,  uncertainty <span class="op">=</span> <span class="cn">FALSE</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2015</span>, <span class="fl">2022</span><span class="op">)</span>, forecast <span class="op">=</span> <span class="cn">FALSE</span>, showrho <span class="op">=</span> <span class="cn">FALSE</span>, forecastrho <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Retrospective-Analysis_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p><img src="Retrospective-Analysis_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span></code></pre>
 <p>Additionally, the fishing mortality can be plotted instead of
 spawning biomass by replacing <code>subplots = "SSB"</code> with
@@ -224,7 +230,7 @@ bias in the forecasted quantities when years of data were removed. The
 rule of thumb proposed by Hurtado-Ferror et al. (2014) for Mohn’s <span class="math inline">\(\rho\)</span> values is that for long-lived
 species, the <span class="math inline">\(\rho\)</span> value should fall
 between -0.15 and 0.20.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/SShcbias.html">SShcbias</a></span><span class="op">(</span><span class="va">retroSummary</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span>
 <span><span class="co">#&gt;    type     peel         Rho   ForcastRho</span></span>
