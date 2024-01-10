@@ -24,7 +24,7 @@ files_path <- system.file("extdata", package = "ss3diags")
 dir_retro <- file.path(tempdir(check = TRUE), "retrospectives")
 dir.create(dir_retro, showWarnings = FALSE)
 file.copy(from = list.files(files_path, full.names = TRUE), to = dir_retro)
-r4ss::get_ss3_exe(dir = dir_jitter, version = "v3.30.21")
+r4ss::get_ss3_exe(dir = dir_retro, version = "v3.30.21")
 r4ss::retro(dir = dir_retro, exe = "ss3", years = 0:-5, verbose = FALSE)
 ```
 

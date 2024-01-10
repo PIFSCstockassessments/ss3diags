@@ -52,8 +52,8 @@ SSplotData(rep)
 ## Jitter 
 For this example, we will run 50 jitters. The `jitter()` function automates the entire process so you only need to give it a few arguments and it will run and produce the total likelihoods for each run. 
 
-```{r run-jitter, eval = F}
-Njitter <- 50 
+```{r run-jitter, eval = T}
+Njitter <- 5 
 jit.likes <- r4ss::jitter(dir = dir_jitter, 
                           Njitter = Njitter, 
                           init_values_src = 1, 
