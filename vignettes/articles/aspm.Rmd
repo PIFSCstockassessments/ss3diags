@@ -23,7 +23,7 @@ library(r4ss)
 
 files_path <- system.file("extdata", package = "ss3diags")
 dir_tmp  <- tempdir(check = TRUE)
-dir_aspm <- file.path(dir_tmp, "profile")
+dir_aspm <- file.path(dir_tmp, "aspm")
 dir.create(dir_aspm, showWarnings = FALSE, recursive = TRUE)
 list.files(files_path)
 file.copy(from = list.files(files_path, full.names = TRUE), to = dir_tmp)
@@ -49,7 +49,7 @@ In order to get the `ss.par` file, you need to run the model once. This will als
 
 ```{r}
 r4ss::run(dir = dir_tmp, verbose = FALSE, exe = "ss3")
-files <- c("data_echo.ss_new", "control.ss_new", "starter.ss", "forecast.ss", "ss.par", "ss3")
+files <- c("data_echo.ss_new", "control.ss_new", "starter.ss", "forecast.ss", "ss.par", "ss3.exe")
 file.copy(from = file.path(dir_tmp, files), to = dir_aspm)
 ```
 
@@ -140,7 +140,7 @@ r4ss::run(dir = dir_aspm, exe = "ss3", skipfinished = FALSE, verbose = FALSE)
 
 ### Visualize Results 
 
-```{r}
+```{r warning=FALSE}
 mods <- SSgetoutput(dirvec = c(
   dir_tmp,
   dir_aspm
@@ -149,6 +149,6 @@ mods <- SSgetoutput(dirvec = c(
 mods_sum <- SSsummarize(mods, verbose = FALSE)
 
 SSplotComparisons(mods_sum, legendlabels = c("Ref", "ASPM"),
-                  subplots = c(2,8,14))
+                  subplots = c(2,8,14), new = F)
 ```
 
