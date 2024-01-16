@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 library(ss3diags)
 library(r4ss)
 library(tidyverse)
-install.packages("future)
+#install.packages("future")
 ```
 
 Jitter analyses are commonly implemented in Stock Synthesis to ensure a model has reached global convergence. Jitter involves changing the parameter start values by a small increment and rerunning the model to see if that adjustment causes the model to converge at a lower likelihood. This can be useful for distinguishing if a model reached a local minimum or a global minimum. The number of jitter iterations should be anywhere between 50-100 to ensure a good spread of start values. If any of those runs has a lower likelihood than your current model, parameter start values should be adjusted to use those from the run with a lower likelihood. You can do this by adjusting the values in the control.ss file to match those in the ss.par_#_of_the_lower_likelihood_run. We provide the steps for running jitter analysis using `r4ss::jitter()` below. 
