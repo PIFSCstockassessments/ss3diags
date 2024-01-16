@@ -25,17 +25,17 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pkgdown, local::., any::tidyverse
+          extra-packages: any::pkgdown, local::., any::tidyverse, any::future
           needs: website
 
-      - name: Get the latest SS3 executable and move to expected location
-        run: |
-          wget -O ss3 https://github.com/nmfs-ost/ss3-source-code/releases/latest/download/ss_linux
-          mv ss3 ss
-          sudo chmod a+x ss
-          cp ss inst/extdata/ss
-          rm ss
-          ls inst/extdata/
+     # - name: Get the latest SS3 executable and move to expected location
+     #   run: |
+     #     wget -O ss3 https://github.com/nmfs-ost/ss3-source-code/releases/latest/download/ss_linux
+     #     mv ss3 ss
+     #     sudo chmod a+x ss
+     #     cp ss inst/extdata/ss
+     #     rm ss
+     #     ls inst/extdata/
 
       - name: Deploy package
         run: |
