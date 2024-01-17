@@ -18,7 +18,7 @@
 		// to install r packages using pak
 		// more info: https://github.com/rocker-org/devcontainer-features/blob/main/src/r-packages/README.md
 		 "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-			"packages": "this.path,tidyverse,future,purrr,ggplot2,r4ss/r4ss,PIFSCstockassessments/ss3diags,rmarkdown",
+			"packages": "this.path,tidyverse,future,purrr,ggplot2,rmarkdown",
 			 "installSystemRequirements": true
 		  }
 	// // for quarto cli
