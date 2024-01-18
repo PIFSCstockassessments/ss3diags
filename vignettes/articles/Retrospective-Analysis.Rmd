@@ -34,10 +34,6 @@ file.copy(from = list.files(files_path, full.names = TRUE), to = dir_retro)
 
 ```
 
-```{r eval = FALSE, echo=FALSE, results = FALSE}
-file.copy(from ="../../inst/extdata/ss", to = dir_retro)
-```
-
 
 You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the retrospective from (in this case `dir_retro`). An easy way to get the latest release of stock synthesis is to use the `r4ss` function `get_ss3_exe()`.
 
