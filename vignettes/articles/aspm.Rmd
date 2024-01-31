@@ -48,8 +48,8 @@ In order to get the `ss.par` file, you need to run the model once. This will als
 
 
 ```{r}
-r4ss::run(dir = dir_tmp, verbose = FALSE, exe = "ss3.exe")
-files <- c("data_echo.ss_new", "control.ss_new", "starter.ss", "forecast.ss", "ss.par", "ss3.exe")
+r4ss::run(dir = dir_tmp, verbose = FALSE, exe = "ss3")
+files <- c("data_echo.ss_new", "control.ss_new", "starter.ss", "forecast.ss", "ss.par", "ss3")
 file.copy(from = file.path(dir_tmp, files), to = dir_aspm)
 ```
 
@@ -135,7 +135,7 @@ SS_writectl_3.30(control, outfile = file.path(dir_aspm, "control.ss_new"),
 ### Run ASPM 
 
 ```{r}
-r4ss::run(dir = dir_aspm, exe = "ss3.exe", skipfinished = FALSE, verbose = FALSE)
+r4ss::run(dir = dir_aspm, exe = "ss3", skipfinished = FALSE, verbose = FALSE)
 ```
 
 ### Visualize Results 
