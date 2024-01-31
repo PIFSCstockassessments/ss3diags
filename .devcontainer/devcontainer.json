@@ -20,7 +20,11 @@
 		 "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
 			"packages": "tidyverse,future,purrr,rmarkdown",
 			 "installSystemRequirements": true
-		  }
+		  },
+		//to install ss3 via wget 
+		"ghcr.io/devcontainers-contrib/features/wget-apt-get:1.0.15":{
+			"-O ss3 https://github.com/nmfs-ost/ss3-source-code/releases/latest/download/ss_linux"
+		}
 	// // for quarto cli
 	     // more info: https://github.com/rocker-org/devcontainer-features/blob/main/src/quarto-cli/README.md
 	    // "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {}
