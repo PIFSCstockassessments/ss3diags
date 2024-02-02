@@ -136,7 +136,7 @@ function as shown below.</p>
 <span><span class="co">#&gt; 2 SURVEY2  0.887 Passed -1.1052361 1.1052361 cpue</span></span></code></pre>
 <p>The output for <code><a href="../reference/SSplotRunstest.html">SSplotRunstest()</a></code> includes a plot of the
 residuals by fleet and a table with the results from the runs test and
-‘three-sigma limit’ values. In the plots below, the shaded area
+‘three-sigma limit’ values. In the plots above, the shaded area
 represents the ‘three-sigma limit’, or three residual standard
 deviations from zero. If any of the individual residual points fall
 outside of the three-sigma limit, they are colored red. Green shaded
@@ -148,19 +148,20 @@ data.</p>
 <div class="section level3">
 <h3 id="customizing-the-plot">Customizing the Plot<a class="anchor" aria-label="anchor" href="#customizing-the-plot"></a>
 </h3>
-<p>Runs test plots can be customized, some common features that you may
-want to specify are:</p>
+<p>Runs test plots can be customized as needed. Some common features
+that you may want to specify are:</p>
 <ul>
 <li>plotting other data types (default is Index of Abundance)</li>
 <li>plotting specific fleet(s)</li>
 <li>adjusting the y-axis range</li>
 </ul>
-<p>To plot other data types, they can be specified with the
-<code>subplots</code> argument, and the options include “cpue”, “len”,
-“age”, “size”, or “con”. “con” is for conditional size-at-age data and
-“size” is for generalized size composition data. Fleets can be specified
-using the <code>indexselect()</code> function, which takes a vector of
-the fleet numbers to plot.</p>
+<p>Examples of each of these changes are shown below, incrementally
+making each adjustment. To plot other data types, they can be specified
+with the <code>subplots</code> argument, and the options include “cpue”,
+“len”, “age”, “size”, or “con”. “con” is for conditional size-at-age
+data and “size” is for generalized size composition data. Fleets can be
+specified using the <code>indexselect()</code> function, which takes a
+vector of the fleet numbers to plot.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/SSplotRunstest.html">SSplotRunstest</a></span><span class="op">(</span><span class="va">report</span>, subplots <span class="op">=</span> <span class="st">"len"</span>, indexselect <span class="op">=</span> <span class="fl">1</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>

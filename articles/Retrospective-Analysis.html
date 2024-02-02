@@ -133,19 +133,23 @@ easy way to get the latest release of stock synthesis is to use the
 <code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_retro</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpAaZIvr/retrospectives/ss3</span></span></code></pre></div>
+<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpuSm4pc/retrospectives/ss3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="retrospective-analysis">Retrospective Analysis<a class="anchor" aria-label="anchor" href="#retrospective-analysis"></a>
 </h2>
 <p>Once you have the 4 input files and SS executable, you can run
 retrospective analysis as shown below. We are running it for 5 1-year
-peels, so with each run, the last year of data is removed and the model
-is re-run for a total of 5 times. The number of year peels can be
-adjusted with the <code>years</code> argument. If the SS executable file
-you are using is named something other than “ss” (e.g. ss_opt_win.exe),
-you will need to specify this with the argument
-<code>exe = "ss_opt_win"</code>.</p>
+peels, so with each run, <em>n</em> years of data are removed from the
+reference model and the model is re-run for a total of 5 times
+(i.e. peel 1 removes the last year of data, peel 2 removes the last 2
+years of data, etc.) . The number of year peels can be adjusted with the
+<code>years</code> argument. If the SS executable file you are using is
+named something other than “ss3” (e.g. ss_opt_win.exe), you will need to
+specify this with the argument <code>exe = "ss_opt_win"</code>. Full
+documentation of the <code><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro()</a></code> function can be found on the
+<a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">r4ss
+website</a>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_retro</span>, exe <span class="op">=</span> <span class="st">"ss3"</span>, years <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="op">-</span><span class="fl">5</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in base::sink(type = "output", split = FALSE): no sink to remove</span></span></code></pre></div>

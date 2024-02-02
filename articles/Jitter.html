@@ -136,7 +136,7 @@ An easy way to get the latest release of stock synthesis is to use the
 <code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_jitter</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/Rtmpkuz5f4/jitter/ss3</span></span></code></pre></div>
+<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpxtNw8J/jitter/ss3</span></span></code></pre></div>
 <p>We will run the model in <code>dir_jitter</code> first to produce the
 necessary output files. It is recommended to do jitter runs in a
 subdirectory of your model run. This will keep all of the output files
@@ -151,7 +151,9 @@ separate from other diagnostic tests you may run.</p>
 <p>For this example, we will run 50 jitters. The <code><a href="https://r4ss.github.io/r4ss/reference/jitter.html" class="external-link">jitter()</a></code>
 function automates the entire process so you only need to give it a few
 arguments and it will run and produce the total likelihoods for each
-run.</p>
+run. Full documentation of the <code><a href="https://r4ss.github.io/r4ss/reference/jitter.html" class="external-link">jitter()</a></code> function can be
+found at the <a href="https://r4ss.github.io/r4ss/reference/jitter.html" class="external-link">r4ss
+website</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Njitter</span> <span class="op">&lt;-</span> <span class="fl">50</span> </span>
 <span><span class="va">jit.likes</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/jitter.html" class="external-link">jitter</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_jitter</span>, </span>
@@ -177,8 +179,8 @@ are, likelihoods, derived quantities, and estimated parameters.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">jit_summary</span><span class="op">$</span><span class="va">likelihoods</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        replist     replist1     replist2     replist3     replist4     replist5</span></span>
 <span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
-<span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33480e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
+<span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
+<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74853e-01  1.74852e-01</span></span>
 <span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
 <span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
 <span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
@@ -192,7 +194,7 @@ are, likelihoods, derived quantities, and estimated parameters.</p>
 <span><span class="co">#&gt;      replist12    replist13    replist14    replist15    replist16    replist17</span></span>
 <span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
 <span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74853e-01  1.74852e-01  1.74852e-01</span></span>
+<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
 <span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
 <span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
 <span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
@@ -363,13 +365,13 @@ suggests the model didn’t converge.</p>
 <span></span>
 <span><span class="va">converged_ssb</span> <span class="op">&lt;-</span> <span class="va">jit_summary</span><span class="op">$</span><span class="va">SpawnBio</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Njitter</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                 .fns <span class="op">=</span> <span class="op">~</span><span class="va">.</span><span class="op">/</span><span class="va">replist</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># for each column, divide SSB by SSB from the reference run (replist0)</span></span>
+<span>                 .fns <span class="op">=</span> <span class="op">~</span><span class="va">.</span><span class="op">/</span><span class="va">replist</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># for each column, divide SSB by SSB from the reference run (replist)</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Label</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Njitter</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"jitter"</span>, values_to <span class="op">=</span> <span class="st">"SSB"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Yr</span>, values_from <span class="op">=</span> <span class="va">SSB</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>rownumber <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"jitter"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter_all.html" class="external-link">filter_at</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/all_vars.html" class="external-link">all_vars</a></span><span class="op">(</span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">2</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co">#keep only </span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter_all.html" class="external-link">filter_at</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/all_vars.html" class="external-link">all_vars</a></span><span class="op">(</span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">2</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co">#keep only rows where SSB is a reasonable value</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rownumber</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">rownumber</span><span class="op">)</span></span>
 <span><span class="va">converged_mods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">converged_grad</span>, <span class="va">converged_ssb</span><span class="op">)</span> <span class="co">#getting which models are in both groups</span></span>
@@ -380,7 +382,7 @@ suggests the model didn’t converge.</p>
 <h2 id="visualizing-output">Visualizing Output<a class="anchor" aria-label="anchor" href="#visualizing-output"></a>
 </h2>
 <p>To compare the likelihoods of all runs, we plot them as shown below.
-There are no built in functions (as of writing this recipe) in
+There are no built in functions (as of writing this vignette) in
 <code>r4ss</code> or <code>ss3diags</code> to generate a likelihood
 plot, therefore we provide code in the tidyverse syntax (using
 <code>ggplot2</code>) to visualize the results.</p>
@@ -411,9 +413,11 @@ parameter values on the estimated quantities.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSplotComparisons.html" class="external-link">SSplotComparisons</a></span><span class="op">(</span><span class="va">converged_sum</span>,     </span>
 <span>                  subplots <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>                  ylimAdj<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span>                  ylimAdj<span class="op">=</span><span class="fl">1</span>,</span>
+<span>                  new <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; showing uncertainty for all models</span></span>
 <span><span class="co">#&gt; subplot 2: spawning biomass with uncertainty intervals</span></span></code></pre></div>
+<p><img src="Jitter_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
