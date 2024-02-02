@@ -84,8 +84,7 @@ starter$init_values_src <- 1
 SS_writestarter(starter, 
                 dir = dir_aspm, 
                 overwrite = TRUE, 
-                verbose = FALSE, 
-                warn = FALSE)
+                verbose = FALSE)
 ```
 
 ### Control File 
@@ -140,6 +139,7 @@ r4ss::run(dir = dir_aspm, exe = "ss3", skipfinished = FALSE, verbose = FALSE)
 
 ### Visualize Results 
 
+To compare the ASPM model with the age-structured model, you can use `SSplotComparisons()`. Comparing spawning biomass and F estimates between the two models and fits to indices of abundance can help to understand if there is enough information in the indices to inform the production function.
 ```{r warning=FALSE}
 mods <- SSgetoutput(dirvec = c(
   dir_tmp,

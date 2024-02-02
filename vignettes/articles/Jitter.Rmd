@@ -48,7 +48,7 @@ r4ss::run(dir = dir_jitter, exe = "ss3", verbose = FALSE)
 ```
 
 ## Jitter 
-For this example, we will run 50 jitters. The `jitter()` function automates the entire process so you only need to give it a few arguments and it will run and produce the total likelihoods for each run. 
+For this example, we will run 50 jitters. The `jitter()` function automates the entire process so you only need to give it a few arguments and it will run and produce the total likelihoods for each run. Full documentation of the `jitter()` function can be found at the [r4ss website](https://r4ss.github.io/r4ss/reference/jitter.html).
 
 ```{r run-jitter}
 Njitter <- 50 
@@ -87,13 +87,13 @@ converged_grad <- which(jit_summary$maxgrad < 0.0001)
 
 converged_ssb <- jit_summary$SpawnBio %>%  
   mutate(across(c(1:(Njitter+1)),
-                 .fns = ~./replist)) %>% # for each column, divide SSB by SSB from the reference run (replist0)
+                 .fns = ~./replist)) %>% # for each column, divide SSB by SSB from the reference run (replist)
   select(-Label) %>% 
   pivot_longer(col = c(1:(Njitter+1)), names_to = "jitter", values_to = "SSB") %>% 
   pivot_wider(names_from = Yr, values_from = SSB) %>% 
   mutate(rownumber = seq(1, nrow(.))) %>% 
   tibble::column_to_rownames("jitter") %>% 
-  filter_at(vars(1:(ncol(.)-1)), all_vars((.) < 2 & (.) > 0.5)) %>% #keep only 
+  filter_at(vars(1:(ncol(.)-1)), all_vars((.) < 2 & (.) > 0.5)) %>% #keep only rows where SSB is a reasonable value
   select(rownumber) %>% 
   pull(rownumber)
 converged_mods <- intersect(converged_grad, converged_ssb) #getting which models are in both groups
@@ -103,7 +103,7 @@ converged_sum <- SSsummarize(converged_jitters, verbose = FALSE)
 
 
 ## Visualizing Output
-To compare the likelihoods of all runs, we plot them as shown below. There are no built in functions (as of writing this recipe) in `r4ss` or `ss3diags` to generate a likelihood plot, therefore we provide code in the tidyverse syntax (using `ggplot2`) to visualize the results. 
+To compare the likelihoods of all runs, we plot them as shown below. There are no built in functions (as of writing this vignette) in `r4ss` or `ss3diags` to generate a likelihood plot, therefore we provide code in the tidyverse syntax (using `ggplot2`) to visualize the results. 
 ```{r }
 converged_sum$likelihoods %>% 
   filter(str_detect(Label, "TOTAL")) %>% 
@@ -124,6 +124,7 @@ We can also use `r4ss::SSplotComparisons()` to compare the spawning biomass traj
 ```{r }
 SSplotComparisons(converged_sum,     
                   subplots = 2,
-                  ylimAdj=1)
+                  ylimAdj=1,
+                  new = FALSE)
 ```
 

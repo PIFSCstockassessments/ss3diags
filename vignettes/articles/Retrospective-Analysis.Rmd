@@ -42,7 +42,7 @@ r4ss::get_ss3_exe(dir = dir_retro, version = "v3.30.21")
 ```
 
 ## Retrospective Analysis
-Once you have the 4 input files and SS executable, you can run retrospective analysis as shown below. We are running it for 5 1-year peels, so with each run, the last year of data is removed and the model is re-run for a total of 5 times. The number of year peels can be adjusted with the `years` argument. If the SS executable file you are using is named something other than "ss" (e.g. ss_opt_win.exe), you will need to specify this with the argument `exe = "ss_opt_win"`. 
+Once you have the 4 input files and SS executable, you can run retrospective analysis as shown below. We are running it for 5 1-year peels, so with each run, *n* years of data are removed from the reference model and the model is re-run for a total of 5 times (i.e. peel 1 removes the last year of data, peel 2 removes the last 2 years of data, etc.) . The number of year peels can be adjusted with the `years` argument. If the SS executable file you are using is named something other than "ss3" (e.g. ss_opt_win.exe), you will need to specify this with the argument `exe = "ss_opt_win"`. Full documentation of the `retro()` function can be found on the [r4ss website](https://r4ss.github.io/r4ss/reference/retro.html).
 
 ```{r message=FALSE}
 r4ss::retro(dir = dir_retro, exe = "ss3", years = 0:-5, verbose = FALSE)
