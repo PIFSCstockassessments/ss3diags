@@ -51,7 +51,7 @@ r4ss::run(dir = dir_jitter, exe = "ss3", verbose = FALSE)
 For this example, we will run 50 jitters. The `jitter()` function automates the entire process so you only need to give it a few arguments and it will run and produce the total likelihoods for each run. 
 
 ```{r run-jitter}
-Njitter <- 5 
+Njitter <- 50 
 jit.likes <- r4ss::jitter(dir = dir_jitter, 
                           Njitter = Njitter, 
                           init_values_src = 1, 

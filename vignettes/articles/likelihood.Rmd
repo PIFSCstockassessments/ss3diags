@@ -77,7 +77,7 @@ profile(dir = dir_profile,
         string = "SR_LN", 
         profilevec = r0_vec, 
         exe = "ss3",
-        verbose = TRUE)
+        verbose = FALSE)
 ```
 
 ## Visualizing Output
