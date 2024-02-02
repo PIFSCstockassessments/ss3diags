@@ -133,7 +133,7 @@ easy way to get the latest release of stock synthesis is to use the
 <code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpKDJxuj/ss3</span></span></code></pre></div>
+<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpXsJ4IS/ss3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="r0-profile">R0 Profile<a class="anchor" aria-label="anchor" href="#r0-profile"></a>
@@ -200,12 +200,7 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span>        string <span class="op">=</span> <span class="st">"SR_LN"</span>, </span>
 <span>        profilevec <span class="op">=</span> <span class="va">r0_vec</span>, </span>
 <span>        exe <span class="op">=</span> <span class="st">"ss3"</span>,</span>
-<span>        verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Doing runs: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,</span></span>
-<span><span class="co">#&gt;   out of n = 11</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile,</span></span>
-<span><span class="co">#&gt;  but will be changed back on exit from function.</span></span>
+<span>        verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; running profile i=1/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -215,10 +210,6 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.9274  7.9274        1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile and running model using the command: ./ss3</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=2/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -228,10 +219,6 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  7.9274  8.1274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile and running model using the command: ./ss3</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=3/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -241,10 +228,6 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.1274  8.3274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile and running model using the command: ./ss3</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=4/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -254,10 +237,6 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.3274  8.5274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile and running model using the command: ./ss3</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=5/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -267,10 +246,6 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.5274  8.7274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile and running model using the command: ./ss3</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=6/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -280,10 +255,6 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.7274  8.9274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile and running model using the command: ./ss3</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=7/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -293,10 +264,6 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  8.9274  9.1274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile and running model using the command: ./ss3</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=8/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -306,10 +273,6 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  9.1274  9.3274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile and running model using the command: ./ss3</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=9/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -319,10 +282,6 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  9.3274  9.5274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile and running model using the command: ./ss3</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=10/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -332,10 +291,6 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  9.5274  9.7274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile and running model using the command: ./ss3</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt; running profile i=11/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -345,10 +300,6 @@ needs to match what you put in the starter file for “cltfile”.</p>
 <span><span class="co">#&gt; 1  9.7274  9.9274       -1       -1      6      6     12     12     10.3</span></span>
 <span><span class="co">#&gt;   newprior oldprsd newprsd oldprtype newprtype     comment</span></span>
 <span><span class="co">#&gt; 1     10.3      10      10         0         0 # SR_LN(R0)</span></span>
-<span><span class="co">#&gt; Executable found in directory /tmp/RtmpKDJxuj/profile</span></span>
-<span><span class="co">#&gt; Changing working directory to /tmp/RtmpKDJxuj/profile and running model using the command: ./ss3</span></span>
-<span><span class="co">#&gt; Input 'show_in_console' = FALSE, so writing console output to console.output.txt</span></span>
-<span><span class="co">#&gt; console output written to console.output.txt</span></span>
 <span><span class="co">#&gt;     Value converged[whichruns]    TOTAL       Catch Equil_catch    Survey</span></span>
 <span><span class="co">#&gt; 1  7.9274                 TRUE 1067.570 4.40715e-01   16.620400  6.065520</span></span>
 <span><span class="co">#&gt; 2  8.1274                 TRUE  940.077 2.29735e-01   12.985200  1.965820</span></span>
