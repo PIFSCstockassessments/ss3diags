@@ -64,7 +64,7 @@ jit.likes <- r4ss::jitter(dir = dir_jitter,
 To analyze the output of all 50 runs, use `r4ss::SSgetoutput()` and `r4ss::SSsummarize()` as shown below. 
 
 ```{r }
-jit_mods <- SSgetoutput(keyvec = 0:Njitter, #"" to include reference run (Report.sso)
+jit_mods <- SSgetoutput(keyvec = 0:Njitter, #0 to include reference run (Report0.sso)
                        getcomp = FALSE, 
                        dirvec = dir_jitter, 
                        getcovar = FALSE, 
