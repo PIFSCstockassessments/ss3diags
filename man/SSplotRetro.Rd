@@ -63,45 +63,56 @@ SSplotRetro(
 )
 }
 \arguments{
-\item{summaryoutput}{List created by r4ss::SSsummarize()}
+\item{summaryoutput}{List created by \code{\link[r4ss:SSsummarize]{r4ss::SSsummarize()}}}
 
-\item{subplots}{Optional vector of subplots to be created, "SSB", "Bratio", "Fvalue", "Recruits", "Index"}
+\item{subplots}{Optional vector of subplots to be created:
+\itemize{
+\item \code{"SSB"} Spawning Stock Biomass
+\item \code{"F"} Fishing Mortality
+}}
 
-\item{plot}{Option to draw subplots and plot in the interface. Deprecated. Option to disable will be removed in future version.}
+\item{plot}{DEPRECATED. By default, TRUE, Plots (and subplots) are drawn to the
+plot device. The option to explicitly disable this option (FALSE), is not
+implemented. This option flag will be defunct in a future version}
 
-\item{print}{print to PNG files? Deprecated. Please use print_plot.}
+\item{print}{DEPRECATED, please use \code{print_plot}.}
 
-\item{print_plot}{Option to print to PNG files}
+\item{print_plot}{Flag to enable plot graphic device to print to PNG or PNG files.}
 
-\item{png}{Deprecated, please use 'use_png'}
+\item{png}{DEPRECATED. Please use \code{use_png}.}
 
-\item{use_png}{Draw plots in PNG format}
+\item{use_png}{Enables plots to be generated to PNG files. Defaults to print value}
 
-\item{pdf}{PDF plots. Deprecated. Please use use_pdf.}
+\item{pdf}{DEPRECATED. Please use \code{use_pdf}.}
 
-\item{use_pdf}{option for pdf plots (currently does not work when subplots specified)}
+\item{use_pdf}{Enables plots to be generated to pdf file.}
 
-\item{models}{Optional subset of the models described in
-r4ss function summaryoutput().  Either "all" or a vector of numbers indicating
+\item{models}{Optional subset of the models of \code{summaryoutput} (or a similar
+field with a different name): a list created by the function
+\link[r4ss:SSsummarize]{r4ss::SSsummarize}. Either \code{"all"} or a vector of numbers indicating
 columns in summary tables.}
 
 \item{endyrvec}{Optional single year or vector of years representing the
 final year of values to show for each model. By default it is set to the
 ending year specified in each model.}
 
-\item{xlim}{optional xlim, which overwrites xmin}
+\item{xlim}{Optional, years to use for x-axis. Default value NULL (or "default"),
+uses all years available.}
 
 \item{xmin}{optional minimum year shown in plot (default first yr)}
 
-\item{labels}{yaxis lable for biomass (bony fish and sharks)}
+\item{labels}{\code{yaxis} label for biomass (bony fish and sharks)}
 
-\item{ylim}{option to specify ylim range}
+\item{ylim}{option to specify \code{ylim} range}
 
-\item{forecast}{if true one-step ahead forecasts are shown in plot}
+\item{forecast}{\link[base:logical]{Logical}. If TRUE, one-step ahead forecasts
+are shown in plot}
 
-\item{forecastrho}{if true one-step ahead forecast rho value is denoted in plot}
+\item{forecastrho}{\link[base:logical]{Logical}. If TRUE, one-step ahead
+forecast rho value is denoted in plot}
 
-\item{showrho}{TRUE/FALSE include Mohn's rho value? Defaults to TRUE}
+\item{showrho}{\link[base:logical]{Logical} flag to include Mohn's rho value.
+Defaults to TRUE}
 
 \item{col}{Optional vector of colors to be used for lines. Input NULL}
 
@@ -111,32 +122,36 @@ ending year specified in each model.}
 
 \item{lwd}{Optional vector of line widths}
 
-\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis mark at final
-year in timeseries plots.}
+\item{tickEndYr}{\link[base:logical]{Logical} flag: set TRUE or FALSE to switch to turn
+on/off extra axis mark at final year in timeseries plots.}
 
-\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space}
+\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space.}
 
-\item{xaxs}{Choice of xaxs parameter (see ?par for more info)}
+\item{xaxs}{Choice of xaxs parameter See \code{?par} for more info.}
 
-\item{yaxs}{Choice of yaxs parameter (see ?par for more info)}
+\item{yaxs}{Choice of yaxs parameter. See \code{?par} for more info.}
 
-\item{xylabs}{TRUE or FALSE, include x- and y-axis labels. Defaults to TRUE}
+\item{xylabs}{\link[base:logical]{Logical} flag: set TRUE or FALSE to include x- and
+y-axis labels to the plot. Defaults to TRUE}
 
-\item{type}{Type parameter passed to points (default 'o' overplots points on
-top of lines)}
+\item{type}{The type of plot to be drawn. For more details, see \code{\link[base:plot]{plot}}.}
 
-\item{uncertainty}{TRUE/FALSE include uncertainty intervals around SSB or F estimated timeseries. Defaults to TRUE.}
+\item{uncertainty}{Logical flag to enable plots with uncertainty intervals. Either a single
+TRUE/FALSE value, or a vector of TRUE/FALSE values around SSB or F
+estimated timeseries, or a set of integers corresponding to
+the choice of models.}
 
-\item{legend}{Add a legend?}
+\item{legend}{Flag to enable legend to plot. TRUE by default.}
 
 \item{legendlabels}{Optional vector of labels to include in legend.}
 
-\item{legendloc}{Location of legend. Either a string like "topleft" or a vector
-of two numeric values representing the fraction of the maximum in the x and y
-dimensions, respectively. See ?legend for more info on the string options.}
+\item{legendloc}{Location of legend. Either a string like "topleft" or a vector of two
+numeric values representing the fraction of the maximum in the x and y
+dimensions, respectively. See \code{help("legend")} for more info on the
+string options.}
 
-\item{legendorder}{Optional vector of model numbers that can be used to have
-the legend display the model names in an order that is different than that
+\item{legendorder}{Optional vector of model numbers that can be used to have the legend
+display the model names in an order that is different than that
 which is represented in the summary input object.}
 
 \item{legendncol}{Number of columns for the legend.}
@@ -145,49 +160,64 @@ which is represented in the summary input object.}
 
 \item{legendsp}{Space between legend labels}
 
-\item{legendindex}{Allows to add lengend for selected indices (plots)}
+\item{legendindex}{Allows to add legend for selected indices (plots)}
 
-\item{pwidth}{Width of plot}
+\item{pwidth}{Default width of plot printed to plot in units of \code{punits}}
 
-\item{pheight}{Height of plot}
+\item{pheight}{Height of plot printed to plot in units of \code{punits }}
 
-\item{punits}{Units for PNG file}
+\item{punits}{Measurement units for \code{pwidth} and \code{pheight}. Default is \code{"in"}.
+\itemize{
+\item \code{"px"} (pixels)
+\item \code{"in"} (inches)
+\item \code{"cm"} (centimeters)
+\item \code{"mm"} (millimeters)
+}}
 
-\item{res}{Resolution for PNG file}
+\item{res}{Resolution for plots printed to files.}
 
-\item{ptsize}{Point size for PNG file}
+\item{ptsize}{Point size for plotted text in plots printed in files. See \code{help("png")}
+for more details}
 
-\item{cex.main}{Character expansion for plot titles}
+\item{cex.main}{Character expansion for plot titles.}
 
-\item{plotdir}{Directory where PNG or PDF files will be written. By default
+\item{plotdir}{Directory where output plot file will be written. By default,
 it will be the directory where the model was run.}
 
-\item{filenameprefix}{Additional text to append to PNG or PDF file names.
+\item{filenameprefix}{Additional text to append to output plot file name.
 It will be separated from default name by an underscore.}
 
-\item{par}{list of graphics parameter values passed to par() function}
+\item{par}{A numerical vector of the form c(bottom, left, top, right) which
+gives the number of lines of margin to be specified on the four sides of
+the plot,which is passed to \code{par()}. Entering \code{NULL} passes plot's default
+\code{par()} values (which depends on whether the main title is included or not)}
 
-\item{verbose}{Report progress to R GUI?}
+\item{verbose}{Flag to print additional diagnostic messages to R console}
 
 \item{shadecol}{uncertainty shading of hcxval horizon}
 
 \item{new}{Deprecated. New plot windows are created by default (TRUE), and the
 option to disable this, via FALSE, is unused.}
 
-\item{add}{surpresses par() to create multiplot figs}
+\item{add}{suppresses \code{par()} to create multiplot figs}
 
-\item{mcmcVec}{NOT TESTED Vector of TRUE/FALSE values (or single value) indicating mcmc values are used}
+\item{mcmcVec}{Logical vector of TRUE/FALSE values (or single value) indicating
+whether input values are from MCMC or to use normal distribution around
+MLE.}
 
 \item{shadecol1}{uncertainty shading of early years not affected by hindcast}
 
-\item{indexQlabel}{TRUE/FALSE, if TRUE add catchability to legend in plot of index fits (currently not used)}
+\item{indexQlabel}{\link[base:logical]{Logical}. If TRUE, add catchability to
+legend in plot of index fits (currently not used)}
 
 \item{indexQdigits}{Number of significant digits for catchability in legend}
 
-\item{shadealpha}{set the transparency level (alpha) of the area of uncertainty. Defalut to 0.3 (currently not used)}
+\item{shadealpha}{set the transparency level (alpha) of the area of
+uncertainty. Defaults to 0.3 (currently not used)}
 }
 \description{
-Plots retrospective pattern, including (optional) one-step ahead forecast and computes Mohn's Rho
+Plots retrospective pattern, including (optional) one-step ahead forecast
+and computes Mohn's Rho
 }
 \author{
 Henning Winker (JRC-EC) and Laurance Kell (Sea++)

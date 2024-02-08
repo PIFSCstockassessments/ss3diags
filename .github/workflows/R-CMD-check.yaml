@@ -30,35 +30,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Get the latest SS3 executable for linux and move to expected location
-        if: matrix.config.os == 'ubuntu-latest'
-        run: |
-          curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_linux" | xargs wget
-          mv ss_linux ss
-          sudo chmod a+x ss
-          cp ss inst/extdata/ss
-          rm ss
-
-      - name: Get the latest SS3 executable for windows and move to expected location
-        if: matrix.config.os == 'windows-latest' 
-        run:  |
-          Invoke-WebRequest -Uri https://github.com/nmfs-stock-synthesis/stock-synthesis/releases/download/v3.30.21/ss_win.exe -Outfile "D:\a\ss3diags\ss3diags\ss_win.exe"
-          mv ss_win.exe ss.exe
-          cp ss.exe inst/extdata/ss.exe
-
-      - uses: nick-fields/retry@v2
-        if: matrix.config.os == 'macOS-latest' 
-        with:
-          timeout_minutes: 3
-          max_attempts: 3
-          retry_on: error
-          command:  |
-            curl https://api.github.com/repos/nmfs-stock-synthesis/stock-synthesis/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep "ss_osx" | xargs wget
-            mv ss_osx ss
-            sudo chmod a+x ss
-            cp ss inst/extdata/ss
-            rm ss
       
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -77,15 +48,6 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with: 
           error-on: '"error"'
-
-      - name: remove ss executable
-        run: |
-          if ["$RUNNER_OS" == "Linux" ]; then
-            rm inst/extdata/ss.exe
-          else 
-            rm inst/extdata/ss
-          fi
-        shell: bash
 
 
     

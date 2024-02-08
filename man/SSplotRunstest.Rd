@@ -17,6 +17,7 @@ SSplotRunstest(
   use_pdf = FALSE,
   indexselect = NULL,
   miny = 1,
+  col = NULL,
   pch = 21,
   lty = 1,
   lwd = 2,
@@ -46,32 +47,43 @@ SSplotRunstest(
 )
 }
 \arguments{
-\item{ss3rep}{Stock Synthesis output as read by r4SS function SS_output}
+\item{ss3rep}{Stock Synthesis output as read by \code{\link[r4ss:SS_output]{r4ss::SS_output()}}}
 
-\item{mixing}{c("less","greater","two.sided"). Default less is checking for positive autocorrelation only}
+\item{mixing}{\code{c("less","greater","two.sided")}. Default less is checking
+for positive autocorrelation only}
 
-\item{subplots}{optional 'cpue' for index data, 'len' for length composition data, 'size' for
-generalized size composition data, 'age' for age composition data,
-or 'con' for conditional age at length data}
+\item{subplots}{optional flag for:
+\itemize{
+\item \code{"cpue"} Index of abundance data
+\item \code{"len"} Length composition data
+\item \code{"size"} Generalized size composition data
+\item \code{"age"} Age composition data
+\item \code{"con"} Conditional age-at-length data
+}}
 
-\item{plot}{Deprecated. Plots (and subplots) are drawn to the active plot device
-by default (TRUE), the option to disable this via FALSE, is unused here.}
+\item{plot}{DEPRECATED. By default, TRUE, Plots (and subplots) are drawn to the
+plot device. The option to explicitly disable this option (FALSE), is not
+implemented. This option flag will be defunct in a future version}
 
-\item{print}{Deprecated. Please use 'print_plot'.}
+\item{print}{DEPRECATED, please use \code{print_plot}.}
 
-\item{print_plot}{Option to print to PNG files}
+\item{print_plot}{Flag to enable plot graphic device to print to PNG or PNG files.}
 
-\item{png}{Deprecated, please use 'use_png'.}
+\item{png}{DEPRECATED. Please use \code{use_png}.}
 
-\item{use_png}{Draw plots in PNG format}
+\item{use_png}{Enables plots to be generated to PNG files. Defaults to print value}
 
-\item{pdf}{PDF plots. Deprecated. Please use use_pdf.}
+\item{pdf}{DEPRECATED. Please use \code{use_pdf}.}
 
-\item{use_pdf}{option for pdf plots}
+\item{use_pdf}{Enables plots to be generated to pdf file.}
 
-\item{indexselect}{Vector of fleet numbers for each model for which to compare}
+\item{indexselect}{Vector of fleet numbers for each model for which to
+compare}
 
-\item{miny}{the absolute value of the min and max value for ylim, default is 1}
+\item{miny}{the absolute value of the min and max value for \code{ylim}.
+Default is 1}
+
+\item{col}{Optional vector of colors to be used for lines. Input NULL}
 
 \item{pch}{Optional vector of plot character values}
 
@@ -79,61 +91,82 @@ by default (TRUE), the option to disable this via FALSE, is unused here.}
 
 \item{lwd}{Optional vector of line widths}
 
-\item{tickEndYr}{TRUE/FALSE switch to turn on/off extra axis mark at final
-year in timeseries plots.}
+\item{tickEndYr}{\link[base:logical]{Logical} flag: set TRUE or FALSE to switch to turn
+on/off extra axis mark at final year in timeseries plots.}
 
-\item{xlim}{Optional, values for x-axis range of years to display on plot. Default = "default" displays all years of available data.}
+\item{xlim}{Optional, years to use for x-axis. Default value NULL (or "default"),
+uses all years available.}
 
-\item{ylim}{Optional, values for y-axis range to display on plot. Default = "default" will range from -1 to 1.}
+\item{ylim}{Optional, values for y-axis range to display on plot.
+The default: \code{"default"}, will range from -1 to 1.}
 
-\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space}
+\item{ylimAdj}{Multiplier for ylim parameter. Allows additional white space.}
 
-\item{xaxs}{Choice of xaxs parameter (see ?par for more info)}
+\item{xaxs}{Choice of xaxs parameter See \code{?par} for more info.}
 
-\item{yaxs}{Choice of yaxs parameter (see ?par for more info)}
+\item{yaxs}{Choice of yaxs parameter. See \code{?par} for more info.}
 
-\item{xylabs}{TRUE or FALSE, include x- and y-axis labels}
+\item{xylabs}{\link[base:logical]{Logical} flag: set TRUE or FALSE to include x- and
+y-axis labels to the plot. Defaults to TRUE}
 
-\item{type}{Type parameter passed to points (default 'o' overplots points on
-top of lines)}
+\item{type}{The type of plot to be drawn. For more details, see \code{\link[base:plot]{plot}}.}
 
-\item{legend}{Option to add a legend. TRUE by default.}
+\item{legend}{Flag to enable legend to plot. TRUE by default.}
 
-\item{legendloc}{Location of legend. Either a string like "topleft" or a vector}
+\item{legendloc}{Location of legend. Either a string like "topleft" or a
+vector of two numeric values representing the fraction of the maximum in
+the x and y dimensions, respectively. See \code{help("legend")} for more info
+on the string options.}
 
 \item{legendcex}{Allows to adjust legend cex}
 
-\item{pwidth}{Width of plot}
+\item{pwidth}{Default width of plot printed to plot in units of \code{punits}}
 
-\item{pheight}{Height of plot}
+\item{pheight}{Height of plot printed to plot in units of \code{punits }}
 
-\item{punits}{Units for PNG file}
+\item{punits}{Measurement units for \code{pwidth} and \code{pheight}. Default is \code{"in"}.
+\itemize{
+\item \code{"px"} (pixels)
+\item \code{"in"} (inches)
+\item \code{"cm"} (centimeters)
+\item \code{"mm"} (millimeters)
+}}
 
-\item{res}{Resolution for PNG file}
+\item{res}{Resolution for plots printed to files.}
 
-\item{ptsize}{Point size for PNG file}
+\item{ptsize}{Point size for plotted text in plots printed in files. See \code{help("png")}
+for more details}
 
-\item{cex.main}{Character expansion for plot titles}
+\item{cex.main}{Character expansion for plot titles.}
 
-\item{plotdir}{Directory where PNG or PDF files will be written. By default
+\item{plotdir}{Directory where output plot file will be written. By default,
 it will be the directory where the model was run.}
 
-\item{filenameprefix}{Additional text to append to PNG or PDF file names.
+\item{filenameprefix}{Additional text to append to output plot file name.
 It will be separated from default name by an underscore.}
 
-\item{par}{list of graphics parameter values passed to par() function}
+\item{par}{A numerical vector of the form c(bottom, left, top, right) which
+gives the number of lines of margin to be specified on the four sides of
+the plot,which is passed to \code{par()}. Entering \code{NULL} passes plot's default
+\code{par()} values (which depends on whether the main title is included or not)}
 
-\item{verbose}{TRUE or FALSE, should the progress be reported to R GUI?}
+\item{verbose}{Flag to print additional diagnostic messages to R console}
 
-\item{new}{Create new empty plot window (TRUE or FALSE)}
+\item{new}{Deprecated. New plot windows are created by default (TRUE), and the
+option to disable this, via FALSE, is unused.}
 
-\item{add}{suppresses par() to create multiplot figs}
+\item{add}{suppresses \code{par()} to create multiplot figs}
 }
 \value{
-a dataframe with runs test p-value, if the test has passed or failed, 3x sigma high and low limits, and the type of data used. Rows are for each fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and failed if p-value < 0.5 (residuals are not random)
+a dataframe with runs test p-value, if the test has passed or failed,
+3x sigma high and low limits, and the type of data used. Rows are for each
+fleet. Note, runs test passed if p-value > 0.05 (residuals are random) and
+failed if p-value < 0.5 (residuals are not random)
 }
 \description{
-Function for residual diagnostics. Plots residuals and 3x sigma limits for indices or mean age or length and outputs a runs test table. Note, if you do not want to plot the residuals, use function ss3diags::SSrunstest.
+Function for residual diagnostics. Plots residuals and 3x sigma limits for
+indices or mean age or length and outputs a runs test table. Note, if you do
+not want to plot the residuals, use \code{\link[=SSrunstest]{SSrunstest()}}.
 }
 \author{
 Henning Winker (JRC-EC) and Laurance Kell (Sea++)
