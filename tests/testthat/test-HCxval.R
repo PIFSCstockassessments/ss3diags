@@ -56,7 +56,7 @@ test_that("SSretroComps returns the correct comp data for simple model", {
     !exists("retrosum.simple"),
     message = "skipping test that requires SS3 executable"
   )
-  retro_comps <- SSretroComps(retrosum.simple)
+  retro_comps <- SSretroComps(retroModels)
 
   expect_equal(retro_comps$n, 6)
   expect_equal(retro_comps$startyrs, rep(26, 6))
