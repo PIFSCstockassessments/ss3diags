@@ -1,0 +1,99 @@
+---
+title: "Residual Analyses"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ss3diags)
+```
+
+Within the `ss3diags` package, there are 2 main diagnostic functions useful for residual analysis: `ss3diags::SSplotRunstest()` and `ss3diags::SSplotJABBAres()`. It is suggested to implement these diagnostics early and often in the model development process to gain a better understanding of how your model is fitting to your data.  
+
+## Runs Test  
+
+The runs test is a nonparametric hypothesis test for randomness in a data sequence that calculates the 2-sided p-value to estimate the number of runs (i.e., sequences of values of the same sign) above and below a reference value. The runs test can diagnose model misspecification using residuals from fits to index and composition data ([Carvalho et al. 2017](https://www.sciencedirect.com/science/article/pii/S0165783616303113)) by testing if there are non-random patterns in the residuals. In addition, the three-sigma limits can be considered useful for identifying potential outliers as any data point further than three standard deviations away from the expected residual process average would be unlikely given a random process error in the observed residual distribution. 
+
+For this example we will be using the "simple_small" SS model included within the `r4ss` package. We can read in the report file from the model output using the `r4ss::SS_output()` function as shown below. 
+
+```{r message=FALSE}
+library(r4ss)
+
+files_path <- system.file("extdata", "simple_small", package = "r4ss")
+report <- SS_output(dir = files_path, verbose = FALSE, printstats = FALSE)
+```
+
+```{r}
+sspar(mfrow = c(1, 2))
+SSplotRunstest(report, add = TRUE)
+```
+
+
+The output for `SSplotRunstest()` includes a plot of the residuals by fleet and a table with the results from the runs test and 'three-sigma limit' values. In the plots above, the shaded area  represents the 'three-sigma limit', or three residual standard deviations from zero. If any of the individual residual points fall outside of the three-sigma limit, they are colored red. Green shaded area indicates the residuals are randomly distributed (p-value >= 0.05) whereas red shaded area indicates the residuals are not randomly distributed. Failing the runs test (p-value < 0.05) can be indicative of some misspecification or conflict with the indices or composition data.  
+
+### Customizing the Plot  
+
+Runs test plots can be customized as needed. Some common features that you may want to specify are:  
+
+* plotting other data types (default is Index of Abundance) 
+* plotting specific fleet(s)
+* adjusting the y-axis range
+
+Examples of each of these changes are shown below, incrementally making each adjustment. To plot other data types, they can be specified with the `subplots` argument, and the options include "cpue", "len", "age", "size", or "con". "con" is for conditional size-at-age data and "size" is for generalized size composition data. Fleets can be specified using the `indexselect()` function, which takes a vector of the fleet numbers to plot.  
+
+```{r}
+sspar(mfrow = c(2, 2))
+SSplotRunstest(report, subplots = "len", indexselect = 1, add = TRUE)
+SSplotRunstest(report, subplots = "age", indexselect = 2, add = TRUE)
+SSplotRunstest(report, subplots = "age", indexselect = 2, add = TRUE, ylim = c(-0.5, 0.5))
+SSplotRunstest(report, subplots = "age", indexselect = 2, add = TRUE, ylim = c(-0.5, 0.5), ylimAdj = 1)
+```
+
+Note that a small adjustment is automatically added to the ylim to provide extra white space. This is why in the third plot, even though we set the y-axis to range from -0.5 to 0.5, the y-axis goes from -0.6 to 0.6. If you do not want the extra space, set `ylimAdj = 1` as done in the 4th plot. 
+
+### Summary Table 
+
+In addition to the residual plots, `SSplotRunstest()` produces a summary table of the runs test output values, including: 
+
+  * p-value for the runs test  
+  * if the test passed or failed (indicated by green or red shading in the plot)
+  * upper and lower limits for the 3-sigma interval 
+  * type of data tested (CPUE, length-composition, age-composition, or conditional age-at-length)
+  
+To only produce the summary table and skip the plot, e.g. to faciliate automated processing, use `SSrunstest()`. 
+
+```{r}
+rcpue <- SSrunstest(report, quants = "cpue")
+rlen <- SSrunstest(report, quants = "len")
+rbind(rcpue, rlen)
+```
+
+
+## RMSE 
+RMSE or root mean square error is useful for evaluating how far predictions fall from the observed data. The `ss3diags::SSplotJABBAres()` function allows you to visualize the full time series of residuals for all fleets of the indicated data (index of abundance or composition). In the example below, we plot the residuals for index of abundance, mean age (age-composition), and mean length (length composition) for both fleets. 
+
+```{r}
+sspar(mfrow = c(2, 2))
+SSplotJABBAres(report, subplots = "cpue", add = TRUE)
+SSplotJABBAres(report, subplots = "age", add = TRUE)
+SSplotJABBAres(report, subplots = "len", add = TRUE, ylim = c(-0.2, 0.2))
+```
+
+In the plots above, each point represents the difference between the observed and expected value (residual) and is color-coded to correspond to a specific fleet. The solid, color-coded vertical lines from the horizontal dashed line (at y = 0) show the distance between 0 and the residual value. Box plots summarize the spread of residual values across all fleets within each year and the thick solid black line is a loess smoother fit through all residual points. Total RMSE is displayed in the top right corner. When assessing this plot, it is important to see if there are any patterns or trends in the residuals, how large the overall RMSE is, and whether the data from different fleets generally agrees or conflicts with each other. 
+
+To retrieve just RMSE and residual values without generating the plot, `SSrmse()` produces a named list with 2 objects, `RMSE` and `residuals`. These can be accessed as shown below. This function is useful for automating analyses. 
+
+```{r}
+rmse <- SSrmse(report, quants = "cpue")$RMSE
+residuals <- SSrmse(report, quants = "cpue")$residuals
+
+rmse
+
+head(residuals)
+```
+

@@ -6,7 +6,7 @@ on:
       - 'README.md'
   pull_request:
 
-name: build-ss-R-CMD-check
+name: R-CMD-check
 
 jobs:
   R-CMD-check:
