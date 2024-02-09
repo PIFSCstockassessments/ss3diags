@@ -120,7 +120,7 @@ the retrospective example.</p>
 <p>Analyzing HCxval results requires the same first step of summarizing
 the list of retrospective runs as for the retrospective analysis.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">retro_mods</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>dirvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_retro</span>, <span class="st">"retrospectives"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"retro"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">5</span>,by<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">retro_mods</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>dirvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_retro</span>, <span class="st">"retrospectives"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"retro"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">5</span>, by <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="va">retroSummary</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">retro_mods</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="visualizing-output">Visualizing Output<a class="anchor" aria-label="anchor" href="#visualizing-output"></a>
@@ -130,7 +130,7 @@ which produces the novel HCxval diagnostic plot and computes the MASE
 scores for indices of abundance, mean lengths, or mean ages that have
 observations falling within the hindcast evaluation period.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"cpue"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting Hindcast Cross-Validation (one-step-ahead) </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -169,8 +169,8 @@ summarize that information before creating the plots.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">retroSummary_comps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SSretroComps.html">SSretroComps</a></span><span class="op">(</span><span class="va">retro_mods</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">hcl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, subplots <span class="op">=</span> <span class="st">"len"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>,<span class="fl">75</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">hcl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, subplots <span class="op">=</span> <span class="st">"len"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">75</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting Hindcast Cross-Validation (one-step-ahead) </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Computing MASE with all 5 of 5  prediction residuals for Index FISHERY</span></span>
@@ -196,7 +196,7 @@ that you may want to specify are:</p>
 <p>Examples of each of these changes are shown below, incrementally
 making each adjustment.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, subplots <span class="op">=</span> <span class="st">"len"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, indexselect <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting Hindcast Cross-Validation (one-step-ahead) </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -205,8 +205,10 @@ making each adjustment.</p>
 <span><span class="co">#&gt; MASE stats by Index:</span></span>
 <span><span class="co">#&gt;     Index Season      MASE     MAE.PR   MAE.base  MASE.adj n.eval</span></span>
 <span><span class="co">#&gt; 1 FISHERY      1 0.3591138 0.01034467 0.02880609 0.1034467      5</span></span>
-<span><span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, subplots <span class="op">=</span> <span class="st">"len"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>             indexselect <span class="op">=</span> <span class="fl">1</span>, indexUncertainty <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>,</span>
+<span>  subplots <span class="op">=</span> <span class="st">"len"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  indexselect <span class="op">=</span> <span class="fl">1</span>, indexUncertainty <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting Hindcast Cross-Validation (one-step-ahead) </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Computing MASE with all 5 of 5  prediction residuals for Index FISHERY</span></span>
@@ -214,8 +216,10 @@ making each adjustment.</p>
 <span><span class="co">#&gt; MASE stats by Index:</span></span>
 <span><span class="co">#&gt;     Index Season      MASE     MAE.PR   MAE.base  MASE.adj n.eval</span></span>
 <span><span class="co">#&gt; 1 FISHERY      1 0.3591138 0.01034467 0.02880609 0.1034467      5</span></span>
-<span><span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, subplots <span class="op">=</span> <span class="st">"len"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>             indexselect <span class="op">=</span> <span class="fl">1</span>, indexUncertainty <span class="op">=</span> <span class="cn">FALSE</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">45</span>,<span class="fl">70</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>,</span>
+<span>  subplots <span class="op">=</span> <span class="st">"len"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  indexselect <span class="op">=</span> <span class="fl">1</span>, indexUncertainty <span class="op">=</span> <span class="cn">FALSE</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">70</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting Hindcast Cross-Validation (one-step-ahead) </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Computing MASE with all 5 of 5  prediction residuals for Index FISHERY</span></span>
@@ -223,8 +227,10 @@ making each adjustment.</p>
 <span><span class="co">#&gt; MASE stats by Index:</span></span>
 <span><span class="co">#&gt;     Index Season      MASE     MAE.PR   MAE.base  MASE.adj n.eval</span></span>
 <span><span class="co">#&gt; 1 FISHERY      1 0.3591138 0.01034467 0.02880609 0.1034467      5</span></span>
-<span><span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, subplots <span class="op">=</span> <span class="st">"len"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>             indexselect <span class="op">=</span> <span class="fl">1</span>, indexUncertainty <span class="op">=</span> <span class="cn">FALSE</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">45</span>,<span class="fl">70</span><span class="op">)</span>, show.mase.adj <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/SSplotHCxval.html">SSplotHCxval</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>,</span>
+<span>  subplots <span class="op">=</span> <span class="st">"len"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  indexselect <span class="op">=</span> <span class="fl">1</span>, indexUncertainty <span class="op">=</span> <span class="cn">FALSE</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">70</span><span class="op">)</span>, show.mase.adj <span class="op">=</span> <span class="cn">F</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting Hindcast Cross-Validation (one-step-ahead) </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Computing MASE with all 5 of 5  prediction residuals for Index FISHERY</span></span></code></pre></div>
@@ -259,7 +265,7 @@ The adjusted MASE essential keep the naive prediction MAE denominator of
 the MASE to a maximum. Below we show the effect of changing adjustment
 threshold from the default <code>MAE.base.adj = 0.1</code></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mase1</span> <span class="op">=</span> <span class="fu"><a href="../reference/SSmase.html">SSmase</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, quant<span class="op">=</span><span class="st">"len"</span>, MAE.base.adj <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mase1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SSmase.html">SSmase</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, quant <span class="op">=</span> <span class="st">"len"</span>, MAE.base.adj <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="va">mase1</span></span>
 <span><span class="co">#&gt;     Index Season      MASE     MAE.PR   MAE.base  MASE.adj n.eval</span></span>
 <span><span class="co">#&gt; 1 FISHERY      1 0.3591138 0.01034467 0.02880609 0.1034467      5</span></span>
@@ -267,7 +273,7 @@ threshold from the default <code>MAE.base.adj = 0.1</code></p>
 <span><span class="co">#&gt; 3   joint        0.4628955 0.01719056 0.03713702 0.1719056      6</span></span></code></pre></div>
 <p>to a larger value <code>MAE.base.adj = 0.15</code></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/SSmase.html">SSmase</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, quant<span class="op">=</span><span class="st">"len"</span>, MAE.base.adj <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/SSmase.html">SSmase</a></span><span class="op">(</span><span class="va">retroSummary_comps</span>, quant <span class="op">=</span> <span class="st">"len"</span>, MAE.base.adj <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     Index Season      MASE     MAE.PR   MAE.base   MASE.adj n.eval</span></span>
 <span><span class="co">#&gt; 1 FISHERY      1 0.3591138 0.01034467 0.02880609 0.06896444      5</span></span>
 <span><span class="co">#&gt; 2 SURVEY1      1 0.6526074 0.05142002 0.07879167 0.34280015      1</span></span>
@@ -276,13 +282,13 @@ threshold from the default <code>MAE.base.adj = 0.1</code></p>
 the prediction residuals <code>MAE.PR</code> to the residuals of the
 naive predictions <code>MAE.base</code></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mase1</span><span class="op">$</span><span class="va">MAE.PR</span><span class="op">/</span><span class="va">mase1</span><span class="op">$</span><span class="va">MAE.base</span></span>
+<code class="sourceCode R"><span><span class="va">mase1</span><span class="op">$</span><span class="va">MAE.PR</span> <span class="op">/</span> <span class="va">mase1</span><span class="op">$</span><span class="va">MAE.base</span></span>
 <span><span class="co">#&gt; [1] 0.3591138 0.6526074 0.4628955</span></span>
 <span><span class="va">mase1</span><span class="op">$</span><span class="va">MASE</span></span>
 <span><span class="co">#&gt; [1] 0.3591138 0.6526074 0.4628955</span></span></code></pre></div>
 <p>and MASE.adj</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mase1</span><span class="op">$</span><span class="va">MAE.PR</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmax</a></span><span class="op">(</span><span class="va">mase1</span><span class="op">$</span><span class="va">MAE.base</span>,<span class="fl">0.1</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mase1</span><span class="op">$</span><span class="va">MAE.PR</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmax</a></span><span class="op">(</span><span class="va">mase1</span><span class="op">$</span><span class="va">MAE.base</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.1034467 0.5142002 0.1719056</span></span>
 <span><span class="va">mase1</span><span class="op">$</span><span class="va">MASE.adj</span></span>
 <span><span class="co">#&gt; [1] 0.1034467 0.5142002 0.1719056</span></span></code></pre></div>

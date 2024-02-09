@@ -115,10 +115,10 @@ need to install for this tutorial.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r4ss/r4ss" class="external-link">r4ss</a></span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r4ss/r4ss" class="external-link">r4ss</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">files_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"ss3diags"</span><span class="op">)</span></span>
-<span><span class="va">dir_tmp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">dir_tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">dir_aspm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_tmp</span>, <span class="st">"aspm"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">dir_aspm</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">files_path</span><span class="op">)</span></span></code></pre></div>
@@ -133,7 +133,7 @@ to get the latest release of stock synthesis is to use the
 <code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/Rtmp6gW5g1/ss3</span></span></code></pre>
+<pre><code><span><span class="co">## The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/Rtmp4d6rMt/ss3</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="aspm">ASPM<a class="anchor" aria-label="anchor" href="#aspm"></a>
@@ -171,10 +171,12 @@ will use as the input files. We will run the model in
 </h3>
 <p>Set the recruitment devations in <code>ss.par</code> to 0.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">par</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_readpar_3.30.html" class="external-link">SS_readpar_3.30</a></span><span class="op">(</span>parfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"ss.par"</span><span class="op">)</span>, </span>
-<span>                       datsource <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"data_echo.ss_new"</span><span class="op">)</span>,</span>
-<span>                       ctlsource <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"control.ss_new"</span><span class="op">)</span>,</span>
-<span>                       verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">par</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_readpar_3.30.html" class="external-link">SS_readpar_3.30</a></span><span class="op">(</span></span>
+<span>  parfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"ss.par"</span><span class="op">)</span>,</span>
+<span>  datsource <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"data_echo.ss_new"</span><span class="op">)</span>,</span>
+<span>  ctlsource <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"control.ss_new"</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">par</span><span class="op">$</span><span class="va">recdev1</span></span></code></pre></div>
 <pre><code><span><span class="co">##       year      recdev</span></span>
 <span><span class="co">##  [1,] 2011 -0.06005247</span></span>
@@ -203,13 +205,15 @@ will use as the input files. We will run the model in
 <span><span class="co">##  [9,] 2031      0</span></span>
 <span><span class="co">## [10,] 2032      0</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">par</span><span class="op">$</span><span class="va">recdev1</span><span class="op">[</span>,<span class="st">"recdev"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<code class="sourceCode R"><span><span class="va">par</span><span class="op">$</span><span class="va">recdev1</span><span class="op">[</span>, <span class="st">"recdev"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span></span>
-<span><span class="co">#Would run if forecasts recdevs were not already 0</span></span>
-<span><span class="co">#par$recdev_forecast[,"recdev"] &lt;- 0</span></span>
-<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_writepar_3.30.html" class="external-link">SS_writepar_3.30</a></span><span class="op">(</span>parlist <span class="op">=</span> <span class="va">par</span>, </span>
-<span>                 outfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"ss.par"</span><span class="op">)</span>, </span>
-<span>                 overwrite <span class="op">=</span> <span class="cn">T</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># Would run if forecasts recdevs were not already 0</span></span>
+<span><span class="co"># par$recdev_forecast[,"recdev"] &lt;- 0</span></span>
+<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_writepar_3.30.html" class="external-link">SS_writepar_3.30</a></span><span class="op">(</span></span>
+<span>  parlist <span class="op">=</span> <span class="va">par</span>,</span>
+<span>  outfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"ss.par"</span><span class="op">)</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">T</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## $headerlines</span></span>
 <span><span class="co">## [1] "# Number of parameters = 32 Objective function value = 754.301687441726  Maximum gradient component = 8.77017492766611e-07"</span></span>
 <span><span class="co">## [2] "# dummy_parm:"                                                                                                             </span></span>
@@ -305,10 +309,11 @@ files.</p>
 <span><span class="va">starter</span><span class="op">$</span><span class="va">datfile</span> <span class="op">&lt;-</span> <span class="st">"data_echo.ss_new"</span></span>
 <span><span class="va">starter</span><span class="op">$</span><span class="va">ctlfile</span> <span class="op">&lt;-</span> <span class="st">"control.ss_new"</span></span>
 <span><span class="va">starter</span><span class="op">$</span><span class="va">init_values_src</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_writestarter.html" class="external-link">SS_writestarter</a></span><span class="op">(</span><span class="va">starter</span>, </span>
-<span>                dir <span class="op">=</span> <span class="va">dir_aspm</span>, </span>
-<span>                overwrite <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>                verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_writestarter.html" class="external-link">SS_writestarter</a></span><span class="op">(</span><span class="va">starter</span>,</span>
+<span>  dir <span class="op">=</span> <span class="va">dir_aspm</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="control-file">Control File<a class="anchor" aria-label="anchor" href="#control-file"></a>
@@ -337,9 +342,11 @@ control file. Some examples include:</p>
 <li>initial F</li>
 </ul>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">control</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_readctl_3.30.html" class="external-link">SS_readctl_3.30</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"control.ss_new"</span><span class="op">)</span>, </span>
-<span>                           datlist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"data_echo.ss_new"</span><span class="op">)</span>,</span>
-<span>                           verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">control</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_readctl_3.30.html" class="external-link">SS_readctl_3.30</a></span><span class="op">(</span></span>
+<span>  file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"control.ss_new"</span><span class="op">)</span>,</span>
+<span>  datlist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"data_echo.ss_new"</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">control</span><span class="op">$</span><span class="va">SR_parms</span></span></code></pre></div>
 <pre><code><span><span class="co">##               LO HI   INIT PRIOR PR_SD PR_type PHASE env_var&amp;link dev_link</span></span>
@@ -356,7 +363,7 @@ control file. Some examples include:</p>
 <span><span class="co">## SR_autocorr         0         0      0     0         0</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Would need to run if PHASES were positive for "steep" and "sigmaR"</span></span>
-<span><span class="co">#control$SR_parms[c(2,3),"PHASE"] &lt;- c(-4,-4)</span></span>
+<span><span class="co"># control$SR_parms[c(2,3),"PHASE"] &lt;- c(-4,-4)</span></span>
 <span><span class="va">control</span><span class="op">$</span><span class="va">age_selex_parms</span></span></code></pre></div>
 <pre><code><span><span class="co">##                       LO HI INIT PRIOR PR_SD PR_type PHASE env_var&amp;link</span></span>
 <span><span class="co">## AgeSel_P_1_SURVEY2(3)  0 20    0     5    99       0   -99            0</span></span>
@@ -365,17 +372,19 @@ control file. Some examples include:</p>
 <span><span class="co">## AgeSel_P_1_SURVEY2(3)        0         0         0      0     0         0</span></span>
 <span><span class="co">## AgeSel_P_2_SURVEY2(3)        0         0         0      0     0         0</span></span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#would need to run if PHASES were positive for age selectivity</span></span>
-<span><span class="co">#control$age_selex_parms[,"PHASE"] &lt;- control$age_selex_parms[,"PHASE"] * -1</span></span>
-<span><span class="va">control</span><span class="op">$</span><span class="va">size_selex_parms</span><span class="op">[</span>,<span class="st">"PHASE"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">control</span><span class="op">$</span><span class="va">size_selex_parms</span><span class="op">[</span>,<span class="st">"PHASE"</span><span class="op">]</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span></span>
+<code class="sourceCode R"><span><span class="co"># would need to run if PHASES were positive for age selectivity</span></span>
+<span><span class="co"># control$age_selex_parms[,"PHASE"] &lt;- control$age_selex_parms[,"PHASE"] * -1</span></span>
+<span><span class="va">control</span><span class="op">$</span><span class="va">size_selex_parms</span><span class="op">[</span>, <span class="st">"PHASE"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">control</span><span class="op">$</span><span class="va">size_selex_parms</span><span class="op">[</span>, <span class="st">"PHASE"</span><span class="op">]</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span></span>
 <span><span class="va">control</span><span class="op">$</span><span class="va">recdev_early_phase</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">4</span></span>
-<span><span class="va">control</span><span class="op">$</span><span class="va">recdev_phase</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">2</span> </span>
+<span><span class="va">control</span><span class="op">$</span><span class="va">recdev_phase</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">2</span></span>
 <span></span>
-<span><span class="va">new_lambdas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>like_comp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">7</span>,<span class="fl">7</span>,<span class="fl">9</span>,<span class="fl">9</span>,<span class="fl">9</span>,<span class="fl">10</span><span class="op">)</span>,</span>
-<span>                          fleet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span>, </span>
-<span>                          phase <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>                          value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>                          sizefreq_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">new_lambdas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  like_comp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">7</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  fleet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  phase <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  sizefreq_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">new_lambdas</span></span></code></pre></div>
 <pre><code><span><span class="co">##    like_comp fleet phase value sizefreq_method</span></span>
 <span><span class="co">## 1          4     1     1     0               1</span></span>
@@ -391,8 +400,10 @@ control file. Some examples include:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">control</span><span class="op">$</span><span class="va">lambdas</span> <span class="op">&lt;-</span> <span class="va">new_lambdas</span></span>
 <span><span class="va">control</span><span class="op">$</span><span class="va">N_lambdas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">new_lambdas</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_writectl_3.30.html" class="external-link">SS_writectl_3.30</a></span><span class="op">(</span><span class="va">control</span>, outfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"control.ss_new"</span><span class="op">)</span>,</span>
-<span>                 overwrite <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_writectl_3.30.html" class="external-link">SS_writectl_3.30</a></span><span class="op">(</span><span class="va">control</span>,</span>
+<span>  outfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_aspm</span>, <span class="st">"control.ss_new"</span><span class="op">)</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="run-aspm">Run ASPM<a class="anchor" aria-label="anchor" href="#run-aspm"></a>
@@ -417,8 +428,10 @@ inform the production function.</p>
 <span></span>
 <span><span class="va">mods_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">mods</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSplotComparisons.html" class="external-link">SSplotComparisons</a></span><span class="op">(</span><span class="va">mods_sum</span>, legendlabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ref"</span>, <span class="st">"ASPM"</span><span class="op">)</span>,</span>
-<span>                  subplots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">8</span>,<span class="fl">14</span><span class="op">)</span>, new <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSplotComparisons.html" class="external-link">SSplotComparisons</a></span><span class="op">(</span><span class="va">mods_sum</span>,</span>
+<span>  legendlabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ref"</span>, <span class="st">"ASPM"</span><span class="op">)</span>,</span>
+<span>  subplots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">8</span>, <span class="fl">14</span><span class="op">)</span>, new <span class="op">=</span> <span class="cn">F</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## showing uncertainty for all models</span></span></code></pre>
 <pre><code><span><span class="co">## subplot 2: spawning biomass with uncertainty intervals</span></span></code></pre>
 <pre><code><span><span class="co">## subplot 8: F value with uncertainty</span></span></code></pre>

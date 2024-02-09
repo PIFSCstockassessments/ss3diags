@@ -116,10 +116,10 @@ need to install for this tutorial.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r4ss/r4ss" class="external-link">r4ss</a></span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r4ss/r4ss" class="external-link">r4ss</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">files_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"ss3diags"</span><span class="op">)</span></span>
-<span><span class="va">dir_tmp</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">dir_tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">dir_profile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_tmp</span>, <span class="st">"profile"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">dir_profile</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">files_path</span><span class="op">)</span></span>
@@ -133,7 +133,7 @@ easy way to get the latest release of stock synthesis is to use the
 <code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpBhxrN1/ss3</span></span></code></pre></div>
+<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpNahQSv/ss3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="r0-profile">R<sub>0</sub> Profile<a class="anchor" aria-label="anchor" href="#r0-profile"></a>
@@ -172,10 +172,10 @@ will use a fairly course resolution to speed up total run time.</p>
 <span><span class="co">#&gt; SR_sigmaR           0         0      0     0         0</span></span>
 <span><span class="co">#&gt; SR_regime           0         0      0     0         0</span></span>
 <span><span class="co">#&gt; SR_autocorr         0         0      0     0         0</span></span>
-<span><span class="co">#getting the estimated r0 value </span></span>
+<span><span class="co"># getting the estimated r0 value</span></span>
 <span><span class="va">r0</span> <span class="op">&lt;-</span> <span class="va">CTL</span><span class="op">$</span><span class="va">SR_parms</span><span class="op">$</span><span class="va">INIT</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
-<span><span class="co">#creating a vector that is +/- 1 unit away from the estimated value in increments of 0.2</span></span>
-<span><span class="va">r0_vec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="va">r0</span><span class="op">-</span><span class="fl">1</span>, <span class="va">r0</span><span class="op">+</span><span class="fl">1</span>, by <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
+<span><span class="co"># creating a vector that is +/- 1 unit away from the estimated value in increments of 0.2</span></span>
+<span><span class="va">r0_vec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="va">r0</span> <span class="op">-</span> <span class="fl">1</span>, <span class="va">r0</span> <span class="op">+</span> <span class="fl">1</span>, by <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="va">r0_vec</span></span>
 <span><span class="co">#&gt;  [1] 7.9274 8.1274 8.3274 8.5274 8.7274 8.9274 9.1274 9.3274 9.5274 9.7274</span></span>
 <span><span class="co">#&gt; [11] 9.9274</span></span></code></pre></div>
@@ -198,12 +198,14 @@ documentation of the <code><a href="https://r4ss.github.io/r4ss/reference/profil
 <a href="https://r4ss.github.io/r4ss/reference/profile.html" class="external-link">r4ss
 website</a>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/profile.html" class="external-link">profile</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_profile</span>, </span>
-<span>        newctlfile <span class="op">=</span> <span class="st">"control_modified.ss"</span>,</span>
-<span>        string <span class="op">=</span> <span class="st">"SR_LN"</span>, </span>
-<span>        profilevec <span class="op">=</span> <span class="va">r0_vec</span>, </span>
-<span>        exe <span class="op">=</span> <span class="st">"ss3"</span>,</span>
-<span>        verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/profile.html" class="external-link">profile</a></span><span class="op">(</span></span>
+<span>  dir <span class="op">=</span> <span class="va">dir_profile</span>,</span>
+<span>  newctlfile <span class="op">=</span> <span class="st">"control_modified.ss"</span>,</span>
+<span>  string <span class="op">=</span> <span class="st">"SR_LN"</span>,</span>
+<span>  profilevec <span class="op">=</span> <span class="va">r0_vec</span>,</span>
+<span>  exe <span class="op">=</span> <span class="st">"ss3"</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; running profile i=1/11</span></span>
 <span><span class="co">#&gt; Parameter names in control file matching input vector </span></span>
 <span><span class="co">#&gt; 'strings' (n=1): SR_LN(R0)</span></span>
@@ -353,9 +355,10 @@ to consider data weighting.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">profile_mods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>dirvec <span class="op">=</span> <span class="va">dir_profile</span>, keyvec <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">r0_vec</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">profile_mods_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">profile_mods</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSplotProfile.html" class="external-link">SSplotProfile</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>, </span>
-<span>              profile.string <span class="op">=</span> <span class="st">"SR_LN"</span>,   </span>
-<span>              profile.label <span class="op">=</span> <span class="st">"SR_LN(R0)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSplotProfile.html" class="external-link">SSplotProfile</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>,</span>
+<span>  profile.string <span class="op">=</span> <span class="st">"SR_LN"</span>,</span>
+<span>  profile.label <span class="op">=</span> <span class="st">"SR_LN(R0)"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Parameter matching profile.string=SR_LN: SR_LN(R0)</span></span>
 <span><span class="co">#&gt; Parameter values (after subsetting based on input 'models'): 7.9274, 8.1274, 8.3274, 8.5274, 8.7274, 8.9274, 9.1274, 9.3274, 9.5274, 9.7274, 9.9274</span></span>
 <span><span class="co">#&gt; Likelihood components showing max change as fraction of total change.</span></span>
@@ -392,10 +395,11 @@ the length composition data by fleet and the likelihood of survey data
 by fleet. This will allow us to see if there are conflicts and what
 sources are the main drivers.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">PinerPlot</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>, </span>
-<span>          component <span class="op">=</span> <span class="st">"Length_like"</span>,</span>
-<span>          main <span class="op">=</span> <span class="st">"Length"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/sspar.html" class="external-link">sspar</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">PinerPlot</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>,</span>
+<span>  component <span class="op">=</span> <span class="st">"Length_like"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Length"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Parameter matching profile.string = 'R0': 'SR_LN(R0)</span></span>
 <span><span class="co">#&gt; Parameter values (after subsetting based on input 'models'): 7.9274, 8.1274, 8.3274, 8.5274, 8.7274, 8.9274, 9.1274, 9.3274, 9.5274, 9.7274, 9.9274,</span></span>
 <span><span class="co">#&gt; Fleet-specific likelihoods showing max change as fraction of total change.</span></span>
@@ -404,9 +408,10 @@ sources are the main drivers.</p>
 <span><span class="co">#&gt; FISHERY      0.6825    TRUE</span></span>
 <span><span class="co">#&gt; SURVEY1      0.3208    TRUE</span></span>
 <span><span class="co">#&gt; SURVEY2      0.0000   FALSE</span></span>
-<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">PinerPlot</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>, </span>
-<span>          component <span class="op">=</span> <span class="st">"Surv_like"</span>,</span>
-<span>          main <span class="op">=</span> <span class="st">"Survey"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">PinerPlot</a></span><span class="op">(</span><span class="va">profile_mods_sum</span>,</span>
+<span>  component <span class="op">=</span> <span class="st">"Surv_like"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Survey"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Parameter matching profile.string = 'R0': 'SR_LN(R0)</span></span>
 <span><span class="co">#&gt; Parameter values (after subsetting based on input 'models'): 7.9274, 8.1274, 8.3274, 8.5274, 8.7274, 8.9274, 9.1274, 9.3274, 9.5274, 9.7274, 9.9274,</span></span>
 <span><span class="co">#&gt; Fleet-specific likelihoods showing max change as fraction of total change.</span></span>
