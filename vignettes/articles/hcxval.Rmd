@@ -18,7 +18,7 @@ Hindcast Cross-Validation is used to evaluate the prediction skill of a model by
 Implementing the Hindcast Cross-Validation (HCxval) diagnostic in Stock Synthesis requires the same model outputs generated when running a retrospective analysis. Therefore, no additional step is needed for HCxval if conducted in conjunction with retrospective analysis (see how to conduct a [restrospective analysis](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)). For this example we will use the same output created in the retrospective example.
 
 ```{r echo=FALSE, message=FALSE, results=FALSE, warning=FALSE}
-library(r4ss) 
+library(r4ss)
 
 files_path <- system.file("extdata", package = "ss3diags")
 dir_retro <- file.path(tempdir(check = TRUE), "retrospectives")
@@ -30,7 +30,7 @@ r4ss::retro(dir = dir_retro, exe = "ss3", years = 0:-5, verbose = FALSE)
 
 Analyzing HCxval results requires the same first step of summarizing the list of retrospective runs as for the retrospective analysis. 
 ```{r}
-retro_mods <- r4ss::SSgetoutput(dirvec = file.path(dir_retro, "retrospectives", paste0("retro", seq(0,-5,by=-1))), verbose = F)
+retro_mods <- r4ss::SSgetoutput(dirvec = file.path(dir_retro, "retrospectives", paste0("retro", seq(0, -5, by = -1))), verbose = F)
 retroSummary <- r4ss::SSsummarize(retro_mods, verbose = F)
 ```
 
@@ -40,7 +40,7 @@ retroSummary <- r4ss::SSsummarize(retro_mods, verbose = F)
 HCxval is implemented using `ss3diags::SSplotHCxval()`, which produces the novel HCxval diagnostic plot and computes the MASE scores for indices of abundance, mean lengths, or mean ages that have observations falling within the hindcast evaluation period.
 
 ```{r}
-r4ss::sspar(mfrow = c(1,2))
+r4ss::sspar(mfrow = c(1, 2))
 SSplotHCxval(retroSummary, subplots = "cpue", add = TRUE)
 ```
 
@@ -53,8 +53,8 @@ To visualize the mean length and mean age, you will need to add an additional st
 ```{r}
 retroSummary_comps <- SSretroComps(retro_mods)
 
-r4ss::sspar(mfrow = c(1,2))
-hcl <- SSplotHCxval(retroSummary_comps, subplots = "len", add = TRUE, ylim = c(40,75))
+r4ss::sspar(mfrow = c(1, 2))
+hcl <- SSplotHCxval(retroSummary_comps, subplots = "len", add = TRUE, ylim = c(40, 75))
 ```
 
 ### Customizing the Plot  
@@ -69,16 +69,20 @@ HCxval plots can be customized in many ways, some common features that you may w
 Examples of each of these changes are shown below, incrementally making each adjustment. 
 
 ```{r}
-r4ss::sspar(mfrow = c(2,2))
+r4ss::sspar(mfrow = c(2, 2))
 SSplotHCxval(retroSummary_comps, subplots = "len", add = TRUE, indexselect = 1)
-SSplotHCxval(retroSummary_comps, subplots = "len", add = TRUE, 
-             indexselect = 1, indexUncertainty = FALSE)
-SSplotHCxval(retroSummary_comps, subplots = "len", add = TRUE, 
-             indexselect = 1, indexUncertainty = FALSE, ylim = c(45,70))
-SSplotHCxval(retroSummary_comps, subplots = "len", add = TRUE, 
-             indexselect = 1, indexUncertainty = FALSE, ylim = c(45,70), show.mase.adj = F)
-
-
+SSplotHCxval(retroSummary_comps,
+  subplots = "len", add = TRUE,
+  indexselect = 1, indexUncertainty = FALSE
+)
+SSplotHCxval(retroSummary_comps,
+  subplots = "len", add = TRUE,
+  indexselect = 1, indexUncertainty = FALSE, ylim = c(45, 70)
+)
+SSplotHCxval(retroSummary_comps,
+  subplots = "len", add = TRUE,
+  indexselect = 1, indexUncertainty = FALSE, ylim = c(45, 70), show.mase.adj = F
+)
 ```
 
 ## Summary Table  
@@ -97,20 +101,20 @@ The reasoning is that prediction residuals must be already very accurate to fall
 
 
 ```{r}
-mase1 = SSmase(retroSummary_comps, quant="len", MAE.base.adj = 0.1)
+mase1 <- SSmase(retroSummary_comps, quant = "len", MAE.base.adj = 0.1)
 mase1
 ```
 
 to a larger value `MAE.base.adj = 0.15`
 
 ```{r}
-SSmase(retroSummary_comps, quant="len", MAE.base.adj = 0.15)
+SSmase(retroSummary_comps, quant = "len", MAE.base.adj = 0.15)
 ```
 
 where `MASE` is the ratio of the mean absolute error of the prediction residuals `MAE.PR` to the residuals of the naive predictions `MAE.base`
 
 ```{r}
-mase1$MAE.PR/mase1$MAE.base
+mase1$MAE.PR / mase1$MAE.base
 mase1$MASE
 ```
 
@@ -118,6 +122,6 @@ and MASE.adj
 
 
 ```{r}
-mase1$MAE.PR/pmax(mase1$MAE.base,0.1)
+mase1$MAE.PR / pmax(mase1$MAE.base, 0.1)
 mase1$MASE.adj
 ```

@@ -23,10 +23,10 @@ pak::pkg_install("r4ss/r4ss")
 ```
 
 ```{r message=FALSE, warning=FALSE}
-library(r4ss) 
+library(r4ss)
 
 files_path <- system.file("extdata", package = "ss3diags")
-dir_tmp  <- tempdir(check = TRUE)
+dir_tmp <- tempdir(check = TRUE)
 dir_profile <- file.path(dir_tmp, "profile")
 dir.create(dir_profile, showWarnings = FALSE, recursive = TRUE)
 list.files(files_path)
@@ -54,12 +54,11 @@ Once you have the input files you need in `dir_profile` you will need to create 
 CTL <- SS_readctl_3.30(file = file.path(dir_profile, "control.ss_new"), datlist = file.path(dir_profile, "data.ss"))
 
 CTL$SR_parms
-#getting the estimated r0 value 
+# getting the estimated r0 value
 r0 <- CTL$SR_parms$INIT[1]
-#creating a vector that is +/- 1 unit away from the estimated value in increments of 0.2
-r0_vec <- seq(r0-1, r0+1, by = 0.2)
+# creating a vector that is +/- 1 unit away from the estimated value in increments of 0.2
+r0_vec <- seq(r0 - 1, r0 + 1, by = 0.2)
 r0_vec
-
 ```
 We also need to modify the starter file by changing the name of the control file that it will read from and making sure the likelihood is calculated for non-estimated quantities.  
 ```{r}
@@ -67,17 +66,18 @@ START <- SS_readstarter(file = file.path(dir_profile, "starter.ss"), verbose = F
 START$prior_like <- 1
 START$ctlfile <- "control_modified.ss"
 SS_writestarter(START, dir = dir_profile, overwrite = TRUE, verbose = F)
-
 ```
 
 To run the profile, use `r4ss::profile()` and you will need to specify a partial string of the name of the parameter you are profiling over (in this case "SR_LN" will match with "SR_LN(R0)"), and the vector of values to profile across. The `newctlfile` is the control file that will be adjusted with values from the `profilevec` and can be named anything you prefer, it just needs to match what you put in the starter file for "cltfile". Full documentation of the `profile()` function can be found on the [r4ss website](https://r4ss.github.io/r4ss/reference/profile.html).
 ```{r}
-profile(dir = dir_profile, 
-        newctlfile = "control_modified.ss",
-        string = "SR_LN", 
-        profilevec = r0_vec, 
-        exe = "ss3",
-        verbose = FALSE)
+profile(
+  dir = dir_profile,
+  newctlfile = "control_modified.ss",
+  string = "SR_LN",
+  profilevec = r0_vec,
+  exe = "ss3",
+  verbose = FALSE
+)
 ```
 
 ## Visualizing Output
@@ -86,10 +86,10 @@ Once the profile is finished running, we can visualize the results to determine 
 ```{r}
 profile_mods <- SSgetoutput(dirvec = dir_profile, keyvec = 1:length(r0_vec), verbose = FALSE)
 profile_mods_sum <- SSsummarize(profile_mods, verbose = FALSE)
-SSplotProfile(profile_mods_sum, 
-              profile.string = "SR_LN",   
-              profile.label = "SR_LN(R0)")
-
+SSplotProfile(profile_mods_sum,
+  profile.string = "SR_LN",
+  profile.label = "SR_LN(R0)"
+)
 ```
 
 The profile plot shows the changes in log-likelihood across the vector of values profiled over for the total likelihood and each of the contributing components. There is a minimum threshold that a component must contribute so if there is a data source that is in your model but does not show up in the plot, the contribution may not be large enough. The steepness of each trajectory indicates how informative (or not) that data source was. For example, the age data in the plot above is much steeper on the left side of the minimum R0 value than the index data, which suggests that age composition data is more informative in the model.
@@ -97,12 +97,14 @@ The profile plot shows the changes in log-likelihood across the vector of values
 
 You can also plot data-type and fleet-specific profiles using `r4ss::PinerPlot()`. Below we are plotting the profile for the length composition data by fleet and the likelihood of survey data by fleet. This will allow us to see if there are conflicts and what sources are the main drivers. 
 ```{r}
-sspar(mfrow = c(1,2))
-PinerPlot(profile_mods_sum, 
-          component = "Length_like",
-          main = "Length")
-PinerPlot(profile_mods_sum, 
-          component = "Surv_like",
-          main = "Survey")
+sspar(mfrow = c(1, 2))
+PinerPlot(profile_mods_sum,
+  component = "Length_like",
+  main = "Length"
+)
+PinerPlot(profile_mods_sum,
+  component = "Surv_like",
+  main = "Survey"
+)
 ```
 
