@@ -61,7 +61,7 @@ test_that("SSretroComps returns the correct comp data for simple model", {
   expect_equal(retro_comps$n, 4)
   expect_equal(retro_comps$startyrs, rep(2011, 4))
   expect_equal(retro_comps$endyrs, rep(2022, 4))
-  #expect_gt(nrow(retro_comps$con), 1)
+  # expect_gt(nrow(retro_comps$con), 1)
   expect_gt(nrow(retro_comps$len), 1)
   expect_gt(nrow(retro_comps$age), 1)
 })
