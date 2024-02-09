@@ -1,5 +1,12 @@
 ## Test script for hindcast cross validation and MASE
 
+  retroModels <- r4ss::SSgetoutput(
+    dirvec = file.path(
+      run_tmp, "retrospectives",
+      paste0("retro", 0:-3)
+    )
+  )
+  retrosum.simple <- r4ss::SSsummarize(retroModels)
 path <- file.path(tempdir(), "test_runs")
 dir.create(path, showWarnings = FALSE)
 
