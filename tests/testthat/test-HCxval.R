@@ -1,12 +1,5 @@
 ## Test script for hindcast cross validation and MASE
 
-  retroModels <- r4ss::SSgetoutput(
-    dirvec = file.path(
-      run_tmp, "retrospectives",
-      paste0("retro", 0:-3)
-    )
-  )
-  retrosum.simple <- r4ss::SSsummarize(retroModels)
 path <- file.path(tempdir(), "test_runs")
 dir.create(path, showWarnings = FALSE)
 
@@ -63,7 +56,7 @@ test_that("SSretroComps returns the correct comp data for simple model", {
     !exists("retrosum.simple"),
     message = "skipping test that requires SS3 executable"
   )
-  retro_comps <- SSretroComps(retroSimple)
+  retro_comps <- SSretroComps(retrosum.simple)
 
   expect_equal(retro_comps$n, 6)
   expect_equal(retro_comps$startyrs, rep(26, 6))
