@@ -19,10 +19,10 @@ pak::pkg_install("r4ss/r4ss")
 ```
 
 ```{r message=FALSE, warning=FALSE}
-library(r4ss) 
+library(r4ss)
 
 files_path <- system.file("extdata", package = "ss3diags")
-dir_tmp  <- tempdir(check = TRUE)
+dir_tmp <- tempdir(check = TRUE)
 dir_aspm <- file.path(dir_tmp, "aspm")
 dir.create(dir_aspm, showWarnings = FALSE, recursive = TRUE)
 list.files(files_path)
@@ -58,20 +58,24 @@ file.copy(from = file.path(dir_tmp, files), to = dir_aspm)
 Set the recruitment devations in `ss.par` to 0. 
 
 ```{r}
-par <- SS_readpar_3.30(parfile = file.path(dir_aspm, "ss.par"), 
-                       datsource = file.path(dir_aspm, "data_echo.ss_new"),
-                       ctlsource = file.path(dir_aspm, "control.ss_new"),
-                       verbose = FALSE)
+par <- SS_readpar_3.30(
+  parfile = file.path(dir_aspm, "ss.par"),
+  datsource = file.path(dir_aspm, "data_echo.ss_new"),
+  ctlsource = file.path(dir_aspm, "control.ss_new"),
+  verbose = FALSE
+)
 par$recdev1
 par$recdev_forecast
 
-par$recdev1[,"recdev"] <- 0
+par$recdev1[, "recdev"] <- 0
 
-#Would run if forecasts recdevs were not already 0
-#par$recdev_forecast[,"recdev"] <- 0
-SS_writepar_3.30(parlist = par, 
-                 outfile = file.path(dir_aspm, "ss.par"), 
-                 overwrite = T, verbose = FALSE)
+# Would run if forecasts recdevs were not already 0
+# par$recdev_forecast[,"recdev"] <- 0
+SS_writepar_3.30(
+  parlist = par,
+  outfile = file.path(dir_aspm, "ss.par"),
+  overwrite = T, verbose = FALSE
+)
 ```
 
 ### Starter File 
@@ -81,10 +85,11 @@ starter <- SS_readstarter(file = file.path(dir_aspm, "starter.ss"), verbose = FA
 starter$datfile <- "data_echo.ss_new"
 starter$ctlfile <- "control.ss_new"
 starter$init_values_src <- 1
-SS_writestarter(starter, 
-                dir = dir_aspm, 
-                overwrite = TRUE, 
-                verbose = FALSE)
+SS_writestarter(starter,
+  dir = dir_aspm,
+  overwrite = TRUE,
+  verbose = FALSE
+)
 ```
 
 ### Control File 
@@ -105,30 +110,36 @@ Additionally, the likelihood for some components may need to be turned off as we
 * initial F  
 
 ```{r}
-control <- SS_readctl_3.30(file = file.path(dir_aspm, "control.ss_new"), 
-                           datlist = file.path(dir_aspm, "data_echo.ss_new"),
-                           verbose = FALSE)
+control <- SS_readctl_3.30(
+  file = file.path(dir_aspm, "control.ss_new"),
+  datlist = file.path(dir_aspm, "data_echo.ss_new"),
+  verbose = FALSE
+)
 
 control$SR_parms
 # Would need to run if PHASES were positive for "steep" and "sigmaR"
-#control$SR_parms[c(2,3),"PHASE"] <- c(-4,-4)
+# control$SR_parms[c(2,3),"PHASE"] <- c(-4,-4)
 control$age_selex_parms
-#would need to run if PHASES were positive for age selectivity
-#control$age_selex_parms[,"PHASE"] <- control$age_selex_parms[,"PHASE"] * -1
-control$size_selex_parms[,"PHASE"] <- control$size_selex_parms[,"PHASE"] * -1
+# would need to run if PHASES were positive for age selectivity
+# control$age_selex_parms[,"PHASE"] <- control$age_selex_parms[,"PHASE"] * -1
+control$size_selex_parms[, "PHASE"] <- control$size_selex_parms[, "PHASE"] * -1
 control$recdev_early_phase <- -4
-control$recdev_phase <- -2 
+control$recdev_phase <- -2
 
-new_lambdas <- data.frame(like_comp = c(4,4,5,5,7,7,9,9,9,10),
-                          fleet = c(1,2,1,2,1,2,1,2,3,1), 
-                          phase = rep(1, 10),
-                          value = rep(0, 10),
-                          sizefreq_method = rep(1, 10))
+new_lambdas <- data.frame(
+  like_comp = c(4, 4, 5, 5, 7, 7, 9, 9, 9, 10),
+  fleet = c(1, 2, 1, 2, 1, 2, 1, 2, 3, 1),
+  phase = rep(1, 10),
+  value = rep(0, 10),
+  sizefreq_method = rep(1, 10)
+)
 new_lambdas
 control$lambdas <- new_lambdas
 control$N_lambdas <- nrow(new_lambdas)
-SS_writectl_3.30(control, outfile = file.path(dir_aspm, "control.ss_new"),
-                 overwrite = TRUE, verbose = FALSE)
+SS_writectl_3.30(control,
+  outfile = file.path(dir_aspm, "control.ss_new"),
+  overwrite = TRUE, verbose = FALSE
+)
 ```
 
 ### Run ASPM 
@@ -148,7 +159,9 @@ mods <- SSgetoutput(dirvec = c(
 
 mods_sum <- SSsummarize(mods, verbose = FALSE)
 
-SSplotComparisons(mods_sum, legendlabels = c("Ref", "ASPM"),
-                  subplots = c(2,8,14), new = F)
+SSplotComparisons(mods_sum,
+  legendlabels = c("Ref", "ASPM"),
+  subplots = c(2, 8, 14), new = F
+)
 ```
 
