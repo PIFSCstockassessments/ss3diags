@@ -26,7 +26,7 @@ evaluate a Stock Synthesis model. Diagnostics include residual analyses,
 hindcast cross-validation techniques, and retrospective analyses.
 Functions also allow users to reproduce the key model diagnostics plots
 that are presented in the paper ‘A Cookbook for Using Model Diagnostics in
-Integrated Stock Assessments’.
+Integrated Stock Assessments’ [(Carvalho et al. 2021)](https://www.sciencedirect.com/science/article/pii/S0165783621000874).
 
 The `ss3diags` Github repository provides step-by-step R recipes on how
 to:

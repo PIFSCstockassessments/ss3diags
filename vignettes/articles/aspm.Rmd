@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 The application of the Age-Structured Production Model (ASPM) approach as a diagnostic can help identify misspecification of the production function. If, in the absence of composition data (likelihood weighting set to 0), the ASPM fits well to the indices of abundance that have good contrast, then the production function is likely to drive the stock dynamics and indices will provide information about the absolute abundance ([Carvalho et al. 2017](https://www.sciencedirect.com/science/article/pii/S0165783616303113)). If there is not a good fit to the indices, then the catch data and production function alone cannot explain the trajectories of the indices of relative abundance. 
 
 ## Model inputs  
-To run a stock synthesis model, 4 input files are required: starter, forecast, control, and data. The input files for the example model can be found within the `ss3diags` package and accessed as shown below. Also, if you do not have `r4ss` installed, you will need to install for this tutorial. 
+To run a Stock Synthesis model, four input files are required: starter.ss, forecast.ss, control.ss, and data.ss. The input files for the example model can be found within the `ss3diags` package and accessed as shown below. Also, if you do not have the `r4ss` package installed, you will need to install it for this tutorial. 
 
 ```{r eval=FALSE}
 install.packages("pak")
@@ -39,7 +39,7 @@ r4ss::get_ss3_exe(dir = dir_tmp, version = "v3.30.21")
 ```
 
 ## ASPM 
-Once you have the 4 input files, you need to determine what components need to be turned off to run the ASPM. ASPM only depend on index of abundance and catch data, so any composition data, recruitment deviations, etc. need to be turned off. We provide an example that includes multiple types of data and recruitment deviations, however, the exact steps necessary for an individual model may vary depending on the complexity and components included. Therefore these steps may not be fully comprehensive for your model so be sure check what other components you may need to change.  
+Once you have the 4 input files, you need to determine what components need to be turned off to run the ASPM. ASPM only depend on index of abundance and catch data, so any composition data, recruitment deviations, etc. need to be turned off. We provide an example that includes multiple types of data and recruitment deviations, however, the exact steps necessary for an individual model may vary depending on the complexity and components included. Therefore these steps may not be fully comprehensive for your model so be sure to check what other components you may need to change.  
 Below, we show how to use the `r4ss` functions to make all the necessary changes to the `control.ss` and `ss.par` files.  
 
 ### Generate files  
@@ -93,7 +93,7 @@ SS_writestarter(starter,
 ```
 
 ### Control File 
-Some things in the control file that may need to be changed, are phases for parameters such as: 
+The estimation phases for the following parameters may need to be changed: 
 
 * length selectivity 
 * age selectivity
