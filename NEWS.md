@@ -1,4 +1,13 @@
-# ss3siags 2.1.1
+# ss3diags 2.2.0
+
+* Add vignettes tutorials for implementing and interpreting diagnostic analyses (#78, #75, #73, and #68). The vignettes replaced the "Cookbook recipe" R scripts with updated code.
+* Removed Rdata files (ss3diags::simple, ss3diags::retroSimple, and ss3diags::mcmcSimple). These objects are now automatically produced in the vignettes.
+* Removed deprecated data objects from function arguments (#100).
+* Created generic functions to re-use common parameter documentation via roxygen tag @inheritParams (#66 and #2).
+* Update r4ss dependency.
+* Replacing installation of SS3 in container during R-CMD-Check GitHub Action workflow to use r4ss::get_ss_exe() (#97).
+
+# ss3diags 2.1.1
 
 * Added new logo. Thanks @pdimens (#76, #77)
 * Added options to `SSdeltaMVLN` for Variance-Coveriance approximation and bias correction. Thanks @N-DucharmeBarth-NOAA (#64)

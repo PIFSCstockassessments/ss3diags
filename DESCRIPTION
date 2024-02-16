@@ -1,7 +1,7 @@
 Package: ss3diags
 Title: Stock Synthesis Model Diagnostics for Intergated Stock Assessments
-Version: 2.1.1
-Date: 2023-06-07
+Version: 2.2.0
+Date: 2024-02-16
 Authors@R: c(
     person("Henning", "Winker", , "henning.winker@ec.europa.eu", role = "aut"),
     person("Felipe", "Carvalho", , "felipe.carvalho@noaa.gov", role = "aut"),
