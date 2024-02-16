@@ -12,26 +12,25 @@ The R package `ss3diags` enables users to apply advanced diagnostics to
 evaluate a Stock Synthesis model. Diagnostics include residual analyses,
 hindcast cross-validation techniques, and retrospective analyses.
 Functions also allow users to reproduce the key model diagnostics plots
-that are presented in the paper ‘A Cookbook for Using Model Diagnostics in
-Integrated Stock Assessments’.
+that are presented in the paper ‘A Cookbook for Using Model Diagnostics
+in Integrated Stock Assessments’ [(Carvalho et
+al. 2021)](https://www.sciencedirect.com/science/article/pii/S0165783621000874).
 
 The `ss3diags` Github repository provides step-by-step R recipes on how
 to:
 
--   [Run jitter
+  - [Run jitter
     analysis](https://pifscstockassessments.github.io/ss3diags/articles/Jitter.html)
--   [Conduct retrospective
+  - [Conduct retrospective
     analysis](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)
--   [Use hindcast
+  - [Use hindcast
     cross-validation](https://pifscstockassessments.github.io/ss3diags/articles/hcxval.html)
--   [Do log-likelood profiling for
+  - [Do log-likelood profiling for
     R0](https://pifscstockassessments.github.io/ss3diags/articles/likelihood.html)
--   [Run the ASPM
+  - [Run the ASPM
     diagnostic](https://pifscstockassessments.github.io/ss3diags/articles/aspm.html)
--   [Evaluate model fit](https://pifscstockassessments.github.io/ss3diags/articles/residuals.html)
-
-
-
+  - [Evaluate model
+    fit](https://pifscstockassessments.github.io/ss3diags/articles/residuals.html)
 
 with Stock Synthesis by making use of a comprehensive collection of R
 functions available in the R packages
@@ -63,8 +62,8 @@ visualize the results of those diagnostic tests using the `r4ss` and
 
 If you would like to contribute to `ss3diags` or have suggestions for
 diagnostic tests to include in the package, you can submit a new
-[issue](https://github.com/PIFSCstockassessments/ss3diags/issues) or contact Meg at
-<megumi.oshima@noaa.gov>.
+[issue](https://github.com/PIFSCstockassessments/ss3diags/issues) or
+email Meg at <megumi.oshima@noaa.gov>.
 
 ## Reference
 
@@ -72,14 +71,12 @@ To cite `ss3diags` for a publication you can use
 
 ``` r
 citation("ss3diags")
-#> 
 #> To cite package 'ss3diags' in publications use:
 #> 
-#>   Henning Winker, Felipe Carvalho, Massimiliano Cardinale, Laurence
-#>   Kell, Megumi Oshima and Eric Fletcher (2023). ss3diags: Stock
-#>   Synthesis Model Diagnostics for Intergated Stock Assessments. R
-#>   package version 2.1.1.
-#>   https://github.com/PIFSCstockassessments/ss3diags
+#>   Winker H, Carvalho F, Cardinale M, Kell L, Oshima M, Fletcher E
+#>   (2023). _ss3diags: Stock Synthesis Model Diagnostics for Intergated
+#>   Stock Assessments_. R package version 2.1.1,
+#>   <https://github.com/PIFSCstockassessments/ss3diags>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
