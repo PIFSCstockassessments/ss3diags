@@ -44,7 +44,7 @@
 #' @importFrom r4ss save_png
 #'
 #' @export
-SSplotJABBAres <- function(ss3rep = ss3diags::simple,
+SSplotJABBAres <- function(ss3rep,
                            subplots = c("cpue", "len", "age", "size", "con")[1],
                            seas = NULL,
                            plot = TRUE,
