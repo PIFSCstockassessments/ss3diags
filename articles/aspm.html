@@ -106,11 +106,12 @@ of the indices of relative abundance.</p>
 <div class="section level2">
 <h2 id="model-inputs">Model inputs<a class="anchor" aria-label="anchor" href="#model-inputs"></a>
 </h2>
-<p>To run a stock synthesis model, 4 input files are required: starter,
-forecast, control, and data. The input files for the example model can
-be found within the <code>ss3diags</code> package and accessed as shown
-below. Also, if you do not have <code>r4ss</code> installed, you will
-need to install for this tutorial.</p>
+<p>To run a Stock Synthesis model, four input files are required:
+starter.ss, forecast.ss, control.ss, and data.ss. The input files for
+the example model can be found within the <code>ss3diags</code> package
+and accessed as shown below. Also, if you do not have the
+<code>r4ss</code> package installed, you will need to install it for
+this tutorial.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
@@ -133,7 +134,7 @@ to get the latest release of stock synthesis is to use the
 <code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpRwCNnb/ss3</span></span></code></pre>
+<pre><code><span><span class="co">## The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpX43obz/ss3</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="aspm">ASPM<a class="anchor" aria-label="anchor" href="#aspm"></a>
@@ -145,7 +146,7 @@ deviations, etc. need to be turned off. We provide an example that
 includes multiple types of data and recruitment deviations, however, the
 exact steps necessary for an individual model may vary depending on the
 complexity and components included. Therefore these steps may not be
-fully comprehensive for your model so be sure check what other
+fully comprehensive for your model so be sure to check what other
 components you may need to change.<br>
 Below, we show how to use the <code>r4ss</code> functions to make all
 the necessary changes to the <code>control.ss</code> and
@@ -318,8 +319,8 @@ files.</p>
 <div class="section level3">
 <h3 id="control-file">Control File<a class="anchor" aria-label="anchor" href="#control-file"></a>
 </h3>
-<p>Some things in the control file that may need to be changed, are
-phases for parameters such as:</p>
+<p>The estimation phases for the following parameters may need to be
+changed:</p>
 <ul>
 <li>length selectivity</li>
 <li>age selectivity</li>

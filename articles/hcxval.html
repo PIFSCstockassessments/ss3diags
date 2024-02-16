@@ -94,22 +94,22 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PIFSCstockassessments/ss3diags" class="external-link">ss3diags</a></span><span class="op">)</span></span></code></pre></div>
-<p>Hindcast Cross-Validation is used to evaluate the prediction skill of
+<p>Hindcast cross-validation is used to evaluate the prediction skill of
 a model by removing a portion of data, fitting the model to the
 subsequent time series, then projecting over the period that was removed
 and comparing the projected values to the observations that were
 omitted. Prediction skill is determined using the mean absolute scaled
 error (MASE) for input data (index of abundance, length composition,
 etc). In brief, the MASE score scales the mean absolute error (MAE) of
-forecasts (i.e., prediction residuals) to mean absolute error (MAE) of a
-naïve in-sample prediction, which is realized in the form of a simple
-‘persistence algorithm’, i.e. index of abunduance will be the same next
-year as it is this year (see Eq. 3, p.5 in <a href="https://www.sciencedirect.com/science/article/pii/S0165783621000874" class="external-link">Carvalho
+forecasts (i.e., prediction residuals) to the MAE of a naïve in-sample
+prediction, which is realized in the form of a simple ‘persistence
+algorithm’ where, for example, an index of abundance will be constant
+from one year to the next (see Eq. 3, p.5 in <a href="https://www.sciencedirect.com/science/article/pii/S0165783621000874" class="external-link">Carvalho
 and Winker et al. 2021</a>). A MASE score &gt; 1 indicates that the
 average model forecasts are worse than a random walk. Conversely, a MASE
-score &lt; 1 indicates a level of prediction skill, for example, a MASE
-of 0.5 indicates that the model forecasts twice as accurately as a naïve
-baseline prediction; thus, the model has prediction skill.</p>
+score &lt; 1 indicates some prediction skills. For example, a MASE of
+0.5 indicates that the model forecasts twice as accurately as a naïve
+baseline prediction; thus, the model has some prediction power.</p>
 <p>Implementing the Hindcast Cross-Validation (HCxval) diagnostic in
 Stock Synthesis requires the same model outputs generated when running a
 retrospective analysis. Therefore, no additional step is needed for
@@ -145,13 +145,13 @@ observations falling within the hindcast evaluation period.</p>
 <span><span class="co">#&gt;     Index Season      MASE     MAE.PR  MAE.base  MASE.adj n.eval</span></span>
 <span><span class="co">#&gt; 1 SURVEY1      1 0.5026435 0.08879379 0.1766536 0.5026435      1</span></span>
 <span><span class="co">#&gt; 2 SURVEY2      1 0.6149530 0.37737925 0.6136717 0.6149530      5</span></span></code></pre>
-<p>In the plots above, we see that for both fleets, the model has fairly
-good prediction skill (compared to a random walk) of index of abundance
-data. In the plots, the white points and white dashed line are the
-observed data that were included in the model with a truncated time
+<p>In the plots above, we see that, for both fleets, the model has
+fairly good prediction skills for index of abundance data (compared to a
+random walk). In the plots, the white points and white dashed line are
+the observed data that were included in the model with a truncated time
 series. The larger colored points are the observed data from each
 retrospective peel (i.e. data that was removed in that peel). The
-smaller colored point and dashed line show the model predicted value.
+smaller colored points and dashed lines show the model predicted values.
 The “Ref” line is the model run with the complete time series of data.
 The grey shaded areas represent the uncertainty of the data, with the
 darker portion indicating the portion that were included in the model

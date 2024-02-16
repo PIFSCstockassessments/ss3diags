@@ -112,11 +112,12 @@ jitter analysis using <code><a href="https://r4ss.github.io/r4ss/reference/jitte
 <div class="section level2">
 <h2 id="model-inputs">Model inputs<a class="anchor" aria-label="anchor" href="#model-inputs"></a>
 </h2>
-<p>To run a stock synthesis model, 4 input files are required: starter,
-forecast, control, and data. The input files for the example model can
-be found within the <code>ss3diags</code> package and accessed as shown
-below. Also, if you do not have <code>r4ss</code> installed, you will
-need to install for this tutorial.</p>
+<p>To run a Stock Synthesis model, four input files are required:
+starter.ss, forecast.ss, control.ss, and data.ss. The input files for
+the example model can be found within the <code>ss3diags</code> package
+and accessed as shown below. Also, if you do not have the
+<code>r4ss</code> package installed, you will need to install it for
+this tutorial.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -136,7 +137,7 @@ An easy way to get the latest release of stock synthesis is to use the
 <code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_jitter</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/Rtmp9EVMYJ/jitter/ss3</span></span></code></pre></div>
+<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpGZDOOH/jitter/ss3</span></span></code></pre></div>
 <p>We will run the model in <code>dir_jitter</code> first to produce the
 necessary output files. It is recommended to do jitter runs in a
 subdirectory of your model run. This will keep all of the output files
@@ -191,7 +192,7 @@ are, likelihoods, derived quantities, and estimated parameters.</p>
 <span><span class="co">#&gt;       replist6     replist7     replist8     replist9    replist10    replist11</span></span>
 <span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
 <span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
+<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74853e-01  1.74852e-01</span></span>
 <span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
 <span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
 <span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
@@ -212,7 +213,7 @@ are, likelihoods, derived quantities, and estimated parameters.</p>
 <span><span class="co">#&gt;      replist24    replist25    replist26    replist27    replist28    replist29</span></span>
 <span><span class="co">#&gt; 1  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02  7.54302e+02</span></span>
 <span><span class="co">#&gt; 2  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10  1.33479e-10</span></span>
-<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74853e-01</span></span>
+<span><span class="co">#&gt; 3  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01  1.74852e-01</span></span>
 <span><span class="co">#&gt; 4 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00 -7.11813e+00</span></span>
 <span><span class="co">#&gt; 5  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02  3.66756e+02</span></span>
 <span><span class="co">#&gt; 6  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02  2.31845e+02</span></span>
@@ -407,10 +408,11 @@ plot, therefore we provide code in the tidyverse syntax (using
 <span>    x <span class="op">=</span> <span class="st">"Jitter runs at a converged solution"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="Jitter_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
-<p>The figure plots the Total likelihood from each jitter run and the
+<p>The figure plots the total likelihood from each jitter run and the
 red line indicates the total likelihood value from the reference run. If
-there are any runs with points below the red line, use the parameter
-values from the run with the lowest likelihood value. We can also use
+there are any runs with points below the red line, use the converged
+parameter values from the run with the lowest likelihood value as
+starting values in your base model. We can also use
 <code><a href="https://r4ss.github.io/r4ss/reference/SSplotComparisons.html" class="external-link">r4ss::SSplotComparisons()</a></code> to compare the spawning biomass
 trajectories between jitter runs to see the impact of different
 parameter values on the estimated quantities.</p>

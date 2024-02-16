@@ -96,23 +96,24 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PIFSCstockassessments/ss3diags" class="external-link">ss3diags</a></span><span class="op">)</span></span></code></pre></div>
 <p>Retrospective analysis is commonly used to check the consistency of
 model estimates such as spawning stock biomass (SSB) and fishing
-mortality (F) as the model is updated with new data in retrospect. The
-retrospective analysis involves sequentially removing observations from
-the terminal year (i.e., peels), fitting the model to the truncated
-series, and then comparing the relative difference between model
-estimates from the full-time series with the truncated time-series. To
-implement a retrospective analysis with stock synthesis the
-<code>r4ss</code> package provides the <code><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro()</a></code> function.
-Here we provide a step-by-step example of how to run and analyze a
-retrospective analysis using a simple, example SS model.</p>
+mortality (F) as the model is updated with new data. The retrospective
+analysis involves sequentially removing observations from the terminal
+year (i.e., peels), fitting the model to the truncated series, and then
+comparing the relative difference between model estimates from the
+full-time series with the truncated time-series. To implement a
+retrospective analysis with Stock Synthesis the <code>r4ss</code>
+package provides the <code><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro()</a></code> function. Here we provide a
+step-by-step example of how to run and interpret a retrospective
+analysis using a simple SS model.</p>
 <div class="section level2">
 <h2 id="model-inputs">Model inputs<a class="anchor" aria-label="anchor" href="#model-inputs"></a>
 </h2>
-<p>To run a stock synthesis model, 4 input files are required: starter,
-forecast, control, and data. The input files for the example model can
-be found within the <code>ss3diags</code> package and accessed as shown
-below. Also, if you do not have <code>r4ss</code> installed, you will
-need to install for this tutorial.</p>
+<p>To run a stock synthesis model, 4 input files are required:
+starter.ss, forecast.ss, control.ss, and data.ss. The input files for
+the example model can be found within the <code>ss3diags</code> package
+and accessed as shown below. Also, if you do not have the
+<code>r4ss</code> package installed, you will need to install it for
+this tutorial.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
@@ -133,22 +134,22 @@ easy way to get the latest release of stock synthesis is to use the
 <code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_retro</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpeBZcTl/retrospectives/ss3</span></span></code></pre></div>
+<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpkOokLa/retrospectives/ss3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="retrospective-analysis">Retrospective Analysis<a class="anchor" aria-label="anchor" href="#retrospective-analysis"></a>
 </h2>
-<p>Once you have the 4 input files and SS executable, you can run
-retrospective analysis as shown below. We are running it for 5 1-year
-peels, so with each run, <em>n</em> years of data are removed from the
-reference model and the model is re-run for a total of 5 times
-(i.e. peel 1 removes the last year of data, peel 2 removes the last 2
-years of data, etc.) . The number of year peels can be adjusted with the
-<code>years</code> argument. If the SS executable file you are using is
-named something other than “ss3” (e.g. ss_opt_win.exe), you will need to
-specify this with the argument <code>exe = "ss_opt_win"</code>. Full
-documentation of the <code><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro()</a></code> function can be found on the
-<a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">r4ss
+<p>Once you have the 4 input files and the SS executable file, you can
+run a retrospective analysis as shown below. We are running it for five
+one-year peels, so with each run, one to five years of data are removed
+from the reference model and the model is re-run for a total of five
+times (i.e. peel 1 removes the last year of data, peel 2 removes the
+last 2 years of data, etc.) . The number of year peels can be adjusted
+with the <code>years</code> argument. If the SS executable file you are
+using is named something other than “ss3” (e.g. ss_opt_win.exe), you
+will need to specify this with the argument
+<code>exe = "ss_opt_win"</code>. Full documentation of the
+<code><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro()</a></code> function can be found on the <a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">r4ss
 website</a>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">retro</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_retro</span>, exe <span class="op">=</span> <span class="st">"ss3"</span>, years <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="op">-</span><span class="fl">5</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -157,13 +158,14 @@ website</a>.</p>
 <div class="section level2">
 <h2 id="visualizing-output">Visualizing Output<a class="anchor" aria-label="anchor" href="#visualizing-output"></a>
 </h2>
-<p>To visualize the output and inspect for any patterns or biases, you
-need to load the report files into R and can use the
-<code><a href="../reference/SSplotRetro.html">SSplotRetro()</a></code> function from <code>ss3diags</code>. The
-easiest way to load multiple report files is using
-<code><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">r4ss::SSgetoutput()</a></code> and <code><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">r4ss::SSsummarize()</a></code>
-functions. The default sub-directories for each peel, 0 to 5, are
-labeled <code>retro0</code> to <code>retro-5</code>.</p>
+<p>To visualize the outputted results and inspect them for any
+retrospective patterns, you will need to load the report files into R
+and use the <code><a href="../reference/SSplotRetro.html">SSplotRetro()</a></code> function from
+<code>ss3diags</code>. The easiest way to load multiple report files is
+using <code><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">r4ss::SSgetoutput()</a></code> and
+<code><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">r4ss::SSsummarize()</a></code> functions. The default sub-directories
+for each peel, 0 to 5, are labeled <code>retro0</code> to
+<code>retro-5</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">retro_mods</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>dirvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_retro</span>, <span class="st">"retrospectives"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"retro"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">5</span>, by <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="va">retroSummary</span> <span class="op">&lt;-</span> <span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">retro_mods</span>, verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
@@ -178,15 +180,16 @@ labeled <code>retro0</code> to <code>retro-5</code>.</p>
 <span><span class="co">#&gt; 5  SSB     2017  0.08716428  0.098849082</span></span>
 <span><span class="co">#&gt; 6  SSB Combined -0.12270351 -0.139113722</span></span></code></pre>
 <p>The default settings plot the spawning stock biomass time series for
-each peel, with the reference run (e.g. model with no years removed) as
-the “Ref” line and each successive peel as colored lines labeled by
-their end year. The solid line ends at the end year and the dashed line
-to the point shows the 1 year forecast. Displaying the projected SSB can
-help assess forecast bias. Note, forecasts are done automatically when
-using <code><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">r4ss::retro()</a></code> and are based on the settings in
-forecast.ss. The grey shaded area represents the 95% confidence
-intervals of uncertainty around the spawning biomass time series.
-Displayed in the center of the plot is the combined Mohn’s <span class="math inline">\(\rho\)</span> for all retrospective runs, and in
+each peel, with the reference run (i.e. original, full time series
+model) as the “Ref” line and each successive peel as colored lines
+labeled by their terminal year value. The solid line ends at the
+terminal year followed by the dashed line extending to a circle
+representing the one year forecast estimate. Displaying the projected
+SSB value helps in assessing forecast bias. Of note, forecasts are done
+automatically when using <code><a href="https://r4ss.github.io/r4ss/reference/retro.html" class="external-link">r4ss::retro()</a></code> and are based on the
+settings in forecast.ss. The grey shaded area represents the 95%
+confidence intervals of uncertainty around the spawning biomass time
+series. Displayed in the center of the plot is the combined Mohn’s <span class="math inline">\(\rho\)</span> for all retrospective runs, and in
 parentheses is the forecast Mohn’s <span class="math inline">\(\rho\)</span>.</p>
 <div class="section level3">
 <h3 id="customizing-the-plot">Customizing the Plot<a class="anchor" aria-label="anchor" href="#customizing-the-plot"></a>
@@ -212,8 +215,8 @@ making each adjustment.</p>
 <span><span class="va">retro4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SSplotRetro.html">SSplotRetro</a></span><span class="op">(</span><span class="va">retroSummary</span>, subplots <span class="op">=</span> <span class="st">"SSB"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, uncertainty <span class="op">=</span> <span class="cn">FALSE</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2015</span>, <span class="fl">2022</span><span class="op">)</span>, forecast <span class="op">=</span> <span class="cn">FALSE</span>, showrho <span class="op">=</span> <span class="cn">FALSE</span>, forecastrho <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Retrospective-Analysis_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; Mohn's Rho stats, including one step ahead forecasts:</span></span></code></pre>
-<p>Additionally, the fishing mortality can be plotted instead of
-spawning biomass by replacing <code>subplots = "SSB"</code> with
+<p>Additionally, fishing mortality can be plotted instead of spawning
+biomass by replacing <code>subplots = "SSB"</code> with
 <code>subplots = "F"</code></p>
 </div>
 <div class="section level3">

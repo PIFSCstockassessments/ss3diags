@@ -95,23 +95,25 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PIFSCstockassessments/ss3diags" class="external-link">ss3diags</a></span><span class="op">)</span></span></code></pre></div>
 <p>Likelihood profiling is a key model diagnostic that helps identify
-the influence of information sources on model estimates. R<sub>0</sub>
-is a commonly profiled parameter because it represents a global scaling
-parameter. To conduct a profile, values of the parameter over a given
-range are fixed and the model re-run and then changes in total
-likelihood and data-component likelihoods are examined. It is
-recommended to run this throughout the development process, particularly
-after incorporating new data sets to understand how informative each
-component is on the estimation of R0 and if there is conflict between
-data sources.</p>
+the influence of information sources on model estimates. The number of
+recruits in an unfished population (R<sub>0</sub>) is a commonly
+profiled parameter since it dictates the absolute size of a fish
+population (serves as global scaling parameter). To conduct a profile,
+values of the parameter over a given range are fixed and the model
+re-run and then changes in total likelihood and data-component
+likelihoods are examined. It is recommended to run this throughout the
+development process, particularly after incorporating new data sets to
+understand how informative each component is on the estimation of R0 and
+if there is conflict between data sources.</p>
 <div class="section level2">
 <h2 id="model-inputs">Model inputs<a class="anchor" aria-label="anchor" href="#model-inputs"></a>
 </h2>
-<p>To run a stock synthesis model, 4 input files are required: starter,
-forecast, control, and data. The input files for the example model can
-be found within the <code>ss3diags</code> package and accessed as shown
-below. Also, if you do not have <code>r4ss</code> installed, you will
-need to install for this tutorial.</p>
+<p>To run a Stock Synthesis model, four input files are required:
+starter.ss, forecast.ss, control.ss, and data.ss. The input files for
+the example model can be found within the <code>ss3diags</code> package
+and accessed as shown below. Also, if you do not have the
+<code>r4ss</code> package installed, you will need to install it for
+this tutorial.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"r4ss/r4ss"</span><span class="op">)</span></span></code></pre></div>
@@ -133,14 +135,14 @@ easy way to get the latest release of stock synthesis is to use the
 <code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpBlyHNF/ss3</span></span></code></pre></div>
+<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpRMurzB/ss3</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="r0-profile">R<sub>0</sub> Profile<a class="anchor" aria-label="anchor" href="#r0-profile"></a>
+<h2 id="running-a-profile-on-r0">Running a Profile on R<sub>0</sub><a class="anchor" aria-label="anchor" href="#running-a-profile-on-r0"></a>
 </h2>
-<p>Once you have the 4 input files and SS executable, you can run a
-likelihood profile as shown below. The first step is to run the model
-you would like to do a profile for. We will do this in
+<p>Once you have the four input files and SS executable file, you can
+run a likelihood profile as shown below. The first step is to run the
+model you would like to do a profile for. We will do this in
 <code>dir_tmp</code> and then copy the necessary files to
 <code>dir_profile</code>. It’s best to run the profile in a subdirectory
 of your main model run to keep the output files separate from other
@@ -151,11 +153,12 @@ diagnostic tests you may run.</p>
 <span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.ss"</span>, <span class="st">"control.ss_new"</span>, <span class="st">"starter.ss"</span>, <span class="st">"forecast.ss"</span>, <span class="st">"ss.par"</span>, <span class="st">"ss3"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_tmp</span>, <span class="va">files</span><span class="op">)</span>, to <span class="op">=</span> <span class="va">dir_profile</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE TRUE TRUE TRUE TRUE TRUE</span></span></code></pre></div>
-<p>Once you have the input files you need in <code>dir_profile</code>
-you will need to create a vector of values to profile across. The range
-and increments to choose depend on your model and the resolution at
-which you want to analyze the likelihood profile. For this example we
-will use a fairly course resolution to speed up total run time.</p>
+<p>Once you have the input files in the <code>dir_profile</code>
+directory, you will need to create a vector of values to profile across.
+The range and increments to choose depend on your model and the
+resolution at which you want to analyze the likelihood profile. For this
+example we will use a fairly coarse resolution to speed up total run
+time.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CTL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SS_readctl_3.30.html" class="external-link">SS_readctl_3.30</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_profile</span>, <span class="st">"control.ss_new"</span><span class="op">)</span>, datlist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_profile</span>, <span class="st">"data.ss"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -193,7 +196,7 @@ profiling over (in this case “SR_LN” will match with “SR_LN(R0)”), and
 the vector of values to profile across. The <code>newctlfile</code> is
 the control file that will be adjusted with values from the
 <code>profilevec</code> and can be named anything you prefer, it just
-needs to match what you put in the starter file for “cltfile”. Full
+needs to match what you put in the starter file for “ctlfile”. Full
 documentation of the <code><a href="https://r4ss.github.io/r4ss/reference/profile.html" class="external-link">profile()</a></code> function can be found on the
 <a href="https://r4ss.github.io/r4ss/reference/profile.html" class="external-link">r4ss
 website</a>.</p>
@@ -347,11 +350,12 @@ website</a>.</p>
 </h2>
 <p>Once the profile is finished running, we can visualize the results to
 determine if there is conflict between the data sources. If all data
-sources reach a minimum at the same R<sub>0</sub> value, this indicates
-good agreement between them. However, more likely, one or more will be
-minimized at different R0 values from the global R<sub>0</sub> value.
-This is a sign of conflict between your data sources and may require you
-to consider data weighting.</p>
+sources reach a negative log-likelihood (NLL) minimum at the same
+R<sub>0</sub> value, this indicates good agreement between them.
+However, more likely, one or more will reach this NLL minimum at
+different R0 values from the global R<sub>0</sub> value. This is a sign
+of conflict between your data sources and may require you to consider
+data weighting.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">profile_mods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSgetoutput.html" class="external-link">SSgetoutput</a></span><span class="op">(</span>dirvec <span class="op">=</span> <span class="va">dir_profile</span>, keyvec <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">r0_vec</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">profile_mods_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4ss.github.io/r4ss/reference/SSsummarize.html" class="external-link">SSsummarize</a></span><span class="op">(</span><span class="va">profile_mods</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -379,16 +383,16 @@ to consider data weighting.</p>
 <span><span class="co">#&gt; Parm_devs                 0.0000   FALSE             Parameter deviations</span></span>
 <span><span class="co">#&gt; Crash_Pen                 0.0000   FALSE                    Crash penalty</span></span></code></pre></div>
 <p><img src="likelihood_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
-<p>The profile plot shows the changes in log-likelihood across the
-vector of values profiled over for the total likelihood and each of the
-contributing components. There is a minimum threshold that a component
-must contribute so if there is a data source that is in your model but
-does not show up in the plot, the contribution may not be large enough.
-The steepness of each trajectory indicates how informative (or not) that
-data source was. For example, the age data in the plot above is much
-steeper on the left side of the minimum R0 value than the index data,
-which suggests that age composition data is more informative in the
-model.</p>
+<p>The profile plot above shows the changes in log-likelihood across the
+selected range of values for each of the contributing data components.
+There is an adjustable minimum contribution threshold that a component
+must meet to appear in this figure (if there is a data source that is in
+your model but does not show up in the plot, its contribution to the
+total likelihood may not be large enough). The steepness of each
+trajectory indicates how informative (or not) a data source is. For
+example, the age data in the plot above is much steeper on the left side
+of the minimum R0 value than the index data, which suggests that age
+composition data is more informative in the model.</p>
 <p>You can also plot data-type and fleet-specific profiles using
 <code><a href="https://r4ss.github.io/r4ss/reference/PinerPlot.html" class="external-link">r4ss::PinerPlot()</a></code>. Below we are plotting the profile for
 the length composition data by fleet and the likelihood of survey data
