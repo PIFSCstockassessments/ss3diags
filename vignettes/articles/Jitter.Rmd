@@ -18,7 +18,7 @@ library(tidyverse)
 Jitter analyses are commonly implemented in Stock Synthesis to ensure a model has reached global convergence. Jitter involves changing the parameter start values by a small increment and rerunning the model to see if that adjustment causes the model to converge at a lower likelihood. This can be useful for distinguishing if a model reached a local minimum or a global minimum. The number of jitter iterations should be anywhere between 50-100 to ensure a good spread of start values. If any of those runs has a lower likelihood than your current model, parameter start values should be adjusted to use those from the run with a lower likelihood. You can do this by adjusting the values in the control.ss file to match those in the ss.par_#_of_the_lower_likelihood_run. We provide the steps for running jitter analysis using `r4ss::jitter()` below. 
 
 ## Model inputs  
-To run a stock synthesis model, 4 input files are required: starter, forecast, control, and data. The input files for the example model can be found within the `ss3diags` package and accessed as shown below. Also, if you do not have `r4ss` installed, you will need to install for this tutorial. 
+To run a Stock Synthesis model, four input files are required: starter.ss, forecast.ss, control.ss, and data.ss. The input files for the example model can be found within the `ss3diags` package and accessed as shown below. Also, if you do not have the `r4ss` package installed, you will need to install it for this tutorial. 
 
 ```{r eval=FALSE}
 install_github("r4ss/r4ss")
@@ -124,7 +124,7 @@ converged_sum$likelihoods %>%
   )
 ```
 
-The figure plots the Total likelihood from each jitter run and the red line indicates the total likelihood value from the reference run. If there are any runs with points below the red line, use the parameter values from the run with the lowest likelihood value. 
+The figure plots the total likelihood from each jitter run and the red line indicates the total likelihood value from the reference run. If there are any runs with points below the red line, use the converged parameter values from the run with the lowest likelihood value as starting values in your base model. 
 We can also use `r4ss::SSplotComparisons()` to compare the spawning biomass trajectories between jitter runs to see the impact of different parameter values on the estimated quantities. 
 ```{r }
 SSplotComparisons(converged_sum,
