@@ -101,7 +101,7 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 #' @export
 #'
 
-SSplotRunstest <- function(ss3rep = ss3diags::simple,
+SSplotRunstest <- function(ss3rep,
                            mixing = "less",
                            subplots = c("cpue", "len", "age", "size", "con")[1],
                            plot = TRUE,
@@ -424,7 +424,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
 #'
 #' @export
 
-SSrunstest <- function(ss3rep = ss3diags::simple,
+SSrunstest <- function(ss3rep,
                        mixing = "less",
                        quants = c("cpue", "len", "age", "con")[1],
                        indexselect = NULL,

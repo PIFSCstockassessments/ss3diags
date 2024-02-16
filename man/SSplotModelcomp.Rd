@@ -5,7 +5,7 @@
 \title{Compare Multiple SS Model Estimates}
 \usage{
 SSplotModelcomp(
-  summaryoutput = ss3diags::retroSimple,
+  summaryoutput,
   plot = TRUE,
   print = deprecated(),
   print_plot = FALSE,
