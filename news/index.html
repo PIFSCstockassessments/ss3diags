@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ss3diags</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,6 +55,28 @@
       <small>Source: <a href="https://github.com/PIFSCstockassessments/ss3diags/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.2.0" id="ss3diags-220">ss3diags 2.2.0<a class="anchor" aria-label="anchor" href="#ss3diags-220"></a></h2>
+<ul><li>Add vignettes tutorials for implementing and interpreting diagnostic analyses (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/78" class="external-link">#78</a>, <a href="https://github.com/PIFSCstockassessments/ss3diags/issues/75" class="external-link">#75</a>, <a href="https://github.com/PIFSCstockassessments/ss3diags/issues/73" class="external-link">#73</a>, and <a href="https://github.com/PIFSCstockassessments/ss3diags/issues/68" class="external-link">#68</a>). The vignettes replaced the “Cookbook recipe” R scripts with updated code.</li>
+<li>Removed Rdata files (ss3diags::simple, ss3diags::retroSimple, and ss3diags::mcmcSimple). These objects are now automatically produced in the vignettes.</li>
+<li>Removed deprecated data objects from function arguments (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/100" class="external-link">#100</a>).</li>
+<li>Created generic functions to re-use common parameter documentation via roxygen tag <a href="https://github.com/inheritParams" class="external-link">@inheritParams</a> (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/66" class="external-link">#66</a> and <a href="https://github.com/PIFSCstockassessments/ss3diags/issues/2" class="external-link">#2</a>).</li>
+<li>Update r4ss dependency.</li>
+<li>Replacing installation of SS3 in container during R-CMD-Check GitHub Action workflow to use r4ss::get_ss_exe() (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/97" class="external-link">#97</a>).</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.1.1" id="ss3diags-211">ss3diags 2.1.1<a class="anchor" aria-label="anchor" href="#ss3diags-211"></a></h2>
+<ul><li>Added new logo. Thanks <a href="https://github.com/pdimens" class="external-link">@pdimens</a> (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/76" class="external-link">#76</a>, <a href="https://github.com/PIFSCstockassessments/ss3diags/issues/77" class="external-link">#77</a>)</li>
+<li>Added options to <code>SSdeltaMVLN</code> for Variance-Coveriance approximation and bias correction. Thanks <a href="https://github.com/N-DucharmeBarth-NOAA" class="external-link">@N-DucharmeBarth-NOAA</a> (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/64" class="external-link">#64</a>)</li>
+<li>Updated r4ss dependency (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/84" class="external-link">#84</a>)
+<ul><li>Dependency resolves r4ss function name conflicts w/ dplyr and kableExtra libraries (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/83" class="external-link">#83</a>). Side effect of nmfs-fish-tools/ghactions4r#69</li>
+</ul></li>
+<li>Removed <code>dplyr</code> from NAMESPACE. Removed roxygen import calls from <code><a href="../reference/SSplotJABBAres.html">SSplotJABBAres()</a></code> and <code><a href="../reference/SSrmse.html">SSrmse()</a></code>, and appended <strong>dplyr</strong> function calls with the double colon operator (<code>dplyr::</code>) (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/82" class="external-link">#82</a>)</li>
+<li>Updated default <strong>summaryoutput</strong> used in <code>SSplotModelComp()</code> for <code>ss3diags::retroSimple</code> and default <strong>ss3rep</strong> used in <code>SSplotRunsTest()</code> for <code>ss3diags::simple</code>
+</li>
+<li>Updated ss3diags citation.</li>
+<li>Minor documentation link fixes.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.0" id="ss3diags-210">ss3diags 2.1.0<a class="anchor" aria-label="anchor" href="#ss3diags-210"></a></h2>
 <ul><li>RMSE calculations are modularized as a standalone function that can be called independently from <code><a href="../reference/SSplotJABBAres.html">SSplotJABBAres()</a></code> as <code><a href="../reference/SSrmse.html">SSrmse()</a></code>. (<a href="https://github.com/PIFSCstockassessments/ss3diags/issues/50" class="external-link">#50</a>)</li>
