@@ -83,7 +83,7 @@ SSplotRetro <- function(summaryoutput,
                         pheight = 5.0,
                         punits = "in",
                         res = 300,
-                        ptsize = 10,
+                        ptsize = 12,
                         cex.main = 1,
                         plotdir = NULL,
                         filenameprefix = "",
@@ -296,7 +296,7 @@ SSplotRetro <- function(summaryoutput,
 
     if (!is.expression(legendlabels[1]) &&
       legendlabels[1] == "default") {
-      legendlabels <- c("Ref", paste(endyrvec[-1]))
+      legendlabels <- c("Reference", paste(endyrvec[-1]))
     }
     if (legendorder[1] == "default") legendorder <- 1:(nlines)
 

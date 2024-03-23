@@ -311,7 +311,7 @@ SSplotRunstest <- function(ss3rep,
 
 
     lims <- runstest[["sig3lim"]]
-    cols <- c(rgb(1, 0, 0, 0.5), rgb(0, 1, 0, 0.5))[ifelse(runstest[["p.runs"]] < 0.05, 1, 2)]
+    cols <- c("#d95f02D9", "#1b9e77")[ifelse(runstest[["p.runs"]] < 0.05, 1, 2)]
     rect(min(resid[["Yr"]] - 1), lims[1], max(resid[["Yr"]] + 1), lims[2], col = cols, border = cols) # only show runs if RMSE >= 0.1
 
     abline(h = 0, lty = 2)
