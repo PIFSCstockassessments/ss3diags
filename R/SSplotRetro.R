@@ -61,9 +61,8 @@ SSplotRetro <- function(summaryoutput,
                         forecastrho = TRUE,
                         showrho = TRUE,
                         col = NULL,
-                        pch = NULL,
-                        lty = 1,
-                        lwd = 2,
+                        pch = NA,
+                        lwd = 2.5,
                         tickEndYr = TRUE,
                         ylimAdj = 1.05,
                         xaxs = "i",
@@ -79,6 +78,7 @@ SSplotRetro <- function(summaryoutput,
                         legendcex = 1,
                         legendsp = 0.7,
                         legendindex = NULL,
+                        pt.cex = 0.7,
                         pwidth = 6.5,
                         pheight = 5.0,
                         punits = "in",
@@ -89,11 +89,11 @@ SSplotRetro <- function(summaryoutput,
                         filenameprefix = "",
                         par = list(mar = c(5, 4, 1, 1) + .1),
                         verbose = TRUE,
-                        shadecol = grey(0.4, 0.6),
+                        shadecol = "#404040", #grey(0.4, 0.6),
                         new = TRUE,
                         add = FALSE,
                         mcmcVec = FALSE,
-                        shadecol1 = grey(0.5, 0.4),
+                        shadecol1 = "#c8d0d9", #grey(0.5, 0.4),
                         indexQlabel = TRUE,
                         indexQdigits = 4,
                         shadealpha = 0.3) {
@@ -181,44 +181,6 @@ SSplotRetro <- function(summaryoutput,
       par(par)
     }
 
-    # subfunction to add legend
-    # add_legend <- function(legendlabels, cumulative = FALSE) {
-    # if (cumulative) {
-    # legendloc <- "topleft"
-    # }
-    # if (is.numeric(legendloc)) {
-    # Usr <- par()$usr
-    # legendloc <- list(
-    #   x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
-    #   y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
-    # )
-    # }
-
-    # if type input is "l" then turn off points on top of lines in legend
-    # legend.pch <- pch
-    # if (type == "l") {
-    #  legend.pch <- rep(NA, length(pch))
-    # }
-    # legend(legendloc,
-    #  legend = legendlabels[legendorder],
-    #  col = col[legendorder], lty = lty[legendorder], seg.len = 2,
-    #  lwd = lwd[legendorder], pch = legend.pch[legendorder], bty = "n", ncol = legendncol, pt.cex = 0.7, cex = legendcex, y.intersp = legendsp
-    # )
-    # }
-
-    # r4ss Colors
-    # rc <- function(n, alpha = 1) {
-    # a subset of rich.colors by Arni Magnusson from the gregmisc package
-    # a.k.a. rich.colors.short, but put directly in this function
-    # to try to diagnose problem with transparency on one computer
-    # x <- seq(0, 1, length = n)
-    # r <- 1 / (1 + exp(20 - 35 * x))
-    # g <- pmin(pmax(0, -0.8 + 6 * x - 5 * x^2), 1)
-    # b <- dnorm(x, 0.25, 0.15) / max(dnorm(x, 0.25, 0.15))
-    # rgb.m <- matrix(c(r, g, b), ncol = 3)
-    # rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1], v[2], v[3], alpha = alpha))
-    # }
-
 
 
     #-------------------------------------------------------------
@@ -279,20 +241,21 @@ SSplotRetro <- function(summaryoutput,
       stop("SSplotRequires requires a minimum of one reference and one retro peel")
     }
 
-
-    if (is.null(col) & nlines > 3) col <- r4ss::rich.colors.short(nlines + 1)[-1]
-    if (is.null(col) & nlines < 3) col <- r4ss::rich.colors.short(nlines)
-    if (is.null(col) & nlines == 3) col <- c("blue", "red", "green3")
+    #tableau inspired color palette
+    tableau10.pal <- c("#6D93BA", "#F28E2B", "#E46264", "#76B7B2", "#3AA363", "#edc948", "#b07aa1", "#FF7278", "#9c755f", "#bab0ac")
+    
+    if (is.null(col)) col <- tableau10.pal[1:nlines]
+    
     if (is.null(shadecol)) {
       # new approach thanks to Trevor Branch
       shadecol <- adjustcolor(col, alpha.f = shadealpha)
     }
 
     # if line stuff is shorter than number of lines, recycle as needed
-    if (length(col) < nlines) col <- rep(col, nlines)[1:nlines]
     if (length(pch) < nlines) pch <- rep(pch, nlines)[1:nlines]
-    if (length(lty) < nlines) lty <- rep(lty, nlines)[1:nlines]
     if (length(lwd) < nlines) lwd <- rep(lwd, nlines)[1:nlines]
+    if (length(pt.cex) < nlines) pt.cex <- rep(pt.cex, nlines)[1:nlines]
+    lty <- 1:nlines
 
     if (!is.expression(legendlabels[1]) &&
       legendlabels[1] == "default") {
@@ -381,19 +344,19 @@ SSplotRetro <- function(summaryoutput,
       y <- exp[subset, imodel]
       xfc <- yr[subsetfc]
       yfc <- exp[subsetfc, imodel]
-      lines(x, y, lwd = lwd[iline], col = col[iline], type = "l", cex = 0.9)
+      lines(x, y, lwd = lwd[iline], col = col[iline], type = "l", cex = 1, lty = lty[iline])
       if (forecast) {
         lines(xfc[(length(xfc) - 1):length(xfc)],
           yfc[(length(xfc) - 1):length(xfc)],
-          lwd = 1,
+          lwd = lwd,
           col = col[iline],
           type = "l",
-          cex = 0.9,
-          lty = 2
+          cex = 1,
+          lty = 1
         )
         points(xfc[length(xfc)], yfc[length(yfc)],
           pch = 21,
-          bg = col[iline], col = 1, type = "p", cex = 0.9
+          bg = col[iline], col = 1, type = "p", cex = 1.1
         )
       }
       rho.i[iline - 1] <- (y[length(y)] - y.ref[length(y)]) /
@@ -410,19 +373,37 @@ SSplotRetro <- function(summaryoutput,
 
     if (legend) {
       # add legend if requested
+      if(uncertainty){
+        # add uncertainty to legend lables if requested to show
+        legendlabels <- c(legendlabels, "95% CI")
+        legendorder <- c(legendorder, nlines + 1)
+        pch <- c(pch, 15)
+        col <- c(col, shadecol)
+        lty <- c(lty, NA)
+        lwd <- c(lwd, NA)
+        pt.cex <- c(pt.cex, 1.5)
+      }
 
       r4ss::add_legend(legendlabels,
         legendloc = legendloc,
-        legendcex = legendcex,
+        legendcex = legendcex, 
         legendsp = legendsp,
         legendncol = legendncol,
         legendorder = legendorder,
-        pch = pch, col = col, lty = lty,
+        pch = pch, 
+        col = col, 
+        lty = lty,
         lwd = lwd,
+        pt.cex = pt.cex,
         type = type
       )
+      
     }
-    if (showrho) legend("top", paste0("Mohn's rho = ", round(rho, 2), ifelse(forecast & forecastrho, paste0("(", round(fcrho, 2), ")"), "")), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
+    if (showrho){
+      legend("top", paste0("Mohn's rho = ", round(rho, 2), 
+                           ifelse(forecast & forecastrho, paste0("\nForecast Mohn's rho = ", round(fcrho, 2)))),
+             bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
+    } 
 
     # axis(1, at=c(max(xmin,min(yr)):max(endyrvec)))
     axis(1)

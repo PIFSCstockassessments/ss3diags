@@ -112,7 +112,7 @@ SSplotRunstest <- function(ss3rep,
                            pdf = deprecated(),
                            use_pdf = FALSE,
                            indexselect = NULL,
-                           miny = 1,
+                           miny = 0.5,
                            col = NULL,
                            pch = 21,
                            lty = 1,
@@ -120,7 +120,7 @@ SSplotRunstest <- function(ss3rep,
                            tickEndYr = FALSE,
                            xlim = "default",
                            ylim = "default",
-                           ylimAdj = 1.4,
+                           ylimAdj = 1.2,
                            xaxs = "i",
                            yaxs = "i",
                            xylabs = TRUE,
@@ -128,11 +128,11 @@ SSplotRunstest <- function(ss3rep,
                            legend = TRUE,
                            legendloc = "top",
                            legendcex = 1,
-                           pwidth = 6.5,
+                           pwidth = 7,
                            pheight = 5.0,
                            punits = "in",
                            res = 300,
-                           ptsize = 10,
+                           ptsize = 12,
                            cex.main = 1,
                            plotdir = NULL,
                            filenameprefix = "",
@@ -311,7 +311,7 @@ SSplotRunstest <- function(ss3rep,
 
 
     lims <- runstest[["sig3lim"]]
-    cols <- c("#d95f02D9", "#1b9e77")[ifelse(runstest[["p.runs"]] < 0.05, 1, 2)]
+    cols <- c("#E15759", "#59A14F")[ifelse(runstest[["p.runs"]] < 0.05, 1, 2)]
     rect(min(resid[["Yr"]] - 1), lims[1], max(resid[["Yr"]] + 1), lims[2], col = cols, border = cols) # only show runs if RMSE >= 0.1
 
     abline(h = 0, lty = 2)
