@@ -27,6 +27,7 @@ Imports:
     r4ss (== 1.49.3),
     randtests,
     reshape2,
+    gh,
     rlang
 Suggests:
     knitr,
