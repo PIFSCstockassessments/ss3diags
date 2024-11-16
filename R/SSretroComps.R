@@ -30,7 +30,7 @@ SSretroComps <- function(retroModels) {
       rep.temp <- retroModels[[paste(replist[i])]]
       rep.temp[["lendbase"]] <- rbind(rep.temp[["ghostlendbase"]], rep.temp[["lendbase"]][, 1:ncol(rep.temp[["ghostlendbase"]])])
       rep.temp[["lendbase"]] <- data.frame(rep.temp[["lendbase"]], imodel = i)
-      lencomps <- rbind(lencomps, data.frame(SScompsTA1.8(rep.temp, type = "len", plotit = F)$runs_dat, imodel = i))
+      lencomps <- rbind(lencomps, data.frame(SScompsTA1.8(rep.temp, type = "len", plotit = F)[["runs_dat"]], imodel = i))
     }
     lencomps <- lencomps[order(lencomps[["imodel"]], lencomps[["Fleet"]], lencomps[["Time"]]), ]
 
@@ -42,7 +42,7 @@ SSretroComps <- function(retroModels) {
     for (i in 1:length(replist)) {
       rep.temp <- retroModels[[paste(replist[i])]]
       rep.temp[["agedbase"]] <- rbind(rep.temp[["ghostagedbase"]], rep.temp[["agedbase"]][, 1:ncol(rep.temp[["ghostagedbase"]])])
-      agecomps <- rbind(agecomps, data.frame(SScompsTA1.8(rep.temp, type = "age", plotit = F)$runs_dat, imodel = i))
+      agecomps <- rbind(agecomps, data.frame(SScompsTA1.8(rep.temp, type = "age", plotit = F)[["runs_dat"]], imodel = i))
     }
     agecomps <- agecomps[order(agecomps[["imodel"]], agecomps[["Fleet"]], agecomps[["Time"]]), ]
     hccomps[["age"]] <- agecomps
@@ -53,7 +53,7 @@ SSretroComps <- function(retroModels) {
     for (i in 1:length(replist)) {
       rep.temp <- retroModels[[paste(replist[i])]]
       rep.temp[["condbase"]] <- rbind(rep.temp[["ghostcondbase"]], rep.temp[["condbase"]][, 1:ncol(rep.temp[["ghostcondbase"]])])
-      concomps <- rbind(concomps, data.frame(SScompsTA1.8(rep.temp, type = "con", plotit = F)$runs_dat, imodel = i))
+      concomps <- rbind(concomps, data.frame(SScompsTA1.8(rep.temp, type = "con", plotit = F)[["runs_dat"]], imodel = i))
     }
     concomps <- concomps[order(concomps[["imodel"]], concomps[["Fleet"]], concomps[["Time"]]), ]
     hccomps[["con"]] <- concomps

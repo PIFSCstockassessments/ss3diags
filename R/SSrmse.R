@@ -36,7 +36,7 @@ SSrmse <- function(ss3rep, quants = c("cpue", "len", "age", "con"), seas = NULL,
   }
 
   if (quants == "len" | quants == "age" | quants == "size") {
-    comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = quants, plotit = FALSE)$runs_dat
+    comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = quants, plotit = FALSE)[["runs_dat"]]
     comps[["residuals"]] <- ifelse(is.na(comps[["Obs"]]), NA, log(comps[["Obs"]]) - log(comps[["Exp"]]))
     if (is.null(comps[["Fleet_name"]])) { # Deal with Version control
       comps[["Fleet_name"]] <- comps[["Name"]]
@@ -45,7 +45,7 @@ SSrmse <- function(ss3rep, quants = c("cpue", "len", "age", "con"), seas = NULL,
   }
 
   if (quants == "con") {
-    cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = quants, plotit = FALSE)$runs_dat
+    cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = quants, plotit = FALSE)[["runs_dat"]]
     cond[["residuals"]] <- ifelse(is.na(cond[["Obs"]]), NA, log(cond[["Obs"]]) - log(cond[["Exp"]]))
     if (is.null(cond[["Fleet_name"]])) { # Deal with Version control
       cond[["Fleet_name"]] <- cond[["Name"]]

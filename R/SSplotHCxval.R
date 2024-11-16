@@ -247,7 +247,7 @@ SSplotHCxval <- function(retroSummary,
     # legendloc <- "topleft"
     # }
     # if (is.numeric(legendloc)) {
-    # Usr <- par()$usr
+    # Usr <- par()[["usr"]]
     # legendloc <- list(
     #   x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
     #   y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
@@ -613,7 +613,7 @@ SSplotHCxval <- function(retroSummary,
           filenameprefix = filenameprefix
         )
         par(par)
-        get_mase <- plot_hcxval(indexfleets)$MASE
+        get_mase <- plot_hcxval(indexfleets)[["MASE"]]
         dev.off()
         MASE <- rbind(MASE, get_mase)
       } # End of Fleet Loop
@@ -626,7 +626,7 @@ SSplotHCxval <- function(retroSummary,
       if (fi %in% legendindex) legend <- TRUE
       indexfleets <- unique(hcruns[["indices"]][["Fleet"]])[fi]
       if (!add) (par)
-      get_mase <- plot_hcxval(indexfleets)$MASE
+      get_mase <- plot_hcxval(indexfleets)[["MASE"]]
       MASE <- rbind(MASE, get_mase)
     } # End of Fleet Loop
   }

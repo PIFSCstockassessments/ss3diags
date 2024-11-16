@@ -25,7 +25,7 @@ SSplotKobe(
 )
 }
 \arguments{
-\item{kb}{output from SSdeltaMVLN()$kb}
+\item{kb}{output from SSdeltaMVLN()[\link{"kb"}]}
 
 \item{joint}{option FALSE shows individual runs}
 
