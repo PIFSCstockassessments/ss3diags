@@ -33,7 +33,7 @@ get_ss3_exe <- function(dir = NULL, version = NULL) {
     all_tags <- gh::gh("GET /repos/nmfs-ost/ss3-source-code/tags", .token = NA_character_)
     df_tags <- as.data.frame(do.call(rbind, all_tags))
     tags <- unlist(df_tags[["name"]])
-    
+
     if (!version %in% tags) {
       warning("The version tag that you entered is invalid or not in the right format,
               please go to https://github.com/nmfs-ost/ss3-source-code/tags
@@ -42,32 +42,27 @@ get_ss3_exe <- function(dir = NULL, version = NULL) {
       tag <- version
     }
   }
-  
+
   if (is.null(dir)) {
     dir <- getwd()
     message("No directory provided, the executable will be downloaded to the working directory")
   }
-  
+
   if (!dir.exists(dir)) {
     stop("Directory doesn't exist: ", dir)
   }
-  
-  #if (.Platform[["OS.type"]] == "windows") {
-  if(R.version[["os"]] == "mingw32") {
-    
+
+  # if (.Platform[["OS.type"]] == "windows") {
+  if (R.version[["os"]] == "mingw32") {
     download_location <- ss3_exe_windows(dir, tag)
-    
-  } else if(substr(R.version[["os"]], 1, 6) == "darwin") {
-    
+  } else if (substr(R.version[["os"]], 1, 6) == "darwin") {
     download_location <- ss3_exe_darwin(dir, tag, R.version[["arch"]])
-  } else if(R.version[["os"]] == "linux-gnu") {
-    
+  } else if (R.version[["os"]] == "linux-gnu") {
     download_location <- ss3_exe_linux(dir, tag)
   } else {
-    
     stop("The Stock Synthesis executable is not available for ", R.version[["os"]], ".") # nocov end
   }
-      
+
   return(invisible(download_location))
 }
 
@@ -75,15 +70,15 @@ get_ss3_exe <- function(dir = NULL, version = NULL) {
 
 
 #' @rdname get_ss3_exe
-#' 
+#'
 #' @param dir Target Directory
-#' @param tag Target ss3 Version release 
-#' 
+#' @param tag Target ss3 Version release
+#'
 #' @return A string of the file path to the downloaded executable
 #'
 #' @keywords internal
-#' 
-ss3_exe_windows <- function (dir, tag) {
+#'
+ss3_exe_windows <- function(dir, tag) {
   if (.Platform[["r_arch"]] == "x32") { # nocov start
     warning(
       "Stock Synthesis binary is not available for 32-bit ",
@@ -98,7 +93,7 @@ ss3_exe_windows <- function (dir, tag) {
       suppressWarnings(utils::download.file(url, destfile = file.path(dir, "ss3.exe"), mode = "wb")),
       error = function(e) "ss3 name not right for this version, trying ss"
     )
-    
+
     if (try_ss == "ss3 name not right for this version, trying ss") {
       url <- paste0(
         "https://github.com/nmfs-ost/ss3-source-code/releases/download/",
@@ -111,7 +106,7 @@ ss3_exe_windows <- function (dir, tag) {
       "The stock synthesis executable for Windows ", tag, " was downloaded to: ",
       download_location
     ))
-    
+
     return(invisible(download_location))
   }
 }
@@ -120,18 +115,17 @@ ss3_exe_windows <- function (dir, tag) {
 #' @rdname get_ss3_exe
 #'
 #' @param dir Target Directory
-#' @param tag Target ss3 Version release 
+#' @param tag Target ss3 Version release
 #' @param arch arch
-#' 
+#'
 #' @return A string of the file path to the downloaded executable
 #'
 #' @keywords internal
-#' 
-ss3_exe_darwin <- function(dir, tag, arch = c("aarch64", "x86_64" )) {
-  
+#'
+ss3_exe_darwin <- function(dir, tag, arch = c("aarch64", "x86_64")) {
   arch <- match.arg(arch)
-  
-  if(arch == "aarch64"){
+
+  if (arch == "aarch64") {
     url <- paste0(
       "https://github.com/nmfs-ost/ss3-source-code/releases/download/",
       tag, "/ss3_osx_arm64"
@@ -141,7 +135,7 @@ ss3_exe_darwin <- function(dir, tag, arch = c("aarch64", "x86_64" )) {
       error = function(e) "ss3 executable not available for macOS arm64 architecture
             computers for versions prior to v.3.30.22.1"
     )
-    
+
     if (try_arm64 == "ss3 executable not available for macOS arm64 architecture computers for
         versions prior to v.3.30.22.1") {
       print(try_arm64)
@@ -162,7 +156,7 @@ ss3_exe_darwin <- function(dir, tag, arch = c("aarch64", "x86_64" )) {
       suppressWarnings(utils::download.file(url, destfile = file.path(dir, "ss3"), mode = "wb")),
       error = function(e) "ss3 name not right for this version, trying ss"
     )
-    
+
     if (try_ss == "ss3 name not right for this version, trying ss") {
       url <- paste0(
         "https://github.com/nmfs-ost/ss3-source-code/releases/download/",
@@ -181,14 +175,14 @@ ss3_exe_darwin <- function(dir, tag, arch = c("aarch64", "x86_64" )) {
 }
 
 #' @rdname get_ss3_exe
-#' 
+#'
 #' @param dir Target Directory
-#' @param tag Target ss3 Version release 
-#' 
+#' @param tag Target ss3 Version release
+#'
 #' @return A string of the file path to the downloaded executable
 #'
 #' @keywords internal
-#' 
+#'
 ss3_exe_linux <- function(dir, tag) {
   url <- paste0(
     "https://github.com/nmfs-ost/ss3-source-code/releases/download/",
@@ -198,7 +192,7 @@ ss3_exe_linux <- function(dir, tag) {
     suppressWarnings(utils::download.file(url, destfile = file.path(dir, "ss3"), mode = "wb")),
     error = function(e) "ss3 name not right for this version, trying ss"
   )
-  
+
   if (try_ss == "ss3 name not right for this version, trying ss") {
     url <- paste0(
       "https://github.com/nmfs-ost/ss3-source-code/releases/download/",

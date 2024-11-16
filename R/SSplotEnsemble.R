@@ -236,8 +236,8 @@ SSplotEnsemble <- function(kb,
     n.quantiles <- length(quantiles)
     for (i in 1:n.quantiles) {
       exp[[i]] <- aggregate(y ~ year + run, kb, mean)
-      exp[[i]][["lower"]] <- aggregate(y ~ year + run, kb, quantile, quantiles[[i]][1])$y
-      exp[[i]][["upper"]] <- aggregate(y ~ year + run, kb, quantile, quantiles[[i]][2])$y
+      exp[[i]][["lower"]] <- aggregate(y ~ year + run, kb, quantile, quantiles[[i]][1])[["y"]]
+      exp[[i]][["upper"]] <- aggregate(y ~ year + run, kb, quantile, quantiles[[i]][2])[["y"]]
     }
 
 
@@ -444,7 +444,7 @@ ensemble_plot_index <- function(summaryoutput,
   # legendloc <- "topleft"
   # }
   # if (is.numeric(legendloc)) {
-  # Usr <- par()$usr
+  # Usr <- par()[["usr"]]
   # legendloc <- list(
   #   x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
   #   y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])

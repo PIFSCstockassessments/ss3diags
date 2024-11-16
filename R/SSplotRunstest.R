@@ -198,7 +198,7 @@ SSplotRunstest <- function(ss3rep,
   }
 
   if (subplots == "len" | subplots == "age" | subplots == "size") {
-    comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
+    comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)[["runs_dat"]]
     comps[["residuals"]] <- ifelse(is.na(comps[["Obs"]]), NA, log(comps[["Obs"]]) - log(comps[["Exp"]]))
     if (is.null(comps[["Fleet_name"]])) { # Deal with Version control
       comps[["Fleet_name"]] <- comps[["Name"]]
@@ -207,7 +207,7 @@ SSplotRunstest <- function(ss3rep,
   }
 
   if (subplots == "con") {
-    cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
+    cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)[["runs_dat"]]
     cond[["residuals"]] <- ifelse(is.na(cond[["Obs"]]), NA, log(cond[["Obs"]]) - log(cond[["Exp"]]))
     if (is.null(cond[["Fleet_name"]])) { # Deal with Version control
       cond[["Fleet_name"]] <- cond[["Name"]]
@@ -444,7 +444,7 @@ SSrunstest <- function(ss3rep,
   }
 
   if (subplots == "len" | subplots == "age") {
-    comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
+    comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)[["runs_dat"]]
     comps[["residuals"]] <- ifelse(is.na(comps[["Obs"]]), NA, log(comps[["Obs"]]) - log(comps[["Exp"]]))
     if (is.null(comps[["Fleet_name"]])) { # Deal with Version control
       comps[["Fleet_name"]] <- comps[["Name"]]
@@ -453,7 +453,7 @@ SSrunstest <- function(ss3rep,
   }
 
   if (subplots == "con") {
-    cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
+    cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)[["runs_dat"]]
     cond[["residuals"]] <- ifelse(is.na(cond[["Obs"]]), NA, log(cond[["Obs"]]) - log(cond[["Exp"]]))
     if (is.null(cond[["Fleet_name"]])) { # Deal with Version control
       cond[["Fleet_name"]] <- cond[["Name"]]

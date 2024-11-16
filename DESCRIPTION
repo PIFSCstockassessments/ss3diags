@@ -20,6 +20,7 @@ Depends:
     R (>= 3.5)
 Imports:
     dplyr,
+    gh,
     gplots,
     lifecycle,
     magrittr,
@@ -27,7 +28,6 @@ Imports:
     r4ss (== 1.49.3),
     randtests,
     reshape2,
-    gh,
     rlang
 Suggests:
     knitr,
