@@ -1,120 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/404.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/articles/Jitter.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/articles/aspm.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/articles/hcxval.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/articles/likelihood.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/articles/residuals.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SScompsTA1.8.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSdeltaMVLN.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSdeltaMVLN_old.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSdiagsMCMC.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSdiagsMCMC_ancient.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SShcbias.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSmase.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotEnsemble.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotGeneric.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotGenericLegend.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotGenericPar.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotGenericUncertainty.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotHCxval.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotJABBAres.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotKobe.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotModelcomp.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotRetro.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotRunstest.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSreadMCMC.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSretroComps.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSrmse.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSrunstest.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/SSsettingsBratioF.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/ensemble_plot_index.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pifscstockassessments.github.io/ss3diags/reference/ssruns_sig3.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/404.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/CONTRIBUTING.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/articles/Jitter.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/articles/aspm.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/articles/hcxval.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/articles/index.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/articles/likelihood.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/articles/residuals.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/authors.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/index.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/news/index.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SScompsTA1.8.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSdeltaMVLN.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSdeltaMVLN_old.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSdiagsMCMC.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSdiagsMCMC_ancient.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SShcbias.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSmase.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotEnsemble.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotGeneric.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotGenericLegend.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotGenericPar.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotGenericUncertainty.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotHCxval.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotJABBAres.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotKobe.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotModelcomp.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotRetro.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSplotRunstest.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSreadMCMC.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSretroComps.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSrmse.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSrunstest.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/SSsettingsBratioF.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/ensemble_plot_index.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/get_ss3_exe.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/index.html</loc></url>
+<url><loc>https://pifscstockassessments.github.io/ss3diags/reference/ssruns_sig3.html</loc></url>
 </urlset>
+
