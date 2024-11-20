@@ -1,3 +1,12 @@
+# ss3diags 2.2.1
+
+* Change **r4ss** dependency to **[ONLY version 1.49.3](https://github.com/r4ss/r4ss/releases/tag/v1.49.3)** for compatibility. 
+  * **[r4ss 1.50.0](https://github.com/r4ss/r4ss/releases/tag/v1.50.0)** introduces a major changes to its read/write functions that breaks compatibility with existing **ss3diags** functions, but will be resolved in a future update. (#109)
+* Set `NA_character_` as `gh::gh()` token to resolve SAML authentication errors downloading ss3 binaries from [nfms-ost/ss3-source-code](https://github.com/nmfs-ost/ss3-source-code) used in test scripts. (#110)
+  * Added local `get_ss3_exe` function, based on `r4ss::get_ss3_exe()`, with `gh::gh()` token fixes 
+  * Once r4ss dependency is updated to 1.50.0+, local function will be superceded by `r4ss::get_ss3_exe()`
+* Update RoxygenNote to 7.3.2 
+
 # ss3diags 2.2.0
 
 * Add vignettes tutorials for implementing and interpreting diagnostic analyses (#78, #75, #73, and #68). The vignettes replaced the "Cookbook recipe" R scripts with updated code.
