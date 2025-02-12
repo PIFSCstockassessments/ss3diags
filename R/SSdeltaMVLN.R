@@ -74,9 +74,9 @@ SSdeltaMVLN <- function(ss3rep, Fref = NULL, years = NULL, mc = 5000, weight = 1
   if (bb %in% c(1:2) == F) stop("This Bratio is not [yet] defined, please rerun Stock Synthesis with starter.ss option for Depletion basis: 1 or 2")
 
   bbasis <- c("SSB/SSB0", "SSB/SSBMSY", "SSB/SSBtrg")[bb]
-  if("F_std_basis" %in% names(ss3rep)){
+  if ("F_std_basis" %in% names(ss3rep)) {
     fbasis <- strsplit(ss3rep[["F_std_basis"]], ";")[[1]][1]
-  }else{
+  } else {
     fbasis <- strsplit(ss3rep[["F_report_basis"]], ";")[[1]][1]
   }
   gettrg <- strsplit(fbasis, "%")[[1]][1]

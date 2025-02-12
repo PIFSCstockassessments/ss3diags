@@ -18,9 +18,8 @@
 
 
 SSrmse <- function(ss3rep, quants, seas = NULL, indexselect = NULL) {
-  
-   quant_options <- c("cpue", "len", "age", "size", "con")
-  if(!quants %in% quant_options){
+  quant_options <- c("cpue", "len", "age", "size", "con")
+  if (!quants %in% quant_options) {
     stop(
       "The quantity for calculating RMSE must be specified as one of the following options:\n",
       paste(" ", quant_options, "\n")
