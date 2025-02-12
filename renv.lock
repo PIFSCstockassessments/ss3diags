@@ -800,6 +800,20 @@
       ],
       "Hash": "f72b5d1ed587f8905e38ee7295e88d80"
     },
+    "gridExtra": {
+      "Package": "gridExtra",
+      "Version": "2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "grDevices",
+        "graphics",
+        "grid",
+        "gtable",
+        "utils"
+      ],
+      "Hash": "7d7f283939f563670a697165b2cf5560"
+    },
     "gtable": {
       "Package": "gtable",
       "Version": "0.3.6",
@@ -1377,14 +1391,14 @@
     },
     "r4ss": {
       "Package": "r4ss",
-      "Version": "1.49.3",
+      "Version": "1.51.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "r4ss",
       "RemoteRepo": "r4ss",
-      "RemoteRef": "v1.49.3",
-      "RemoteSha": "869476df7ca32dcd5338d65216f2a91bd6a8b991",
+      "RemoteRef": "main",
+      "RemoteSha": "b2b441825b4d4c0465c4b85b94c1d34a0e463f50",
       "Requirements": [
         "R",
         "coda",
@@ -1399,9 +1413,10 @@
         "lifecycle",
         "purrr",
         "stringr",
-        "tidyr"
+        "tidyr",
+        "viridis"
       ],
-      "Hash": "2bec45b7625c1c5a4333002a9886157b"
+      "Hash": "9b206bcca3ed81cb07eb1b2a04ca0713"
     },
     "ragg": {
       "Package": "ragg",
@@ -1914,6 +1929,19 @@
         "rlang"
       ],
       "Hash": "c03fa420630029418f7e6da3667aac4a"
+    },
+    "viridis": {
+      "Package": "viridis",
+      "Version": "0.6.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "ggplot2",
+        "gridExtra",
+        "viridisLite"
+      ],
+      "Hash": "acd96d9fa70adeea4a5a1150609b9745"
     },
     "viridisLite": {
       "Package": "viridisLite",

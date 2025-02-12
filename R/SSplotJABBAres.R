@@ -133,9 +133,10 @@ SSplotJABBAres <- function(ss3rep,
     use_png <- F
   }
 
+  ##TODO: either change name to make it singular or allow for multiple plots at one time
   subplots <- subplots[1]
-  datatypes <- c("Index", "Mean length", "Mean age", "Conditional Age")
-  ylabel <- datatypes[which(c("cpue", "len", "age", "con") %in% subplots)]
+  datatypes <- c("Index", "Mean length", "Mean age", "Mean size", "Conditional Age")
+  ylabel <- datatypes[which(c("cpue", "len", "age", "size", "con") %in% subplots)]
 
   # log <- FALSE # (no option to plot on log scale) #removed this line, not sure why it is necessary - MO 7/14/22
   if (use_png) print_plot <- TRUE
@@ -154,7 +155,7 @@ SSplotJABBAres <- function(ss3rep,
     pdffile <- file.path(
       plotdir,
       paste0(
-        filenameprefix, "SSplotComparisons_",
+        filenameprefix, "SSplotJABBAres_",
         format(Sys.time(), "%d-%b-%Y_%H.%M"), ".pdf"
       )
     )
@@ -163,7 +164,7 @@ SSplotJABBAres <- function(ss3rep,
     par(par)
   }
 
-
+  ##TODO: to allow for multiple subplots at one time, need to change this to apply function
   resids_list <- SSrmse(ss3rep, quants = subplots, seas = seas, indexselect = indexselect)
   #-----------------
   # start plot
