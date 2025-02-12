@@ -2,7 +2,7 @@
 #' used for `SSplotJABBAres()`
 #'
 #' @param ss3rep output from `SS_output()`
-#' @param quants the dataset to calculate RMSE for. "cpue" for index of abundance, "len" for length comp, "age" for age composition, and "con" for conditional age-at-length.
+#' @param quants the dataset to calculate RMSE for. "cpue" for index of abundance, "len" for length comp, "age" for age composition, "size" for general size composition, and "con" for conditional age-at-length.
 #' @param seas string indicating how to treat data from multiple seasons
 #' 'comb' - combine seasonal data for each year and plot against Yr
 #' 'sep' - treat season separately, plotting against Yr.S.
@@ -18,7 +18,16 @@
 #' @export
 
 
-SSrmse <- function(ss3rep, quants = c("cpue", "len", "age", "con"), seas = NULL, indexselect = NULL) {
+SSrmse <- function(ss3rep, quants, seas = NULL, indexselect = NULL) {
+  
+   quant_options <- c("cpue", "len", "age", "size", "con")
+  if(!quants %in% quant_options){
+    stop(
+      "The quantity for calculating RMSE must be specified as one of the following options:\n",
+      paste(" ", quant_options, "\n")
+    )
+  }
+
   if (length(quants) > 1) {
     warning("RMSE can only be calculated for one object at a time, calculating RMSE for ", quants[1], " only.")
   }
@@ -68,27 +77,27 @@ SSrmse <- function(ss3rep, quants = c("cpue", "len", "age", "con"), seas = NULL,
     Res <- Res[Res[["Fleet_name"]] %in% iname, ]
   }
 
-  RMSE <- Res %>%
+  RMSE <- Res |>
     dplyr::summarise(
       RMSE.perc = round(100 * sqrt(mean(residuals^2, na.rm = TRUE)), 1),
       Nobs = length(!is.na(residuals))
-    ) %>%
-    dplyr::mutate(Fleet = "Combined") %>%
+    ) |>
+    dplyr::mutate(Fleet = "Combined") |>
     dplyr::select(.data[["Fleet"]], .data[["RMSE.perc"]], .data[["Nobs"]])
 
-  rmse_table <- Res %>%
-    dplyr::group_by(.data[["Fleet_name"]]) %>%
+  rmse_table <- Res |>
+    dplyr::group_by(.data[["Fleet_name"]]) |>
     dplyr::summarise(
       resi = sum(residuals^2, na.rm = TRUE),
       ni = length(!is.na(residuals))
-    ) %>%
-    dplyr::mutate(rmse = round(100 * sqrt(.data[["resi"]] / .data[["ni"]]), 1)) %>%
-    dplyr::select(.data[["Fleet_name"]], .data[["rmse"]], .data[["ni"]]) %>%
+    ) |>
+    dplyr::mutate(rmse = round(100 * sqrt(.data[["resi"]] / .data[["ni"]]), 1)) |>
+    dplyr::select(.data[["Fleet_name"]], .data[["rmse"]], .data[["ni"]]) |>
     dplyr::rename(
       Fleet = "Fleet_name",
       RMSE.perc = "rmse",
       Nobs = "ni"
-    ) %>%
+    ) |>
     dplyr::bind_rows(RMSE)
 
   output <- list(RMSE = rmse_table, residuals = Res)
