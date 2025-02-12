@@ -169,8 +169,8 @@ SSplotJABBAres <- function(ss3rep,
   # start plot
   #----------------
   jabbaresiduals <- function(resids_list) {
-    Res <- resids_list[["residuals"]] %>%
-      dplyr::group_by(.data[["Fleet"]]) %>%
+    Res <- resids_list[["residuals"]] |>
+      dplyr::group_by(.data[["Fleet"]]) |>
       dplyr::arrange(.data[["Yr"]], .by_group = TRUE)
     positions <- runif(nrow(Res), -0.2, 0.2)
 
@@ -257,9 +257,9 @@ SSplotJABBAres <- function(ss3rep,
       points(yr + positions[i], Resids[i, ], col = 1, pch = pch, bg = col[i])
     }
 
-    mean.res <- Res %>%
-      dplyr::group_by(.data[["Yr"]]) %>%
-      dplyr::summarise(mean.res = mean(.data[["residuals"]], na.rm = TRUE)) %>%
+    mean.res <- Res |>
+      dplyr::group_by(.data[["Yr"]]) |>
+      dplyr::summarise(mean.res = mean(.data[["residuals"]], na.rm = TRUE)) |>
       dplyr::mutate(Yr = as.numeric(.data[["Yr"]]))
 
     mean.res[["smooth.res"]] <- predict(
