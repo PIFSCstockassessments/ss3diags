@@ -37,7 +37,7 @@ file.copy(from = list.files(files_path, full.names = TRUE), to = dir_jitter)
 You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the retrospective from (in this case `dir_jitter`). An easy way to get the latest release of stock synthesis is to use the `r4ss` function `get_ss3_exe()`.
 
 ```{r}
-r4ss::get_ss3_exe(dir = dir_jitter, version = "v3.30.21")
+r4ss::get_ss3_exe(dir = dir_jitter)
 ```
  
 We will run the model in `dir_jitter` first to produce the necessary output files. It is recommended to do jitter runs in a subdirectory of your model run. This will keep all of the output files separate from other diagnostic tests you may run. 
@@ -88,18 +88,20 @@ You may also want to check that the models converged. To do this you can check t
 converged_grad <- which(jit_summary$maxgrad < 0.0001)
 
 converged_ssb <- jit_summary$SpawnBio |>
-  mutate(across(c(1:(Njitter + 1)),
+  dplyr::mutate(across(c(1:(Njitter + 1)),
     .fns = ~ . / replist0
   )) |> # for each column, divide SSB by SSB from the reference run (replist)
-  select(-Label) |>
-  pivot_longer(col = c(1:(Njitter + 1)), names_to = "jitter", values_to = "SSB") |>
-  pivot_wider(names_from = Yr, values_from = SSB) |>
-  mutate(rownumber = seq(1, nrow(.))) |>
-  tibble::column_to_rownames("jitter") |>
-  filter_at(vars(1:(ncol(.) - 1)), all_vars((.) < 2 & (.) > 0.5)) |> # keep only rows where SSB is a reasonable value
-  select(rownumber) |>
-  pull(rownumber)
-converged_mods <- intersect(converged_grad, converged_ssb) # getting which models are in both groups
+  dplyr::select(-Label) |>
+  tidyr::pivot_longer(col = c(1:(Njitter + 1)), names_to = "jitter", values_to = "SSB") |>
+  tidyr::pivot_wider(names_from = Yr, values_from = SSB) |>
+  dplyr::mutate(rownumber = seq(1, dplyr::n())) |>
+  tibble::column_to_rownames("rownumber") |>
+  dplyr::select(-jitter) |>
+  dplyr:: filter(across(everything(), ~ . >= 0.5 & . <= 2)) |> # keep only rows where SSB is a reasonable value
+  tibble::rownames_to_column("rownumber") |>
+  dplyr::select(rownumber) |>
+  dplyr::pull(rownumber)
+converged_mods <- intersect(converged_grad, as.numeric(converged_ssb)) # getting which models are in both groups
 converged_jitters <- jit_mods[converged_grad]
 converged_sum <- SSsummarize(converged_jitters, verbose = FALSE)
 ```
