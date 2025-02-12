@@ -133,7 +133,7 @@ SSplotJABBAres <- function(ss3rep,
     use_png <- F
   }
 
-  ##TODO: either change name to make it singular or allow for multiple plots at one time
+  ## TODO: either change name to make it singular or allow for multiple plots at one time
   subplots <- subplots[1]
   datatypes <- c("Index", "Mean length", "Mean age", "Mean size", "Conditional Age")
   ylabel <- datatypes[which(c("cpue", "len", "age", "size", "con") %in% subplots)]
@@ -164,7 +164,7 @@ SSplotJABBAres <- function(ss3rep,
     par(par)
   }
 
-  ##TODO: to allow for multiple subplots at one time, need to change this to apply function
+  ## TODO: to allow for multiple subplots at one time, need to change this to apply function
   resids_list <- SSrmse(ss3rep, quants = subplots, seas = seas, indexselect = indexselect)
   #-----------------
   # start plot
