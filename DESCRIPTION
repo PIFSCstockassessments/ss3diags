@@ -25,7 +25,7 @@ Imports:
     lifecycle,
     magrittr,
     mvtnorm,
-    r4ss (== 1.49.3),
+    r4ss,
     randtests,
     reshape2,
     rlang
@@ -35,7 +35,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 Remotes: 
-    r4ss/r4ss@v1.49.3
+    r4ss/r4ss
 Encoding: UTF-8
 LazyData: True
 LazyDataCompression: gzip
