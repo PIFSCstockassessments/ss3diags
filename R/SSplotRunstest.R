@@ -101,7 +101,7 @@ ssruns_sig3 <- function(x, type = NULL, mixing = "less") {
 #' @export
 #'
 
-SSplotRunstest <- function(ss3rep = ss3diags::simple,
+SSplotRunstest <- function(ss3rep,
                            mixing = "less",
                            subplots = c("cpue", "len", "age", "size", "con")[1],
                            plot = TRUE,
@@ -198,7 +198,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
   }
 
   if (subplots == "len" | subplots == "age" | subplots == "size") {
-    comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
+    comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)[["runs_dat"]]
     comps[["residuals"]] <- ifelse(is.na(comps[["Obs"]]), NA, log(comps[["Obs"]]) - log(comps[["Exp"]]))
     if (is.null(comps[["Fleet_name"]])) { # Deal with Version control
       comps[["Fleet_name"]] <- comps[["Name"]]
@@ -207,7 +207,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
   }
 
   if (subplots == "con") {
-    cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
+    cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)[["runs_dat"]]
     cond[["residuals"]] <- ifelse(is.na(cond[["Obs"]]), NA, log(cond[["Obs"]]) - log(cond[["Exp"]]))
     if (is.null(cond[["Fleet_name"]])) { # Deal with Version control
       cond[["Fleet_name"]] <- cond[["Name"]]
@@ -424,7 +424,7 @@ SSplotRunstest <- function(ss3rep = ss3diags::simple,
 #'
 #' @export
 
-SSrunstest <- function(ss3rep = ss3diags::simple,
+SSrunstest <- function(ss3rep,
                        mixing = "less",
                        quants = c("cpue", "len", "age", "con")[1],
                        indexselect = NULL,
@@ -444,7 +444,7 @@ SSrunstest <- function(ss3rep = ss3diags::simple,
   }
 
   if (subplots == "len" | subplots == "age") {
-    comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
+    comps <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)[["runs_dat"]]
     comps[["residuals"]] <- ifelse(is.na(comps[["Obs"]]), NA, log(comps[["Obs"]]) - log(comps[["Exp"]]))
     if (is.null(comps[["Fleet_name"]])) { # Deal with Version control
       comps[["Fleet_name"]] <- comps[["Name"]]
@@ -453,7 +453,7 @@ SSrunstest <- function(ss3rep = ss3diags::simple,
   }
 
   if (subplots == "con") {
-    cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)$runs_dat
+    cond <- SScompsTA1.8(ss3rep, fleet = NULL, type = subplots, plotit = FALSE)[["runs_dat"]]
     cond[["residuals"]] <- ifelse(is.na(cond[["Obs"]]), NA, log(cond[["Obs"]]) - log(cond[["Exp"]]))
     if (is.null(cond[["Fleet_name"]])) { # Deal with Version control
       cond[["Fleet_name"]] <- cond[["Name"]]

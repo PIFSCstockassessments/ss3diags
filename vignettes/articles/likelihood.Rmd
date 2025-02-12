@@ -1,0 +1,110 @@
+---
+title: "Likelihood Profile"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ss3diags)
+```
+Likelihood profiling is a key model diagnostic that helps identify the influence of information sources on model estimates. The number of recruits in an unfished population (R~0~) is a commonly profiled parameter since it dictates the absolute size of a fish population (serves as global scaling parameter). To conduct a profile, values of the parameter over a given range are fixed and the model re-run and then changes in total likelihood and data-component likelihoods are examined. It is recommended to run this throughout the development process, particularly after incorporating new data sets to understand how informative each component is on the estimation of R0 and if there is conflict between data sources.
+
+## Model inputs  
+To run a Stock Synthesis model, four input files are required: starter.ss, forecast.ss, control.ss, and data.ss. The input files for the example model can be found within the `ss3diags` package and accessed as shown below. Also, if you do not have the `r4ss` package installed, you will need to install it for this tutorial. 
+
+```{r eval=FALSE}
+install.packages("pak")
+pak::pkg_install("r4ss/r4ss")
+```
+
+```{r message=FALSE, warning=FALSE}
+library(r4ss)
+
+files_path <- system.file("extdata", package = "ss3diags")
+dir_tmp <- tempdir(check = TRUE)
+dir_profile <- file.path(dir_tmp, "profile")
+dir.create(dir_profile, showWarnings = FALSE, recursive = TRUE)
+list.files(files_path)
+file.copy(from = list.files(files_path, full.names = TRUE), to = dir_tmp)
+```
+
+You will need to make sure you have the [SS executable](https://github.com/nmfs-stock-synthesis/stock-synthesis) file either in your path or in the directory you are running the profile from (in this case `dir_profile`). An easy way to get the latest release of stock synthesis is to use the `r4ss` function `get_ss3_exe()`.
+
+```{r}
+r4ss::get_ss3_exe(dir = dir_tmp, version = "v3.30.21")
+```
+
+## Running a Profile on R~0~  
+Once you have the four input files and SS executable file, you can run a likelihood profile as shown below. The first step is to run the model you would like to do a profile for. We will do this in `dir_tmp` and then copy the necessary files to `dir_profile`.  It's best to run the profile in a subdirectory of your main model run to keep the output files separate from other diagnostic tests you may run. 
+
+```{r}
+r4ss::run(dir = dir_tmp, exe = "ss3", verbose = FALSE)
+files <- c("data.ss", "control.ss_new", "starter.ss", "forecast.ss", "ss.par", "ss3")
+file.copy(from = file.path(dir_tmp, files), to = dir_profile)
+```
+
+Once you have the input files in the `dir_profile` directory, you will need to create a vector of values to profile across. The range and increments to choose depend on your model and the resolution at which you want to analyze the likelihood profile. For this example we will use a fairly coarse resolution to speed up total run time. 
+
+```{r}
+CTL <- SS_readctl_3.30(file = file.path(dir_profile, "control.ss_new"), datlist = file.path(dir_profile, "data.ss"))
+
+CTL$SR_parms
+# getting the estimated r0 value
+r0 <- CTL$SR_parms$INIT[1]
+# creating a vector that is +/- 1 unit away from the estimated value in increments of 0.2
+r0_vec <- seq(r0 - 1, r0 + 1, by = 0.2)
+r0_vec
+```
+We also need to modify the starter file by changing the name of the control file that it will read from and making sure the likelihood is calculated for non-estimated quantities.  
+```{r}
+START <- SS_readstarter(file = file.path(dir_profile, "starter.ss"), verbose = FALSE)
+START$prior_like <- 1
+START$ctlfile <- "control_modified.ss"
+SS_writestarter(START, dir = dir_profile, overwrite = TRUE, verbose = F)
+```
+
+To run the profile, use `r4ss::profile()` and you will need to specify a partial string of the name of the parameter you are profiling over (in this case "SR_LN" will match with "SR_LN(R0)"), and the vector of values to profile across. The `newctlfile` is the control file that will be adjusted with values from the `profilevec` and can be named anything you prefer, it just needs to match what you put in the starter file for "ctlfile". Full documentation of the `profile()` function can be found on the [r4ss website](https://r4ss.github.io/r4ss/reference/profile.html).
+```{r}
+profile(
+  dir = dir_profile,
+  newctlfile = "control_modified.ss",
+  string = "SR_LN",
+  profilevec = r0_vec,
+  exe = "ss3",
+  verbose = FALSE
+)
+```
+
+## Visualizing Output
+Once the profile is finished running, we can visualize the results to determine if there is conflict between the data sources. If all data sources reach a negative log-likelihood (NLL) minimum at the same R~0~ value, this indicates good agreement between them. However, more likely, one or more will reach this NLL minimum at different R0 values from the global R~0~ value. This is a sign of conflict between your data sources and may require you to consider data weighting. 
+
+```{r}
+profile_mods <- SSgetoutput(dirvec = dir_profile, keyvec = 1:length(r0_vec), verbose = FALSE)
+profile_mods_sum <- SSsummarize(profile_mods, verbose = FALSE)
+SSplotProfile(profile_mods_sum,
+  profile.string = "SR_LN",
+  profile.label = "SR_LN(R0)"
+)
+```
+
+The profile plot above shows the changes in log-likelihood across the selected range of values for each of the contributing data components. There is an adjustable minimum contribution threshold that a component must meet to appear in this figure (if there is a data source that is in your model but does not show up in the plot, its contribution to the total likelihood may not be large enough). The steepness of each trajectory indicates how informative (or not) a data source is. For example, the age data in the plot above is much steeper on the left side of the minimum R0 value than the index data, which suggests that age composition data is more informative in the model.
+
+
+You can also plot data-type and fleet-specific profiles using `r4ss::PinerPlot()`. Below we are plotting the profile for the length composition data by fleet and the likelihood of survey data by fleet. This will allow us to see if there are conflicts and what sources are the main drivers. 
+```{r}
+sspar(mfrow = c(1, 2))
+PinerPlot(profile_mods_sum,
+  component = "Length_like",
+  main = "Length"
+)
+PinerPlot(profile_mods_sum,
+  component = "Surv_like",
+  main = "Survey"
+)
+```
+

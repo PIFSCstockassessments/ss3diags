@@ -1,0 +1,59 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.234.0/containers/r
+{
+	"name": "R (rocker/r-ver base)",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "ghcr.io/rocker-org/devcontainer/r-ver:4.3", //commma needed if other sections are used.
+
+	// hostRequirements to set a minimum for machine type
+	//"hostRequirements": {
+	//	"cpus": 8,
+	//	"memory": "8gb",
+	//	"storage": "32gb"
+	// },
+	 
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+
+		// to install r packages using pak
+		// more info: https://github.com/rocker-org/devcontainer-features/blob/main/src/r-packages/README.md
+		 "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+			"packages": "tidyverse,future,purrr,rmarkdown",
+			 "installSystemRequirements": true
+		  },
+		//to install ss3 via wget 
+		"ghcr.io/devcontainers-contrib/features/wget-apt-get:1.0.15":{
+			"-O ss3 https://github.com/nmfs-ost/ss3-source-code/releases/latest/download/ss_linux"
+		}
+	// // for quarto cli
+	     // more info: https://github.com/rocker-org/devcontainer-features/blob/main/src/quarto-cli/README.md
+	    // "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {}
+
+		 //to use Rstudio as IDE instead of VS code
+		 //"ghcr.io/rocker-org/devcontainer-features/rstudio-server:0": {}
+	 },
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	//"postAttachCommand": {
+    //    "rstudio-start": "rserver"
+    //},
+	// Use 'postCreateCommand' to run commands after the container is created.
+	//"postCreateCommand": "echo 'options(repos = c(CRAN = \"https://cloud.r-project.org\"))' | sudo sh -c 'cat - >>\"${R_HOME}/etc/Rprofile.site\"'",
+	
+	// Configure tool-specific properties.
+	 "customizations": {
+	   "vscode": {
+	 		// Set *default* container specific settings.json values on container create.
+	 		// Add the IDs of extensions you want installed when the container is created.
+	 		"extensions": [
+				 "GitHub.codespaces"
+	 		]
+	     }
+	 
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
+}

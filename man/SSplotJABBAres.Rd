@@ -5,7 +5,7 @@
 \title{Residual plot}
 \usage{
 SSplotJABBAres(
-  ss3rep = ss3diags::simple,
+  ss3rep,
   subplots = c("cpue", "len", "age", "size", "con")[1],
   seas = NULL,
   plot = TRUE,

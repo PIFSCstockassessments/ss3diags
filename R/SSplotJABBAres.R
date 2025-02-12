@@ -44,7 +44,7 @@
 #' @importFrom r4ss save_png
 #'
 #' @export
-SSplotJABBAres <- function(ss3rep = ss3diags::simple,
+SSplotJABBAres <- function(ss3rep,
                            subplots = c("cpue", "len", "age", "size", "con")[1],
                            seas = NULL,
                            plot = TRUE,
@@ -133,9 +133,10 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
     use_png <- F
   }
 
+  ##TODO: either change name to make it singular or allow for multiple plots at one time
   subplots <- subplots[1]
-  datatypes <- c("Index", "Mean length", "Mean age", "Conditional Age")
-  ylabel <- datatypes[which(c("cpue", "len", "age", "con") %in% subplots)]
+  datatypes <- c("Index", "Mean length", "Mean age", "Mean size", "Conditional Age")
+  ylabel <- datatypes[which(c("cpue", "len", "age", "size", "con") %in% subplots)]
 
   # log <- FALSE # (no option to plot on log scale) #removed this line, not sure why it is necessary - MO 7/14/22
   if (use_png) print_plot <- TRUE
@@ -154,7 +155,7 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
     pdffile <- file.path(
       plotdir,
       paste0(
-        filenameprefix, "SSplotComparisons_",
+        filenameprefix, "SSplotJABBAres_",
         format(Sys.time(), "%d-%b-%Y_%H.%M"), ".pdf"
       )
     )
@@ -163,14 +164,14 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
     par(par)
   }
 
-
+  ##TODO: to allow for multiple subplots at one time, need to change this to apply function
   resids_list <- SSrmse(ss3rep, quants = subplots, seas = seas, indexselect = indexselect)
   #-----------------
   # start plot
   #----------------
   jabbaresiduals <- function(resids_list) {
-    Res <- resids_list[["residuals"]] %>%
-      dplyr::group_by(.data[["Fleet"]]) %>%
+    Res <- resids_list[["residuals"]] |>
+      dplyr::group_by(.data[["Fleet"]]) |>
       dplyr::arrange(.data[["Yr"]], .by_group = TRUE)
     positions <- runif(nrow(Res), -0.2, 0.2)
 
@@ -257,9 +258,9 @@ SSplotJABBAres <- function(ss3rep = ss3diags::simple,
       points(yr + positions[i], Resids[i, ], col = 1, pch = pch, bg = col[i])
     }
 
-    mean.res <- Res %>%
-      dplyr::group_by(.data[["Yr"]]) %>%
-      dplyr::summarise(mean.res = mean(.data[["residuals"]], na.rm = TRUE)) %>%
+    mean.res <- Res |>
+      dplyr::group_by(.data[["Yr"]]) |>
+      dplyr::summarise(mean.res = mean(.data[["residuals"]], na.rm = TRUE)) |>
       dplyr::mutate(Yr = as.numeric(.data[["Yr"]]))
 
     mean.res[["smooth.res"]] <- predict(

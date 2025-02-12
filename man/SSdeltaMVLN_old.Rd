@@ -22,7 +22,7 @@ SSdeltaMVLN_old(
 )
 }
 \arguments{
-\item{ss3rep}{from r4ss::SSgetoutput()$replist1}
+\item{ss3rep}{from r4ss::SSgetoutput()[\link{"replist1"}]}
 
 \item{status}{covarying stock status quantaties to extract from Hessian}
 
