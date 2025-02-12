@@ -7,8 +7,7 @@ files_path <- system.file("extdata", package = "ss3diags")
 run_tmp <- file.path(tempdir(check = TRUE), "test-runs")
 dir.create(run_tmp, showWarnings = FALSE)
 file.copy(from = list.files(files_path, full.names = TRUE), to = run_tmp)
-# r4ss::get_ss3_exe(dir = run_tmp, version = "v3.30.21")
-ss3diags::get_ss3_exe(dir = run_tmp, version = "v3.30.21")
+r4ss::get_ss3_exe(dir = run_tmp)
 ## Run retrospectives
 if (file.exists(file.path(run_tmp, "ss3")) | file.exists(file.path(run_tmp, "ss3.exe"))) {
   r4ss::retro(dir = run_tmp, oldsubdir = "", newsubdir = "retrospectives", years = 0:-3, show_in_console = FALSE)
