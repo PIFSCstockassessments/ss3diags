@@ -70,7 +70,7 @@
             
             <h4 data-toc-skip class="date">2023-08-25</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/PIFSCstockassessments/ss3diags/blob/v2.2.1/vignettes/articles/aspm.Rmd" class="external-link"><code>vignettes/articles/aspm.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/PIFSCstockassessments/ss3diags/blob/main/vignettes/articles/aspm.Rmd" class="external-link"><code>vignettes/articles/aspm.Rmd</code></a></small>
       <div class="d-none name"><code>aspm.Rmd</code></div>
     </div>
 
@@ -114,10 +114,10 @@ this tutorial.</p>
 executable</a> file either in your path or in the directory you are
 running the ASPM from (in this case <code>dir_aspm</code>). An easy way
 to get the latest release of stock synthesis is to use the
-<code>r4ss</code> function <code><a href="../reference/get_ss3_exe.html">get_ss3_exe()</a></code>.</p>
+<code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpyV5HqQ/ss3</span></span></code></pre>
+<pre><code><span><span class="co">## The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpupQowh/ss3</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="aspm">ASPM<a class="anchor" aria-label="anchor" href="#aspm"></a>
@@ -144,7 +144,7 @@ will use as the input files. We will run the model in
 <code>dir_aspm</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/run.html" class="external-link">run</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, exe <span class="op">=</span> <span class="st">"ss3"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "ran model" "ran model" "ran model" "ran model" "ran model"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "ran model"</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data_echo.ss_new"</span>, <span class="st">"control.ss_new"</span>, <span class="st">"starter.ss"</span>, <span class="st">"forecast.ss"</span>, <span class="st">"ss.par"</span>, <span class="st">"ss3"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_tmp</span>, <span class="va">files</span><span class="op">)</span>, to <span class="op">=</span> <span class="va">dir_aspm</span><span class="op">)</span></span></code></pre></div>
@@ -394,7 +394,7 @@ control file. Some examples include:</p>
 </h3>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/run.html" class="external-link">run</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_aspm</span>, exe <span class="op">=</span> <span class="st">"ss3"</span>, skipfinished <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "ran model" "ran model" "ran model" "ran model" "ran model"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "ran model"</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="visualize-results">Visualize Results<a class="anchor" aria-label="anchor" href="#visualize-results"></a>

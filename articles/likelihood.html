@@ -69,7 +69,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Likelihood Profile</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/PIFSCstockassessments/ss3diags/blob/v2.2.1/vignettes/articles/likelihood.Rmd" class="external-link"><code>vignettes/articles/likelihood.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/PIFSCstockassessments/ss3diags/blob/main/vignettes/articles/likelihood.Rmd" class="external-link"><code>vignettes/articles/likelihood.Rmd</code></a></small>
       <div class="d-none name"><code>likelihood.Rmd</code></div>
     </div>
 
@@ -115,10 +115,10 @@ this tutorial.</p>
 executable</a> file either in your path or in the directory you are
 running the profile from (in this case <code>dir_profile</code>). An
 easy way to get the latest release of stock synthesis is to use the
-<code>r4ss</code> function <code><a href="../reference/get_ss3_exe.html">get_ss3_exe()</a></code>.</p>
+<code>r4ss</code> function <code><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/get_ss3_exe.html" class="external-link">get_ss3_exe</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, version <span class="op">=</span> <span class="st">"v3.30.21"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpWXSOMB/ss3</span></span></code></pre></div>
+<span><span class="co">#&gt; The stock synthesis executable for Linux v3.30.21 was downloaded to: /tmp/RtmpMtDQGk/ss3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="running-a-profile-on-r0">Running a Profile on R<sub>0</sub><a class="anchor" aria-label="anchor" href="#running-a-profile-on-r0"></a>
@@ -132,7 +132,7 @@ of your main model run to keep the output files separate from other
 diagnostic tests you may run.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">r4ss</span><span class="fu">::</span><span class="fu"><a href="https://r4ss.github.io/r4ss/reference/run.html" class="external-link">run</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="va">dir_tmp</span>, exe <span class="op">=</span> <span class="st">"ss3"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "ran model" "ran model" "ran model" "ran model" "ran model"</span></span>
+<span><span class="co">#&gt; [1] "ran model"</span></span>
 <span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.ss"</span>, <span class="st">"control.ss_new"</span>, <span class="st">"starter.ss"</span>, <span class="st">"forecast.ss"</span>, <span class="st">"ss.par"</span>, <span class="st">"ss3"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_tmp</span>, <span class="va">files</span><span class="op">)</span>, to <span class="op">=</span> <span class="va">dir_profile</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE TRUE TRUE TRUE TRUE TRUE</span></span></code></pre></div>

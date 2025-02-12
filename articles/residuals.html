@@ -69,7 +69,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Residual Analyses</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/PIFSCstockassessments/ss3diags/blob/v2.2.1/vignettes/articles/residuals.Rmd" class="external-link"><code>vignettes/articles/residuals.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/PIFSCstockassessments/ss3diags/blob/main/vignettes/articles/residuals.Rmd" class="external-link"><code>vignettes/articles/residuals.Rmd</code></a></small>
       <div class="d-none name"><code>residuals.Rmd</code></div>
     </div>
 
@@ -289,26 +289,26 @@ shown below. This function is useful for automating analyses.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     Fleet Fleet_name Area   Yr Seas Subseas Month   Time Vuln_bio         Obs</span></span>
-<span><span class="co">#&gt; 926     2    SURVEY1    1 2013    1       2     7 2013.5 62947.50 144745.0000</span></span>
-<span><span class="co">#&gt; 927     2    SURVEY1    1 2016    1       2     7 2016.5 49335.70  63760.3000</span></span>
-<span><span class="co">#&gt; 928     2    SURVEY1    1 2019    1       2     7 2019.5 38132.00  59242.9000</span></span>
-<span><span class="co">#&gt; 929     2    SURVEY1    1 2022    1       2     7 2022.5 34045.80  49649.7000</span></span>
-<span><span class="co">#&gt; 930     3    SURVEY2    1 2011    1       2     7 2011.5  6306.83     11.5668</span></span>
-<span><span class="co">#&gt; 931     3    SURVEY2    1 2012    1       2     7 2012.5  6544.96     13.9955</span></span>
+<span><span class="co">#&gt; 961     2    SURVEY1    1 2013    1       2     7 2013.5 62947.50 144745.0000</span></span>
+<span><span class="co">#&gt; 962     2    SURVEY1    1 2016    1       2     7 2016.5 49335.70  63760.3000</span></span>
+<span><span class="co">#&gt; 963     2    SURVEY1    1 2019    1       2     7 2019.5 38132.00  59242.9000</span></span>
+<span><span class="co">#&gt; 964     2    SURVEY1    1 2022    1       2     7 2022.5 34045.80  49649.7000</span></span>
+<span><span class="co">#&gt; 965     3    SURVEY2    1 2011    1       2     7 2011.5  6306.83     11.5668</span></span>
+<span><span class="co">#&gt; 966     3    SURVEY2    1 2012    1       2     7 2012.5  6544.96     13.9955</span></span>
 <span><span class="co">#&gt;             Exp     Calc_Q      Eff_Q  SE SE_input         Dev        Like</span></span>
-<span><span class="co">#&gt; 926 101399.0000 1.61084000 1.61084000 0.3      0.3  0.35591400 7.03749e-01</span></span>
-<span><span class="co">#&gt; 927  79472.2000 1.61084000 1.61084000 0.3      0.3 -0.22027600 2.69564e-01</span></span>
-<span><span class="co">#&gt; 928  61424.7000 1.61084000 1.61084000 0.3      0.3 -0.03616590 7.26653e-03</span></span>
-<span><span class="co">#&gt; 929  54842.4000 1.61084000 1.61084000 0.3      0.3 -0.09947210 5.49706e-02</span></span>
-<span><span class="co">#&gt; 930     11.5342 0.00182885 0.00182885 0.7      0.7  0.00281832 8.10502e-06</span></span>
-<span><span class="co">#&gt; 931     11.9698 0.00182885 0.00182885 0.7      0.7  0.15635300 2.49451e-02</span></span>
+<span><span class="co">#&gt; 961 101399.0000 1.61084000 1.61084000 0.3      0.3  0.35591400 7.03749e-01</span></span>
+<span><span class="co">#&gt; 962  79472.2000 1.61084000 1.61084000 0.3      0.3 -0.22027600 2.69564e-01</span></span>
+<span><span class="co">#&gt; 963  61424.7000 1.61084000 1.61084000 0.3      0.3 -0.03616590 7.26653e-03</span></span>
+<span><span class="co">#&gt; 964  54842.4000 1.61084000 1.61084000 0.3      0.3 -0.09947210 5.49706e-02</span></span>
+<span><span class="co">#&gt; 965     11.5342 0.00182885 0.00182885 0.7      0.7  0.00281832 8.10502e-06</span></span>
+<span><span class="co">#&gt; 966     11.9698 0.00182885 0.00182885 0.7      0.7  0.15635300 2.49451e-02</span></span>
 <span><span class="co">#&gt;     Like+log(s) SuprPer Use    residuals</span></span>
-<span><span class="co">#&gt; 926   -0.500223      NA   1  0.355910344</span></span>
-<span><span class="co">#&gt; 927   -0.934409      NA   1 -0.220276535</span></span>
-<span><span class="co">#&gt; 928   -1.196710      NA   1 -0.036166093</span></span>
-<span><span class="co">#&gt; 929   -1.149000      NA   1 -0.099471269</span></span>
-<span><span class="co">#&gt; 930   -0.356667      NA   1  0.002822391</span></span>
-<span><span class="co">#&gt; 931   -0.331730      NA   1  0.156349038</span></span></code></pre></div>
+<span><span class="co">#&gt; 961   -0.500223      NA   1  0.355910344</span></span>
+<span><span class="co">#&gt; 962   -0.934409      NA   1 -0.220276535</span></span>
+<span><span class="co">#&gt; 963   -1.196710      NA   1 -0.036166093</span></span>
+<span><span class="co">#&gt; 964   -1.149000      NA   1 -0.099471269</span></span>
+<span><span class="co">#&gt; 965   -0.356667      NA   1  0.002822391</span></span>
+<span><span class="co">#&gt; 966   -0.331730      NA   1  0.156349038</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
