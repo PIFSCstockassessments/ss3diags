@@ -20,12 +20,10 @@ Depends:
     R (>= 3.5)
 Imports:
     dplyr,
-    gh,
     gplots,
     lifecycle,
-    magrittr,
     mvtnorm,
-    r4ss(>= 1.50.0),
+    r4ss (>= 1.50.0),
     randtests,
     reshape2,
     rlang
