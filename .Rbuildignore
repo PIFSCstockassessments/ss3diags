@@ -3,7 +3,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
-^\Cookbook$
+^\.devcontainer$
 ^\Vignette$
 data-raw
 testing.html
