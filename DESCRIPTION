@@ -1,7 +1,7 @@
 Package: ss3diags
 Title: Stock Synthesis Model Diagnostics for Intergated Stock Assessments
-Version: 2.2.1
-Date: 2024-11-19
+Version: 2.2.2
+Date: 2025-02-22
 Authors@R: c(
     person("Henning", "Winker", , "henning.winker@ec.europa.eu", role = "aut"),
     person("Felipe", "Carvalho", , "felipe.carvalho@noaa.gov", role = "aut"),
@@ -25,7 +25,7 @@ Imports:
     lifecycle,
     magrittr,
     mvtnorm,
-    r4ss,
+    r4ss(>= 1.50.0),
     randtests,
     reshape2,
     rlang
@@ -35,7 +35,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 Remotes: 
-    r4ss/r4ss
+    r4ss/r4ss@*release
 Encoding: UTF-8
 LazyData: True
 LazyDataCompression: gzip
