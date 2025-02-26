@@ -3,8 +3,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
-^\Cookbook$
-^\Vignette$
+^\.devcontainer$
+^vignettes$
+^tests$
 data-raw
 testing.html
 testing.rmd

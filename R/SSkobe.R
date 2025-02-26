@@ -2,7 +2,7 @@
 #'
 #' Generates a Kobe plot or phase plot illustrating the stock status uncertainty over SSB/SSBmsy and F/Fmsy
 #'
-#' @param kb output from SSdeltaMVLN()[["kb"]]
+#' @param kb output from `SSdeltaMVLN()[["kb"]]`
 #' @param joint option FALSE shows individual runs
 #' @param year option to choose year for kobe, last year is default
 #' @param posterior visualization of posterior c("points","kernel")

@@ -1,3 +1,16 @@
+# ss3diags 2.2.2
+
+This version is compatible with the changes introduced with **[r4ss 1.50.0](https://github.com/r4ss/r4ss/releases/tag/v1.50.0)** and above.
+
+* Updated **r4ss** dependency to **version 1.50.0 and above**. (#113, #114, #115)
+  * Removed local `get_ss3_exe` function, which `r4ss::get_r4ss_exe()` supersedes it
+  * Updated references to match updated **r4ss** new naming conventions (#113)
+* Change to native R's pipes; replacing **magrittr** pipes
+* SSrmse: Parameter `quants`, the "quantity" for calcuating RMSE, is now checked for these valid options: `cpue`, `len`, `age`, `size`, and `con` 
+* SSPlotHCxval: Remove redundant parameter uncertainty (#95)
+* Added **renv** to help with github actions 
+* Omitted LazyData in DESCRIPTION due to removal of Rdata files. 
+
 # ss3diags 2.2.1
 
 * Change **r4ss** dependency to **[ONLY version 1.49.3](https://github.com/r4ss/r4ss/releases/tag/v1.49.3)** for compatibility. 
