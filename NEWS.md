@@ -9,6 +9,7 @@ This version is compatible with the changes introduced with **[r4ss 1.50.0](http
 * SSrmse: Parameter `quants`, the "quantity" for calcuating RMSE, is now checked for these valid options: `cpue`, `len`, `age`, `size`, and `con` 
 * SSPlotHCxval: Remove redundant parameter uncertainty (#95)
 * Added **renv** to help with github actions 
+* Omitted LazyData in DESCRIPTION due to removal of Rdata files. 
 
 # ss3diags 2.2.1
 
