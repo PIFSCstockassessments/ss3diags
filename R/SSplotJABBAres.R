@@ -80,7 +80,7 @@ SSplotJABBAres <- function(ss3rep,
                            pheight = 5.0,
                            punits = "in",
                            res = 300,
-                           ptsize = 10,
+                           ptsize = 12,
                            cex.main = 1,
                            plotdir = NULL,
                            filenameprefix = "",
@@ -203,7 +203,7 @@ SSplotJABBAres <- function(ss3rep,
     n.indices <- length(unique(Res[["Fleet"]]))
     if (is.null(col) & n.indices > 3) col <- r4ss::rich.colors.short(n.indices + 1)[-1]
     if (is.null(col) & n.indices < 3) col <- r4ss::rich.colors.short(n.indices)
-    if (is.null(col) & n.indices == 3) col <- c("blue", "red", "green3")
+    if (is.null(col) & n.indices == 3) col <- c("#4477AA", "#EE6677", "#228833")
     # set pch values if no input
 
     # if line stuff is shorter than number of lines, recycle as needed

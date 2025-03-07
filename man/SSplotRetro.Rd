@@ -24,9 +24,8 @@ SSplotRetro(
   forecastrho = TRUE,
   showrho = TRUE,
   col = NULL,
-  pch = NULL,
-  lty = 1,
-  lwd = 2,
+  pch = NA,
+  lwd = 2.5,
   tickEndYr = TRUE,
   ylimAdj = 1.05,
   xaxs = "i",
@@ -42,21 +41,22 @@ SSplotRetro(
   legendcex = 1,
   legendsp = 0.7,
   legendindex = NULL,
+  pt.cex = 0.7,
   pwidth = 6.5,
   pheight = 5,
   punits = "in",
   res = 300,
-  ptsize = 10,
+  ptsize = 12,
   cex.main = 1,
   plotdir = NULL,
   filenameprefix = "",
   par = list(mar = c(5, 4, 1, 1) + 0.1),
   verbose = TRUE,
-  shadecol = grey(0.4, 0.6),
+  shadecol = "#404040",
   new = TRUE,
   add = FALSE,
   mcmcVec = FALSE,
-  shadecol1 = grey(0.5, 0.4),
+  shadecol1 = "#c8d0d9",
   indexQlabel = TRUE,
   indexQdigits = 4,
   shadealpha = 0.3
@@ -117,8 +117,6 @@ Defaults to TRUE}
 \item{col}{Optional vector of colors to be used for lines. Input NULL}
 
 \item{pch}{Optional vector of plot character values}
-
-\item{lty}{Optional vector of line types}
 
 \item{lwd}{Optional vector of line widths}
 

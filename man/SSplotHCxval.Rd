@@ -46,7 +46,7 @@ SSplotHCxval(
   pheight = 5,
   punits = "in",
   res = 300,
-  ptsize = 10,
+  ptsize = 12,
   cex.main = 1,
   plotdir = NULL,
   filenameprefix = "",
