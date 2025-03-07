@@ -50,7 +50,7 @@ SSplotHCxval(
   cex.main = 1,
   plotdir = NULL,
   filenameprefix = "",
-  par = list(mar = c(5, 4, 1, 1) + 0.1),
+  par = list(mar = c(5, 4, 1, 1) + 0.1, family = "sans"),
   verbose = TRUE,
   shadecol = grey(0.5, 0.4),
   shadecol2 = grey(0.5, 0.4),
