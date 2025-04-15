@@ -62,7 +62,7 @@ SSplotRetro <- function(summaryoutput,
                         showrho = TRUE,
                         col = NULL,
                         pch = NA,
-                        lwd = 2.5,
+                        lwd = 8,
                         tickEndYr = TRUE,
                         ylimAdj = 1.05,
                         xaxs = "i",
@@ -78,7 +78,7 @@ SSplotRetro <- function(summaryoutput,
                         legendcex = 1,
                         legendsp = 0.7,
                         legendindex = NULL,
-                        pt.cex = 0.7,
+                        pt.cex = 3,
                         pwidth = 6.5,
                         pheight = 5.0,
                         punits = "in",
@@ -91,7 +91,7 @@ SSplotRetro <- function(summaryoutput,
                         verbose = TRUE,
                         shadecol = "#404040", #grey(0.4, 0.6),
                         new = TRUE,
-                        add = FALSE,
+                        add = TRUE,
                         mcmcVec = FALSE,
                         shadecol1 = "#c8d0d9", #grey(0.5, 0.4),
                         indexQlabel = TRUE,
@@ -242,10 +242,14 @@ SSplotRetro <- function(summaryoutput,
     }
 
     #tableau inspired color palette
-    tableau10.pal <- c("#6D93BA", "#F28E2B", "#E46264", "#76B7B2", "#3AA363", "#edc948", "#b07aa1", "#FF7278", "#9c755f", "#bab0ac")
+    # tableau10.pal <- c("#6D93BA", "#F28E2B", "#E46264", "#76B7B2", 
+    # "#3AA363", "#edc948", "#b07aa1", "#FF7278", "#9c755f", "#bab0ac")
+    # if (is.null(col)) col <- tableau10.pal[1:nlines]
     
-    if (is.null(col)) col <- tableau10.pal[1:nlines]
-    
+    if (is.null(col) & nlines > 3) col <- r4ss::rich.colors.short(nlines + 1)[-1]
+    if (is.null(col) & nlines < 3) col <- r4ss::rich.colors.short(nlines)
+    if (is.null(col) & nlines == 3) col <- c("blue", "red", "green3")
+
     if (is.null(shadecol)) {
       # new approach thanks to Trevor Branch
       shadecol <- adjustcolor(col, alpha.f = shadealpha)
@@ -334,7 +338,7 @@ SSplotRetro <- function(summaryoutput,
     # Plot Reference
     x.ref <- exp[["Yr"]][which(exp[["Yr"]] == xlim[1]):which(exp[["Yr"]] == xlim[2])]
     y.ref <- exp[which(exp[["Yr"]] == xlim[1]):which(exp[["Yr"]] == xlim[2]), imodel]
-    lines(x.ref, y.ref, col = col[1], lwd = 2, lty = 1, pch = 16)
+    lines(x.ref, y.ref, col = col[1], lwd = lwd, lty = 1, pch = 16)
     rho.i <- fcrho.i <- NULL
     for (iline in (2:nlines)[!mcmcVec]) {
       imodel <- models[iline]
@@ -356,7 +360,7 @@ SSplotRetro <- function(summaryoutput,
         )
         points(xfc[length(xfc)], yfc[length(yfc)],
           pch = 21,
-          bg = col[iline], col = 1, type = "p", cex = 1.1
+          bg = col[iline], col = 1, type = "p", cex = pt.cex
         )
       }
       rho.i[iline - 1] <- (y[length(y)] - y.ref[length(y)]) /
@@ -372,32 +376,46 @@ SSplotRetro <- function(summaryoutput,
 
 
     if (legend) {
-      # add legend if requested
+      r4ss::add_legend(legendlabels,
+          legendloc = legendloc,
+          legendcex = legendcex, 
+          legendsp = legendsp,
+          legendncol = legendncol,
+          legendorder = legendorder,
+          pch = pch, 
+          col = col, 
+          lty = lty,
+          lwd = lwd,
+          pt.cex = pt.cex,
+          type = type
+          )
       if(uncertainty){
-        # add uncertainty to legend lables if requested to show
-        legendlabels <- c(legendlabels, "95% CI")
-        legendorder <- c(legendorder, nlines + 1)
-        pch <- c(pch, 15)
-        col <- c(col, shadecol)
-        lty <- c(lty, NA)
-        lwd <- c(lwd, NA)
-        pt.cex <- c(pt.cex, 1.5)
+        # get position of legend
+        legend_info <- r4ss::add_legend(legendlabels,
+          legendloc = legendloc,
+          legendcex = legendcex, 
+          legendsp = legendsp,
+          legendncol = legendncol,
+          legendorder = legendorder,
+          pch = pch, 
+          col = col, 
+          lty = lty,
+          lwd = lwd,
+          pt.cex = pt.cex,
+          type = type
+          )
+        # Add a standard R legend just for the CI box
+        legend_coords <- legend_info$rect
+        ci_legend_x <- legend_coords$left
+        ci_legend_y <- legend_coords$top - legend_coords$h
+        legend(x = ci_legend_x, y = ci_legend_y, 
+        legend = "95% CI",
+        pch = 15, 
+        col = shadecol,
+        pt.cex = 2,
+        bty = "n")
       }
 
-      r4ss::add_legend(legendlabels,
-        legendloc = legendloc,
-        legendcex = legendcex, 
-        legendsp = legendsp,
-        legendncol = legendncol,
-        legendorder = legendorder,
-        pch = pch, 
-        col = col, 
-        lty = lty,
-        lwd = lwd,
-        pt.cex = pt.cex,
-        type = type
-      )
-      
     }
     if (showrho){
       legend("top", paste0("Mohn's rho = ", round(rho, 2), 
