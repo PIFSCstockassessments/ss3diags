@@ -87,10 +87,10 @@ SSplotHCxval <- function(retroSummary,
                          col = NULL,
                          pch = NULL,
                          lty = 1,
-                         lwd = 2,
+                         lwd = 8,
                          tickEndYr = TRUE,
                          xlim = "default",
-                         ylimAdj = 1.15,
+                         ylimAdj = 1.05,
                          ylim = NULL,
                          xaxs = "i",
                          yaxs = "i",
@@ -103,7 +103,7 @@ SSplotHCxval <- function(retroSummary,
                          legendorder = "default",
                          legendncol = 1,
                          legendcex = 1,
-                         legendsp = 0.9,
+                         legendsp = 1,
                          legendindex = NULL,
                          pwidth = 6.5,
                          pheight = 5.0,
@@ -496,15 +496,15 @@ SSplotHCxval <- function(retroSummary,
         polygon(c(yr[subset & yr <= min(endyrvec)], rev(yr[subset & yr <= min(endyrvec)])), c(lower[subset & yr <= min(endyrvec)], rev(upper[subset & yr <= min(endyrvec)])), col = shadecol2, border = shadecol2)
       }
 
-      lines(yr[subset], obs[subset], pch = 21, lty = 2, col = "white")
-      points(yr[subset], obs[subset], pch = 21, cex = 1.5, bg = "white")
+      lines(yr[subset], obs[subset], pch = 21, lty = 2, col = "white", lwd = lwd)
+      points(yr[subset], obs[subset], pch = 21, cex = 1.5, bg = "white") #TODO: pt.cex
       points(yr.eval[pe.eval], obs.eval[pe.eval], pch = 21, cex = 1.5, bg = (rev(col))[pe.eval - 1])
 
       # Plot Reference
       index.i <- unique(indices2[["Fleet_name"]])
       x.ref <- indices[indices[["imodel"]] == imodel & indices[["Yr"]] >= xmin & indices[["Fleet_name"]] == index.i, ][["Yr"]]
       y.ref <- indices[indices[["imodel"]] == imodel & indices[["Yr"]] >= xmin & indices[["Fleet_name"]] == index.i, ][["Exp"]]
-      lines(x.ref, y.ref, col = col[1], lwd = 2, lty = 1, type = type, pch = 16)
+      lines(x.ref, y.ref, col = col[1], lwd = lwd, lty = 1, type = type, pch = 16)
       pred.resid <- NULL # Note Prediction Residuals
       for (iline in (2:nlines)[!mcmcVec]) {
         imodel <- models[iline]
