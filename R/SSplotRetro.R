@@ -181,8 +181,6 @@ SSplotRetro <- function(summaryoutput,
       par(par)
     }
 
-
-
     #-------------------------------------------------------------
     # plot function
 
