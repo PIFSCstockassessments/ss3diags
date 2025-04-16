@@ -43,7 +43,7 @@ SSplotRunstest(
   par = list(mar = c(5, 4, 1, 1) + 0.1, family = "sans"),
   verbose = TRUE,
   new = TRUE,
-  add = FALSE
+  add = TRUE
 )
 }
 \arguments{

@@ -24,10 +24,11 @@ SSplotHCxval(
   col = NULL,
   pch = NULL,
   lty = 1,
-  lwd = 2,
+  lwd = 5,
+  pt.cex = 3,
   tickEndYr = TRUE,
   xlim = "default",
-  ylimAdj = 1.15,
+  ylimAdj = 1.05,
   ylim = NULL,
   xaxs = "i",
   yaxs = "i",
@@ -40,7 +41,7 @@ SSplotHCxval(
   legendorder = "default",
   legendncol = 1,
   legendcex = 1,
-  legendsp = 0.9,
+  legendsp = 1,
   legendindex = NULL,
   pwidth = 6.5,
   pheight = 5,
@@ -53,16 +54,15 @@ SSplotHCxval(
   par = list(mar = c(5, 4, 1, 1) + 0.1, family = "sans"),
   verbose = TRUE,
   shadecol = grey(0.5, 0.4),
-  shadecol2 = grey(0.5, 0.4),
+  shadecol2 = grey(0.5, 0.8),
   shadealpha = 0.3,
   new = TRUE,
-  add = FALSE,
+  add = TRUE,
   mcmcVec = FALSE,
   indexQlabel = TRUE,
   indexQdigits = 4,
   indexfleets = 1,
-  plot = TRUE,
-  shadecol1 = grey(0.5, 0.4)
+  plot = TRUE
 )
 }
 \arguments{
@@ -238,9 +238,6 @@ absent.
 \item{plot}{DEPRECATED. By default, TRUE, Plots (and subplots) are drawn to the
 plot device. The option to explicitly disable this option (FALSE), is not
 implemented. This option flag will be defunct in a future version}
-
-\item{shadecol1}{uncertainty shading of early years not affected by
-hindcast (currently not used)}
 }
 \description{
 Plots one-step ahead hindcasting cross-validations and computes MASE from

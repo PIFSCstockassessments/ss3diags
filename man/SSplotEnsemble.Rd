@@ -21,7 +21,7 @@ SSplotEnsemble(
   col = NULL,
   pch = NULL,
   lty = 1,
-  lwd = 2,
+  lwd = 5,
   tickEndYr = FALSE,
   xlim = NULL,
   ylimAdj = 1.05,
