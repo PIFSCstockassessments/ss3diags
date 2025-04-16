@@ -549,7 +549,7 @@ SSplotHCxval <- function(retroSummary,
         ci_legend_x <- legend_coords$left
         ci_legend_y <- legend_coords$top - legend_coords$h
 
-        if(uncertainty == TRUE){
+        if(indexUncertainty == TRUE){
           legend(x = ci_legend_x, y = ci_legend_y, 
             legend = c("Observed", "Expected", "95% CI of years \nwith all data", "95% CI of years \nwith data removed"),
             pch = c(24, 16, 15, 15), 
