@@ -40,8 +40,6 @@
 #' @param xmin optional number first year shown in plot (if available)
 #' @param ylim will over-write `ylimAdj` if specified
 #' @param shadecol uncertainty shading of hcxval horizon
-#' @param shadecol1 uncertainty shading of early years not affected by
-#' hindcast (currently not used)
 #' @param shadecol2 color for uncertainty in early years not affected by
 #' hindcast
 #' @param shadealpha Transparency adjustment used to make default `shadecol`.
@@ -88,6 +86,7 @@ SSplotHCxval <- function(retroSummary,
                          pch = NULL,
                          lty = 1,
                          lwd = 5,
+                         pt.cex = 3,
                          tickEndYr = TRUE,
                          xlim = "default",
                          ylimAdj = 1.05,
@@ -116,16 +115,15 @@ SSplotHCxval <- function(retroSummary,
                          par = list(mar = c(5, 4, 1, 1) + .1, family = "sans"),
                          verbose = TRUE,
                          shadecol = grey(0.5, 0.4),
-                         shadecol2 = grey(0.5, 0.4),
+                         shadecol2 = grey(0.5, 0.8),
                          shadealpha = 0.3,
                          new = TRUE,
-                         add = FALSE,
+                         add = TRUE,
                          mcmcVec = FALSE,
                          indexQlabel = TRUE,
                          indexQdigits = 4,
                          indexfleets = 1,
-                         plot = TRUE,
-                         shadecol1 = grey(0.5, 0.4)) { # plot different fits to a single index of abundance
+                         plot = TRUE) { # plot different fits to a single index of abundance
 
   # Parameter DEPRECATION checks
   if (lifecycle::is_present(print)) {
@@ -167,7 +165,6 @@ SSplotHCxval <- function(retroSummary,
   # subfunction to write png files
   if (!add) graphics.off()
   plot <- TRUE
-  hcruns <- retroSummary # added for now
   # save_png <- function(file) {
   # if extra text requested, add it before extention in file name
   # file <- paste0(filenameprefix, file)
@@ -182,36 +179,36 @@ SSplotHCxval <- function(retroSummary,
 
 
 
-  if (is.null(hcruns[["indices"]]) & subplots[1] == "cpue") {
+  if (is.null(retroSummary[["indices"]]) & subplots[1] == "cpue") {
     stop("Require input object from r4ss::SSsummarize()")
   }
 
   if (subplots[1] %in% c("len", "age")) {
-    if (is.null(hcruns[["age"]]) & is.null(hcruns[["len"]])) {
+    if (is.null(retroSummary[["age"]]) & is.null(retroSummary[["len"]])) {
       stop("Require input object from ss3diags::SSdiagsComps")
     }
   }
 
   if (subplots[1] == "len") {
-    if (is.null(hcruns[["len"]])) stop("No Length Comps found")
-    hcruns[["indices"]] <- hcruns[["len"]]
+    if (is.null(retroSummary[["len"]])) stop("No Length Comps found")
+    retroSummary[["indices"]] <- retroSummary[["len"]]
   }
 
   if (subplots[1] == "age") {
-    if (is.null(hcruns[["age"]])) stop("No Age Comps found")
-    hcruns[["indices"]] <- hcruns[["age"]]
+    if (is.null(retroSummary[["age"]])) stop("No Age Comps found")
+    retroSummary[["indices"]] <- retroSummary[["age"]]
   }
 
   # subset if indexselect is specified
   if (is.null(indexselect) == F & is.numeric(indexselect)) {
-    iname <- unique(hcruns[["indices"]][["Fleet_name"]])[indexselect]
+    iname <- unique(retroSummary[["indices"]][["Fleet_name"]])[indexselect]
     if (TRUE %in% is.na(iname)) stop("One or more index numbers exceed number of available indices")
-    hcruns[["indices"]] <- hcruns[["indices"]][hcruns[["indices"]][["Fleet_name"]] %in% iname, ]
+    retroSummary[["indices"]] <- retroSummary[["indices"]][retroSummary[["indices"]][["Fleet_name"]] %in% iname, ]
   }
 
 
 
-  if (is.null(legendindex)) legendindex <- 1:hcruns[["n"]]
+  if (is.null(legendindex)) legendindex <- 1:retroSummary[["n"]]
   if (!legend) legendindex <- 10000
 
 
@@ -241,43 +238,6 @@ SSplotHCxval <- function(retroSummary,
       par(par)
     }
 
-    # subfunction to add legend
-    # add_legend <- function(legendlabels, cumulative = FALSE) {
-    # if (cumulative) {
-    # legendloc <- "topleft"
-    # }
-    # if (is.numeric(legendloc)) {
-    # Usr <- par()$usr
-    # legendloc <- list(
-    #   x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
-    #   y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
-    # )
-    # }
-
-    # if type input is "l" then turn off points on top of lines in legend
-    # legend.pch <- pch
-    # if (type == "l") {
-    #  legend.pch <- rep(NA, length(pch))
-    # }
-    # legend(legendloc,
-    #  legend = legendlabels[legendorder],
-    #  col = col[legendorder], lty = lty[legendorder], seg.len = 2,
-    #  lwd = lwd[legendorder], pch = legend.pch[legendorder], bty = "n", ncol = legendncol, pt.cex = 0.7, cex = legendcex, y.intersp = legendsp
-    # )
-    # }
-
-    # r4ss Colors
-    # rc <- function(n, alpha = 1) {
-    # a subset of rich.colors by Arni Magnusson from the gregmisc package
-    # a.k.a. rich.colors.short, but put directly in this function
-    # to try to diagnose problem with transparency on one computer
-    # x <- seq(0, 1, length = n)
-    # r <- 1 / (1 + exp(20 - 35 * x))
-    # g <- pmin(pmax(0, -0.8 + 6 * x - 5 * x^2), 1)
-    # b <- dnorm(x, 0.25, 0.15) / max(dnorm(x, 0.25, 0.15))
-    # rgb.m <- matrix(c(r, g, b), ncol = 3)
-    # rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1], v[2], v[3], alpha = alpha))
-    # }
 
     labels <- c(
       "Year", # 1
@@ -293,10 +253,10 @@ SSplotHCxval <- function(retroSummary,
     # plot_hcxal function
     #-------------------------------------------------------------
     # get stuff from summary output (minimized)
-    n <- hcruns[["n"]]
-    startyrs <- hcruns[["startyrs"]]
-    endyrs <- hcruns[["endyrs"]]
-    indices <- hcruns[["indices"]]
+    n <- retroSummary[["n"]]
+    startyrs <- retroSummary[["startyrs"]]
+    endyrs <- retroSummary[["endyrs"]]
+    indices <- retroSummary[["indices"]]
 
     if (models[1] == "all") models <- 1:n
     nlines <- length(models)
@@ -342,7 +302,7 @@ SSplotHCxval <- function(retroSummary,
 
     if (!is.expression(legendlabels[1]) &&
       legendlabels[1] == "default") {
-      legendlabels <- c("Ref", paste(endyrvec)[-1])
+      legendlabels <- c("Reference", paste(endyrvec)[-1])
     }
     if (legendorder[1] == "default") legendorder <- 1:nlines
 
@@ -496,9 +456,9 @@ SSplotHCxval <- function(retroSummary,
         polygon(c(yr[subset & yr <= min(endyrvec)], rev(yr[subset & yr <= min(endyrvec)])), c(lower[subset & yr <= min(endyrvec)], rev(upper[subset & yr <= min(endyrvec)])), col = shadecol2, border = shadecol2)
       }
 
-      lines(yr[subset], obs[subset], pch = 21, lty = 2, col = "white", lwd = lwd)
-      points(yr[subset], obs[subset], pch = 21, cex = 1.5, bg = "white") #TODO: pt.cex
-      points(yr.eval[pe.eval], obs.eval[pe.eval], pch = 21, cex = 1.5, bg = (rev(col))[pe.eval - 1])
+      lines(yr[subset], obs[subset], pch = 21, lty = 2, col = "grey15", lwd = lwd)
+      points(yr[subset], obs[subset], pch = 24, cex = pt.cex, bg = "white") 
+      points(yr.eval[pe.eval], obs.eval[pe.eval], pch = 24, cex = pt.cex, bg = (rev(col))[pe.eval - 1])
 
       # Plot Reference
       index.i <- unique(indices2[["Fleet_name"]])
@@ -518,19 +478,19 @@ SSplotHCxval <- function(retroSummary,
           pred.resid <- c(pred.resid, log(y[length(x)]) - log(yobs[length(x)])) # add log() for v1.1
 
 
-          lines(x, y,
-            lwd = lwd[iline],
+          lines(x[1:(length(x) - 1)], y[1:(length(x) - 1)], 
+            lwd = lwd[iline], 
             lty = lty[iline], col = col[iline], type = "l", cex = 0.9
           )
 
           lines(x[(length(x) - 1):(length(x))], y[(length(x) - 1):(length(x))],
-            lwd = 2,
-            col = 1, lty = 2
+            lwd = lwd[iline],
+            col = col[iline], lty = 2
           )
 
           points(x[length(x)], y[length(y)],
             pch = 21,
-            bg = col[iline], col = 1, type = "p", cex = 0.9
+            bg = col[iline], col = 1, type = "p", cex = pt.cex
           )
         }
       } # end for
@@ -568,9 +528,42 @@ SSplotHCxval <- function(retroSummary,
           lwd = lwd,
           type = type
         )
+        legend_info <- r4ss::add_legend(legendlabels,
+          legendloc = legendloc,
+          legendcex = legendcex,
+          legendsp = legendsp,
+          legendncol = legendncol,
+          legendorder = legendorder,
+          pch = pch, col = col, lty = lty,
+          lwd = lwd,
+          type = type
+        )
+        # Add a standard R legend just for the CI box
+        legend_coords <- legend_info$rect
+        ci_legend_x <- legend_coords$left
+        ci_legend_y <- legend_coords$top - legend_coords$h
+
+        if(uncertainty == TRUE){
+          legend(x = ci_legend_x, y = ci_legend_y, 
+            legend = c("Observed", "Expected", "95% CI of years \nwith all data", "95% CI of years \nwith data removed"),
+            pch = c(24, 16, 15, 15), 
+            bg = c("white", NA, shadecol2, shadecol), 
+            col = c("black", "black", shadecol2, shadecol), 
+            pt.cex = 2,
+            bty = "n")
+        }else{
+          legend(x = ci_legend_x, y = ci_legend_y, 
+            legend = c("Observed", "Expected"),
+            pch = c(24, 16), 
+            bg = c("white", NA), 
+            col = c("black", "black"), 
+            pt.cex = 2,
+            bty = "n")          
+        }
+
       }
-      if (mase == mase.adj | show.mase.adj == FALSE) legend("top", paste0(unique(indices2[["Fleet_name"]])[1], ifelse(length(unique(hcruns[["indices"]][["Seas"]])) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2)), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
-      if (mase.adj < mase & show.mase.adj == TRUE) legend("top", paste0(unique(indices2[["Fleet_name"]])[1], ifelse(length(unique(hcruns[["indices"]][["Seas"]])) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2), " (", round(mase.adj, 2), ")"), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
+      if (mase == mase.adj | show.mase.adj == FALSE) legend("top", paste0(unique(indices2[["Fleet_name"]])[1], ifelse(length(unique(retroSummary[["indices"]][["Seas"]])) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2)), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
+      if (mase.adj < mase & show.mase.adj == TRUE) legend("top", paste0(unique(indices2[["Fleet_name"]])[1], ifelse(length(unique(retroSummary[["indices"]][["Seas"]])) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2), " (", round(mase.adj, 2), ")"), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
 
 
       axis(1, at = c(max(xmin, min(yr)):max(endyrvec)))
@@ -591,19 +584,19 @@ SSplotHCxval <- function(retroSummary,
   if (verbose) cat("Plotting Hindcast Cross-Validation (one-step-ahead) \n")
   if (plot) {
     # LOOP through fleets
-    nfleets <- length(unique(hcruns[["indices"]][["Fleet"]]))
+    nfleets <- length(unique(retroSummary[["indices"]][["Fleet"]]))
     if (print_plot) {
       MASE <- NULL
       for (fi in 1:nfleets) {
         legend <- F
         if (fi %in% legendindex) legend <- TRUE
-        indexfleets <- unique(hcruns[["indices"]][["Fleet"]])[fi]
-        # save_png(paste0("hcxval_", unique(hcruns[["indices"]][["Fleet"]])[fi], ".png", sep = ""))
+        indexfleets <- unique(retroSummary[["indices"]][["Fleet"]])[fi]
+        # save_png(paste0("hcxval_", unique(retroSummary[["indices"]][["Fleet"]])[fi], ".png", sep = ""))
 
         plotinfo <- NULL
         r4ss::save_png(
           plotinfo = plotinfo,
-          file = paste0("hcxval_", unique(hcruns[["indices"]][["Fleet"]])[fi], ".png", sep = ""),
+          file = paste0("hcxval_", unique(retroSummary[["indices"]][["Fleet"]])[fi], ".png", sep = ""),
           plotdir = plotdir,
           pwidth = pwidth,
           pheight = pheight,
@@ -624,7 +617,7 @@ SSplotHCxval <- function(retroSummary,
     for (fi in 1:nfleets) {
       legend <- F
       if (fi %in% legendindex) legend <- TRUE
-      indexfleets <- unique(hcruns[["indices"]][["Fleet"]])[fi]
+      indexfleets <- unique(retroSummary[["indices"]][["Fleet"]])[fi]
       if (!add) (par)
       get_mase <- plot_hcxval(indexfleets)$MASE
       MASE <- rbind(MASE, get_mase)
