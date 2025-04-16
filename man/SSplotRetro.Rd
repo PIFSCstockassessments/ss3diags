@@ -160,6 +160,8 @@ which is represented in the summary input object.}
 
 \item{legendindex}{Allows to add legend for selected indices (plots)}
 
+\item{pt.cex}{Character expansion for points in plots.}
+
 \item{pwidth}{Default width of plot printed to plot in units of \code{punits}}
 
 \item{pheight}{Height of plot printed to plot in units of \code{punits }}

@@ -120,6 +120,8 @@ compare}
 
 \item{lwd}{Optional vector of line widths}
 
+\item{pt.cex}{Character expansion for points in plots.}
+
 \item{tickEndYr}{\link[base:logical]{Logical} flag: set TRUE or FALSE to switch to turn
 on/off extra axis mark at final year in timeseries plots.}
 

@@ -27,6 +27,9 @@
 #'
 #' @param cex.main
 #' Character expansion for plot titles.
+#' 
+#' @param pt.cex
+#' Character expansion for points in plots.
 #'
 #' @param plotdir
 #' Directory where output plot file will be written. By default,
@@ -83,6 +86,7 @@ SSplotGeneric <- function(pwidth = 6.5,
                           res = 300,
                           ptsize = 12,
                           cex.main = 1,
+                          pt.cex = 1,
                           plotdir = NULL,
                           filenameprefix = "",
                           par = list(mar = c(5, 4, 1, 1) + .1, family = "sans"),
