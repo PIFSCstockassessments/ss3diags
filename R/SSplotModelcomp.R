@@ -231,7 +231,7 @@ SSplotModelcomp <- function(summaryoutput,
     # legendloc <- "topleft"
     # }
     # if (is.numeric(legendloc)) {
-    # Usr <- par()$usr
+    # Usr <- par()[["usr"]]
     # legendloc <- list(
     #   x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
     #   y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])
@@ -510,7 +510,7 @@ SSplotModelcomp <- function(summaryoutput,
     # legendloc <- "topleft"
     # }
     # if (is.numeric(legendloc)) {
-    # Usr <- par()$usr
+    # Usr <- par()[["usr"]]
     # legendloc <- list(
     #   x = Usr[1] + legendloc[1] * (Usr[2] - Usr[1]),
     #   y = Usr[3] + legendloc[2] * (Usr[4] - Usr[3])

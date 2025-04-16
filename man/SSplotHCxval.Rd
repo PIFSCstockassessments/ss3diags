@@ -34,7 +34,6 @@ SSplotHCxval(
   yaxs = "i",
   xylabs = TRUE,
   type = "o",
-  uncertainty = TRUE,
   legend = TRUE,
   legendlabels = "default",
   legendloc = "topright",
@@ -139,11 +138,6 @@ uses all years available.}
 y-axis labels to the plot. Defaults to TRUE}
 
 \item{type}{The type of plot to be drawn. For more details, see \code{\link[base:plot]{plot}}.}
-
-\item{uncertainty}{Logical flag to enable plots with uncertainty intervals. Either a single
-TRUE/FALSE value, or a vector of TRUE/FALSE values around SSB or F
-estimated timeseries, or a set of integers corresponding to
-the choice of models.}
 
 \item{legend}{Flag to enable legend to plot. TRUE by default.}
 

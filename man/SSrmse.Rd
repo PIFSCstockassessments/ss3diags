@@ -5,17 +5,12 @@
 \title{Function for calculating RMSE
 used for \code{SSplotJABBAres()}}
 \usage{
-SSrmse(
-  ss3rep,
-  quants = c("cpue", "len", "age", "con"),
-  seas = NULL,
-  indexselect = NULL
-)
+SSrmse(ss3rep, quants, seas = NULL, indexselect = NULL)
 }
 \arguments{
 \item{ss3rep}{output from \code{SS_output()}}
 
-\item{quants}{the dataset to calculate RMSE for. "cpue" for index of abundance, "len" for length comp, "age" for age composition, and "con" for conditional age-at-length.}
+\item{quants}{the dataset to calculate RMSE for. "cpue" for index of abundance, "len" for length comp, "age" for age composition, "size" for general size composition, and "con" for conditional age-at-length.}
 
 \item{seas}{string indicating how to treat data from multiple seasons
 'comb' - combine seasonal data for each year and plot against Yr

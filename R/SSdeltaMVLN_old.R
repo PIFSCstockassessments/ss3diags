@@ -3,7 +3,7 @@
 #' A function to generate kobe pdfs from a Multivariate Log-Normal Distribution including plotting option. This version is used for older versions of Stock Synthesis. For newer versions (v3.24 and newer), use SSdeltaMVLN().
 #'
 #'
-#' @param ss3rep from r4ss::SSgetoutput()$replist1
+#' @param ss3rep from `r4ss::SSgetoutput()[["replist1"]]`
 #' @param status covarying stock status quantaties to extract from Hessian
 #' @param quants additional stock quantaties to extract from Hessian
 #' @param Fref  Choice of reference point for stock SSB/XFref=c("MSY","Ftrg"),only if F_report_basis: 0 or 3
