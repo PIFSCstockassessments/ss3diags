@@ -311,7 +311,7 @@ SSplotRunstest <- function(ss3rep,
 
     lims <- runstest[["sig3lim"]]
     cols <- c("#E15759", "#59A14F")[ifelse(runstest[["p.runs"]] < 0.05, 1, 2)]
-    point_cols <- ifelse(resid[["residuals"]] < lims[1] | resid[["residuals"]] > lims[2], "red", "white")
+    point_cols <- ifelse(resid[["residuals"]] < lims[1] | resid[["residuals"]] > lims[2], "#f01e2c", "#ffffff")
     n_point_cols <- length(unique(point_cols))
     if(n_point_cols == 2) {
       point_labels <- c("Extreme Residual", "Residual")
