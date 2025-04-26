@@ -65,7 +65,7 @@ SSplotEnsemble <- function(kb,
                            col = NULL,
                            pch = NULL,
                            lty = 1,
-                           lwd = 2,
+                           lwd = 5,
                            tickEndYr = FALSE,
                            xlim = NULL,
                            ylimAdj = 1.05,
@@ -85,11 +85,11 @@ SSplotEnsemble <- function(kb,
                            pheight = 5.0,
                            punits = "in",
                            res = 300,
-                           ptsize = 10,
+                           ptsize = 12,
                            cex.main = 1,
                            plotdir = NULL,
                            filenameprefix = "",
-                           par = list(mar = c(5, 4, 1, 1) + .1),
+                           par = list(mar = c(5, 4, 1, 1) + .1, family = "sans"),
                            verbose = TRUE,
                            shadealpha = 0.3,
                            new = TRUE,
@@ -355,6 +355,33 @@ SSplotEnsemble <- function(kb,
         lwd = lwd,
         type = type
       )
+
+      if(uncertainty == TRUE & quant != "Recr"){
+        legend_info <- r4ss::add_legend(legendlabels,
+          legendloc = legendloc,
+          legendcex = legendcex,
+          legendsp = legendsp,
+          legendncol = legendncol,
+          legendorder = legendorder,
+          pch = pch, col = col, lty = lty,
+          lwd = lwd,
+          type = type
+        )
+        legend_coords <- legend_info$rect
+        ci_legend_x <- legend_coords$left
+        ci_legend_y <- legend_coords$top - legend_coords$h
+        ci_quants <- sapply(quantiles, function(x) max(x) - min(x))
+        ci_labels <- paste0(round(ci_quants * 100), "% CI")
+        legend(ci_legend_x, ci_legend_y,
+          legend = ci_labels,
+          pt.cex = 2,
+          pch = 15, col = col,
+          bty = "n"
+        )
+
+
+      }
+
     }
 
     # axis(1, at=c(min(xmin,min(yr)):max(endyrvec)))

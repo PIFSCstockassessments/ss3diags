@@ -80,11 +80,11 @@ SSplotJABBAres <- function(ss3rep,
                            pheight = 5.0,
                            punits = "in",
                            res = 300,
-                           ptsize = 10,
+                           ptsize = 12,
                            cex.main = 1,
                            plotdir = NULL,
                            filenameprefix = "",
-                           par = list(mar = c(5, 4, 1, 1) + .1),
+                           par = list(mar = c(5, 4, 1, 1) + .1, family = "sans"),
                            verbose = TRUE,
                            boxcol = grey(0.8, 0.5),
                            new = TRUE,
@@ -165,6 +165,7 @@ SSplotJABBAres <- function(ss3rep,
   }
 
   ## TODO: to allow for multiple subplots at one time, need to change this to apply function
+
   resids_list <- SSrmse(ss3rep, quants = subplots, seas = seas, indexselect = indexselect)
   #-----------------
   # start plot
@@ -204,13 +205,13 @@ SSplotJABBAres <- function(ss3rep,
     n.indices <- length(unique(Res[["Fleet"]]))
     if (is.null(col) & n.indices > 3) col <- r4ss::rich.colors.short(n.indices + 1)[-1]
     if (is.null(col) & n.indices < 3) col <- r4ss::rich.colors.short(n.indices)
-    if (is.null(col) & n.indices == 3) col <- c("blue", "red", "green3")
+    if (is.null(col) & n.indices == 3) col <- c("#0063FFFF", "#13F240FF", "#FF3300FF")
     # set pch values if no input
 
     # if line stuff is shorter than number of lines, recycle as needed
     if (!is.expression(legendlabels[1]) &&
       legendlabels[1] == "default") {
-      legendlabels <- c(paste(indices), "Loess")
+      legendlabels <- c(paste(indices), "Loess Regression")
     }
     if (legendorder[1] == "default") legendorder <- 1:(n.indices + 1)
 
@@ -271,7 +272,7 @@ SSplotJABBAres <- function(ss3rep,
     lines(mean.res[["Yr"]], mean.res[["smooth.res"]], lwd = 2)
 
     legend("topright",
-      c(paste0("RMSE = ", resids_list[["RMSE"]][resids_list[["RMSE"]][["Fleet"]] == "Combined", "RMSE.perc"], "%")),
+      c(paste0("Root Mean Square Error = ", resids_list[["RMSE"]][resids_list[["RMSE"]][["Fleet"]] == "Combined", "RMSE.perc"], "%")),
       bty = "n", cex = legendcex + 0.1, y.intersp = 0.2, x.intersp = 0
     )
 

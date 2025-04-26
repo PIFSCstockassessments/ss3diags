@@ -112,7 +112,7 @@ SSplotRunstest <- function(ss3rep,
                            pdf = deprecated(),
                            use_pdf = FALSE,
                            indexselect = NULL,
-                           miny = 1,
+                           miny = 0.5,
                            col = NULL,
                            pch = 21,
                            lty = 1,
@@ -120,7 +120,7 @@ SSplotRunstest <- function(ss3rep,
                            tickEndYr = FALSE,
                            xlim = "default",
                            ylim = "default",
-                           ylimAdj = 1.4,
+                           ylimAdj = 1.2,
                            xaxs = "i",
                            yaxs = "i",
                            xylabs = TRUE,
@@ -128,18 +128,18 @@ SSplotRunstest <- function(ss3rep,
                            legend = TRUE,
                            legendloc = "top",
                            legendcex = 1,
-                           pwidth = 6.5,
+                           pwidth = 7,
                            pheight = 5.0,
                            punits = "in",
                            res = 300,
-                           ptsize = 10,
+                           ptsize = 12,
                            cex.main = 1,
                            plotdir = NULL,
                            filenameprefix = "",
-                           par = list(mar = c(5, 4, 1, 1) + .1),
+                           par = list(mar = c(5, 4, 1, 1) + .1, family = "sans"),
                            verbose = TRUE,
                            new = TRUE,
-                           add = FALSE) {
+                           add = TRUE) {
   # Parameter DEPRECATION checks
   if (lifecycle::is_present(print)) {
     lifecycle::deprecate_warn("2.0.0", "SSplotRunstest(print)", "SSplotRunstest(print_plot)")
@@ -309,22 +309,28 @@ SSplotRunstest <- function(ss3rep,
       ylim = ylim, xlab = ifelse(xylabs, "Year", ""), ylab = ifelse(xylabs, ylab, ""), axes = FALSE
     )
 
-
     lims <- runstest[["sig3lim"]]
-    cols <- c(rgb(1, 0, 0, 0.5), rgb(0, 1, 0, 0.5))[ifelse(runstest[["p.runs"]] < 0.05, 1, 2)]
+    cols <- c("#E15759", "#59A14F")[ifelse(runstest[["p.runs"]] < 0.05, 1, 2)]
+    point_cols <- ifelse(resid[["residuals"]] < lims[1] | resid[["residuals"]] > lims[2], "#f01e2c", "#ffffff")
+    n_point_cols <- length(unique(point_cols))
+    if(n_point_cols == 2) {
+      point_labels <- c("Extreme Residual", "Residual")
+      }else{
+      point_labels <- "Residual"
+    }
+    
     rect(min(resid[["Yr"]] - 1), lims[1], max(resid[["Yr"]] + 1), lims[2], col = cols, border = cols) # only show runs if RMSE >= 0.1
 
     abline(h = 0, lty = 2)
     for (j in 1:length(resid[["Yr"]])) {
       lines(c(resid[["Time"]][j], resid[["Time"]][j]), c(0, resid[["residuals"]][j]))
     }
-    points(resid[["Time"]], resid[["residuals"]], pch = pch, bg = ifelse(resid[["residuals"]] < lims[1] | resid[["residuals"]] > lims[2], 2, "white"), cex = 1)
+    points(resid[["Time"]], resid[["residuals"]], pch = pch, bg = point_cols, cex = 1)
     if (legend) {
       legend(legendloc, paste(resid[["Fleet_name"]][1]), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
+      legend("topright", legend = c(point_labels, "sigma3 limit"), pch = c(rep(21, n_point_cols), 22), pt.bg = c(unique(point_cols), cols))
     }
-    # legend("topright", bty='n',
-    #       c("Passed","Failed"),pch=15,col=c(rgb(0,1,0,0.5),rgb(1,0,0,0.5)),pt.cex=2,cex=legendcex,y.intersp=0.9 )
-
+   
     axis(1, at = resid[["Yr"]])
     if (tickEndYr) axis(1, at = max(resid[["Yr"]]))
 
