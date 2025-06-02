@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ss3diags <a href="http://pifscstockassessments.github.io/ss3diags/"><img src="man/figures/logo.png" align="right" /></a>
+# ss3diags <a href="http://nmfs-ost.github.io/ss3diags/"><img src="man/figures/logo.png" align="right" /></a>
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/PIFSCstockassessments/ss3diags/workflows/R-CMD-check/badge.svg)](https://github.com/PIFSCstockassessments/ss3diags/actions)
+[![R-CMD-check](https://github.com/nmfs-ost/ss3diags/workflows/R-CMD-check/badge.svg)](https://github.com/nmfs-ost/ss3diags/actions)
 <!-- badges: end -->
 
 The R package `ss3diags` enables users to apply advanced diagnostics to
@@ -19,18 +19,18 @@ al. 2021)](https://www.sciencedirect.com/science/article/pii/S0165783621000874)
 The `ss3diags` Github repository provides step-by-step R recipes on how
 to:
 
-  - [Run jitter
-    analysis](https://pifscstockassessments.github.io/ss3diags/articles/Jitter.html)
-  - [Conduct retrospective
-    analysis](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)
-  - [Use hindcast
-    cross-validation](https://pifscstockassessments.github.io/ss3diags/articles/hcxval.html)
-  - [Do log-likelood profiling for
-    R0](https://pifscstockassessments.github.io/ss3diags/articles/likelihood.html)
-  - [Run the ASPM
-    diagnostic](https://pifscstockassessments.github.io/ss3diags/articles/aspm.html)
-  - [Evaluate model
-    fit](https://pifscstockassessments.github.io/ss3diags/articles/residuals.html)
+- [Run jitter
+  analysis](https://nmfs-ost.github.io/ss3diags/articles/Jitter.html)
+- [Conduct retrospective
+  analysis](https://nmfs-ost.github.io/ss3diags/articles/Retrospective-Analysis.html)
+- [Use hindcast
+  cross-validation](https://nmfs-ost.github.io/ss3diags/articles/hcxval.html)
+- [Do log-likelood profiling for
+  R0](https://nmfs-ost.github.io/ss3diags/articles/likelihood.html)
+- [Run the ASPM
+  diagnostic](https://nmfs-ost.github.io/ss3diags/articles/aspm.html)
+- [Evaluate model
+  fit](https://nmfs-ost.github.io/ss3diags/articles/residuals.html)
 
 with Stock Synthesis by making use of a comprehensive collection of R
 functions available in the R packages
@@ -44,7 +44,7 @@ with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("PIFSCstockassessments/ss3diags")
+remotes::install_github("nmfs-ost/ss3diags")
 ```
 
 Once the package is installed it can be loaded by:
@@ -56,14 +56,14 @@ library(ss3diags)
 For examples of how to run common diagnostic tests for SS models and
 visualize the results of those diagnostic tests using the `r4ss` and
 `ss3diags` packages, please refer to the articles on the package
-[website](https://pifscstockassessments.github.io/ss3diags/).
+[website](https://nmfs-ost.github.io/ss3diags/).
 
 ## Contributing to ss3diags
 
 If you would like to contribute to `ss3diags` or have suggestions for
 diagnostic tests to include in the package, you can submit a new
-[issue](https://github.com/PIFSCstockassessments/ss3diags/issues) or
-email Meg at <megumi.oshima@noaa.gov>.
+[issue](https://github.com/nmfs-ost/ss3diags/issues) or email Meg at
+<megumi.oshima@noaa.gov>.
 
 ## Reference
 
@@ -74,18 +74,19 @@ citation("ss3diags")
 #> To cite package 'ss3diags' in publications use:
 #> 
 #>   Winker H, Carvalho F, Cardinale M, Kell L, Oshima M, Fletcher E
-#>   (2023). _ss3diags: Stock Synthesis Model Diagnostics for Intergated
-#>   Stock Assessments_. R package version 2.1.1,
-#>   <https://github.com/PIFSCstockassessments/ss3diags>.
+#>   (2025). _ss3diags: Stock Synthesis Model Diagnostics for Intergated
+#>   Stock Assessments_. R package version 2.2.2,
+#>   <https://github.com/nmfs-ost/ss3diags>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {ss3diags: Stock Synthesis Model Diagnostics for Intergated Stock Assessments},
+#>     title = {ss3diags: Stock Synthesis Model Diagnostics for Intergated Stock
+#> Assessments},
 #>     author = {Henning Winker and Felipe Carvalho and Massimiliano Cardinale and Laurence Kell and Megumi Oshima and Eric Fletcher},
-#>     year = {2023},
-#>     note = {R package version 2.1.1},
-#>     url = {https://github.com/PIFSCstockassessments/ss3diags},
+#>     year = {2025},
+#>     note = {R package version 2.2.2},
+#>     url = {https://github.com/nmfs-ost/ss3diags},
 #>   }
 ```
 
@@ -106,7 +107,5 @@ bureau, shall not be used in any manner to imply endorsement of any
 commercial product or activity by DOC or the United States Government.”
 
 <!-- What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.-->
+&#10;You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
+&#10;In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.-->
