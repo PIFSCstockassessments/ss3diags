@@ -356,7 +356,7 @@ SSplotEnsemble <- function(kb,
         type = type
       )
 
-      if(uncertainty == TRUE & quant != "Recr"){
+      if (uncertainty == TRUE & quant != "Recr") {
         legend_info <- r4ss::add_legend(legendlabels,
           legendloc = legendloc,
           legendcex = legendcex,
@@ -367,9 +367,9 @@ SSplotEnsemble <- function(kb,
           lwd = lwd,
           type = type
         )
-        legend_coords <- legend_info$rect
-        ci_legend_x <- legend_coords$left
-        ci_legend_y <- legend_coords$top - legend_coords$h
+        legend_coords <- legend_info[["rect"]]
+        ci_legend_x <- legend_coords[["left"]]
+        ci_legend_y <- legend_coords[["top"]] - legend_coords[["h"]]
         ci_quants <- sapply(quantiles, function(x) max(x) - min(x))
         ci_labels <- paste0(round(ci_quants * 100), "% CI")
         legend(ci_legend_x, ci_legend_y,
@@ -378,10 +378,7 @@ SSplotEnsemble <- function(kb,
           pch = 15, col = col,
           bty = "n"
         )
-
-
       }
-
     }
 
     # axis(1, at=c(min(xmin,min(yr)):max(endyrvec)))

@@ -89,11 +89,11 @@ SSplotRetro <- function(summaryoutput,
                         filenameprefix = "",
                         par = list(mar = c(5, 4, 1, 1) + .1, family = "sans"),
                         verbose = TRUE,
-                        shadecol = "#404040", #grey(0.4, 0.6),
+                        shadecol = "#404040", # grey(0.4, 0.6),
                         new = TRUE,
                         add = TRUE,
                         mcmcVec = FALSE,
-                        shadecol1 = "#c8d0d9", #grey(0.5, 0.4),
+                        shadecol1 = "#c8d0d9", # grey(0.5, 0.4),
                         indexQlabel = TRUE,
                         indexQdigits = 4,
                         shadealpha = 0.3) {
@@ -239,11 +239,11 @@ SSplotRetro <- function(summaryoutput,
       stop("SSplotRequires requires a minimum of one reference and one retro peel")
     }
 
-    #tableau inspired color palette
-    # tableau10.pal <- c("#6D93BA", "#F28E2B", "#E46264", "#76B7B2", 
+    # tableau inspired color palette
+    # tableau10.pal <- c("#6D93BA", "#F28E2B", "#E46264", "#76B7B2",
     # "#3AA363", "#edc948", "#b07aa1", "#FF7278", "#9c755f", "#bab0ac")
     # if (is.null(col)) col <- tableau10.pal[1:nlines]
-    
+
     if (is.null(col) & nlines > 3) col <- r4ss::rich.colors.short(nlines + 1)[-1]
     if (is.null(col) & nlines < 3) col <- r4ss::rich.colors.short(nlines)
     if (is.null(col) & nlines == 3) col <- c("blue", "red", "green3")
@@ -375,51 +375,55 @@ SSplotRetro <- function(summaryoutput,
 
     if (legend) {
       r4ss::add_legend(legendlabels,
-          legendloc = legendloc,
-          legendcex = legendcex, 
-          legendsp = legendsp,
-          legendncol = legendncol,
-          legendorder = legendorder,
-          pch = pch, 
-          col = col, 
-          lty = lty,
-          lwd = lwd,
-          pt.cex = pt.cex,
-          type = type
-          )
-      if(uncertainty){
+        legendloc = legendloc,
+        legendcex = legendcex,
+        legendsp = legendsp,
+        legendncol = legendncol,
+        legendorder = legendorder,
+        pch = pch,
+        col = col,
+        lty = lty,
+        lwd = lwd,
+        pt.cex = pt.cex,
+        type = type
+      )
+      if (uncertainty) {
         # get position of legend
         legend_info <- r4ss::add_legend(legendlabels,
           legendloc = legendloc,
-          legendcex = legendcex, 
+          legendcex = legendcex,
           legendsp = legendsp,
           legendncol = legendncol,
           legendorder = legendorder,
-          pch = pch, 
-          col = col, 
+          pch = pch,
+          col = col,
           lty = lty,
           lwd = lwd,
           pt.cex = pt.cex,
           type = type
-          )
+        )
         # Add a standard R legend just for the CI box
-        legend_coords <- legend_info$rect
-        ci_legend_x <- legend_coords$left
-        ci_legend_y <- legend_coords$top - legend_coords$h
-        legend(x = ci_legend_x, y = ci_legend_y, 
-        legend = "95% CI",
-        pch = 15, 
-        col = shadecol,
-        pt.cex = 2,
-        bty = "n")
+        legend_coords <- legend_info[["rect"]]
+        ci_legend_x <- legend_coords[["left"]]
+        ci_legend_y <- legend_coords[["top"]] - legend_coords[["h"]]
+        legend(
+          x = ci_legend_x, y = ci_legend_y,
+          legend = "95% CI",
+          pch = 15,
+          col = shadecol,
+          pt.cex = 2,
+          bty = "n"
+        )
       }
-
     }
-    if (showrho){
-      legend("top", paste0("Mohn's rho = ", round(rho, 2), 
-                           ifelse(forecast & forecastrho, paste0("\nForecast Mohn's rho = ", round(fcrho, 2)))),
-             bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
-    } 
+    if (showrho) {
+      legend("top", paste0(
+        "Mohn's rho = ", round(rho, 2),
+        ifelse(forecast & forecastrho, paste0("\nForecast Mohn's rho = ", round(fcrho, 2)))
+      ),
+      bty = "n", y.intersp = -0.2, cex = legendcex + 0.1
+      )
+    }
 
     # axis(1, at=c(max(xmin,min(yr)):max(endyrvec)))
     axis(1)

@@ -27,7 +27,7 @@
 #'
 #' @param cex.main
 #' Character expansion for plot titles.
-#' 
+#'
 #' @param pt.cex
 #' Character expansion for points in plots.
 #'
