@@ -40,7 +40,7 @@ jobs:
       - name: Create R cache directories (macOS)
         if: runner.os == 'macOS'
         run: |
-          mkdir -p ~/Library/Caches/org.R-project.R/R/renv/binary/macos
+          mkdir -p ~/Library/Caches/org.R-project.R/R/renv/binary/macos/R-4.5/aarch64-apple-darwin20/repository
           chmod -R 755 ~/Library/Caches/org.R-project.R
 
       - uses: r-lib/actions/setup-r-dependencies@v2
