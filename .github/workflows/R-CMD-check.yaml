@@ -37,6 +37,12 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
+      - name: Create R cache directories (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          mkdir -p ~/Library/Caches/org.R-project.R/R/renv/binary/macos
+          chmod -R 755 ~/Library/Caches/org.R-project.R
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
