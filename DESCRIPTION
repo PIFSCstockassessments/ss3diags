@@ -14,10 +14,10 @@ Description: Compilation of diagnostic functions for Stock Synthesis
     models, which developed for the manuscript "Using Model Diagnostics in
     Integrated Stock Assessments".
 License: EUPL
-URL: https://github.com/PIFSCstockassessments/ss3diags
-BugReports: https://github.com/PIFSCstockassessments/ss3diags/issues
+URL: https://github.com/nmfs-ost/ss3diags
+BugReports: https://github.com/nmfs-ost/ss3diags/issues
 Depends:
-    R (>= 3.5)
+    R (>= 4.1)
 Imports:
     dplyr,
     gplots,

@@ -14,10 +14,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ss3diags  <a href="http://pifscstockassessments.github.io/ss3diags/"><img src="man/figures/logo.png" align="right" /></a>
+# ss3diags  <a href="http://nmfs-ost.github.io/ss3diags/"><img src="man/figures/logo.png" align="right" /></a>
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/PIFSCstockassessments/ss3diags/workflows/R-CMD-check/badge.svg)](https://github.com/PIFSCstockassessments/ss3diags/actions)
+[![R-CMD-check](https://github.com/nmfs-ost/ss3diags/workflows/R-CMD-check/badge.svg)](https://github.com/nmfs-ost/ss3diags/actions)
 <!-- badges: end -->
 
 
@@ -32,16 +32,16 @@ The `ss3diags` Github repository provides step-by-step R recipes on how
 to:
 
 -   [Run jitter
-    analysis](https://pifscstockassessments.github.io/ss3diags/articles/Jitter.html)
+    analysis](https://nmfs-ost.github.io/ss3diags/articles/Jitter.html)
 -   [Conduct retrospective
-    analysis](https://pifscstockassessments.github.io/ss3diags/articles/Retrospective-Analysis.html)
+    analysis](https://nmfs-ost.github.io/ss3diags/articles/Retrospective-Analysis.html)
 -   [Use hindcast
-    cross-validation](https://pifscstockassessments.github.io/ss3diags/articles/hcxval.html)
+    cross-validation](https://nmfs-ost.github.io/ss3diags/articles/hcxval.html)
 -   [Do log-likelood profiling for
-    R0](https://pifscstockassessments.github.io/ss3diags/articles/likelihood.html)
+    R0](https://nmfs-ost.github.io/ss3diags/articles/likelihood.html)
 -   [Run the ASPM
-    diagnostic](https://pifscstockassessments.github.io/ss3diags/articles/aspm.html)
--   [Evaluate model fit](https://pifscstockassessments.github.io/ss3diags/articles/residuals.html)
+    diagnostic](https://nmfs-ost.github.io/ss3diags/articles/aspm.html)
+-   [Evaluate model fit](https://nmfs-ost.github.io/ss3diags/articles/residuals.html)
 
 
 
@@ -53,18 +53,18 @@ with Stock Synthesis by making use of a comprehensive collection of R functions 
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("PIFSCstockassessments/ss3diags")
+remotes::install_github("nmfs-ost/ss3diags")
 ```
 Once the package is installed it can be loaded by:
 
 ```{r example}
 library(ss3diags)
 ```
-For examples of how to run common diagnostic tests for SS models and visualize the results of those diagnostic tests using the `r4ss` and `ss3diags` packages, please refer to the articles on the package [website](https://pifscstockassessments.github.io/ss3diags/).
+For examples of how to run common diagnostic tests for SS models and visualize the results of those diagnostic tests using the `r4ss` and `ss3diags` packages, please refer to the articles on the package [website](https://nmfs-ost.github.io/ss3diags/).
 
 
 ## Contributing to ss3diags  
-If you would like to contribute to `ss3diags` or have suggestions for diagnostic tests to include in the package, you can submit a new [issue](https://github.com/PIFSCstockassessments/ss3diags/issues) or email Meg at megumi.oshima@noaa.gov.
+If you would like to contribute to `ss3diags` or have suggestions for diagnostic tests to include in the package, you can submit a new [issue](https://github.com/nmfs-ost/ss3diags/issues) or email Meg at megumi.oshima@noaa.gov.
 
 ## Reference
 To cite `ss3diags` for a publication you can use 
