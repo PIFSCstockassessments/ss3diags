@@ -122,7 +122,7 @@ SSplotHCxval <- function(retroSummary,
                          par = list(mar = c(5, 4, 1, 1) + .1, family = "sans"),
                          verbose = TRUE,
                          shadecol = "#80808066",
-                         shadecol2 =  "#808080CC",
+                         shadecol2 = "#808080CC",
                          shadealpha = 0.3,
                          new = TRUE,
                          add = TRUE,
@@ -463,7 +463,7 @@ SSplotHCxval <- function(retroSummary,
       }
 
       lines(yr[subset], obs[subset], pch = 21, lty = 2, col = "grey15", lwd = lwd)
-      points(yr[subset], obs[subset], pch = 24, cex = pt.cex, bg = "white") 
+      points(yr[subset], obs[subset], pch = 24, cex = pt.cex, bg = "white")
       points(yr.eval[pe.eval], obs.eval[pe.eval], pch = 24, cex = pt.cex, bg = (rev(col))[pe.eval - 1])
 
       # Plot Reference
@@ -484,8 +484,8 @@ SSplotHCxval <- function(retroSummary,
           pred.resid <- c(pred.resid, log(y[length(x)]) - log(yobs[length(x)])) # add log() for v1.1
 
 
-          lines(x[1:(length(x) - 1)], y[1:(length(x) - 1)], 
-            lwd = lwd[iline], 
+          lines(x[1:(length(x) - 1)], y[1:(length(x) - 1)],
+            lwd = lwd[iline],
             lty = lty[iline], col = col[iline], type = "l", cex = 0.9
           )
 
@@ -545,28 +545,31 @@ SSplotHCxval <- function(retroSummary,
           type = type
         )
         # Add a standard R legend just for the CI box
-        legend_coords <- legend_info$rect
-        ci_legend_x <- legend_coords$left
-        ci_legend_y <- legend_coords$top - legend_coords$h
+        legend_coords <- legend_info[["rect"]]
+        ci_legend_x <- legend_coords[["left"]]
+        ci_legend_y <- legend_coords[["top"]] - legend_coords[["h"]]
 
-        if(indexUncertainty == TRUE){
-          legend(x = ci_legend_x, y = ci_legend_y, 
+        if (indexUncertainty == TRUE) {
+          legend(
+            x = ci_legend_x, y = ci_legend_y,
             legend = c("Observed", "Expected", "95% CI of years \nwith all data", "95% CI of years \nwith data removed"),
-            pch = c(24, 16, 15, 15), 
-            bg = c("white", NA, shadecol2, shadecol), 
-            col = c("black", "black", shadecol2, shadecol), 
+            pch = c(24, 16, 15, 15),
+            bg = c("white", NA, shadecol2, shadecol),
+            col = c("black", "black", shadecol2, shadecol),
             pt.cex = 2,
-            bty = "n")
-        }else{
-          legend(x = ci_legend_x, y = ci_legend_y, 
+            bty = "n"
+          )
+        } else {
+          legend(
+            x = ci_legend_x, y = ci_legend_y,
             legend = c("Observed", "Expected"),
-            pch = c(24, 16), 
-            bg = c("white", NA), 
-            col = c("black", "black"), 
+            pch = c(24, 16),
+            bg = c("white", NA),
+            col = c("black", "black"),
             pt.cex = 2,
-            bty = "n")          
+            bty = "n"
+          )
         }
-
       }
       if (mase == mase.adj | show.mase.adj == FALSE) legend("top", paste0(unique(indices2[["Fleet_name"]])[1], ifelse(length(unique(retroSummary[["indices"]][["Seas"]])) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2)), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
       if (mase.adj < mase & show.mase.adj == TRUE) legend("top", paste0(unique(indices2[["Fleet_name"]])[1], ifelse(length(unique(retroSummary[["indices"]][["Seas"]])) > 1, paste0(".S", Season), ""), ": MASE = ", round(mase, 2), " (", round(mase.adj, 2), ")"), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)

@@ -313,12 +313,12 @@ SSplotRunstest <- function(ss3rep,
     cols <- c("#E15759", "#59A14F")[ifelse(runstest[["p.runs"]] < 0.05, 1, 2)]
     point_cols <- ifelse(resid[["residuals"]] < lims[1] | resid[["residuals"]] > lims[2], "#f01e2c", "#ffffff")
     n_point_cols <- length(unique(point_cols))
-    if(n_point_cols == 2) {
+    if (n_point_cols == 2) {
       point_labels <- c("Extreme Residual", "Residual")
-      }else{
+    } else {
       point_labels <- "Residual"
     }
-    
+
     rect(min(resid[["Yr"]] - 1), lims[1], max(resid[["Yr"]] + 1), lims[2], col = cols, border = cols) # only show runs if RMSE >= 0.1
 
     abline(h = 0, lty = 2)
@@ -330,7 +330,7 @@ SSplotRunstest <- function(ss3rep,
       legend(legendloc, paste(resid[["Fleet_name"]][1]), bty = "n", y.intersp = -0.2, cex = legendcex + 0.1)
       legend("topright", legend = c(point_labels, "sigma3 limit"), pch = c(rep(21, n_point_cols), 22), pt.bg = c(unique(point_cols), cols))
     }
-   
+
     axis(1, at = resid[["Yr"]])
     if (tickEndYr) axis(1, at = max(resid[["Yr"]]))
 

@@ -97,7 +97,7 @@ converged_ssb <- jit_summary$SpawnBio |>
   dplyr::mutate(rownumber = seq(1, dplyr::n())) |>
   tibble::column_to_rownames("rownumber") |>
   dplyr::select(-jitter) |>
-  dplyr:: filter(across(everything(), ~ . >= 0.5 & . <= 2)) |> # keep only rows where SSB is a reasonable value
+  dplyr::filter(across(everything(), ~ . >= 0.5 & . <= 2)) |> # keep only rows where SSB is a reasonable value
   tibble::rownames_to_column("rownumber") |>
   dplyr::select(rownumber) |>
   dplyr::pull(rownumber)
