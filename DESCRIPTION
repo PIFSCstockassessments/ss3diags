@@ -14,7 +14,7 @@ Description: Compilation of diagnostic functions for Stock Synthesis
     models, which developed for the manuscript "Using Model Diagnostics in
     Integrated Stock Assessments".
 License: EUPL
-URL: https://github.com/nmfs-ost/ss3diags
+URL: https://nmfs-ost.github.io/ss3diags
 BugReports: https://github.com/nmfs-ost/ss3diags/issues
 Depends:
     R (>= 4.1)
