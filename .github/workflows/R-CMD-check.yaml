@@ -27,7 +27,7 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -37,31 +37,12 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - name: Create R cache directories (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          mkdir -p ~/Library/Caches/org.R-project.R/R/renv/binary/macos/R-4.5/aarch64-apple-darwin20/repository
-          chmod -R 755 ~/Library/Caches/org.R-project.R
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          extra-packages: any::rcmdcheck, any::testthat
           needs: check
  
-      - name: Install rcmdcheck
-        shell: Rscript {0}
-        run: renv::install("rcmdcheck")
-
-      - name: Install remotes
-        shell: Rscript {0}
-        run: renv::install("remotes")
-
       - uses: r-lib/actions/check-r-package@v2
         with: 
           error-on: '"error"'
-
-
-    
-
-
 
