@@ -56,6 +56,60 @@ jobs:
         shell: Rscript {0}
         run: renv::install("remotes")
 
+      - name: Debug test setup
+        run: |
+          cat("=== Debugging test environment ===\n")
+          cat("Working directory:", getwd(), "\n")
+          cat("Files in root:", paste(list.files("."), collapse = ", "), "\n")
+          
+          if (dir.exists("tests")) {
+            cat("Files in tests/:", paste(list.files("tests"), collapse = ", "), "\n")
+            if (dir.exists("tests/testthat")) {
+              cat("Test files found:", paste(list.files("tests/testthat", pattern = "test.*\\.[rR]$"), collapse = ", "), "\n")
+            }
+          }
+          
+          cat("Environment variables:\n")
+          cat("CI =", Sys.getenv("CI"), "\n")
+          cat("GITHUB_ACTIONS =", Sys.getenv("GITHUB_ACTIONS"), "\n")
+          
+          cat("=== Checking if testthat.R runs ===\n")
+          if (file.exists("tests/testthat.R")) {
+            cat("testthat.R exists\n")
+            tryCatch({
+              source("tests/testthat.R")
+              cat("testthat.R ran successfully\n")
+            }, error = function(e) {
+              cat("Error in testthat.R:", conditionMessage(e), "\n")
+              traceback()
+            })
+          } else {
+            cat("testthat.R not found\n")
+          }
+        shell: Rscript {0}
+
+      - name: Try running tests directly
+        run: |
+          cat("=== Trying devtools::test() ===\n")
+          tryCatch({
+            devtools::test()
+          }, error = function(e) {
+            cat("Error in devtools::test():", conditionMessage(e), "\n")
+            print(e)
+          })
+        shell: Rscript {0}
+
+      - name: Try running tests with testthat directly
+        run: |
+          cat("=== Trying testthat::test_dir() ===\n")
+          tryCatch({
+            testthat::test_dir("tests/testthat")
+          }, error = function(e) {
+            cat("Error in test_dir():", conditionMessage(e), "\n")
+            print(e)
+          })
+        shell: Rscript {0}
+
       - uses: r-lib/actions/check-r-package@v2
         with: 
           error-on: '"error"'
