@@ -48,6 +48,14 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
  
+      - name: Install devtools
+        shell: Rscript {0}
+        run: renv::install("devtools")
+
+      - name: Install ss3diags package for testing
+        shell: Rscript {0}
+        run: devtools::install(dependencies=FALSE)
+        
       - name: Install rcmdcheck
         shell: Rscript {0}
         run: renv::install("rcmdcheck")
