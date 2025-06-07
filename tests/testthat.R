@@ -20,6 +20,6 @@ if (file.exists(file.path(run_tmp, "ss3")) | file.exists(file.path(run_tmp, "ss3
   )
   retrosum.simple <- r4ss::SSsummarize(retroModels)
 }
-on.exit(unlink(tmp_path, recursive = TRUE))
+on.exit(unlink(run_tmp, recursive = TRUE))
 
 test_check("ss3diags")
