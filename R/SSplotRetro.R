@@ -419,7 +419,7 @@ SSplotRetro <- function(summaryoutput,
     if (showrho) {
       legend("top", paste0(
         "Mohn's rho = ", round(rho, 2),
-        ifelse(forecast & forecastrho, paste0("\nForecast Mohn's rho = ", round(fcrho, 2)))
+        ifelse(forecast & forecastrho, paste0("\nForecast Mohn's rho = ", round(fcrho, 2)), "")
       ),
       bty = "n", y.intersp = -0.2, cex = legendcex + 0.1
       )
